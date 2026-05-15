@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include "config/connect.php";
 include_once "util/function.php";
 
@@ -52,7 +52,7 @@ $product_details = fetch_product_details($cate_id);
   <meta name="ICBM" content="28.6139, 77.2090">
   
   <!-- Open Graph - Make it global-friendly -->
-  <meta property="og:title" content="International Web Development Services | Code With Nikhil">
+  <meta property="og:title" content="International Web Development Services | NikhilWorks">
   <meta property="og:description" content="Professional web developer serving clients in USA, Australia, Europe, Dubai & India. Remote development with 24/7 support.">
   <meta property="og:image" content="<?= $site ?>assets/img/web-development-global.jpg">
   <meta property="og:url" content="<?= $site ?>/services">
@@ -63,7 +63,7 @@ $product_details = fetch_product_details($cate_id);
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="International Web Development Services | Code With Nikhil">
+  <meta name="twitter:title" content="International Web Development Services | NikhilWorks">
   <meta name="twitter:description" content="Professional web developer serving clients in USA, Australia, Europe, Dubai & India.">
   <meta name="twitter:image" content="<?= $site ?>assets/img/web-development-global.jpg">
   
@@ -86,7 +86,7 @@ $product_details = fetch_product_details($cate_id);
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "Code With Nikhil - International Web Development",
+    "name": "NikhilWorks - International Web Development",
     "image": "<?= $site ?>assets/img/logo.png",
     "@id": "<?= $site ?>",
     "url": "<?= $site ?>",
@@ -284,7 +284,7 @@ $product_details = fetch_product_details($cate_id);
         <div class="col-lg-6 m-auto">
           <div class="choose-header-area text-center heading2">
             <h5>Why Choose Us</h5>
-            <h2>Why Choose Code With Nikhil?</h2>
+            <h2>Why Choose NikhilWorks?</h2>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include 'config/connect.php'; // DB connection
 include 'util/function.php';
 
@@ -58,7 +58,7 @@ $siteURL = $site . "blog/" . $blog['slug_url'];
       },
       "publisher": {
         "@type": "Organization",
-        "name": "CodeWithNikhil",
+        "name": "NikhilWorks",
         "logo": {
           "@type": "ImageObject",
           "url": "<?= $site ?>assets/img/logo.png"

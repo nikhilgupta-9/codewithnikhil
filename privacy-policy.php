@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy | CodeWithNikhil</title>
-  <meta name="description" content="Learn how CodeWithNikhil collects, uses, and protects your personal data. Your privacy is our top priority.">
+  <title>Privacy Policy | NikhilWorks</title>
+  <meta name="description" content="Learn how NikhilWorks collects, uses, and protects your personal data. Your privacy is our top priority.">
   <!--=====FAB ICON=======-->
   <link rel="shortcut icon" href="assets/img/logo/fav-logo5.png" type="image/x-icon">
 
@@ -101,7 +101,7 @@ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;  }
               <h5>Your Privacy Matters</h5>
               <h2>Privacy Policy</h2>
               <p>
-                This Privacy Policy explains how <strong>Code With Nikhil</strong>
+                This Privacy Policy explains how <strong>NikhilWorks</strong>
                 collects, uses, and protects your personal information when you
                 visit our website or use our services.
               </p>
@@ -172,7 +172,7 @@ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;  }
               <div class="policy-item">
                 <h4>7. Changes to This Policy</h4>
                 <p>
-                  Code With Nikhil reserves the right to update this Privacy
+                  NikhilWorks reserves the right to update this Privacy
                   Policy at any time. Any changes will be reflected on this
                   page with an updated effective date.
                 </p>

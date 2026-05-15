@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once "config/connect.php";
 ?>
 <!DOCTYPE html>
@@ -21,7 +21,7 @@ include_once "config/connect.php";
   <meta property="og:image" content="<?= $site ?>assets/img/logo/fav-logo1.png">
   <meta property="og:url" content="<?= $site ?>contact/">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="CodeWithNikhil">
+  <meta property="og:site_name" content="NikhilWorks">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">

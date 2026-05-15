@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once "util/function.php";
 $contact = contact_us();
 
@@ -33,7 +33,7 @@ $services = get_sub_category($limit);
           <div class="header-elements">
             <div class="site-logo">
               <a href="<?= $site ?>">
-                <h2 class="logo_header">CodeWithNikhil</h2>
+                <h2 class="logo_header">NikhilWorks</h2>
               </a>
             </div>
             <div class="main-menu">
@@ -92,7 +92,7 @@ $services = get_sub_category($limit);
     <div class="col-12">
       <div class="mobile-header-elements">
         <div class="mobile-logo">
-          <a href="<?= $site ?>"><h2 class="logo_header text-light">CodeWithNikhil</h2></a>
+          <a href="<?= $site ?>"><h2 class="logo_header text-light">NikhilWorks</h2></a>
         </div>
         <div class="mobile-nav-icon dots-menu">
           <i class="fa-solid fa-bars"></i>
@@ -105,7 +105,7 @@ $services = get_sub_category($limit);
 <div class="mobile-sidebar mobile-sidebar4">
   <div class="logosicon-area">
     <div class="logos">
-      <h2 class="logo_header text-light">CodeWithNikhil</h2>
+      <h2 class="logo_header text-light">NikhilWorks</h2>
     </div>
     <div class="menu-close">
       <i class="fa-solid fa-xmark"></i>

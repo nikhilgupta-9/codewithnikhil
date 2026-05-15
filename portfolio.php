@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include "config/connect.php";
 include_once "util/function.php";
 
@@ -11,21 +11,21 @@ $portfolios = get_portfolio();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Development Portfolio | CodeWithNikhil - Professional Web Developer</title>
+  <title>Web Development Portfolio | NikhilWorks - Professional Web Developer</title>
   <meta name="description" content="Explore the portfolio of Nikhil Gupta - Expert web developer and SEO specialist. View responsive websites, e-commerce solutions, and digital marketing projects.">
-  <meta name="keywords" content="web development portfolio, website portfolio, SEO projects, CodeWithNikhil portfolio, web developer India">
+  <meta name="keywords" content="web development portfolio, website portfolio, SEO projects, NikhilWorks portfolio, web developer India">
 
   <!-- Open Graph Tags -->
-  <meta property="og:title" content="Web Development Portfolio | CodeWithNikhil">
+  <meta property="og:title" content="Web Development Portfolio | NikhilWorks">
   <meta property="og:description" content="Professional portfolio of Nikhil Gupta - Web Developer & SEO Expert.">
   <meta property="og:image" content="<?= $site ?>assets/img/portfolio-banner.jpg">
   <meta property="og:url" content="<?= $site ?>portfolio/">
-  <meta property="og:site_name" content="CodeWithNikhil">
+  <meta property="og:site_name" content="NikhilWorks">
   <meta property="og:type" content="website">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Web Development Portfolio | CodeWithNikhil">
+  <meta name="twitter:title" content="Web Development Portfolio | NikhilWorks">
   <meta name="twitter:description" content="Professional portfolio of Nikhil Gupta - Web Developer & SEO Expert.">
   <meta name="twitter:image" content="<?= $site ?>assets/img/portfolio-banner.jpg">
 

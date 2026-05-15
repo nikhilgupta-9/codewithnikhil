@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include "config/connect.php";
 include_once "util/function.php";
 
@@ -15,21 +15,21 @@ $portfolios = get_portfolio();
   <meta charset="UTF-8">
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Professional Web Development Services Delhi | CodeWithNikhil</title>
+  <title>Professional Web Development Services Delhi | NikhilWorks</title>
   <meta name="description" content="Hire Nikhil Gupta, Delhi's top freelance web developer for custom websites, e-commerce solutions & responsive web design. Get affordable web development services with SEO optimization.">
   <meta name="keywords" content="web developer Delhi, web development company Delhi, e-commerce website developer, WordPress developer India, responsive web design, SEO services Delhi, freelance web developer">
 
   <!-- Open Graph Tags -->
-  <meta property="og:title" content="Professional Web Development Services Delhi | Code With Nikhil">
+  <meta property="og:title" content="Professional Web Development Services Delhi | NikhilWorks">
   <meta property="og:description" content="Hire Delhi's top freelance web developer for custom websites, e-commerce solutions & responsive web design.">
   <meta property="og:image" content="<?= $site ?>assets/img/web-development-services-delhi.jpg">
   <meta property="og:url" content="<?= $site ?>services/">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="CodeWithNikhil">
+  <meta property="og:site_name" content="NikhilWorks">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Professional Web Development Services Delhi | Code With Nikhil">
+  <meta name="twitter:title" content="Professional Web Development Services Delhi | NikhilWorks">
   <meta name="twitter:description" content="Hire Delhi's top freelance web developer for custom websites, e-commerce solutions & responsive web design.">
   <meta name="twitter:image" content="<?= $site ?>assets/img/web-development-services-delhi.jpg">
 
@@ -41,7 +41,7 @@ $portfolios = get_portfolio();
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "name": "Code With Nikhil",
+      "name": "NikhilWorks",
       "image": "<?= $site ?>assets/img/logo.png",
       "@id": "<?= $site ?>",
       "url": "<?= $site ?>",
@@ -73,9 +73,9 @@ $portfolios = get_portfolio();
         "closes": "18:00"
       },
       "sameAs": [
-        "https://www.facebook.com/codewithnikhil",
-        "https://www.instagram.com/codewithnikhil",
-        "https://www.linkedin.com/company/codewithnikhil"
+        "https://www.facebook.com/NikhilWorks",
+        "https://www.instagram.com/NikhilWorks",
+        "https://www.linkedin.com/company/NikhilWorks"
       ]
     }
   </script>
@@ -489,7 +489,7 @@ $portfolios = get_portfolio();
           <div class="pricing-header heading8 text-center">
             <h5 data-aos="fade-up" data-aos-duration="1000"><img src="assets/img/icons/logo-icons6.svg" alt="">Pricing &
               Plan</h5>
-            <h2 class="text-anime-style-1">Code With Nikhil <span>Pricing Plan <img src="assets/img/elements/line-img2.png"
+            <h2 class="text-anime-style-1">NikhilWorks <span>Pricing Plan <img src="assets/img/elements/line-img2.png"
                   alt=""></span></h2>
           </div>
         </div>
@@ -852,7 +852,7 @@ $portfolios = get_portfolio();
         <div class="col-lg-6 m-auto">
           <div class="choose-header-area text-center heading2">
             <h5>Why Choose Us</h5>
-            <h2>Why Choose Code With Nikhil?</h2>
+            <h2>Why Choose NikhilWorks?</h2>
           </div>
         </div>
       </div>

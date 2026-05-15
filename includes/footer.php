@@ -1,4 +1,4 @@
-<!--===== FOOTER AREA STARTS =======-->
+﻿<!--===== FOOTER AREA STARTS =======-->
 <div class="footer4-section-area">
   <div class="container">
     <div class="row">
@@ -6,7 +6,7 @@
       <!-- About -->
       <div class="col-lg-3 col-md-6">
         <div class="footer-logo-area">
-          <h2 class="logo_header my-2">CodeWithNikhil</h2>
+          <h2 class="logo_header my-2">NikhilWorks</h2>
           <p class="my-2">I am Nikhil Gupta, a passionate Web Developer specializing in MERN stack, PHP, Laravel, and modern web technologies to deliver powerful and user-friendly applications.</p>
           <ul class="social-links" style="display: flex; gap: 12px; list-style: none; padding: 0; margin: 0;">
             <li>

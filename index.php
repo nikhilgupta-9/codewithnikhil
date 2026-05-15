@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once "config/connect.php";
 include_once "util/function.php";
 
@@ -14,7 +14,7 @@ $blogs = get_blog($limit);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary Title for International Reach -->
-  <title>Code With Nikhil | Web Development & SEO Services - India, Dubai, USA, UK, Australia</title>
+  <title>NikhilWorks | Web Development & SEO Services - India, Dubai, USA, UK, Australia</title>
 
   <!-- Multilingual and Geographic Targeting -->
   <meta name="description" content="Professional Web Developer & SEO Expert Nikhil provides custom web solutions and digital marketing services for businesses in India (Mumbai, Delhi NCR, Bangalore, Pune), Dubai, USA, UK, Australia, New Zealand, and Western Europe. Let's build your online presence together.">
@@ -27,7 +27,7 @@ $blogs = get_blog($limit);
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
-      "name": "Code With Nikhil",
+      "name": "NikhilWorks",
       "description": "Web Development and SEO Services",
       "url": "<?= $site ?>",
       "serviceArea": {
@@ -86,7 +86,7 @@ $blogs = get_blog($limit);
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "CodeWithNikhil",
+      "name": "NikhilWorks",
       "url": "<?= $site ?>",
       "description": "Professional web development and SEO services for businesses in India, UAE, USA, UK, and Australia.",
       "inLanguage": "en",
@@ -188,10 +188,10 @@ $blogs = get_blog($limit);
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What web development services does CodeWithNikhil offer?",
+          "name": "What web development services does NikhilWorks offer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "CodeWithNikhil offers custom website development, e-commerce solutions, WordPress development, SEO services, social media marketing, landing page design, and website redesign. All services are available for clients in India, UAE, USA, UK, and Australia."
+            "text": "NikhilWorks offers custom website development, e-commerce solutions, WordPress development, SEO services, social media marketing, landing page design, and website redesign. All services are available for clients in India, UAE, USA, UK, and Australia."
           }
         },
         {
@@ -199,7 +199,7 @@ $blogs = get_blog($limit);
           "name": "How much does a website cost in India?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Website development costs in India vary by type. A basic static website starts from ₹5,000–₹15,000, a dynamic business website ranges from ₹15,000–₹50,000, and a full e-commerce website starts from ₹30,000 onwards. CodeWithNikhil offers affordable packages tailored to your budget."
+            "text": "Website development costs in India vary by type. A basic static website starts from ₹5,000–₹15,000, a dynamic business website ranges from ₹15,000–₹50,000, and a full e-commerce website starts from ₹30,000 onwards. NikhilWorks offers affordable packages tailored to your budget."
           }
         },
         {
@@ -207,7 +207,7 @@ $blogs = get_blog($limit);
           "name": "Do you work with international clients outside India?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. CodeWithNikhil works with clients globally — including businesses in Dubai (UAE), United States, United Kingdom, Australia, and New Zealand. All communication is in English and projects are delivered remotely."
+            "text": "Yes. NikhilWorks works with clients globally — including businesses in Dubai (UAE), United States, United Kingdom, Australia, and New Zealand. All communication is in English and projects are delivered remotely."
           }
         },
         {
@@ -223,7 +223,7 @@ $blogs = get_blog($limit);
           "name": "Do you provide SEO services for international markets?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. CodeWithNikhil provides international SEO services targeting markets in USA, UK, UAE, Australia, and other global regions. Services include keyword research, on-page optimization, backlink building, and Google Search Console setup."
+            "text": "Yes. NikhilWorks provides international SEO services targeting markets in USA, UK, UAE, Australia, and other global regions. Services include keyword research, on-page optimization, backlink building, and Google Search Console setup."
           }
         },
         {
@@ -239,19 +239,19 @@ $blogs = get_blog($limit);
   </script>
 
   <!-- Open Graph with International Appeal -->
-  <meta property="og:title" content="Code With Nikhil - Web Development & SEO for Global Businesses">
+  <meta property="og:title" content="NikhilWorks - Web Development & SEO for Global Businesses">
   <meta property="og:description" content="Building websites and SEO strategies for businesses worldwide. Based in India, serving clients in Dubai, USA, UK, Australia, New Zealand, and major Indian cities including Mumbai, Delhi, Bangalore, Pune.">
   <meta property="og:image" content="<?= $site ?>assets/img/preview.jpg">
   <meta property="og:url" content="<?= $site ?>">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="CodeWithNikhil">
+  <meta property="og:site_name" content="NikhilWorks">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="en_GB">
   <meta property="og:locale:alternate" content="en_AU">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Code With Nikhil - Web Development & SEO for Global Businesses">
+  <meta name="twitter:title" content="NikhilWorks - Web Development & SEO for Global Businesses">
   <meta name="twitter:description" content="Professional web development & SEO services. Based in India, serving clients globally in UAE, USA, UK, Australia.">
   <meta name="twitter:image" content="<?= $site ?>assets/img/preview.jpg">
 
@@ -299,7 +299,7 @@ $blogs = get_blog($limit);
           <div class="header-content-area heading9">
             <h5><img src="<?= $site ?>assets/img/icons/logo-icons5.svg" alt="">Top Web Developer & SEO Expert in Delhi NCR</h5>
             <h1 class="text-anime-style-2">Boost Your Business With Professional Website & SEO Services</h1>
-            <p data-aos="fade-left" data-aos-duration="1000">Code With Nikhil provides expert web development and SEO services in Delhi NCR, Uttar Pradesh, Gujarat, and across India. We help businesses increase online visibility, drive targeted traffic, and generate more customers through effective digital marketing strategies.</p>
+            <p data-aos="fade-left" data-aos-duration="1000">NikhilWorks provides expert web development and SEO services in Delhi NCR, Uttar Pradesh, Gujarat, and across India. We help businesses increase online visibility, drive targeted traffic, and generate more customers through effective digital marketing strategies.</p>
             <div class="btn-area1" data-aos="fade-left" data-aos-duration="1200">
               <a href="<?= $site ?>contact/" class="header-btn9">Get Free Consultation <i class="fa-solid fa-arrow-right"></i></a>
               <a href="<?= $site ?>portfolio.php" class="header-btn10">View Our Work <i class="fa-solid fa-arrow-right"></i></a>
@@ -344,7 +344,7 @@ $blogs = get_blog($limit);
         <div class="col-lg-7 m-auto">
           <div class="about5-header text-center heading10">
             <h5><img src="<?= $site ?>assets/img/icons/logo-icons6.svg" alt="">Welcome to SEO Agency</h5>
-            <h2 class="text-anime-style-3">Meet Code With Nikhil Your Trusted SEO & Digital Marketing Partner</h2>
+            <h2 class="text-anime-style-3">Meet NikhilWorks Your Trusted SEO & Digital Marketing Partner</h2>
           </div>
         </div>
       </div>
@@ -371,7 +371,7 @@ $blogs = get_blog($limit);
         <div class="col-lg-6">
           <div class="about5-content-area heading10">
             <h3 class="text-anime-style-3">Expert Web Development & SEO Services to Grow Your Business Online</h3>
-            <p data-aos="fade-left" data-aos-duration="1000">At Code With Nikhil, I understand that every business in Delhi NCR and across India has unique digital needs. With years of hands-on experience in web development and SEO, I provide personalized solutions that actually work. Unlike large agencies, I offer direct communication and focused attention to ensure your website not only looks great but also ranks well on Google.</p>
+            <p data-aos="fade-left" data-aos-duration="1000">At NikhilWorks, I understand that every business in Delhi NCR and across India has unique digital needs. With years of hands-on experience in web development and SEO, I provide personalized solutions that actually work. Unlike large agencies, I offer direct communication and focused attention to ensure your website not only looks great but also ranks well on Google.</p>
             <div class="space32"></div>
             <div class="about5-boxarea">
               <div class="row">
@@ -435,7 +435,7 @@ $blogs = get_blog($limit);
                 <a href="<?= $site ?>service-details/website-design-services" title="Professional Web Design Services in Delhi">Web Design Delhi</a>
               </div>
               <div class="img1 reveal">
-                <img src="assets/img/all-images/brand-img2.png" alt="Professional Web Design Services in Delhi by Code With Nikhil">
+                <img src="assets/img/all-images/brand-img2.png" alt="Professional Web Design Services in Delhi by NikhilWorks">
               </div>
             </div>
 
@@ -444,7 +444,7 @@ $blogs = get_blog($limit);
                 <a href="<?= $site ?>service-details/seo-services-delhi" title="Best SEO Company in Delhi NCR">SEO Services Delhi</a>
               </div>
               <div class="img1 reveal">
-                <img src="assets/img/all-images/brand-img3.png" alt="Top SEO Services in Delhi by Code With Nikhil">
+                <img src="assets/img/all-images/brand-img3.png" alt="Top SEO Services in Delhi by NikhilWorks">
               </div>
             </div>
 
@@ -453,7 +453,7 @@ $blogs = get_blog($limit);
                 <a href="<?= $site ?>service-details/ecommerce-website-delhi" title="E-commerce Website Development Delhi">E-commerce Development</a>
               </div>
               <div class="img1 reveal">
-                <img src="assets/img/all-images/brand-img1.png" alt="E-commerce Website Development in Delhi by Code With Nikhil">
+                <img src="assets/img/all-images/brand-img1.png" alt="E-commerce Website Development in Delhi by NikhilWorks">
               </div>
             </div>
 
@@ -462,7 +462,7 @@ $blogs = get_blog($limit);
                 <a href="<?= $site ?>service-details/wordpress-developer-delhi" title="WordPress Developer in Delhi">WordPress Developer</a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img2.png" alt="Expert WordPress Developer in Delhi - Code With Nikhil">
+                <img src="assets/img/all-images/brand-img2.png" alt="Expert WordPress Developer in Delhi - NikhilWorks">
               </div>
             </div>
 
@@ -471,7 +471,7 @@ $blogs = get_blog($limit);
                 <a href="<?= $site ?>service-details/digital-marketing-delhi" title="Digital Marketing Agency Delhi">Digital Marketing</a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img3.png" alt="Digital Marketing Services in Delhi by Code With Nikhil">
+                <img src="assets/img/all-images/brand-img3.png" alt="Digital Marketing Services in Delhi by NikhilWorks">
               </div>
             </div>
           </div>
@@ -482,7 +482,7 @@ $blogs = get_blog($limit);
                 <a href="<?= $site ?>service-details/website-redesign-delhi" title="Website Redesign Services Delhi">Website Redesign</a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img4.png" alt="Website Redesign Services in Delhi - Code With Nikhil">
+                <img src="assets/img/all-images/brand-img4.png" alt="Website Redesign Services in Delhi - NikhilWorks">
               </div>
             </div>
 
@@ -491,7 +491,7 @@ $blogs = get_blog($limit);
                 <a href="<?= $site ?>service-details/seo-company-delhi" title="SEO Expert in Delhi NCR">SEO Expert Delhi</a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img5.png" alt="SEO Expert in Delhi - Code With Nikhil">
+                <img src="assets/img/all-images/brand-img5.png" alt="SEO Expert in Delhi - NikhilWorks">
               </div>
             </div>
 
@@ -500,7 +500,7 @@ $blogs = get_blog($limit);
                 <a href="<?= $site ?>service-details/web-development-delhi" title="Web Development Company Delhi">Web Development</a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img6.png" alt="Web Development Company in Delhi - Code With Nikhil">
+                <img src="assets/img/all-images/brand-img6.png" alt="Web Development Company in Delhi - NikhilWorks">
               </div>
             </div>
 
@@ -509,7 +509,7 @@ $blogs = get_blog($limit);
                 <a href="<?= $site ?>service-details/responsive-web-design" title="Responsive Web Design Delhi">Responsive Design</a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img7.png" alt="Responsive Web Design Services in Delhi - Code With Nikhil">
+                <img src="assets/img/all-images/brand-img7.png" alt="Responsive Web Design Services in Delhi - NikhilWorks">
               </div>
             </div>
 
@@ -518,7 +518,7 @@ $blogs = get_blog($limit);
                 <a href="<?= $site ?>service-details/local-seo-delhi" title="Local SEO Services Delhi">Local SEO Delhi</a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img8.png" alt="Local SEO Services for Delhi Businesses - Code With Nikhil">
+                <img src="assets/img/all-images/brand-img8.png" alt="Local SEO Services for Delhi Businesses - NikhilWorks">
               </div>
             </div>
           </div>
@@ -541,7 +541,7 @@ $blogs = get_blog($limit);
             </h5>
 
             <h2 class="text-anime-style-1">
-              About <span>Code With Nikhil
+              About <span>NikhilWorks
                 <img src="<?= $site ?>assets/img/elements/line-img1.png" alt="">
               </span>
             </h2>
@@ -549,7 +549,7 @@ $blogs = get_blog($limit);
             <div class="space10 d-lg-block d-none"></div>
 
             <p data-aos="fade-up" data-aos-duration="1000">
-              Code With Nikhil is a freelance web development and SEO brand led by
+              NikhilWorks is a freelance web development and SEO brand led by
               <strong>Nikhil Gupta</strong>, focused on helping businesses build a strong,
               scalable, and result-driven online presence.
             </p>
@@ -1469,7 +1469,7 @@ $blogs = get_blog($limit);
           <div class="pricing-header heading8 text-center">
             <h5 data-aos="fade-up" data-aos-duration="1000"><img src="assets/img/icons/logo-icons6.svg" alt="">Pricing &
               Plan</h5>
-            <h2 class="text-anime-style-1">Code With Nikhil <span>Pricing Plan <img src="assets/img/elements/line-img2.png"
+            <h2 class="text-anime-style-1">NikhilWorks <span>Pricing Plan <img src="assets/img/elements/line-img2.png"
                   alt=""></span></h2>
           </div>
         </div>
@@ -1550,7 +1550,7 @@ $blogs = get_blog($limit);
           <div class="testimonial4-slider-area owl-carousel">
             <div class="testimonial-boxarea">
               <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"Nikhil from CodeWithNikhil.in transformed our Delhi-based business with his exceptional web development skills. His SEO strategies helped us rank on Google's first page within 3 months. Highly recommended for businesses in India!"</p>
+              <p>"Nikhil from nikhilworks.com transformed our Delhi-based business with his exceptional web development skills. His SEO strategies helped us rank on Google's first page within 3 months. Highly recommended for businesses in India!"</p>
               <div class="space48"></div>
               <div class="auhtor-logo">
                 <div class="text">
@@ -1572,7 +1572,7 @@ $blogs = get_blog($limit);
 
             <div class="testimonial-boxarea">
               <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"As a startup founder in Mumbai, I was struggling with my online presence until I found CodeWithNikhil.in. Nikhil Gupta created a stunning website and implemented SEO strategies that brought us genuine customers. His pricing is very reasonable for Indian businesses."</p>
+              <p>"As a startup founder in Mumbai, I was struggling with my online presence until I found nikhilworks.com. Nikhil Gupta created a stunning website and implemented SEO strategies that brought us genuine customers. His pricing is very reasonable for Indian businesses."</p>
               <div class="space48"></div>
               <div class="auhtor-logo">
                 <div class="text">
@@ -1594,7 +1594,7 @@ $blogs = get_blog($limit);
 
             <div class="testimonial-boxarea">
               <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"I run a small business in Bangalore and needed an affordable web developer. Nikhil from CodeWithNikhil.in exceeded my expectations. He created a responsive website and helped with local SEO. Now we're getting more customers from Google searches."</p>
+              <p>"I run a small business in Bangalore and needed an affordable web developer. Nikhil from nikhilworks.com exceeded my expectations. He created a responsive website and helped with local SEO. Now we're getting more customers from Google searches."</p>
               <div class="space48"></div>
               <div class="auhtor-logo">
                 <div class="text">
@@ -1616,7 +1616,7 @@ $blogs = get_blog($limit);
 
             <div class="testimonial-boxarea">
               <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"CodeWithNikhil.in provided excellent WordPress development services for my consultancy in Hyderabad. Nikhil's technical expertise and understanding of Indian market needs made all the difference. Our website traffic increased by 200% after his SEO work."</p>
+              <p>"nikhilworks.com provided excellent WordPress development services for my consultancy in Hyderabad. Nikhil's technical expertise and understanding of Indian market needs made all the difference. Our website traffic increased by 200% after his SEO work."</p>
               <div class="space48"></div>
               <div class="auhtor-logo">
                 <div class="text">
@@ -1638,7 +1638,7 @@ $blogs = get_blog($limit);
 
             <div class="testimonial-boxarea">
               <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"As an NRI looking to establish business in India, I found CodeWithNikhil.in to be the perfect partner. Nikhil Gupta understood my vision and created a website that works perfectly for both Indian and international audiences. His SEO knowledge is impressive!"</p>
+              <p>"As an NRI looking to establish business in India, I found nikhilworks.com to be the perfect partner. Nikhil Gupta understood my vision and created a website that works perfectly for both Indian and international audiences. His SEO knowledge is impressive!"</p>
               <div class="space48"></div>
               <div class="auhtor-logo">
                 <div class="text">
@@ -1660,7 +1660,7 @@ $blogs = get_blog($limit);
 
             <div class="testimonial-boxarea">
               <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"I contacted CodeWithNikhil.in for my restaurant website in Delhi. Nikhil created a beautiful, responsive site and optimized it for local SEO. Now we appear in 'near me' searches and our online orders have increased significantly. Great service for Indian businesses!"</p>
+              <p>"I contacted nikhilworks.com for my restaurant website in Delhi. Nikhil created a beautiful, responsive site and optimized it for local SEO. Now we appear in 'near me' searches and our online orders have increased significantly. Great service for Indian businesses!"</p>
               <div class="space48"></div>
               <div class="auhtor-logo">
                 <div class="text">
@@ -1759,13 +1759,13 @@ $blogs = get_blog($limit);
                   <button class="accordion-button" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseOne" aria-expanded="true"
                     aria-controls="flush-collapseOne">
-                    1. What services does Code With Nikhil provide?
+                    1. What services does NikhilWorks provide?
                   </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse show"
                   data-bs-parent="#accordionFlushExample">
                   <div class="accordion-body">
-                    Code With Nikhil offers professional web design and development services including
+                    NikhilWorks offers professional web design and development services including
                     static websites, dynamic websites, custom web applications, and SEO-friendly solutions.
                   </div>
                   <div class="space10"></div>
@@ -1875,7 +1875,7 @@ $blogs = get_blog($limit);
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseSix" aria-expanded="false"
                     aria-controls="flush-collapseSix">
-                    6. How do I get started with Code With Nikhil?
+                    6. How do I get started with NikhilWorks?
                   </button>
                 </h2>
                 <div id="flush-collapseSix" class="accordion-collapse collapse"

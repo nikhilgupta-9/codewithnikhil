@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once "config/connect.php";
 ?>
 <!DOCTYPE html>
@@ -7,7 +7,7 @@ include_once "config/connect.php";
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About CodeWithNikhil | Freelance Web Developer & SEO Expert Delhi NCR</title>
+  <title>About NikhilWorks | Freelance Web Developer & SEO Expert Delhi NCR</title>
   <meta name="description" content="Meet Nikhil Gupta - Professional freelance web developer & SEO expert in Delhi NCR. 3+ years experience in website development, SEO services, and digital marketing solutions.">
   <meta name="keywords" content="freelance web developer Delhi, SEO expert India, website developer NCR, freelance web designer, SEO services Delhi, digital marketing expert, WordPress developer Delhi, MERN stack developer">
 
@@ -15,16 +15,16 @@ include_once "config/connect.php";
   <link rel="canonical" href="<?= $site ?>about/" />
 
   <!-- Open Graph Tags -->
-  <meta property="og:title" content="About CodeWithNikhil | Freelance Web Developer & SEO Expert">
+  <meta property="og:title" content="About NikhilWorks | Freelance Web Developer & SEO Expert">
   <meta property="og:description" content="Professional freelance web developer & SEO expert in Delhi NCR. Website development, SEO services, and digital marketing solutions.">
   <meta property="og:image" content="<?= $site ?>assets/img/logo/og-about.jpg">
   <meta property="og:url" content="<?= $site ?>about/">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="CodeWithNikhil">
+  <meta property="og:site_name" content="NikhilWorks">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="About CodeWithNikhil | Freelance Web Developer Delhi">
+  <meta name="twitter:title" content="About NikhilWorks | Freelance Web Developer Delhi">
   <meta name="twitter:description" content="Professional web development & SEO services in Delhi NCR. 3+ years experience building successful websites.">
 
   <!-- Structured Data -->
@@ -105,7 +105,7 @@ include_once "config/connect.php";
       <div class="row">
         <div class="col-lg-8 m-auto">
           <div class="about-inner-header heading9 text-center">
-            <h1>About CodeWithNikhil</h1>
+            <h1>About NikhilWorks</h1>
             <a href="<?= $site ?>">Home <i class="fa-solid fa-angle-right"></i> <span>About</span></a>
           </div>
           <div class="text-center">
@@ -127,7 +127,7 @@ include_once "config/connect.php";
             <h5>About Me</h5>
             <h1>Nikhil Gupta</h1>
             <h3 class="h4 text-primary mb-3">Freelance Web Developer & SEO Expert</h3>
-            <p>Welcome to CodeWithNikhil! I'm a passionate freelance web developer and SEO expert based in Delhi NCR with <strong>3+ years of hands-on experience</strong> in creating stunning, high-performance websites and driving organic growth for businesses.</p>
+            <p>Welcome to NikhilWorks! I'm a passionate freelance web developer and SEO expert based in Delhi NCR with <strong>3+ years of hands-on experience</strong> in creating stunning, high-performance websites and driving organic growth for businesses.</p>
 
             <div class="space32"></div>
 

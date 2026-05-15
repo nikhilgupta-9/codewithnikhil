@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include "config/connect.php";
 ?>
 <!DOCTYPE html>
@@ -6,7 +6,7 @@ include "config/connect.php";
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Affordable Web Development Pricing Plans India | CodeWithNikhil</title>
+  <title>Affordable Web Development Pricing Plans India | NikhilWorks</title>
   <meta name="description" content="Professional web development pricing plans by Nikhil Gupta. Affordable static, dynamic, WordPress, MERN stack, and e-commerce website development in Delhi, India.">
   <meta name="keywords" content="web developer pricing india, website development cost delhi, affordable web design moti nagar, WordPress developer india, MERN stack developer, e-commerce website price, PHP developer delhi, freelance web developer rates">
   
@@ -14,16 +14,16 @@ include "config/connect.php";
   <link rel="canonical" href="<?=$site?>pricing/" />
   
   <!-- Open Graph Tags -->
-  <meta property="og:title" content="Affordable Web Development Pricing Plans | CodeWithNikhil">
+  <meta property="og:title" content="Affordable Web Development Pricing Plans | NikhilWorks">
   <meta property="og:description" content="Professional web development services in Delhi. Static, Dynamic, WordPress, MERN Stack & E-commerce solutions at competitive prices.">
   <meta property="og:image" content="<?=$site?>assets/img/logo/og-pricing.jpg">
   <meta property="og:url" content="<?=$site?>pricing/">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="CodeWithNikhil">
+  <meta property="og:site_name" content="NikhilWorks">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Web Development Pricing Plans | CodeWithNikhil">
+  <meta name="twitter:title" content="Web Development Pricing Plans | NikhilWorks">
   <meta name="twitter:description" content="Affordable web development solutions in Delhi, India. Get your website built with modern technologies.">
   
   <!-- Structured Data -->
@@ -300,7 +300,7 @@ include "config/connect.php";
       <div class="row mt-5">
         <div class="col-lg-12">
           <div class="pricing-features-info text-center">
-            <h3>Why Choose CodeWithNikhil?</h3>
+            <h3>Why Choose NikhilWorks?</h3>
             <div class="row mt-4">
               <div class="col-md-4" data-aos="fade-up">
                 <div class="feature-item">

@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms & Conditions | CodeWithNikhil</title>
-  <meta name="description" content="Read the Terms & Conditions for using CodeWithNikhil's web development and digital marketing services. Clear policies for transparency.">
+  <title>Terms & Conditions | NikhilWorks</title>
+  <meta name="description" content="Read the Terms & Conditions for using NikhilWorks's web development and digital marketing services. Clear policies for transparency.">
 
   <!--=====FAB ICON=======-->
   <link rel="shortcut icon" href="assets/img/logo/fav-logo5.png" type="image/x-icon">
@@ -99,7 +99,7 @@
             <h2>Terms & Conditions</h2>
             <p>
               These terms outline the rules, responsibilities, and conditions
-              for using services provided by <strong>Code With Nikhil</strong>.
+              for using services provided by <strong>NikhilWorks</strong>.
             </p>
           </div>
 
@@ -109,7 +109,7 @@
               <h4>1. Acceptance of Terms</h4>
               <p>
                 By accessing this website or using any services provided by
-                Code With Nikhil, you agree to comply with and be bound by
+                NikhilWorks, you agree to comply with and be bound by
                 these Terms & Conditions. If you do not agree, please do not
                 use our services.
               </p>
@@ -118,7 +118,7 @@
             <div class="terms-item">
               <h4>2. Services</h4>
               <p>
-                Code With Nikhil offers freelance web development, SEO,
+                NikhilWorks offers freelance web development, SEO,
                 digital marketing, and related consulting services.
                 The scope, timeline, and deliverables of each project are
                 defined and agreed upon before work begins.
@@ -162,7 +162,7 @@
               <p>
                 Once full payment is received, ownership of the final
                 website or project is transferred to the client.
-                Code With Nikhil reserves the right to showcase completed
+                NikhilWorks reserves the right to showcase completed
                 work in portfolios or case studies unless otherwise agreed.
               </p>
             </div>
@@ -180,7 +180,7 @@
               <h4>8. Data & Security</h4>
               <p>
                 While reasonable measures are taken to ensure data safety,
-                Code With Nikhil is not responsible for issues arising from
+                NikhilWorks is not responsible for issues arising from
                 third-party hosting providers, servers, or external services.
               </p>
             </div>
@@ -188,7 +188,7 @@
             <div class="terms-item">
               <h4>9. Limitation of Liability</h4>
               <p>
-                Code With Nikhil shall not be held liable for any indirect,
+                NikhilWorks shall not be held liable for any indirect,
                 incidental, or consequential damages arising from the use
                 or inability to use the services.
               </p>
