@@ -4,10 +4,9 @@ include_once "config/connect.php";
 <!DOCTYPE html>
 <html lang="en">
 
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Nikhil Gupta | Freelance Web Developer & SEO Specialist</title>
@@ -15,13 +14,20 @@ include_once "config/connect.php";
   <meta name="description" content="Nikhil Gupta – Freelance Web Developer offering modern website development, MERN stack projects, SEO optimization, and digital marketing solutions for businesses.">
   <meta name="keywords" content="freelancer web developer, web developer India, MERN stack developer, SEO expert, freelance website designer">
 
-  <link rel="canonical" href="https://codewithnikhil.in/contact/">
+  <link rel="canonical" href="<?= $site ?>contact/">
 
   <meta property="og:title" content="Nikhil Gupta – Freelance Web Developer & SEO Specialist">
   <meta property="og:description" content="Website development, SEO services, MERN stack development & digital marketing solutions.">
   <meta property="og:image" content="<?= $site ?>assets/img/logo/fav-logo1.png">
-  <meta property="og:url" content="https://codewithnikhil.in/contact/">
+  <meta property="og:url" content="<?= $site ?>contact/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CodeWithNikhil">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nikhil Gupta – Freelance Web Developer & SEO Specialist">
+  <meta name="twitter:description" content="Website development, SEO services, MERN stack development & digital marketing solutions.">
+  <meta name="twitter:image" content="<?= $site ?>assets/img/logo/fav-logo1.png">
 
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 

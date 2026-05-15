@@ -160,7 +160,7 @@ $services = get_sub_category($limit);
               <i class="fa-solid fa-envelope"></i>
             </div>
              <div class="contact-info-text">
-              <a href="iamnikhilgupta9@gmail.com">iamnikhilgupta9@gmail.com</a>
+              <a href="mailto:iamnikhilgupta9@gmail.com">iamnikhilgupta9@gmail.com</a>
             </div>
             
           </div>
@@ -171,7 +171,7 @@ $services = get_sub_category($limit);
             </div>
             
             <div class="contact-info-text">
-              <a href="contact@codewithnikhil.in">contact@codewithnikhil.in</a>
+              <a href="mailto:contact@codewithnikhil.in">contact@codewithnikhil.in</a>
             </div>
           </div>
 

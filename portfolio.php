@@ -18,15 +18,16 @@ $portfolios = get_portfolio();
   <!-- Open Graph Tags -->
   <meta property="og:title" content="Web Development Portfolio | CodeWithNikhil">
   <meta property="og:description" content="Professional portfolio of Nikhil Gupta - Web Developer & SEO Expert.">
-  <meta property="og:image" content="https://codewithnikhil.in/assets/img/portfolio-banner.jpg">
-  <meta property="og:url" content="https://codewithnikhil.in/portfolio">
+  <meta property="og:image" content="<?= $site ?>assets/img/portfolio-banner.jpg">
+  <meta property="og:url" content="<?= $site ?>portfolio/">
+  <meta property="og:site_name" content="CodeWithNikhil">
   <meta property="og:type" content="website">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Web Development Portfolio | CodeWithNikhil">
   <meta name="twitter:description" content="Professional portfolio of Nikhil Gupta - Web Developer & SEO Expert.">
-  <meta name="twitter:image" content="https://codewithnikhil.in/assets/img/portfolio-banner.jpg">
+  <meta name="twitter:image" content="<?= $site ?>assets/img/portfolio-banner.jpg">
 
   <!--=====FAB ICON=======-->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">

@@ -7,10 +7,10 @@ $blogs = get_blog($limit);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary Title for International Reach -->
@@ -29,7 +29,7 @@ $blogs = get_blog($limit);
       "@type": "ProfessionalService",
       "name": "Code With Nikhil",
       "description": "Web Development and SEO Services",
-      "url": "https://codewithnikhil.in",
+      "url": "<?= $site ?>",
       "serviceArea": {
         "@type": "GeoCircle",
         "geoMidpoint": {
@@ -84,24 +84,31 @@ $blogs = get_blog($limit);
   <!-- Open Graph with International Appeal -->
   <meta property="og:title" content="Code With Nikhil - Web Development & SEO for Global Businesses">
   <meta property="og:description" content="Building websites and SEO strategies for businesses worldwide. Based in India, serving clients in Dubai, USA, UK, Australia, New Zealand, and major Indian cities including Mumbai, Delhi, Bangalore, Pune.">
-  <meta property="og:image" content="assets/img/preview.jpg">
-  <meta property="og:url" content="https://codewithnikhil.in">
+  <meta property="og:image" content="<?= $site ?>assets/img/preview.jpg">
+  <meta property="og:url" content="<?= $site ?>">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CodeWithNikhil">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="en_GB">
   <meta property="og:locale:alternate" content="en_AU">
 
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Code With Nikhil - Web Development & SEO for Global Businesses">
+  <meta name="twitter:description" content="Professional web development & SEO services. Based in India, serving clients globally in UAE, USA, UK, Australia.">
+  <meta name="twitter:image" content="<?= $site ?>assets/img/preview.jpg">
+
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://codewithnikhil.in">
+  <link rel="canonical" href="<?= $site ?>">
 
   <!-- Hreflang Tags for International Targeting -->
-  <link rel="alternate" hreflang="en" href="https://codewithnikhil.in">
-  <link rel="alternate" hreflang="en-in" href="https://codewithnikhil.in">
-  <link rel="alternate" hreflang="en-us" href="https://codewithnikhil.in">
-  <link rel="alternate" hreflang="en-gb" href="https://codewithnikhil.in">
-  <link rel="alternate" hreflang="en-au" href="https://codewithnikhil.in">
-  <link rel="alternate" hreflang="en-nz" href="https://codewithnikhil.in">
-  <link rel="alternate" hreflang="x-default" href="https://codewithnikhil.in">
+  <link rel="alternate" hreflang="en" href="<?= $site ?>">
+  <link rel="alternate" hreflang="en-in" href="<?= $site ?>">
+  <link rel="alternate" hreflang="en-us" href="<?= $site ?>">
+  <link rel="alternate" hreflang="en-gb" href="<?= $site ?>">
+  <link rel="alternate" hreflang="en-au" href="<?= $site ?>">
+  <link rel="alternate" hreflang="en-nz" href="<?= $site ?>">
+  <link rel="alternate" hreflang="x-default" href="<?= $site ?>">
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="assets/img/logo/fav-logo5.png" type="image/x-icon">

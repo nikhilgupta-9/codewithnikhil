@@ -11,12 +11,9 @@ $portfolios = get_portfolio();
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from seoc-html-v2.vercel.app/service3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 07 Sep 2025 00:36:18 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Professional Web Development Services Delhi | CodeWithNikhil</title>
   <meta name="description" content="Hire Nikhil Gupta, Delhi's top freelance web developer for custom websites, e-commerce solutions & responsive web design. Get affordable web development services with SEO optimization.">
@@ -25,18 +22,19 @@ $portfolios = get_portfolio();
   <!-- Open Graph Tags -->
   <meta property="og:title" content="Professional Web Development Services Delhi | Code With Nikhil">
   <meta property="og:description" content="Hire Delhi's top freelance web developer for custom websites, e-commerce solutions & responsive web design.">
-  <meta property="og:image" content="https://codewithnikhil.in/assets/img/web-development-services-delhi.jpg">
-  <meta property="og:url" content="https://codewithnikhil.in/services">
+  <meta property="og:image" content="<?= $site ?>assets/img/web-development-services-delhi.jpg">
+  <meta property="og:url" content="<?= $site ?>services/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CodeWithNikhil">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Professional Web Development Services Delhi | Code With Nikhil">
   <meta name="twitter:description" content="Hire Delhi's top freelance web developer for custom websites, e-commerce solutions & responsive web design.">
-  <meta name="twitter:image" content="https://codewithnikhil.in/assets/img/web-development-services-delhi.jpg">
+  <meta name="twitter:image" content="<?= $site ?>assets/img/web-development-services-delhi.jpg">
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://codewithnikhil.in/services">
+  <link rel="canonical" href="<?= $site ?>services/">
 
   <!-- Local Business Schema -->
   <script type="application/ld+json">
@@ -44,9 +42,9 @@ $portfolios = get_portfolio();
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Code With Nikhil",
-      "image": "https://codewithnikhil.in/assets/img/logo.png",
-      "@id": "https://codewithnikhil.in",
-      "url": "https://codewithnikhil.in",
+      "image": "<?= $site ?>assets/img/logo.png",
+      "@id": "<?= $site ?>",
+      "url": "<?= $site ?>",
       "telephone": "+91-9876543210",
       "priceRange": "₹₹",
       "address": {
