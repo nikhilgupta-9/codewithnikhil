@@ -1,0 +1,21 @@
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Routes
+RewriteRule ^services/([a-zA-Z0-9-]+)/?$ services.php?service=$1 [L,NC]
+RewriteRule ^services/?$ services.php [L,NC]
+RewriteRule ^pricing/?$ pricing.php [L,NC]
+RewriteRule ^portfolio/?$ portfolio.php [L,NC]
+RewriteRule ^about/?$ about.php [L,NC]
+RewriteRule ^blogs/?$ blog.php [L,NC]
+RewriteRule ^product-details/([^/]+)/?$ construction-services.php?alias=$1 [L,QSA]
+RewriteRule ^service/([^/]+)/?$ service.php?alias=$1 [L,QSA]
+RewriteRule ^blog/([^/]+)/?$ blog-detail.php?alias=$1 [L,QSA]
+RewriteRule ^contact/?$ contact.php [L,NC]
+
+# Error Pages
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php

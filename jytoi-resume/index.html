@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jyoti Upadhyay – Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #faf7f2;
+      --ink: #1a1612;
+      --accent: #7c4f2f;
+      --gold: #c8993a;
+      --muted: #8a7d72;
+      --border: #ddd5c8;
+      --soft: #f0ebe3;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── SCREEN: preview centred on page ── */
+    body {
+      background: #d6cfc6;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      color: var(--ink);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 30px 16px;
+    }
+
+    /* A4 = 210 × 297 mm  →  794 × 1123 px at 96 dpi */
+    .page {
+      width: 794px;
+      height: 1123px;
+      background: #fff;
+      box-shadow: 0 6px 40px rgba(0,0,0,0.18);
+      overflow: hidden;          /* hard-clip anything that overflows */
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      height: 5px;
+      flex-shrink: 0;
+      background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent));
+    }
+
+    /* ── HEADER ── */
+    header {
+      flex-shrink: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 20px;
+      padding: 22px 40px 18px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 40px;
+      width: 50px; height: 3px;
+      background: var(--gold);
+    }
+
+    .name-block h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+    .name-block h1 span { display: block; font-weight: 600; color: var(--accent); }
+
+    .designation {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 6px;
+    }
+
+    .contact-block {
+      text-align: right;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .contact-block a { color: var(--accent); text-decoration: none; }
+    .contact-block strong {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    /* ── BODY (sidebar + main) ── */
+    .body {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: var(--soft);
+      padding: 20px 20px;
+      border-right: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .sidebar-section { margin-bottom: 18px; }
+    .sidebar-section:last-child { margin-bottom: 0; }
+
+    .sidebar-label {
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-item {
+      font-size: 0.74rem;
+      color: var(--ink);
+      padding: 3px 0;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      line-height: 1.3;
+    }
+    .skill-item::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .lang-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--ink);
+      border-radius: 2px;
+      padding: 2px 7px;
+      margin: 2px 2px;
+    }
+
+    .personal-item {
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding: 3px 0;
+      line-height: 1.35;
+    }
+    .personal-item strong {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ── MAIN ── */
+    .main {
+      padding: 20px 32px 18px;
+      overflow: hidden;
+    }
+
+    .section { margin-bottom: 16px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .summary-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.88rem;
+      font-style: italic;
+      color: #4a3f36;
+      line-height: 1.6;
+      border-left: 3px solid var(--gold);
+      padding-left: 14px;
+    }
+
+    .exp-card {
+      padding: 12px 16px;
+      background: var(--soft);
+      border-radius: 2px;
+      border-left: 3px solid var(--accent);
+    }
+    .exp-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .exp-org {
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin: 2px 0;
+    }
+    .exp-meta {
+      font-size: 0.67rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    .exp-desc {
+      font-size: 0.75rem;
+      color: #5a4f46;
+      line-height: 1.55;
+    }
+
+    .edu-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.74rem;
+    }
+    .edu-table thead tr { background: var(--accent); color: white; }
+    .edu-table thead th {
+      padding: 6px 10px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .edu-table tbody tr { border-bottom: 1px solid var(--border); }
+    .edu-table tbody tr:nth-child(even) { background: var(--soft); }
+    .edu-table tbody td { padding: 5px 10px; color: var(--ink); }
+    .edu-table tbody td:last-child { color: var(--muted); font-size: 0.7rem; }
+
+    .achievement-item {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      margin-bottom: 7px;
+    }
+    .achievement-item:last-child { margin-bottom: 0; }
+
+    .ach-icon {
+      width: 18px; height: 18px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .ach-icon svg { width: 9px; height: 9px; fill: white; }
+
+    .ach-text { font-size: 0.76rem; color: var(--ink); line-height: 1.45; }
+
+    /* ── FOOTER ── */
+    footer {
+      flex-shrink: 0;
+      padding: 10px 40px 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .declaration {
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .signature {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-align: right;
+    }
+    .sig-place { font-size: 0.65rem; color: var(--muted); margin-top: 1px; }
+
+    /* ══════════════════════════════════════
+       PRINT STYLES  — exact A4, single page
+    ══════════════════════════════════════ */
+    @page {
+      size: A4 portrait;
+      margin: 0;          /* we handle all spacing inside .page */
+    }
+
+    @media print {
+      html, body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+        background: white;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+        box-shadow: none;
+        overflow: hidden;
+        page-break-after: avoid;
+        page-break-before: avoid;
+      }
+
+      /* Force background colours to print */
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="top-bar"></div>
+
+  <header>
+    <div class="name-block">
+      <h1>Jyoti <span>Upadhyay</span></h1>
+      <div class="designation">Political Science Teacher · PGT</div>
+    </div>
+    <div class="contact-block">
+      <strong>Contact</strong>
+      +91 9711402356 / 7982698514<br>
+      <a href="mailto:jyotiofficial2801@gmail.com">jyotiofficial2801@gmail.com</a><br>
+      Indrapuram, Ghaziabad
+    </div>
+  </header>
+
+  <div class="body">
+
+    <aside class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Core Skills</div>
+        <div class="skill-item">Curriculum Planning</div>
+        <div class="skill-item">Classroom Management</div>
+        <div class="skill-item">Political Theory</div>
+        <div class="skill-item">Student Assessment</div>
+        <div class="skill-item">Communication</div>
+        <div class="skill-item">Record Keeping</div>
+        <div class="skill-item">MS Word &amp; Excel</div>
+        <div class="skill-item">Data Documentation</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Languages</div>
+        <span class="lang-tag">Hindi</span>
+        <span class="lang-tag">English</span>
+        <span class="lang-tag">Gujarati</span>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Personal</div>
+        <div class="personal-item"><strong>Date of Birth</strong>07 August 1998</div>
+        <div class="personal-item"><strong>Gender</strong>Female</div>
+        <div class="personal-item"><strong>Marital Status</strong>Unmarried</div>
+        <div class="personal-item"><strong>Location</strong>Indrapuram, Ghaziabad</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Highlights</div>
+        <div class="skill-item">NCC 'C' Cert – Grade A</div>
+        <div class="skill-item">SSB Recommended</div>
+        <div class="skill-item">Delhi University Alumni</div>
+      </div>
+
+    </aside>
+
+    <main class="main">
+
+      <div class="section">
+        <div class="section-title">Profile</div>
+        <p class="summary-text">
+          Dedicated Political Science educator with 2 years of PGT teaching experience. M.A. from University of Delhi, disciplined through NCC 'C' Certificate (Grade 'A'). Committed to inspiring students through engaging, value-driven classroom instruction.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Teaching Experience</div>
+        <div class="exp-card">
+          <div class="exp-role">PGT – Political Science</div>
+          <div class="exp-org">J D Public Inter College, Hapur</div>
+          <div class="exp-meta">2 Years · Classes XI–XII · UP Board / CBSE</div>
+          <div class="exp-desc">
+            Delivered Political Science lessons for senior secondary classes. Developed lesson plans, conducted assessments, maintained student records and fostered an interactive learning environment. Guided students in constitutional frameworks, international relations and political theory.
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-role">PGT – Political Science</div>
+          <div class="exp-org">Shaiffali Public School, Dadri</div>
+          <div class="exp-meta"> · Classes XI–XII · CBSE</div>
+          <div class="exp-desc">
+            Taught Political Science to senior secondary students with a focus on conceptual clarity and exam-oriented preparation. Designed structured lesson plans, conducted regular assessments, and supported students in understanding democratic systems, governance, and global politics. Encouraged active classroom discussions and critical thinking.
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+          <div class="section-title">Education</div>
+          <table class="edu-table">
+            <thead>
+              <tr>
+                <th>Qualification</th>
+                <th>Institution / Board</th>
+                <th>Year</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>B.Ed.</td><td>CCS University</td><td>Started 2026 (Pursuing)</td></tr>
+              <tr><td>M.A. Political Science</td><td>University of Delhi</td><td>2021</td></tr>
+              <tr><td>NCC 'C' Certificate with Grade 'A'</td><td>Delhi Directorate </td><td>2018</td></tr>
+              <tr><td>B.A. (Hons.) Political Science</td><td>University of Delhi</td><td>2018</td></tr>
+              <tr><td>12th – CBSE</td><td>CBSE Board, Delhi</td><td>2015</td></tr>
+              <tr><td>10th – CBSE</td><td>CBSE Board, Delhi</td><td>2013</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      <div class="section">
+        <div class="section-title">Achievements &amp; Distinctions</div>
+        <div class="achievement-item">
+          <div class="ach-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="ach-text">NCC 'C' Certificate with <strong>Grade 'A'</strong> — Delhi Directorate, 2018</div>
+        </div>
+        <div class="achievement-item">
+          <div class="ach-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="ach-text">Recommended for <strong>SSB Interview</strong> — Indian Army Officer Selection</div>
+        </div>
+        <div class="achievement-item">
+          <div class="ach-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="ach-text">Volunteer at <strong>National Conference on Public Policy</strong>, University of Delhi</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <footer>
+    <div class="declaration">
+      I hereby declare that the above information is true and correct to the best of my knowledge.
+    </div>
+    <div>
+      <div class="signature">Jyoti Upadhyay</div>
+      <div class="sig-place">Ghaziabad</div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

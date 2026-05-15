@@ -1,0 +1,32 @@
+# Dependencies
+/vendor/
+
+# Sensitive config — never commit credentials
+/config/connect.php
+
+# Uploads (user-generated content)
+/admin/uploads/*
+!/admin/uploads/.gitkeep
+
+# Backups & archives
+*.zip
+*.tar.gz
+*.sql
+
+# Local environment
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+/admin/error_log
