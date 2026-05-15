@@ -223,6 +223,16 @@ $portfolios = get_portfolio();
       ]
     }
   </script>
+
+  <!-- Google Analytics 4 — NikhilWorks -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HVPGR81RL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1HVPGR81RL');
+  </script>
+
 </head>
 
 <body class="homepage4-body">

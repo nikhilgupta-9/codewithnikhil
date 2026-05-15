@@ -86,6 +86,16 @@ $siteURL = $site . "blog/" . $blog['slug_url'];
 
   <!--=====  JS SCRIPT LINK =======-->
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
+
+  <!-- Google Analytics 4 — NikhilWorks -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HVPGR81RL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1HVPGR81RL');
+  </script>
+
 </head>
 
 <body class="homepage4-body">
