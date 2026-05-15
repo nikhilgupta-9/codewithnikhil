@@ -1,158 +1,138 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
-<url>
-<loc>https://codewithnikhil.in/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>1.00</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/about/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/services/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/service/website-design-development/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/service/search-engine-optimization/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/service/social-media-marketing/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/service/website-maintenance-support/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/service/e-commerce-website-development/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/service/website-redesign/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/service/landing-page-design/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/portfolio/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/pricing/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/contact/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/about.php</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/services.php</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/services/website-design-development</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/services/search-engine-optimization</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/services/social-media-marketing</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/services/website-maintenance-support</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/services/e-commerce-website-development</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/services/website-redesign</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/services/landing-page-design</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/blog.php</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/pricing.php</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/contact.php</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/portfolio.php</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/blog/why-having-a-website-and-online-presence-is-essential-for-business-growth</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/blog/social-media-marketing-strategies-to-drive-engagement-and-conversions</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/blogs/</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/terms-and-conditions.php</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://codewithnikhil.in/privacy-policy.php</loc>
-<lastmod>2026-03-05T14:01:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://learnwithnikhil.com/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.00</priority>
+  </url>
+
+  <!-- Core Pages -->
+  <url>
+    <loc>https://learnwithnikhil.com/about/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/services/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/portfolio/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/pricing/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/contact/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Service Detail Pages -->
+  <url>
+    <loc>https://learnwithnikhil.com/service/website-design-development/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/service/search-engine-optimization/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/service/social-media-marketing/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/service/website-maintenance-support/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/service/e-commerce-website-development/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/service/website-redesign/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/service/landing-page-design/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Blog Pages -->
+  <url>
+    <loc>https://learnwithnikhil.com/blogs/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/blog/why-having-a-website-and-online-presence-is-essential-for-business-growth/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/blog/social-media-marketing-strategies-to-drive-engagement-and-conversions/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://learnwithnikhil.com/privacy-policy/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
+  <url>
+    <loc>https://learnwithnikhil.com/terms-and-conditions/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
 </urlset>

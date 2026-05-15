@@ -81,6 +81,163 @@ $blogs = get_blog($limit);
     }
   </script>
 
+  <!-- WebSite Schema — Google entity recognition + Sitelinks -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "CodeWithNikhil",
+      "url": "<?= $site ?>",
+      "description": "Professional web development and SEO services for businesses in India, UAE, USA, UK, and Australia.",
+      "inLanguage": "en",
+      "publisher": {
+        "@type": "Person",
+        "name": "Nikhil Gupta"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "<?= $site ?>?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+
+  <!-- Person Schema — AI systems identify Nikhil as a known entity -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Nikhil Gupta",
+      "jobTitle": "Freelance Web Developer & SEO Expert",
+      "description": "Professional freelance web developer and SEO expert based in Delhi NCR. 3+ years of experience building websites and digital marketing solutions for businesses globally.",
+      "url": "<?= $site ?>",
+      "image": "<?= $site ?>assets/img/all-images/auhtor-img1.png",
+      "email": "contact@codewithnikhil.in",
+      "telephone": "+91-8368552640",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Karampura",
+        "addressRegion": "Delhi",
+        "addressCountry": "IN"
+      },
+      "knowsAbout": [
+        "Web Development",
+        "SEO",
+        "Digital Marketing",
+        "PHP",
+        "MySQL",
+        "WordPress",
+        "MERN Stack",
+        "JavaScript",
+        "E-commerce Development"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web & Digital Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Website Development",
+              "description": "Custom responsive website development for businesses"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "SEO Services",
+              "description": "Search engine optimization for higher Google rankings"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "E-commerce Development",
+              "description": "Online store development with payment integration"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Social Media Marketing",
+              "description": "Social media management and paid ad campaigns"
+            }
+          }
+        ]
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/nikhil-gupta-b30627327/",
+        "https://github.com/nikhilgupta-9",
+        "https://x.com/NikhilG69581514"
+      ]
+    }
+  </script>
+
+  <!-- FAQPage Schema — AI systems extract these directly for answers -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What web development services does CodeWithNikhil offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CodeWithNikhil offers custom website development, e-commerce solutions, WordPress development, SEO services, social media marketing, landing page design, and website redesign. All services are available for clients in India, UAE, USA, UK, and Australia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does a website cost in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Website development costs in India vary by type. A basic static website starts from ₹5,000–₹15,000, a dynamic business website ranges from ₹15,000–₹50,000, and a full e-commerce website starts from ₹30,000 onwards. CodeWithNikhil offers affordable packages tailored to your budget."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you work with international clients outside India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. CodeWithNikhil works with clients globally — including businesses in Dubai (UAE), United States, United Kingdom, Australia, and New Zealand. All communication is in English and projects are delivered remotely."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to build a website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A basic static website typically takes 3–5 days. A dynamic business website with a CMS takes 1–2 weeks. A full e-commerce website can take 2–4 weeks depending on the number of products and features required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide SEO services for international markets?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. CodeWithNikhil provides international SEO services targeting markets in USA, UK, UAE, Australia, and other global regions. Services include keyword research, on-page optimization, backlink building, and Google Search Console setup."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What technologies does Nikhil use for web development?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nikhil uses PHP, MySQL, HTML5, CSS3, JavaScript, Bootstrap, WordPress, and the MERN stack (MongoDB, Express.js, React, Node.js) for web development projects."
+          }
+        }
+      ]
+    }
+  </script>
+
   <!-- Open Graph with International Appeal -->
   <meta property="og:title" content="Code With Nikhil - Web Development & SEO for Global Businesses">
   <meta property="og:description" content="Building websites and SEO strategies for businesses worldwide. Based in India, serving clients in Dubai, USA, UK, Australia, New Zealand, and major Indian cities including Mumbai, Delhi, Bangalore, Pune.">
