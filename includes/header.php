@@ -32,13 +32,13 @@ $services = get_sub_category($limit);
         <div class="col-lg-12">
           <div class="header-elements">
             <div class="site-logo">
-              <a href="https://codewithnikhil.in/">
+              <a href="<?= $site ?>">
                 <h2 class="logo_header">CodeWithNikhil</h2>
               </a>
             </div>
             <div class="main-menu">
               <ul>
-                <li><a href="https://codewithnikhil.in/">Home </a> </li>
+                <li><a href="<?= $site ?>">Home </a> </li>
                 <li><a href="<?=$site?>about/">About</a></li>
                 <li><a href="<?=$site?>services/">Services <i class="fa-solid fa-angle-down"></i></a>
                   <ul class="dropdown-padding">
@@ -171,7 +171,7 @@ $services = get_sub_category($limit);
             </div>
             
             <div class="contact-info-text">
-              <a href="mailto:contact@codewithnikhil.in">contact@codewithnikhil.in</a>
+              <a href="mailto:contact@nikhilworks.com">contact@nikhilworks.com</a>
             </div>
           </div>
 
@@ -183,7 +183,7 @@ $services = get_sub_category($limit);
                 <i class="fa-solid fa-location-dot"></i>
               </div>
               <div class="contact-info-text">
-                <a href="mailto:contact@codewithnikhil.in">Karampura, Delhi
+                <a href="mailto:contact@nikhilworks.com">Karampura, Delhi
                   States</a>
               </div>
             </div>

@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 Disallow: /admin/
 
@@ -21,4 +21,4 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
-Sitemap: https://learnwithnikhil.com/sitemap.xml
+Sitemap: https://nikhilworks.com/sitemap.xml

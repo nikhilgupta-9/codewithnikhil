@@ -202,7 +202,7 @@ include_once "config/connect.php";
             <p>Serving clients across India and globally. Available for in-person meetings in Delhi & NCR.</p>
             <div class="space24"></div>
             <p><strong>Phone:</strong> <a href="tel:+918368552640">+91 83685 52640</a></p>
-            <p><strong>Email:</strong> <a href="mailto:contact@codewithnikhil.in">contact@codewithnikhil.in</a> <br><a href="mailto:iamnikhilgupta9@gmail.com">iamnikhilgupta9@gmail.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:contact@nikhilworks.com">contact@nikhilworks.com</a> <br><a href="mailto:iamnikhilgupta9@gmail.com">iamnikhilgupta9@gmail.com</a></p>
             <div class="space32"></div>
             <a href="https://wa.me/918368552640" class="header-btn11" target="_blank">
               <i class="fab fa-whatsapp"></i> Chat on WhatsApp

@@ -8,27 +8,28 @@ $blogs = get_blog($limit);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Latest Blogs on Web Development, SEO & Digital Marketing | CodeWithNikhil</title>
-  <meta name="description" content="Read expert blogs on Web Development, SEO, Digital Marketing, and more at CodeWithNikhil. Stay updated with the latest tips and strategies for growing your business online.">
-  <meta name="keywords" content="web development blogs, SEO blogs, digital marketing blogs, CodeWithNikhil">
+  <title>Latest Blogs on Web Development, SEO & Digital Marketing | NikhilWorks</title>
+  <meta name="description" content="Read expert blogs on Web Development, SEO, Digital Marketing, and more at NikhilWorks. Stay updated with the latest tips and strategies for growing your business online.">
+  <meta name="keywords" content="web development blogs, SEO blogs, digital marketing blogs, NikhilWorks">
 
   <!-- Open Graph Tags -->
-  <meta property="og:title" content="Latest Blogs on Web Development, SEO & Digital Marketing | CodeWithNikhil">
+  <meta property="og:title" content="Latest Blogs on Web Development, SEO & Digital Marketing | NikhilWorks">
   <meta property="og:description" content="Read expert blogs on Web Development, SEO, Digital Marketing, and more.">
-  <meta property="og:image" content="https://codewithnikhil.in/assets/img/blogs-banner.jpg">
-  <meta property="og:url" content="https://codewithnikhil.in/blogs">
+  <meta property="og:image" content="<?= $site ?>assets/img/blogs-banner.jpg">
+  <meta property="og:url" content="<?= $site ?>blogs/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NikhilWorks">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Latest Blogs on Web Development, SEO & Digital Marketing | CodeWithNikhil">
+  <meta name="twitter:title" content="Latest Blogs on Web Development, SEO & Digital Marketing | NikhilWorks">
   <meta name="twitter:description" content="Read expert blogs on Web Development, SEO, Digital Marketing, and more.">
-  <meta name="twitter:image" content="https://codewithnikhil.in/assets/img/blogs-banner.jpg">
+  <meta name="twitter:image" content="<?= $site ?>assets/img/blogs-banner.jpg">
 
 
   <!--=====FAB ICON=======-->
@@ -56,13 +57,13 @@ $blogs = get_blog($limit);
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://codewithnikhil.in"
+          "item": "<?= $site ?>"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Blogs",
-          "item": "https://codewithnikhil.in/blogs"
+          "item": "<?= $site ?>/blogs"
         }
       ]
     }

@@ -54,8 +54,8 @@ $product_details = fetch_product_details($cate_id);
   <!-- Open Graph - Make it global-friendly -->
   <meta property="og:title" content="International Web Development Services | Code With Nikhil">
   <meta property="og:description" content="Professional web developer serving clients in USA, Australia, Europe, Dubai & India. Remote development with 24/7 support.">
-  <meta property="og:image" content="https://codewithnikhil.in/assets/img/web-development-global.jpg">
-  <meta property="og:url" content="https://codewithnikhil.in/services">
+  <meta property="og:image" content="<?= $site ?>assets/img/web-development-global.jpg">
+  <meta property="og:url" content="<?= $site ?>/services">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="en_AU">
@@ -65,20 +65,20 @@ $product_details = fetch_product_details($cate_id);
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="International Web Development Services | Code With Nikhil">
   <meta name="twitter:description" content="Professional web developer serving clients in USA, Australia, Europe, Dubai & India.">
-  <meta name="twitter:image" content="https://codewithnikhil.in/assets/img/web-development-global.jpg">
+  <meta name="twitter:image" content="<?= $site ?>assets/img/web-development-global.jpg">
   
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://codewithnikhil.in/services/">
+  <link rel="canonical" href="<?= $site ?>/services/">
   
   <!-- Hreflang Tags - ONLY if you have actual pages -->
   <!-- Remove these if you don't have /us/, /au/, /uk/ directories -->
   <!-- 
-  <link rel="alternate" hreflang="en-in" href="https://codewithnikhil.in">
-  <link rel="alternate" hreflang="en-us" href="https://codewithnikhil.in/us">
-  <link rel="alternate" hreflang="en-au" href="https://codewithnikhil.in/au">
-  <link rel="alternate" hreflang="en-gb" href="https://codewithnikhil.in/uk">
-  <link rel="alternate" hreflang="en" href="https://codewithnikhil.in/international">
-  <link rel="alternate" hreflang="x-default" href="https://codewithnikhil.in">
+  <link rel="alternate" hreflang="en-in" href="<?= $site ?>">
+  <link rel="alternate" hreflang="en-us" href="<?= $site ?>/us">
+  <link rel="alternate" hreflang="en-au" href="<?= $site ?>/au">
+  <link rel="alternate" hreflang="en-gb" href="<?= $site ?>/uk">
+  <link rel="alternate" hreflang="en" href="<?= $site ?>/international">
+  <link rel="alternate" hreflang="x-default" href="<?= $site ?>">
   -->
   
   <!-- Combined Schema - Single, accurate representation -->
@@ -87,9 +87,9 @@ $product_details = fetch_product_details($cate_id);
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "Code With Nikhil - International Web Development",
-    "image": "https://codewithnikhil.in/assets/img/logo.png",
-    "@id": "https://codewithnikhil.in",
-    "url": "https://codewithnikhil.in",
+    "image": "<?= $site ?>assets/img/logo.png",
+    "@id": "<?= $site ?>",
+    "url": "<?= $site ?>",
     "telephone": "+91-8368552640",
     "priceRange": "$$",
     "address": {
@@ -122,7 +122,7 @@ $product_details = fetch_product_details($cate_id);
     ],
     "availableChannel": {
       "@type": "ServiceChannel",
-      "serviceUrl": "https://codewithnikhil.in/contact"
+      "serviceUrl": "<?= $site ?>/contact"
     },
     "sameAs": [
       "https://www.facebook.com/profile.php?id=61559869365624",

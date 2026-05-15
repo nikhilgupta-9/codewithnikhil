@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -19,7 +19,7 @@ if ($local) {
     $username = 'u950539402_code_with_db';
     $password = '@sZ4=NL1|l';
     $dbName = 'u950539402_code_with_db';
-    $site = 'https://codewithnikhil.in/';
+    $site = 'https://nikhilworks.com/';
 }
 
 // Make `$site` global

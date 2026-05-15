@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
@@ -6,7 +6,7 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://learnwithnikhil.com/</loc>
+    <loc>https://nikhilworks.com/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
@@ -14,35 +14,35 @@
 
   <!-- Core Pages -->
   <url>
-    <loc>https://learnwithnikhil.com/about/</loc>
+    <loc>https://nikhilworks.com/about/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/services/</loc>
+    <loc>https://nikhilworks.com/services/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/portfolio/</loc>
+    <loc>https://nikhilworks.com/portfolio/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/pricing/</loc>
+    <loc>https://nikhilworks.com/pricing/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/contact/</loc>
+    <loc>https://nikhilworks.com/contact/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
@@ -50,49 +50,49 @@
 
   <!-- Service Detail Pages -->
   <url>
-    <loc>https://learnwithnikhil.com/service/website-design-development/</loc>
+    <loc>https://nikhilworks.com/service/website-design-development/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/service/search-engine-optimization/</loc>
+    <loc>https://nikhilworks.com/service/search-engine-optimization/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/service/social-media-marketing/</loc>
+    <loc>https://nikhilworks.com/service/social-media-marketing/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/service/website-maintenance-support/</loc>
+    <loc>https://nikhilworks.com/service/website-maintenance-support/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/service/e-commerce-website-development/</loc>
+    <loc>https://nikhilworks.com/service/e-commerce-website-development/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/service/website-redesign/</loc>
+    <loc>https://nikhilworks.com/service/website-redesign/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/service/landing-page-design/</loc>
+    <loc>https://nikhilworks.com/service/landing-page-design/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -100,21 +100,21 @@
 
   <!-- Blog Pages -->
   <url>
-    <loc>https://learnwithnikhil.com/blogs/</loc>
+    <loc>https://nikhilworks.com/blogs/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/blog/why-having-a-website-and-online-presence-is-essential-for-business-growth/</loc>
+    <loc>https://nikhilworks.com/blog/why-having-a-website-and-online-presence-is-essential-for-business-growth/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/blog/social-media-marketing-strategies-to-drive-engagement-and-conversions/</loc>
+    <loc>https://nikhilworks.com/blog/social-media-marketing-strategies-to-drive-engagement-and-conversions/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
@@ -122,14 +122,14 @@
 
   <!-- Legal Pages -->
   <url>
-    <loc>https://learnwithnikhil.com/privacy-policy/</loc>
+    <loc>https://nikhilworks.com/privacy-policy/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.30</priority>
   </url>
 
   <url>
-    <loc>https://learnwithnikhil.com/terms-and-conditions/</loc>
+    <loc>https://nikhilworks.com/terms-and-conditions/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.30</priority>

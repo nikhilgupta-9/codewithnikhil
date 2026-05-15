@@ -83,7 +83,7 @@ try {
         $mail->CharSet = 'UTF-8';
 
         // Sender & Recipient
-        $mail->setFrom('no-reply@codewithnikhil.in', 'Code With Nikhil');
+        $mail->setFrom('no-reply@nikhilworks.com', 'NikhilWorks');
         $mail->addReplyTo($email, $name);
         $mail->addAddress($contactInfo['email'] ?? 'nik007guptadu@gmail.com');
         if (!empty($contactInfo['contact_email'])) {
@@ -100,7 +100,7 @@ try {
         <head>
             <meta charset='UTF-8'>
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <title>New Contact Form Submission - Code With Nikhil</title>
+            <title>New Contact Form Submission - NikhilWorks</title>
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
                 
@@ -254,7 +254,7 @@ try {
         <body>
             <div class='container'>
                 <div class='header'>
-                    <h1>Code With Nikhil</h1>
+                    <h1>NikhilWorks</h1>
                     <h2>New Contact Form Submission</h2>
                 </div>
                 
@@ -298,7 +298,7 @@ try {
                 
                 <div class='footer'>
                     <div class='inquiry-id'>Inquiry ID: #$inquiryId</div>
-                    <p>&copy; " . date('Y') . " <span class='highlight'>Code With Nikhil</span>. All rights reserved.</p>
+                    <p>&copy; " . date('Y') . " <span class='highlight'>NikhilWorks</span>. All rights reserved.</p>
                     <p>" . ($contactInfo['address'] ?? "Transforming ideas into digital reality") . "</p>
                 </div>
             </div>

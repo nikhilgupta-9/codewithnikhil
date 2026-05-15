@@ -115,7 +115,7 @@ $blogs = get_blog($limit);
       "description": "Professional freelance web developer and SEO expert based in Delhi NCR. 3+ years of experience building websites and digital marketing solutions for businesses globally.",
       "url": "<?= $site ?>",
       "image": "<?= $site ?>assets/img/all-images/auhtor-img1.png",
-      "email": "contact@codewithnikhil.in",
+      "email": "contact@nikhilworks.com",
       "telephone": "+91-8368552640",
       "address": {
         "@type": "PostalAddress",

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -251,9 +251,9 @@
   <div class="header">
     <div class="header-inner">
       <div class="from-block">
-        <h1>CodeWithNikhil.in</h1>
+        <h1>nikhilworks.com</h1>
         <p>Digital Marketing &amp; Web Solutions</p>
-        <p style="color:#5a8fa8;font-size:10px;margin-top:6px;">www.codewithnikhil.in &nbsp;|&nbsp; contact@codewithnikhil.in</p>
+        <p style="color:#5a8fa8;font-size:10px;margin-top:6px;">www.nikhilworks.com &nbsp;|&nbsp; contact@nikhilworks.com</p>
       </div>
       <div class="proposal-badge">
         SERVICE PROPOSAL
@@ -529,7 +529,7 @@
       
       <li>Client to provide website access credentials and Google account access upon project start.</li>
       
-      <li>CodeWithNikhil.in reserves the right to use campaign results (without confidential data) as case studies.</li>
+      <li>nikhilworks.com reserves the right to use campaign results (without confidential data) as case studies.</li>
     </ul>
   </div>
 
@@ -537,8 +537,8 @@
   <div class="sig-row">
     <div class="sig-block">
       <strong>Prepared by</strong>
-      <p>CodeWithNikhil.in</p>
-      <p>www.codewithnikhil.in</p>
+      <p>nikhilworks.com</p>
+      <p>www.nikhilworks.com</p>
       <div class="sig-line"></div>
       <div class="sig-label">Authorized Signature</div>
     </div>
@@ -551,16 +551,16 @@
     </div>
     <div class="sig-block" style="text-align:right;">
       <strong>Questions?</strong>
-      <p>contact@codewithnikhil.in</p>
-      <p>www.codewithnikhil.in</p>
+      <p>contact@nikhilworks.com</p>
+      <p>www.nikhilworks.com</p>
       <p style="margin-top:6px;font-size:10px;color:var(--teal);">We're happy to customize<br>this plan further for you.</p>
     </div>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
-    <p>© 2025 CodeWithNikhil.in — Digital Marketing &amp; Web Solutions</p>
-    <p>Proposal Ref: PEC-SEO-2025 &nbsp;|&nbsp; <a href="https://www.codewithnikhil.in">www.codewithnikhil.in</a></p>
+    <p>© 2025 nikhilworks.com — Digital Marketing &amp; Web Solutions</p>
+    <p>Proposal Ref: PEC-SEO-2025 &nbsp;|&nbsp; <a href="https://www.nikhilworks.com">www.nikhilworks.com</a></p>
   </div>
 
 </div>

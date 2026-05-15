@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -23,7 +23,7 @@ if ($local) {
     $username = 'YOUR_HOSTINGER_DB_USER';
     $password = 'YOUR_HOSTINGER_DB_PASSWORD';
     $dbName   = 'YOUR_HOSTINGER_DB_NAME';
-    $site     = 'https://learnwithnikhil.com/';
+    $site     = 'https://nikhilworks.com/';
 }
 
 global $site;

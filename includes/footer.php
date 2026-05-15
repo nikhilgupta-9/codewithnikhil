@@ -61,9 +61,9 @@
               </a>
             </li>
             <li>
-              <a href="mailto:contact@codewithnikhil.in">
+              <a href="mailto:contact@nikhilworks.com">
                 <img src="<?= $site ?>assets/img/icons/email.svg" alt="Email">
-                <span>contact@codewithnikhil.in</span>
+                <span>contact@nikhilworks.com</span>
               </a>
             </li>
             <li>

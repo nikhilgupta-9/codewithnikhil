@@ -19,7 +19,7 @@ if (!$blog) {
 $metaTitle = $blog['meta_title'] ?: $blog['title'];
 $metaDesc = $blog['meta_description'] ?: substr(strip_tags($blog['content']), 0, 150);
 $blogImage = "uploads/" . $blog['image'];
-$siteURL = "https://codewithnikhil.in/blog/" . $blog['slug_url'];
+$siteURL = $site . "blog/" . $blog['slug_url'];
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +61,7 @@ $siteURL = "https://codewithnikhil.in/blog/" . $blog['slug_url'];
         "name": "CodeWithNikhil",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://codewithnikhil.in/assets/img/logo.png"
+          "url": "<?= $site ?>assets/img/logo.png"
         }
       },
       "datePublished": "<?= $blog['created_at'] ?>",

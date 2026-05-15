@@ -212,13 +212,13 @@ $portfolios = get_portfolio();
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://codewithnikhil.in"
+          "item": "<?= $site ?>"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Portfolio",
-          "item": "https://codewithnikhil.in/portfolio"
+          "item": "<?= $site ?>/portfolio"
         }
       ]
     }
