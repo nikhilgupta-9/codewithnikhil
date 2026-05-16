@@ -60,10 +60,10 @@ if (isset($_POST["add-categories"])) {
     if (empty($errors)) {
         $sql = "INSERT INTO `categories` (`cate_id`, `categories`, `meta_title`, `meta_desc`, `meta_key`, `image`, `slug_url`, `status`, `added_on`) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-        
+
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("issssssi", $cate_id, $cate_name, $meta_title, $meta_desc, $meta_key, $image_name, $slug_url, $status);
-        
+
         if ($stmt->execute()) {
             $_SESSION['success'] = "Category added successfully!";
             header("Location: view-categories.php");
@@ -156,33 +156,34 @@ if (isset($_POST["add-sub-categories"])) {
 
     $check = mysqli_query($conn, $sql);
     if ($check) {
-        ?>
+?>
         <script type="text/javascript">
             alert('Add sub category Successfully!');
             window.location.href = "view-sub-categories.php";
         </script>
-        <?php
+    <?php
     } else {
         echo "Error inserting record: " . mysqli_error($conn);
     }
 }
 
-function get_Category() {
+function get_Category()
+{
     include "db-conn.php";
 
     $sql = "SELECT * FROM `categories` ORDER BY id DESC";
     $check = mysqli_query($conn, $sql);
     $sno = 1;
-    
+
     while ($result = mysqli_fetch_assoc($check)) {
         // Format status with badge
-        $status = $result['status'] == '1' 
+        $status = $result['status'] == '1'
             ? '<span class="badge bg-success bg-opacity-10 text-success text-light">Active</span>'
             : '<span class="badge bg-danger bg-opacity-10 text-danger text-light">Inactive</span>';
-        
+
         // Format date
         $added_on = date('d M Y', strtotime($result['added_on']));
-        
+
         echo "<tr>
             <td class='text-center'>" . $sno++ . "</td>
             <td class='fw-semibold'>" . $result['cate_id'] . "</td>
@@ -290,12 +291,12 @@ VALUES ('$pro_id', '$pro_name', '$brand_name','$pro_cate', '$pro_sub_cate', '$sh
     // Execute the query
     $check = mysqli_query($conn, $sql);
     if ($check) {
-        ?>
+    ?>
         <script type="text/javascript">
             alert('Inserted Successfully!');
             window.location.href = "add-products.php";
         </script>
-        <?php
+    <?php
     } else {
         echo "Error: " . mysqli_error($conn);  // Optional: Display any error message from MySQL
     }
@@ -305,7 +306,8 @@ VALUES ('$pro_id', '$pro_name', '$brand_name','$pro_cate', '$pro_sub_cate', '$sh
 
 
 
-function get_Sub_Category() {
+function get_Sub_Category()
+{
     include "db-conn.php";
 
     // Search functionality
@@ -323,20 +325,20 @@ function get_Sub_Category() {
             LEFT JOIN `categories` c ON sc.parent_id = c.cate_id
             $searchQuery 
             ORDER BY sc.id DESC";
-    
+
     $check = mysqli_query($conn, $sql);
     $sno = 1;
 
     if ($check && mysqli_num_rows($check) > 0) {
         while ($result = mysqli_fetch_assoc($check)) {
             // Status badge
-            $status = $result['status'] == '1' 
+            $status = $result['status'] == '1'
                 ? '<span class="badge bg-success bg-opacity-10 text-success text-light">Active</span>'
                 : '<span class="badge bg-danger bg-opacity-10 text-danger text-light">Inactive</span>';
-            
+
             // Format date
             $added_on = date('d M Y', strtotime($result['added_on']));
-            
+
             echo "<tr>
                     <td class='text-center'>" . $sno++ . "</td>
                     <td class='fw-semibold'>" . htmlspecialchars($result['cate_id']) . "</td>
@@ -381,7 +383,7 @@ if (isset($_POST['cate_id'])) {
     $check = mysqli_query($conn, $sql);
     ?>
     <option value="">Select</option>
-    <?php
+<?php
     while ($result = mysqli_fetch_assoc($check)) {
         echo "<option value=" . $result['cate_id'] . ">" . $result['categories'] . "</option>";
     }
@@ -421,7 +423,8 @@ function get_sub_category_by_id($cat_id)
 }
 
 
-function get_testimonial_by_id($id) {
+function get_testimonial_by_id($id)
+{
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM testimonials WHERE id = ?");
     $stmt->bind_param("i", $id);
@@ -430,9 +433,19 @@ function get_testimonial_by_id($id) {
     return $result->fetch_assoc();
 }
 
-function update_testimonial($id, $client_name, $client_title, $client_company, $client_photo, 
-                          $testimonial_text, $rating, $project_name, $project_date, 
-                          $featured, $display_order) {
+function update_testimonial(
+    $id,
+    $client_name,
+    $client_title,
+    $client_company,
+    $client_photo,
+    $testimonial_text,
+    $rating,
+    $project_name,
+    $project_date,
+    $featured,
+    $display_order
+) {
     global $conn;
     $stmt = $conn->prepare("UPDATE testimonials SET 
                            client_name = ?, 
@@ -447,10 +460,20 @@ function update_testimonial($id, $client_name, $client_title, $client_company, $
                            display_order = ?, 
                            updated_at = NOW() 
                            WHERE id = ?");
-    $stmt->bind_param("sssssisssii", 
-                      $client_name, $client_title, $client_company, $client_photo, 
-                      $testimonial_text, $rating, $project_name, $project_date, 
-                      $featured, $display_order, $id);
+    $stmt->bind_param(
+        "sssssisssii",
+        $client_name,
+        $client_title,
+        $client_company,
+        $client_photo,
+        $testimonial_text,
+        $rating,
+        $project_name,
+        $project_date,
+        $featured,
+        $display_order,
+        $id
+    );
     return $stmt->execute();
 }
 
@@ -468,7 +491,7 @@ if (isset($_POST['add-testimonial'])) {
     $project_date = mysqli_real_escape_string($conn, $_POST['project_date']);
     $featured = isset($_POST['featured']) ? 1 : 0;
     $display_order = intval($_POST['display_order']);
-    
+
     // Handle file upload
     $client_photo = '';
     if (isset($_FILES['client_photo']) && $_FILES['client_photo']['error'] === UPLOAD_ERR_OK) {
@@ -476,10 +499,10 @@ if (isset($_POST['add-testimonial'])) {
         if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0755, true);
         }
-        
+
         $file_name = time() . '_' . basename($_FILES['client_photo']['name']);
         $target_path = $upload_dir . $file_name;
-        
+
         // Check if image file is an actual image
         $check = getimagesize($_FILES['client_photo']['tmp_name']);
         if ($check !== false) {
@@ -489,7 +512,7 @@ if (isset($_POST['add-testimonial'])) {
             }
         }
     }
-    
+
     // Insert into database
     $stmt = $conn->prepare("INSERT INTO testimonials (
         client_name, 
@@ -505,29 +528,35 @@ if (isset($_POST['add-testimonial'])) {
         created_at,
         updated_at
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
-    
+
     $stmt->bind_param(
-        "sssssisssi", 
-        $client_name, 
-        $client_title, 
-        $client_company, 
-        $client_photo, 
-        $testimonial_text, 
-        $rating, 
-        $project_name, 
-        $project_date, 
-        $featured, 
+        "sssssisssi",
+        $client_name,
+        $client_title,
+        $client_company,
+        $client_photo,
+        $testimonial_text,
+        $rating,
+        $project_name,
+        $project_date,
+        $featured,
         $display_order
     );
-    
+
     if ($stmt->execute()) {
         $testimonial_id = $stmt->insert_id;
         $_SESSION['success'] = "Testimonial added successfully!";
-        header("Location: testimonials.php?edit=" . $testimonial_id);
+        echo json_encode([
+            "status" => "success",
+            "message" => "Testimonial added successfully!",
+            "testimonial_id" => $testimonial_id
+        ]);
         exit();
     } else {
-        $_SESSION['error'] = "Error adding testimonial: " . $conn->error;
-        header("Location: add-testimonial.php");
+        echo json_encode([
+            "status" => "error",
+            "message" => "Error adding testimonial: " . $conn->error
+        ]);
         exit();
     }
 }
@@ -535,11 +564,11 @@ if (isset($_POST['add-testimonial'])) {
 // Handle update testimonial
 if (isset($_POST['update-testimonial'])) {
     $testimonial_id = intval($_POST['testimonial_id']);
-    
+
     // Validate and sanitize input (same as above)
     $client_name = mysqli_real_escape_string($conn, $_POST['client_name']);
     // ... [all other fields same as above]
-    
+
     // First get current photo
     $current_photo = '';
     $stmt = $conn->prepare("SELECT client_photo FROM testimonials WHERE id = ?");
@@ -549,7 +578,7 @@ if (isset($_POST['update-testimonial'])) {
     if ($row = $result->fetch_assoc()) {
         $current_photo = $row['client_photo'];
     }
-    
+
     // Handle file upload
     $client_photo = $current_photo;
     if (isset($_FILES['client_photo']) && $_FILES['client_photo']['error'] === UPLOAD_ERR_OK) {
@@ -557,7 +586,7 @@ if (isset($_POST['update-testimonial'])) {
         if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0755, true);
         }
-        
+
         // Delete old photo if exists
         if (!empty($current_photo)) {
             $old_file = $upload_dir . $current_photo;
@@ -565,10 +594,10 @@ if (isset($_POST['update-testimonial'])) {
                 unlink($old_file);
             }
         }
-        
+
         $file_name = time() . '_' . basename($_FILES['client_photo']['name']);
         $target_path = $upload_dir . $file_name;
-        
+
         $check = getimagesize($_FILES['client_photo']['tmp_name']);
         if ($check !== false) {
             if (move_uploaded_file($_FILES['client_photo']['tmp_name'], $target_path)) {
@@ -576,7 +605,7 @@ if (isset($_POST['update-testimonial'])) {
             }
         }
     }
-    
+
     // Update database
     $stmt = $conn->prepare("UPDATE testimonials SET 
         client_name = ?, 
@@ -591,22 +620,22 @@ if (isset($_POST['update-testimonial'])) {
         display_order = ?,
         updated_at = NOW()
         WHERE id = ?");
-    
+
     $stmt->bind_param(
-        "sssssisssii", 
-        $client_name, 
-        $client_title, 
-        $client_company, 
-        $client_photo, 
-        $testimonial_text, 
-        $rating, 
-        $project_name, 
-        $project_date, 
-        $featured, 
+        "sssssisssii",
+        $client_name,
+        $client_title,
+        $client_company,
+        $client_photo,
+        $testimonial_text,
+        $rating,
+        $project_name,
+        $project_date,
+        $featured,
         $display_order,
         $testimonial_id
     );
-    
+
     if ($stmt->execute()) {
         $_SESSION['success'] = "Testimonial updated successfully!";
         header("Location: testimonials.php?edit=" . $testimonial_id);
@@ -618,7 +647,8 @@ if (isset($_POST['update-testimonial'])) {
     }
 }
 
-function handleTestimonialSubmission($conn) {
+function handleTestimonialSubmission($conn)
+{
     // Check if form was submitted
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         return ['status' => 'error', 'message' => 'Invalid request method'];
@@ -645,7 +675,7 @@ function handleTestimonialSubmission($conn) {
     // Handle file upload
     $client_photo = null;
     $upload_dir = '../uploads/testimonials/';
-    
+
     if (!file_exists($upload_dir)) {
         mkdir($upload_dir, 0755, true);
     }
@@ -654,23 +684,23 @@ function handleTestimonialSubmission($conn) {
         $file = $_FILES['client_photo'];
         $file_ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
-        
+
         if (!in_array($file_ext, $allowed_ext)) {
             return ['status' => 'error', 'message' => 'Invalid file type. Only JPG, PNG, GIF are allowed'];
         }
-        
+
         if ($file['size'] > 5242880) { // 5MB
             return ['status' => 'error', 'message' => 'File size exceeds 5MB limit'];
         }
-        
+
         // Generate unique filename
         $client_photo = uniqid('testimonial_', true) . '.' . $file_ext;
         $destination = $upload_dir . $client_photo;
-        
+
         if (!move_uploaded_file($file['tmp_name'], $destination)) {
             return ['status' => 'error', 'message' => 'Failed to upload file'];
         }
-        
+
         // If editing, delete old photo
         if ($is_edit && !empty($_POST['existing_photo'])) {
             $old_photo = $upload_dir . $_POST['existing_photo'];
@@ -704,20 +734,22 @@ function handleTestimonialSubmission($conn) {
                 display_order = ?, 
                 updated_at = ?
                 WHERE id = ?");
-            
-            $stmt->bind_param("sssssisssisi", 
-                $client_name, 
-                $client_title, 
-                $client_company, 
-                $client_photo, 
-                $testimonial_text, 
-                $rating, 
-                $project_name, 
-                $project_date, 
-                $featured, 
-                $display_order, 
-                $current_time, 
-                $testimonial_id);
+
+            $stmt->bind_param(
+                "sssssisssisi",
+                $client_name,
+                $client_title,
+                $client_company,
+                $client_photo,
+                $testimonial_text,
+                $rating,
+                $project_name,
+                $project_date,
+                $featured,
+                $display_order,
+                $current_time,
+                $testimonial_id
+            );
         } else {
             // Insert new testimonial
             $stmt = $conn->prepare("INSERT INTO testimonials (
@@ -734,25 +766,27 @@ function handleTestimonialSubmission($conn) {
                 created_at, 
                 updated_at
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            
-            $stmt->bind_param("sssssisssiss", 
-                $client_name, 
-                $client_title, 
-                $client_company, 
-                $client_photo, 
-                $testimonial_text, 
-                $rating, 
-                $project_name, 
-                $project_date, 
-                $featured, 
-                $display_order, 
-                $current_time, 
-                $current_time);
+
+            $stmt->bind_param(
+                "sssssisssiss",
+                $client_name,
+                $client_title,
+                $client_company,
+                $client_photo,
+                $testimonial_text,
+                $rating,
+                $project_name,
+                $project_date,
+                $featured,
+                $display_order,
+                $current_time,
+                $current_time
+            );
         }
 
         if ($stmt->execute()) {
             return [
-                'status' => 'success', 
+                'status' => 'success',
                 'message' => $is_edit ? 'Testimonial updated successfully' : 'Testimonial added successfully',
                 'testimonial_id' => $is_edit ? $testimonial_id : $stmt->insert_id
             ];
@@ -767,7 +801,7 @@ function handleTestimonialSubmission($conn) {
 // Handle form submission
 if (isset($_POST['add-testimonial']) || isset($_POST['update-testimonial'])) {
     $result = handleTestimonialSubmission($conn);
-    
+
     // Return JSON response for AJAX or redirect for normal form submission
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         header('Content-Type: application/json');
@@ -777,11 +811,11 @@ if (isset($_POST['add-testimonial']) || isset($_POST['update-testimonial'])) {
         // Store result in session for display after redirect
         session_start();
         $_SESSION['form_result'] = $result;
-        
-        $redirect_url = isset($_POST['update-testimonial']) ? 
-            'testimonials.php?edit=' . $_POST['testimonial_id'] : 
+
+        $redirect_url = isset($_POST['update-testimonial']) ?
+            'testimonials.php?edit=' . $_POST['testimonial_id'] :
             'testimonials.php';
-        
+
         header('Location: ' . $redirect_url);
         exit;
     }

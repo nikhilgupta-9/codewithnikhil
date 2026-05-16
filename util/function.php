@@ -225,7 +225,7 @@ function get_blog($limit)
 {
     global $conn;
 
-    $sql_blog = "SELECT * FROM `blogs` limit $limit ";
+    $sql_blog = "SELECT * FROM `blogs` order by created_at limit $limit";
     $res_blog = mysqli_query($conn, $sql_blog);
 
     if (!$res_blog) {

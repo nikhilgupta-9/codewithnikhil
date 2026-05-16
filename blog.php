@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include "config/connect.php";
 include_once "util/function.php";
 
@@ -10,6 +10,15 @@ $blogs = get_blog($limit);
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1HVPGR81RL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1HVPGR81RL');
+</script>
   <meta charset="UTF-8">
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,16 +76,6 @@ $blogs = get_blog($limit);
         }
       ]
     }
-  </script>
-
-
-  <!-- Google Analytics 4 — NikhilWorks -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HVPGR81RL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-1HVPGR81RL');
   </script>
 
 </head>

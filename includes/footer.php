@@ -41,7 +41,7 @@
           <ul>
             <li><a href="<?= $site ?>">Home</a></li>
             <li><a href="<?= $site ?>about/">About Me</a></li>
-            <li><a href="<?= $site ?>services.html">Services</a></li>
+            <li><a href="<?= $site ?>services/">Services</a></li>
             <li><a href="<?= $site ?>portfolio/">Projects</a></li>
             <li><a href="<?= $site ?>blogs/">Blog</a></li>
             <li><a href="<?= $site ?>contact/">Contact</a></li>
@@ -54,12 +54,12 @@
         <div class="footer-logo-area2">
           <h3>Get in Touch</h3>
           <ul>
-            <li>
+            <!-- <li>
               <a href="mailto:iamnikhilgupta9@gmail.com">
                 <img src="<?= $site ?>assets/img/icons/email.svg" alt="Email">
                 <span>iamnikhilgupta9@gmail.com</span>
               </a>
-            </li>
+            </li> -->
             <li>
               <a href="mailto:contact@nikhilworks.com">
                 <img src="<?= $site ?>assets/img/icons/email.svg" alt="Email">
@@ -102,7 +102,7 @@
       <div class="col-lg-12">
         <div class="copyright-area">
           <div class="pera">
-            <p>ⓒ Copyright 2025 CodeWithNikhil. All Rights Reserved.</p>
+            <p>ⓒ Copyright 2025 <a href="https://nikhilworks.com">Nikhil Works</a>. All Rights Reserved.</p>
           </div>
           <ul>
             <li><a href="<?= $site ?>terms-and-conditions.php">Terms & Conditions</a></li>

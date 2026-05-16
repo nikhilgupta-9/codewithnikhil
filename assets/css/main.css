@@ -43,7 +43,7 @@ img {
 }
 
 .reveal img {
-  height: 100%;
+  /*height: 100%;*/
   width: 100%;
   display: inline-block;
   -o-object-fit: cover;
@@ -9717,7 +9717,7 @@ Location:
   opacity: 0.7;
 }
 .blog1-scetion-area .blog-author-boxarea .img1 img {
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
   border-radius: 5px 5px 0 0;
   transition: all 0.4s;
@@ -10107,7 +10107,7 @@ Location:
   border-radius: 8px;
 }
 .blog4-section-area .blog-auhtor-boxarea .img1 img {
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
   border-radius: 8px;
   transition: all 0.4s;
@@ -10494,7 +10494,7 @@ Location:
   margin-bottom: 8px;
 }
 .blog-auhtor-section-area .blog-auhtor-sidebar-area .img1 img {
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
@@ -28331,11 +28331,12 @@ Location:
   }
 }
 .testimonial4-section-area .testimonial4-slider-area .testimonial-boxarea {
-  background: var(--ztc-text-text-1);
-  border-radius: 8px;
-  padding: 32px 24px;
-  position: relative;
-  z-index: 1;
+      background: var(--ztc-text-text-1);
+    border-radius: 8px;
+    padding: 17px 16px;
+    position: relative;
+    z-index: 1;
+    border: 1px solid #87878730;
 }
 
 /* .testimonial4-section-area .testimonial4-slider-area .testimonial-boxarea :hover {
@@ -28348,14 +28349,14 @@ Location:
 } */
 
 .testimonial4-section-area .testimonial4-slider-area .testimonial-boxarea img.quito {
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   height: 40px;
   width: 40px;
 }
 .testimonial4-section-area .testimonial4-slider-area .testimonial-boxarea p {
   font-family: var(--ztc-family-font1);
-  font-size: var(--ztc-font-size-font-s20);
-  line-height: var(--ztc-font-size-font-s30);
+  font-size: var(--ztc-font-size-font-s16);
+  line-height: var(--ztc-font-size-font-s25);
   font-weight: var(--ztc-weight-regular);
   color: var(--ztc-text-text-3);
   transition: all 0.4s;
@@ -28615,7 +28616,7 @@ Location:
 }
 .slider5-section-area .slider-all-boxarea .slider-boxarea .img1 img {
   width: 100%;
-  height: 100%;
+  /*height: 100%;*/
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -31706,3 +31707,14 @@ Location:
 }
 
 /*============= CASE STUDY CSS AREA ENDS ===============*//*# sourceMappingURL=main.css.map */
+
+.first-letter{
+  font-weight: 700;
+  font-size: 19px;
+  background-color: lavender;
+  border-radius: 50%;
+  padding: 10px 12px;
+  margin: 5px;
+  position: relative;
+  top: 13px;
+}

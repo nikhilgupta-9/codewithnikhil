@@ -9,6 +9,18 @@ $blogs = get_blog($limit);
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HVPGR81RL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-1HVPGR81RL');
+  </script>
   <meta charset="UTF-8">
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -137,8 +149,7 @@ $blogs = get_blog($limit);
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Web & Digital Services",
-        "itemListElement": [
-          {
+        "itemListElement": [{
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
@@ -185,8 +196,7 @@ $blogs = get_blog($limit);
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": [
-        {
+      "mainEntity": [{
           "@type": "Question",
           "name": "What web development services does NikhilWorks offer?",
           "acceptedAnswer": {
@@ -284,16 +294,6 @@ $blogs = get_blog($limit);
 
   <!-- JS Script -->
   <script src="assets/js/plugins/jquery-3-6-0.min.js"></script>
-
-  <!-- Google Analytics 4 — NikhilWorks -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HVPGR81RL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-1HVPGR81RL');
-  </script>
-
 </head>
 
 <body class="homepage4-body">
@@ -435,107 +435,164 @@ $blogs = get_blog($limit);
   <!--===== ABOUT AREA ENDS =======-->
 
   <!--===== SLIDER AREA STARTS =======-->
-  <div class="slider5-section-area">
+  <section class="slider5-section-area">
     <div class="container">
+
+      <!-- SEO Heading -->
+      <div class="row">
+        <div class="col-lg-12 text-center mb-4">
+          <h2>Our Web Design & Digital Marketing Services in Delhi NCR</h2>
+          <p>We provide professional website development, SEO, and digital marketing services across Delhi, Gurgaon, and India.</p>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-lg-12">
+
+          <!-- First Slider -->
           <div class="slider-all-boxarea">
+
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service-details/website-design-services" title="Professional Web Design Services in Delhi">Web Design Delhi</a>
+                <a href="<?= $site ?>service/website-design-development/"
+                  title="Professional Website Design Services in Delhi NCR">
+                  Website Design Services
+                </a>
               </div>
               <div class="img1 reveal">
-                <img src="assets/img/all-images/brand-img2.png" alt="Professional Web Design Services in Delhi by NikhilWorks">
+                <img src="assets/img/all-images/brand-img2.png"
+                  alt="Custom website design services in Delhi NCR by NikhilWorks">
               </div>
             </div>
 
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service-details/seo-services-delhi" title="Best SEO Company in Delhi NCR">SEO Services Delhi</a>
+                <a href="<?= $site ?>service/search-engine-optimization/"
+                  title="Affordable SEO Services in Delhi NCR">
+                  SEO Services
+                </a>
               </div>
               <div class="img1 reveal">
-                <img src="assets/img/all-images/brand-img3.png" alt="Top SEO Services in Delhi by NikhilWorks">
+                <img src="assets/img/all-images/brand-img3.png"
+                  alt="SEO optimization services in Delhi NCR for business growth">
               </div>
             </div>
 
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service-details/ecommerce-website-delhi" title="E-commerce Website Development Delhi">E-commerce Development</a>
+                <a href="<?= $site ?>service/e-commerce-website-development/"
+                  title="Ecommerce Website Development Company in Delhi">
+                  Ecommerce Development
+                </a>
               </div>
               <div class="img1 reveal">
-                <img src="assets/img/all-images/brand-img1.png" alt="E-commerce Website Development in Delhi by NikhilWorks">
+                <img src="assets/img/all-images/brand-img1.png"
+                  alt="Ecommerce website development solutions in India">
               </div>
             </div>
 
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service-details/wordpress-developer-delhi" title="WordPress Developer in Delhi">WordPress Developer</a>
+                <a href="<?= $site ?>service/wordpress-website-development/"
+                  title="Hire WordPress Developer in Delhi NCR">
+                  WordPress Development
+                </a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img2.png" alt="Expert WordPress Developer in Delhi - NikhilWorks">
+                <img src="assets/img/all-images/brand-img2.png"
+                  alt="WordPress website development services in Delhi NCR">
               </div>
             </div>
 
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service-details/digital-marketing-delhi" title="Digital Marketing Agency Delhi">Digital Marketing</a>
+                <a href="<?= $site ?>service/search-engine-optimization/"
+                  title="Digital Marketing Agency in Delhi NCR">
+                  Digital Marketing
+                </a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img3.png" alt="Digital Marketing Services in Delhi by NikhilWorks">
+                <img src="assets/img/all-images/brand-img3.png"
+                  alt="Online marketing services including SEO and ads in India">
               </div>
             </div>
+
           </div>
 
+          <!-- Second Slider -->
           <div class="slider-all-boxarea2">
+
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service-details/website-redesign-delhi" title="Website Redesign Services Delhi">Website Redesign</a>
+                <a href="<?= $site ?>service/website-redesign/"
+                  title="Website Redesign Services in Delhi NCR">
+                  Website Redesign
+                </a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img4.png" alt="Website Redesign Services in Delhi - NikhilWorks">
+                <img src="assets/img/all-images/brand-img4.png"
+                  alt="Modern website redesign services for better UX and SEO">
               </div>
             </div>
 
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service-details/seo-company-delhi" title="SEO Expert in Delhi NCR">SEO Expert Delhi</a>
+                <a href="<?= $site ?>service/search-engine-optimization/"
+                  title="SEO Expert in Delhi NCR for Ranking">
+                  SEO Expert Services
+                </a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img5.png" alt="SEO Expert in Delhi - NikhilWorks">
+                <img src="assets/img/all-images/brand-img5.png"
+                  alt="Professional SEO expert helping rank websites on Google">
               </div>
             </div>
 
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service-details/web-development-delhi" title="Web Development Company Delhi">Web Development</a>
+                <a href="<?= $site ?>service/website-design-development/"
+                  title="Web Development Company in Delhi NCR">
+                  Web Development
+                </a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img6.png" alt="Web Development Company in Delhi - NikhilWorks">
+                <img src="assets/img/all-images/brand-img6.png"
+                  alt="Full stack web development services in India">
               </div>
             </div>
 
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service-details/responsive-web-design" title="Responsive Web Design Delhi">Responsive Design</a>
+                <a href="<?= $site ?>service/website-design-development/"
+                  title="Responsive Web Design Services in India">
+                  Responsive Web Design
+                </a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img7.png" alt="Responsive Web Design Services in Delhi - NikhilWorks">
+                <img src="assets/img/all-images/brand-img7.png"
+                  alt="Mobile friendly responsive website design services">
               </div>
             </div>
 
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service-details/local-seo-delhi" title="Local SEO Services Delhi">Local SEO Delhi</a>
+                <a href="<?= $site ?>service/search-engine-optimization/"
+                  title="Local SEO Services for Delhi Businesses">
+                  Local SEO Services
+                </a>
               </div>
               <div class="img1">
-                <img src="assets/img/all-images/brand-img8.png" alt="Local SEO Services for Delhi Businesses - NikhilWorks">
+                <img src="assets/img/all-images/brand-img8.png"
+                  alt="Local SEO services to rank your business in Google Maps">
               </div>
             </div>
+
           </div>
+
         </div>
       </div>
     </div>
-  </div>
+  </section>
   <!--===== SLIDER AREA ENDS =======>
   
   <!--===== who we are start here  =======-->
@@ -1558,137 +1615,40 @@ $blogs = get_blog($limit);
       <div class="row">
         <div class="col-lg-12" data-aos="zoom-out" data-aos-duration="1200">
           <div class="testimonial4-slider-area owl-carousel">
-            <div class="testimonial-boxarea">
-              <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"Nikhil from nikhilworks.com transformed our Delhi-based business with his exceptional web development skills. His SEO strategies helped us rank on Google's first page within 3 months. Highly recommended for businesses in India!"</p>
-              <div class="space48"></div>
-              <div class="auhtor-logo">
-                <div class="text">
-                  <a href="javascript:void(0)">Rajesh Sharma</a>
-                  <span>Delhi-based E-commerce Business</span>
-                  <ul>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                  </ul>
-                </div>
-                <div class="logo">
-                  <img src="assets/img/icons/google1.svg" alt="">
-                </div>
-              </div>
-            </div>
+            <?php
+            $tests = testimonial();
+            foreach ($tests as $test) {
+            ?>
+              <div class="testimonial-boxarea">
+                <!-- <img src="assets/img/icons/quito7.svg" alt="" class="quito"> -->
 
-            <div class="testimonial-boxarea">
-              <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"As a startup founder in Mumbai, I was struggling with my online presence until I found nikhilworks.com. Nikhil Gupta created a stunning website and implemented SEO strategies that brought us genuine customers. His pricing is very reasonable for Indian businesses."</p>
-              <div class="space48"></div>
-              <div class="auhtor-logo">
-                <div class="text">
-                  <a href="javascript:void(0)">Priya Patel</a>
-                  <span>Mumbai Startup Founder</span>
-                  <ul>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                  </ul>
+                <div class="space14"></div>
+                <div class="auhtor-logo">
+                  <div class="text">
+                    <span class="first-letter"><?= strtoupper(substr($test['client_name'], 0, 1)) ?></span>
+                    <a href="javascript:void(0)"><?= $test['client_name'] ?></a><br>
+                    <?php
+                    if ($test['client_title']) {
+                    ?>
+                      <span style="margin-left: 50px; font-size:13px"><?= $test['client_title'] ?></span>
+                    <?php } ?>
+                    <ul style="margin-left: 50px; font-size:12px">
+                      <li><i class="fa-solid fa-star"></i></li>
+                      <li><i class="fa-solid fa-star"></i></li>
+                      <li><i class="fa-solid fa-star"></i></li>
+                      <li><i class="fa-solid fa-star"></i></li>
+                      <li><i class="fa-solid fa-star"></i></li>
+                    </ul>
+                  </div>
+                  <div class="logo">
+                    <img src="assets/img/icons/google1.svg" alt="" style="max-width: 80%;">
+                  </div>
                 </div>
-                <div class="logo">
-                  <img src="assets/img/icons/google1.svg" alt="">
-                </div>
+                <p><?= $test['testimonial_text'] ?></p>
               </div>
-            </div>
+            <?php } ?>
 
-            <div class="testimonial-boxarea">
-              <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"I run a small business in Bangalore and needed an affordable web developer. Nikhil from nikhilworks.com exceeded my expectations. He created a responsive website and helped with local SEO. Now we're getting more customers from Google searches."</p>
-              <div class="space48"></div>
-              <div class="auhtor-logo">
-                <div class="text">
-                  <a href="javascript:void(0)">Vikram Singh</a>
-                  <span>Bangalore Small Business Owner</span>
-                  <ul>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                  </ul>
-                </div>
-                <div class="logo">
-                  <img src="assets/img/icons/google1.svg" alt="">
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-boxarea">
-              <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"nikhilworks.com provided excellent WordPress development services for my consultancy in Hyderabad. Nikhil's technical expertise and understanding of Indian market needs made all the difference. Our website traffic increased by 200% after his SEO work."</p>
-              <div class="space48"></div>
-              <div class="auhtor-logo">
-                <div class="text">
-                  <a href="javascript:void(0)">Ananya Reddy</a>
-                  <span>Hyderabad Consultancy Firm</span>
-                  <ul>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                  </ul>
-                </div>
-                <div class="logo">
-                  <img src="assets/img/icons/google1.svg" alt="">
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-boxarea">
-              <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"As an NRI looking to establish business in India, I found nikhilworks.com to be the perfect partner. Nikhil Gupta understood my vision and created a website that works perfectly for both Indian and international audiences. His SEO knowledge is impressive!"</p>
-              <div class="space48"></div>
-              <div class="auhtor-logo">
-                <div class="text">
-                  <a href="javascript:void(0)">Amit Verma</a>
-                  <span>NRI Business Owner</span>
-                  <ul>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                  </ul>
-                </div>
-                <div class="logo">
-                  <img src="assets/img/icons/google1.svg" alt="">
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-boxarea">
-              <img src="assets/img/icons/quito7.svg" alt="" class="quito">
-              <p>"I contacted nikhilworks.com for my restaurant website in Delhi. Nikhil created a beautiful, responsive site and optimized it for local SEO. Now we appear in 'near me' searches and our online orders have increased significantly. Great service for Indian businesses!"</p>
-              <div class="space48"></div>
-              <div class="auhtor-logo">
-                <div class="text">
-                  <a href="javascript:void(0)">Sunita Kapoor</a>
-                  <span>Delhi Restaurant Owner</span>
-                  <ul>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                    <li><i class="fa-solid fa-star"></i></li>
-                  </ul>
-                </div>
-                <div class="logo">
-                  <img src="assets/img/icons/google1.svg" alt="">
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>

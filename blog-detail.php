@@ -19,7 +19,7 @@ if (!$blog) {
 $metaTitle = $blog['meta_title'] ?: $blog['title'];
 $metaDesc = $blog['meta_description'] ?: substr(strip_tags($blog['content']), 0, 150);
 $blogImage = "uploads/" . $blog['image'];
-$siteURL = $site . "blog/" . $blog['slug_url'];
+$siteURL = $site . $blog['slug_url'];
 ?>
 
 <!DOCTYPE html>
@@ -58,10 +58,10 @@ $siteURL = $site . "blog/" . $blog['slug_url'];
       },
       "publisher": {
         "@type": "Organization",
-        "name": "NikhilWorks",
+        "name": "Nikhil Works",
         "logo": {
           "@type": "ImageObject",
-          "url": "<?= $site ?>assets/img/logo.png"
+          "url": "https://nikhilworks.com/assets/img/logo.png"
         }
       },
       "datePublished": "<?= $blog['created_at'] ?>",
@@ -70,7 +70,7 @@ $siteURL = $site . "blog/" . $blog['slug_url'];
   </script>
 
   <!--=====FAB ICON=======-->
-  <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
+  <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo1.png" type="image/x-icon">
 
   <!--===== CSS LINK =======-->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
@@ -86,16 +86,6 @@ $siteURL = $site . "blog/" . $blog['slug_url'];
 
   <!--=====  JS SCRIPT LINK =======-->
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
-
-  <!-- Google Analytics 4 — NikhilWorks -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HVPGR81RL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-1HVPGR81RL');
-  </script>
-
 </head>
 
 <body class="homepage4-body">
@@ -103,7 +93,7 @@ $siteURL = $site . "blog/" . $blog['slug_url'];
   <?php include_once "includes/header.php" ?>
 
   <!--===== HERO AREA STARTS =======-->
-  <div class="about-header-area" style="background-image: url(<?= $site ?>assets/img/bg/cta-bg7.png); background-repeat: no-repeat; background-size: cover; background-position: center;">
+  <div class="about-header-area" style="background-image: url(<?= $site ?>assets/img/bg/inner-header.png); background-repeat: no-repeat; background-size: cover; background-position: center;">
     <img src="<?= $site ?>assets/img/elements/elements1.png" alt="" class="elements1 aniamtion-key-1">
     <img src="<?= $site ?>assets/img/elements/star2.png" alt="" class="star2 keyframe5">
     <div class="container">
@@ -134,7 +124,7 @@ $siteURL = $site . "blog/" . $blog['slug_url'];
             <h2><?= $blog['title'] ?></h2>
             <div class="space34"></div>
             <div class="img1">
-              <img src="<?= $site ?>admin/uploads/blogs/<?= $blog['image'] ?>" alt="">
+              <img src="<?= $site ?>admin/uploads/blogs/<?= $blog['image'] ?>" alt="" style="max-width:100%; he">
             </div>
             <div class="space24"></div>
             <?= $blog['content'] ?>

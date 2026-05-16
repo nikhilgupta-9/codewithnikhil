@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $meta_title = mysqli_real_escape_string($conn, $_POST['meta_title']);
     $meta_description = mysqli_real_escape_string($conn, $_POST['meta_description']);
     $tags = mysqli_real_escape_string($conn, $_POST['tags']);
-    $content = mysqli_real_escape_string($conn, $_POST['content']);
+    $content = $_POST['content'];
     $author = mysqli_real_escape_string($conn, $_POST['author']);
     $status = mysqli_real_escape_string($conn, $_POST['status']);
     

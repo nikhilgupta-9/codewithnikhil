@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Database Configuration
-$local = false; // Set to false for live server
+$local = true; // Set to false for live server
 
 if ($local) {
     $host = 'localhost';
@@ -16,10 +16,10 @@ if ($local) {
     $site = "http://localhost/learn-with-nikhil/";
 } else {
     $host = 'localhost';
-    $username = 'u950539402_code_with_db';
-    $password = '@sZ4=NL1|l';
-    $dbName = 'u950539402_code_with_db';
-    $site = 'https://nikhilworks.com/';
+    $username = 'u950539402_nikhil_work_db';
+    $password = 'e5ILWM2&';
+    $dbName   = 'u950539402_nikhil_work_db';
+    $site     = 'https://nikhilworks.com/';
 }
 
 // Make `$site` global

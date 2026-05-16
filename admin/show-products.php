@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "db-conn.php";
+include_once "functions.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -164,7 +165,9 @@ include "db-conn.php";
                                                                 <td><?= $sno++ ?></td>
                                                                 <td class="fw-bold"><?= htmlspecialchars($row['pro_id']) ?></td>
                                                                 <td><?= htmlspecialchars($row['pro_name']) ?></td>
-                                                                <td><?= htmlspecialchars($row['pro_cate']) ?></td>
+                                                                <!-- <td><?= htmlspecialchars($row['pro_cate']) ?></td> -->
+                                                                <?php $cat = get_category_by_id($row['pro_cate']); ?>
+                                                                <td><?= $cat['categories'] ?></td>
                                                                 <td>
                                                                     <img src="assets/img/uploads/<?= htmlspecialchars($row['pro_img']) ?>"
                                                                         alt="<?= htmlspecialchars($row['pro_name']) ?>"
