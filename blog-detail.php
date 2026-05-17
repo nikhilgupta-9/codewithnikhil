@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include 'config/connect.php';
 include 'util/function.php';
 
