@@ -407,4 +407,69 @@ function testimonial(){
     }
     return $test;
 }
+
+// ── Recent published blogs for sidebar ────────────────────────────────────
+function get_recent_blogs($limit = 4)
+{
+    global $conn;
+
+    $limit    = intval($limit);
+    $sql_blog = "SELECT `id`, `title`, `slug_url`, `image`, `author`, `created_at`, `meta_description`
+                 FROM `blogs`
+                 ORDER BY `created_at` DESC
+                 LIMIT $limit";
+    $res_blog = mysqli_query($conn, $sql_blog);
+
+    $posts = [];
+    if ($res_blog) {
+        while ($row = mysqli_fetch_assoc($res_blog)) {
+            $posts[] = $row;
+        }
+    }
+    return $posts;
+}
+
+// ── Approved comments for a specific blog post ────────────────────────────
+function get_blog_comments($slug)
+{
+    global $conn;
+
+    $slug = mysqli_real_escape_string($conn, $slug);
+    $sql  = "SELECT * FROM `blog_comments`
+             WHERE `blog_slug` = '$slug' AND `status` = 1
+             ORDER BY `created_at` ASC";
+    $res  = mysqli_query($conn, $sql);
+
+    $comments = [];
+    if ($res) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $comments[] = $row;
+        }
+    }
+    return $comments;
+}
+
+// ── Aggregate tags from all published posts (top N by frequency) ──────────
+function get_all_blog_tags($top = 15)
+{
+    global $conn;
+
+    $sql = "SELECT `tags` FROM `blogs` WHERE `tags` != '' AND `tags` IS NOT NULL";
+    $res = mysqli_query($conn, $sql);
+
+    $freq = [];
+    if ($res) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $raw = preg_split('/[,;\|]+/', $row['tags']);
+            foreach ($raw as $tag) {
+                $tag = trim($tag);
+                if ($tag !== '') {
+                    $freq[$tag] = ($freq[$tag] ?? 0) + 1;
+                }
+            }
+        }
+    }
+    arsort($freq);
+    return array_slice(array_keys($freq), 0, intval($top));
+}
 ?>

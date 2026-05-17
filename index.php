@@ -1,4 +1,4 @@
-﻿<?php
+﻿﻿<?php
 include_once "config/connect.php";
 include_once "util/function.php";
 
@@ -768,7 +768,7 @@ $blogs = get_blog($limit);
               </ul>
               <div class="service-cta">
                 <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>website-development/" class="btn-service-outline">Learn More</a>
+                <a href="<?= $site ?>service/website-design-development/" class="btn-service-outline">Learn More</a>
               </div>
             </div>
           </div>
@@ -795,7 +795,7 @@ $blogs = get_blog($limit);
               </ul>
               <div class="service-cta">
                 <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>ecommerce-development/" class="btn-service-outline">Learn More</a>
+                <a href="<?= $site ?>service/e-commerce-website-development/" class="btn-service-outline">Learn More</a>
               </div>
             </div>
           </div>
@@ -822,7 +822,7 @@ $blogs = get_blog($limit);
               </ul>
               <div class="service-cta">
                 <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>wordpress-development/" class="btn-service-outline">Learn More</a>
+                <a href="<?= $site ?>service/wordpress-website-development/" class="btn-service-outline">Learn More</a>
               </div>
             </div>
           </div>
@@ -839,7 +839,7 @@ $blogs = get_blog($limit);
                 </div>
               </div>
               <h3>PHP Development</h3>
-              <p class="service-tagline">PHP5 & PHP7 SOLUTIONS</p>
+              <p class="service-tagline">PHP7 & PHP8.4 SOLUTIONS</p>
               <p class="service-description">Custom PHP web applications and dynamic websites built with Laravel, CodeIgniter, and custom frameworks for scalable business solutions.</p>
               <ul class="service-features">
                 <li><i class="fa-solid fa-check"></i> Laravel Development</li>

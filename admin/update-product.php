@@ -5,23 +5,25 @@ ini_set('display_errors', 1);
 include "db-conn.php";
 
 if (isset($_POST['update-product'])) {
-    $pro_id = $_POST['pro_id'];
-    $pro_name = $_POST['pro_name'];
-    $pro_cate = $_POST['pro_cate'];
-    $short_desc = $_POST['short_desc'];
-    $description = $_POST['pro_desc'];
-    $new_arrival = $_POST['new_arrival'];
-    $trending = $_POST['trending'];
-    $qty = $_POST['qty'];
+    $pro_id          = intval($_POST['pro_id']);
+    $pro_name        = $_POST['pro_name'];
+    $brand_name      = $_POST['brand_name']      ?? '';
+    $pro_cate        = $_POST['pro_cate'];
+    $pro_sub_cate    = $_POST['pro_sub_cate']    ?? '';
+    $short_desc      = $_POST['short_desc'];
+    $description     = $_POST['pro_desc'];
+    $new_arrival     = $_POST['new_arrival'];
+    $trending        = $_POST['trending'];
+    $qty             = $_POST['qty'];
     $whole_sale_price = $_POST['whole_sale_selling_price'];
-    $mrp = $_POST['mrp'];
-    $selling_price = $_POST['selling_price'];
-    $stock = $_POST['stock'];
-    $status = $_POST['status'];
-    $meta_title = $_POST['meta_title'];
-    $meta_desc = $_POST['meta_desc'];
-    $meta_key = $_POST['meta_key'];
-    $added_on = date('Y-m-d H:i:s');
+    $mrp             = $_POST['mrp'];
+    $selling_price   = $_POST['selling_price'];
+    $stock           = $_POST['stock'];
+    $status          = $_POST['status'];
+    $meta_title      = $_POST['meta_title'];
+    $meta_desc       = $_POST['meta_desc'];
+    $meta_key        = $_POST['meta_key'];
+    $added_on        = date('Y-m-d H:i:s');
 
     $target_dir = "assets/img/uploads/";
 
@@ -53,18 +55,51 @@ if (isset($_POST['update-product'])) {
         $img_query = "";
     }
 
-    $query = "UPDATE `products` SET `pro_name` = ?, `pro_cate` = ?, `short_desc` = ?, `description` = ?,
-              `new_arrival` = ?, `trending` = ?, `qty` = ?, `mrp` = ?, `selling_price` = ?,
-              `whole_sale_selling_price` = ?, `stock` = ?, `status` = ?,
-              `meta_title` = ?, `meta_desc` = ?, `meta_key` = ?, `added_on` = ? $img_query
+    // Fixed: added brand_name and pro_sub_cate to the update query
+    $query = "UPDATE `products` SET
+                `pro_name`                 = ?,
+                `brand_name`               = ?,
+                `pro_cate`                 = ?,
+                `pro_sub_cate`             = ?,
+                `short_desc`               = ?,
+                `description`              = ?,
+                `new_arrival`              = ?,
+                `trending`                 = ?,
+                `qty`                      = ?,
+                `mrp`                      = ?,
+                `selling_price`            = ?,
+                `whole_sale_selling_price` = ?,
+                `stock`                    = ?,
+                `status`                   = ?,
+                `meta_title`               = ?,
+                `meta_desc`                = ?,
+                `meta_key`                 = ?,
+                `added_on`                 = ?
+                $img_query
               WHERE `pro_id` = ?";
 
     $stmt = mysqli_prepare($conn, $query);
 
+    if (!$stmt) {
+        die("Prepare failed: " . mysqli_error($conn));
+    }
+
     if ($pro_img) {
-        mysqli_stmt_bind_param($stmt, "sssssssssssssssssi", $pro_name, $pro_cate, $short_desc, $description, $new_arrival, $trending, $qty, $mrp, $selling_price, $whole_sale_price, $stock, $status, $meta_title, $meta_desc, $meta_key, $added_on, $pro_img, $pro_id);
+        // 18 string fields + pro_img (s) + pro_id (i) = 20 params → "ssssssssssssssssssi" is 19s+1i
+        mysqli_stmt_bind_param($stmt, "sssssssssssssssssssi",
+            $pro_name, $brand_name, $pro_cate, $pro_sub_cate,
+            $short_desc, $description, $new_arrival, $trending,
+            $qty, $mrp, $selling_price, $whole_sale_price,
+            $stock, $status, $meta_title, $meta_desc, $meta_key,
+            $added_on, $pro_img, $pro_id);
     } else {
-        mysqli_stmt_bind_param($stmt, "ssssssssssssssssi", $pro_name, $pro_cate, $short_desc, $description, $new_arrival, $trending, $qty, $mrp, $selling_price, $whole_sale_price, $stock, $status, $meta_title, $meta_desc, $meta_key, $added_on, $pro_id);
+        // 18 string fields + pro_id (i) = 19 params → "ssssssssssssssssssi" (18s+1i)
+        mysqli_stmt_bind_param($stmt, "ssssssssssssssssssi",
+            $pro_name, $brand_name, $pro_cate, $pro_sub_cate,
+            $short_desc, $description, $new_arrival, $trending,
+            $qty, $mrp, $selling_price, $whole_sale_price,
+            $stock, $status, $meta_title, $meta_desc, $meta_key,
+            $added_on, $pro_id);
     }
 
     if (mysqli_stmt_execute($stmt)) {

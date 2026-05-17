@@ -111,16 +111,22 @@ $categories = mysqli_query($conn, $category_query);
         .price-input {
             position: relative;
         }
-        .price-input:before {
+        .price-input::before {
             content: "₹";
             position: absolute;
-            left: 1px;
-            top: 1px;
-            font-weight: 500;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
             color: #495057;
+            z-index: 5;
+            pointer-events: none;
+            line-height: 1;
         }
+        /* push label out of the way for the pseudo-element */
+        .price-input label { display: block; }
         .price-input input {
-            padding-left: 25px;
+            padding-left: 26px !important;
         }
     </style>
 </head>
@@ -158,35 +164,42 @@ $categories = mysqli_query($conn, $category_query);
                                     <!-- Basic Information -->
                                     <div class="col-md-6 mb-4">
                                         <label class="form-label">Product Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="pro_name" 
+                                        <input type="text" class="form-control" name="pro_name"
                                             value="<?= htmlspecialchars($product['pro_name']) ?>" required>
                                     </div>
-                                    
+
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label">Brand / Client Name</label>
+                                        <input type="text" class="form-control" name="brand_name"
+                                            value="<?= htmlspecialchars($product['brand_name'] ?? '') ?>"
+                                            placeholder="e.g. Bestok, Earnova">
+                                    </div>
+
                                     <div class="col-md-6 mb-4">
                                         <label class="form-label">Category <span class="text-danger">*</span></label>
                                         <select class="form-select" name="pro_cate" required onchange="get_subcategory(this.value)">
-                                            <!-- <option value="">Select Category</option> -->
                                             <?php while ($category = mysqli_fetch_assoc($categories)): ?>
-                                                <?php $_SESSION['cate_id'] = $category['cate_id'] ?>
                                                 <option value="<?= $category['cate_id'] ?>" <?= ($category['cate_id'] == $product['pro_cate']) ? 'selected' : '' ?>>
                                                     <?= htmlspecialchars(ucwords($category['categories'])) ?>
                                                 </option>
                                             <?php endwhile; ?>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="col-md-6 mb-4">
                                         <?php
-                                        $cate_id = $_SESSION['cate_id'];
-                                        $sql_sub_cat = "SELECT * FROM `sub_categories` where `parent_id` = $cate_id";
+                                        // Fix: Use product's own pro_cate, NOT $_SESSION['cate_id']
+                                        $prod_cate_id = intval($product['pro_cate']);
+                                        $sql_sub_cat  = "SELECT * FROM `sub_categories` WHERE `parent_id` = $prod_cate_id ORDER BY categories ASC";
                                         $res_sub_cate = mysqli_query($conn, $sql_sub_cat);
                                         ?>
                                         <label class="form-label">Sub Category</label>
                                         <select class="form-select" name="pro_sub_cate" id="subcate_id">
-                                            <!-- <option value="">Select Sub Category</option> -->
-                                            <?php while ($category = mysqli_fetch_assoc($res_sub_cate)): ?>
-                                                <option value="<?= $category['cate_id'] ?>" <?= ($category['cate_id'] == $product['pro_cate']) ? 'selected' : '' ?>>
-                                                    <?= htmlspecialchars(ucwords($category['categories'])) ?>
+                                            <option value="">— Select Sub Category —</option>
+                                            <?php while ($sub = mysqli_fetch_assoc($res_sub_cate)): ?>
+                                                <!-- Fix: compare against pro_sub_cate, not pro_cate -->
+                                                <option value="<?= $sub['cate_id'] ?>" <?= ($sub['cate_id'] == $product['pro_sub_cate']) ? 'selected' : '' ?>>
+                                                    <?= htmlspecialchars(ucwords($sub['categories'])) ?>
                                                 </option>
                                             <?php endwhile; ?>
                                         </select>

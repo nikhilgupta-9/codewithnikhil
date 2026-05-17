@@ -141,7 +141,65 @@ $product_details = fetch_product_details($cate_id);
     ]
   }
   </script>
-  
+
+  <!-- FAQPage Schema for AI & Featured Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long does it take to build a website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A static website typically takes 3–5 days, a dynamic website with admin panel takes 1–3 weeks, and complex web applications take 4–8 weeks depending on features and requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide website maintenance after launch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All plans include post-launch support — 1 month for static sites, 3 months for dynamic sites, and ongoing support for custom web applications."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my website be mobile-friendly and responsive?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. Every website I build is fully responsive and tested across mobile, tablet, and desktop devices. Mobile-first design is a standard part of my development process."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide SEO optimization with the website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Every website includes on-page SEO basics — meta tags, schema markup, XML sitemap, robots.txt, and fast loading speed. Advanced SEO campaigns are available as separate packages."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you work with clients outside India?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! I work remotely with clients from the USA, UK, Australia, UAE, and Canada. Communication happens via WhatsApp, Zoom, or email, and international payments are accepted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What information do you need to start a web development project?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To get started I need your business name, project goals, reference websites you like, logo/brand assets, and content (text and images). I can also help with content and design if you don't have them ready."
+        }
+      }
+    ]
+  }
+  </script>
+
   <!-- Favicon -->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
   
@@ -159,6 +217,84 @@ $product_details = fetch_product_details($cate_id);
   
   <!-- JS -->
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
+
+  <style>
+    /* ---- Stats Counter ---- */
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #ADFF1C;
+      margin-bottom: 6px;
+      line-height: 1.1;
+    }
+
+    /* ---- Process Steps ---- */
+    .process-step-box {
+      background: #fff;
+      border: 2px solid #e8f0e8;
+      border-radius: 16px;
+      transition: all 0.35s ease;
+    }
+    .process-step-box:hover {
+      border-color: #ADFF1C;
+      box-shadow: 0 14px 38px rgba(16, 64, 65, 0.12);
+      transform: translateY(-6px);
+    }
+    .step-number {
+      font-size: 2.8rem;
+      font-weight: 900;
+      -webkit-text-stroke: 2px #104041;
+      color: transparent;
+      line-height: 1;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ---- Tech Badges ---- */
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-weight: 600;
+      color: #104041;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      cursor: default;
+      white-space: nowrap;
+    }
+    .tech-badge:hover {
+      border-color: #104041;
+      background: #104041;
+      color: #ADFF1C;
+    }
+    .tech-badge i { font-size: 1.2em; }
+
+    /* ---- FAQ Accordion ---- */
+    .faq-item {
+      border: 1px solid #dde9dd !important;
+      border-radius: 12px !important;
+      overflow: hidden;
+      background: #fff;
+    }
+    .faq-btn {
+      background: #fff;
+      color: #104041;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: none !important;
+      padding: 18px 22px;
+    }
+    .faq-btn:not(.collapsed) {
+      background: #104041;
+      color: #ADFF1C;
+    }
+    .faq-btn:not(.collapsed)::after {
+      filter: brightness(10);
+    }
+  </style>
 </head>
 
 <body class="homepage4-body">
@@ -240,6 +376,31 @@ $product_details = fetch_product_details($cate_id);
     </div>
   </section>
 
+  <!--===== STATS AREA STARTS =======-->
+  <section class="py-5" style="background: #104041;">
+    <div class="container">
+      <div class="row g-4 text-center text-white">
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-duration="600">
+          <h2 class="stat-number">50+</h2>
+          <p class="mb-0 opacity-75">Projects Completed</p>
+        </div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-duration="800">
+          <h2 class="stat-number">3+</h2>
+          <p class="mb-0 opacity-75">Years of Experience</p>
+        </div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-duration="1000">
+          <h2 class="stat-number">100%</h2>
+          <p class="mb-0 opacity-75">Client Satisfaction</p>
+        </div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-duration="1200">
+          <h2 class="stat-number">24/7</h2>
+          <p class="mb-0 opacity-75">Support Available</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--===== STATS AREA ENDS =======-->
+
 
   <section class="bg-light py-5">
     <div class="container">
@@ -281,6 +442,87 @@ $product_details = fetch_product_details($cate_id);
       </div>
     </div>
   </section>
+
+  <!--===== PROCESS AREA STARTS =======-->
+  <section class="sp1">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-7 m-auto text-center heading2">
+          <h5>My Workflow</h5>
+          <h2>How I Deliver Your Project</h2>
+          <p class="text-muted">A proven 4-step process that turns your idea into a live, high-performing website — on time, every time.</p>
+        </div>
+      </div>
+      <div class="row g-4">
+
+        <div class="col-md-3 col-6" data-aos="fade-up" data-aos-duration="600">
+          <div class="process-step-box text-center p-4 h-100">
+            <div class="step-number">01</div>
+            <div class="my-3"><i class="fa-solid fa-magnifying-glass fa-2x" style="color:#104041;"></i></div>
+            <h5 class="fw-bold">Discovery</h5>
+            <p class="text-muted small mb-0">We discuss your goals, target audience, and project requirements in detail.</p>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-6" data-aos="fade-up" data-aos-duration="800">
+          <div class="process-step-box text-center p-4 h-100">
+            <div class="step-number">02</div>
+            <div class="my-3"><i class="fa-solid fa-pen-nib fa-2x" style="color:#104041;"></i></div>
+            <h5 class="fw-bold">Design</h5>
+            <p class="text-muted small mb-0">UI/UX wireframes and design mockups tailored to your brand identity.</p>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-6" data-aos="fade-up" data-aos-duration="1000">
+          <div class="process-step-box text-center p-4 h-100">
+            <div class="step-number">03</div>
+            <div class="my-3"><i class="fa-solid fa-code fa-2x" style="color:#104041;"></i></div>
+            <h5 class="fw-bold">Development</h5>
+            <p class="text-muted small mb-0">Clean, scalable code with regular progress updates and feedback loops.</p>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-6" data-aos="fade-up" data-aos-duration="1200">
+          <div class="process-step-box text-center p-4 h-100">
+            <div class="step-number">04</div>
+            <div class="my-3"><i class="fa-solid fa-rocket fa-2x" style="color:#104041;"></i></div>
+            <h5 class="fw-bold">Launch</h5>
+            <p class="text-muted small mb-0">Testing, deployment, and post-launch support to ensure everything runs perfectly.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!--===== PROCESS AREA ENDS =======-->
+
+  <!--===== TECH STACK AREA STARTS =======-->
+  <section class="py-5 bg2">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-7 m-auto text-center heading2">
+          <h5>Technologies</h5>
+          <h2>Tech Stack I Work With</h2>
+          <p class="text-muted">Modern, battle-tested technologies to build reliable, scalable, and lightning-fast web solutions.</p>
+        </div>
+      </div>
+      <div class="row g-3 justify-content-center" data-aos="fade-up" data-aos-duration="1000">
+        <div class="col-auto"><div class="tech-badge"><i class="fa-brands fa-php" style="color:#7a86b8;"></i> PHP</div></div>
+        <div class="col-auto"><div class="tech-badge"><i class="fa-solid fa-database" style="color:#00758f;"></i> MySQL</div></div>
+        <div class="col-auto"><div class="tech-badge"><i class="fa-brands fa-js" style="color:#f7df1e;"></i> JavaScript</div></div>
+        <div class="col-auto"><div class="tech-badge"><i class="fa-brands fa-react" style="color:#61dafb;"></i> React.js</div></div>
+        <div class="col-auto"><div class="tech-badge"><i class="fa-brands fa-laravel" style="color:#ff2d20;"></i> Laravel</div></div>
+        <div class="col-auto"><div class="tech-badge"><i class="fa-brands fa-wordpress" style="color:#21759b;"></i> WordPress</div></div>
+        <div class="col-auto"><div class="tech-badge"><i class="fa-brands fa-bootstrap" style="color:#7952b3;"></i> Bootstrap</div></div>
+        <div class="col-auto"><div class="tech-badge"><i class="fa-brands fa-node-js" style="color:#68a063;"></i> Node.js</div></div>
+        <div class="col-auto"><div class="tech-badge"><i class="fa-brands fa-html5" style="color:#e34c26;"></i> HTML5</div></div>
+        <div class="col-auto"><div class="tech-badge"><i class="fa-brands fa-css3-alt" style="color:#264de4;"></i> CSS3</div></div>
+        <div class="col-auto"><div class="tech-badge"><i class="fa-brands fa-git-alt" style="color:#f05032;"></i> Git</div></div>
+        <div class="col-auto"><div class="tech-badge"><i class="fa-solid fa-leaf" style="color:#4db33d;"></i> MongoDB</div></div>
+      </div>
+    </div>
+  </section>
+  <!--===== TECH STACK AREA ENDS =======-->
 
 
   <!-- Key Features / Benefits -->
@@ -496,6 +738,105 @@ $product_details = fetch_product_details($cate_id);
     </div>
   </div>
   <!--===== PRICING AREA ENDS =======-->
+
+  <!--===== FAQ AREA STARTS =======-->
+  <section class="sp1">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-7 m-auto text-center heading2">
+          <h5>FAQs</h5>
+          <h2>Frequently Asked Questions</h2>
+          <p class="text-muted">Got questions? I've got answers. Here are the most common things clients ask before starting a project.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 m-auto">
+          <div class="accordion d-flex flex-column gap-3" id="serviceFaqAccordion">
+
+            <div class="accordion-item faq-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button faq-btn" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
+                  How long does it take to build a website?
+                </button>
+              </h3>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#serviceFaqAccordion">
+                <div class="accordion-body text-muted">
+                  A <strong>static website</strong> typically takes <strong>3–5 days</strong>, a dynamic website with a custom admin panel takes <strong>1–3 weeks</strong>, and complex web applications may take <strong>4–8 weeks</strong> depending on features and requirements.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false">
+                  Do you provide website maintenance after launch?
+                </button>
+              </h3>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                <div class="accordion-body text-muted">
+                  Yes! All plans include post-launch support — <strong>1 month</strong> for static sites, <strong>3 months</strong> for dynamic sites, and <strong>ongoing support</strong> for custom web applications. Long-term maintenance contracts are also available.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false">
+                  Will my website be mobile-friendly and responsive?
+                </button>
+              </h3>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                <div class="accordion-body text-muted">
+                  Absolutely. Every website I build is <strong>fully responsive</strong> and thoroughly tested across mobile, tablet, and desktop devices. Mobile-first design is a standard part of my development workflow.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false">
+                  Do you provide SEO optimization with the website?
+                </button>
+              </h3>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                <div class="accordion-body text-muted">
+                  Yes. Every website I deliver includes <strong>on-page SEO basics</strong> — meta tags, schema markup (JSON-LD), XML sitemap, robots.txt, image optimization, and fast page load speed. Advanced monthly SEO campaigns are available as a separate package.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false">
+                  Can you work with clients outside India?
+                </button>
+              </h3>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                <div class="accordion-body text-muted">
+                  Yes! I work remotely with clients from the <strong>USA, UK, Australia, UAE, Canada,</strong> and beyond. All communication happens via WhatsApp, Zoom, or email. International payments are fully supported.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false">
+                  What do I need to provide to start the project?
+                </button>
+              </h3>
+              <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#serviceFaqAccordion">
+                <div class="accordion-body text-muted">
+                  To get started I need your business name, project goals, reference websites you like, your logo/brand assets, and content (text and images). No worries if you don't have everything ready — I can help with copywriting and design too.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--===== FAQ AREA ENDS =======-->
 
   <!--===== TESTIMONIAL AREA STARTS =======-->
   <div class="testimonial1-section-area sp1 bg2">
