@@ -1,0 +1,45 @@
+# PHP dependencies
+/vendor/
+/composer.phar
+
+# Uploaded files and dynamic content
+/uploads/
+/admin/uploads/
+/uploads/*
+
+# Environment and config
+/config/connect.php
+/.env
+.env.local
+.env.*.local
+
+# Logs and caches
+*.log
+admin/error_log
+auth/error_log
+
+# Editor/IDE files
+/.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build tools / node
+node_modules/
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Generated sitemaps
+/sitemap.xml
+
+# Backup files
+*.bak
+*.old
+*.backup

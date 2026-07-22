@@ -1,0 +1,111 @@
+# ============================================
+# Security Headers
+# ============================================
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Report-Only first — logs violations to the browser console without blocking anything.
+  # Known real resource origins from a codebase audit: jQuery CDN, Google Tag Manager/Analytics
+  # (script + beacon), Google Maps embed (contact page iframe). img-src stays permissive since
+  # blog posts (via the admin CKEditor) may reference external image hosts.
+  Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'unsafe-inline' https://code.jquery.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; frame-src https://www.google.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; frame-ancestors 'self'"
+</IfModule>
+
+# ============================================
+# Caching & Compression
+# ============================================
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+RewriteEngine On
+# ============================================
+# Force HTTPS
+# ============================================
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ============================================
+# Fix -- .php extension URLs redirect
+# ============================================
+RewriteRule ^index\.php$ https://nikhilworks.com/ [R=301,L]
+RewriteRule ^about\.php$ https://nikhilworks.com/about/ [R=301,L]
+RewriteRule ^blog\.php$ https://nikhilworks.com/blogs/ [R=301,L]
+RewriteRule ^contact\.php$ https://nikhilworks.com/contact/ [R=301,L]
+RewriteRule ^pricing\.php$ https://nikhilworks.com/pricing/ [R=301,L]
+RewriteRule ^portfolio\.php$ https://nikhilworks.com/portfolio/ [R=301,L]
+RewriteRule ^services\.php$ https://nikhilworks.com/services/ [R=301,L]
+RewriteRule ^privacy-policy\.php$ https://nikhilworks.com/privacy-policy/ [R=301,L]
+RewriteRule ^terms-and-conditions\.php$ https://nikhilworks.com/terms-and-conditions/ [R=301,L]
+
+# ============================================
+# Fix -- /services/{slug}/ redirect to /service/{slug}/
+# This fixes the duplicate canonical issue found by Google
+# ============================================
+RewriteRule ^services/([a-z0-9_-]+)/?$ /service/$1/ [R=301,L]
+
+# ============================================
+# URL Routing -- Clean URLs to PHP files
+# ============================================
+RewriteRule ^about/?$ about.php [L]
+RewriteRule ^services/?$ services.php [L]
+RewriteRule ^portfolio/?$ portfolio.php [L]
+RewriteRule ^pricing/?$ pricing.php [L]
+RewriteRule ^contact/?$ contact.php [L]
+RewriteRule ^blogs/?$ blog.php [L]
+RewriteRule ^testimonials/?$ testimonials.php [L]
+RewriteRule ^privacy-policy/?$ privacy-policy.php [L]
+RewriteRule ^terms-and-conditions/?$ terms-and-conditions.php [L]
+
+# Service detail pages
+RewriteRule ^service/([a-z0-9_-]+)/?$ service.php?alias=$1 [QSA,L]
+
+# Blog detail pages
+RewriteRule ^blog/([a-z0-9_-]+)/?$ blog-detail.php?alias=$1 [QSA,L]
+
+# India location pages
+RewriteRule ^(web-designer-delhi|web-developer-india|seo-services-india|freelance-web-developer-india|website-development-cost-india|web-developer-mumbai|web-developer-bangalore|web-developer-gurgaon|web-developer-noida|web-developer-hyderabad|web-developer-ahmedabad)/?$ location-india.php?page=$1 [QSA,L]
+
+# International location pages
+RewriteRule ^(web-developer-dubai|web-developer-usa|web-developer-uk|web-developer-australia|hire-freelance-web-developer|web-developer-canada|web-developer-singapore|web-developer-new-zealand|web-developer-russia|web-developer-south-africa|web-developer-saudi-arabia|web-developer-switzerland|web-developer-germany)/?$ location-international.php?page=$1 [QSA,L]
+
+# City/state location pages (data-driven -- add new cities in data/locations-cities.php, no .htaccess change needed)
+RewriteRule ^(web-developer-[a-z-]+)/?$ location-city.php?slug=$1 [QSA,L]
+
+# CRM development service pages (data-driven -- add new countries in data/services-crm.php, no .htaccess change needed)
+RewriteRule ^(crm-development-[a-z-]+)/?$ service-crm.php?slug=$1 [QSA,L]
+
+# ============================================
+# Fix -- Trailing slash canonicalization
+# ============================================
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{REQUEST_URI} !\.(php|xml|txt|css|js|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot|pdf|zip)$
+RewriteCond %{REQUEST_URI} !^/$
+RewriteRule ^(.+)$ /$1/ [R=301,L]
+
+# ============================================
+# Fix -- Old /service-details/ URLs redirect
+# ============================================
+RewriteRule ^service-details/website-design-services/?$ /service/website-design-development/ [R=301,L]
+
+# ============================================
+# Fix -- Sitemap service slug corrections
+# ============================================
+RewriteRule ^service/website-maintenance/?$ /service/website-maintenance-support/ [R=301,L]
