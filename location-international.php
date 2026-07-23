@@ -60,7 +60,8 @@ $rating = average_client_rating();
   <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
 
 </head>
-<body>
+<body class="homepage4-body">
+
 <?php include_once "includes/header.php" ?>
 
 <section style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);padding:120px 0 80px;">
@@ -71,8 +72,8 @@ $rating = average_client_rating();
         <h1 class="text-white fw-bold" style="font-size:2.8rem;"><?= htmlspecialchars($c['h1']) ?></h1>
         <p class="text-light mt-3" style="font-size:1.2rem;"><?= htmlspecialchars($c['hero_sub']) ?></p>
         <div class="mt-4">
-          <a href="/contact/" class="btn btn-warning btn-lg me-3 fw-bold">Get Free Quote</a>
-          <a href="/portfolio/" class="btn btn-outline-light btn-lg">View My Work</a>
+          <a href="<?=$site?>/contact/" class="btn btn-warning btn-lg me-3 fw-bold">Get Free Quote</a>
+          <a href="<?=$site?>/portfolio/" class="btn btn-outline-light btn-lg">View My Work</a>
         </div>
         <div class="mt-4 d-flex gap-4">
           <div><span class="text-warning fw-bold">Remote-First</span><br><small class="text-light">Work from anywhere</small></div>
@@ -131,12 +132,12 @@ $rating = average_client_rating();
       <h2 class="fw-bold">Services Available for <?= htmlspecialchars($c['city_name']) ?></h2>
     </div>
     <div class="row g-4">
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Custom Website Development</h3><p class="text-muted">PHP, HTML, CSS, JavaScript — bespoke websites built from scratch.</p><a href="/service/website-design-development/">Learn More</a></div></div>
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">WordPress Development</h3><p class="text-muted">Custom themes, plugins, WooCommerce stores and WordPress migrations.</p><a href="/service/wordpress-website-development/">Learn More</a></div></div>
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">E-Commerce Development</h3><p class="text-muted">Online stores with payment gateways supporting <?= htmlspecialchars($c['currency']) ?> and global payments.</p><a href="/service/e-commerce-website-development/">Learn More</a></div></div>
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">SEO Services</h3><p class="text-muted">International SEO, local SEO in <?= htmlspecialchars($c['city_name']) ?> and content strategy.</p><a href="/service/search-engine-optimization/">Learn More</a></div></div>
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Website Redesign</h3><p class="text-muted">Modernize your outdated website with a fresh, conversion-focused design.</p><a href="/service/website-redesign-services/">Learn More</a></div></div>
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Monthly Maintenance</h3><p class="text-muted">Ongoing support, updates, security patches and performance monitoring.</p><a href="/service/website-maintenance/">Learn More</a></div></div>
+      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Custom Website Development</h3><p class="text-muted">PHP, HTML, CSS, JavaScript — bespoke websites built from scratch.</p><a href="<?=$site?>service/website-design-development/">Learn More</a></div></div>
+      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">WordPress Development</h3><p class="text-muted">Custom themes, plugins, WooCommerce stores and WordPress migrations.</p><a href="<?=$site?>service/wordpress-website-development/">Learn More</a></div></div>
+      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">E-Commerce Development</h3><p class="text-muted">Online stores with payment gateways supporting <?= htmlspecialchars($c['currency']) ?> and global payments.</p><a href="<?=$site?>service/e-commerce-website-development/">Learn More</a></div></div>
+      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">SEO Services</h3><p class="text-muted">International SEO, local SEO in <?= htmlspecialchars($c['city_name']) ?> and content strategy.</p><a href="<?=$site?>service/search-engine-optimization/">Learn More</a></div></div>
+      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Website Redesign</h3><p class="text-muted">Modernize your outdated website with a fresh, conversion-focused design.</p><a href="<?=$site?>service/website-redesign-services/">Learn More</a></div></div>
+      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Monthly Maintenance</h3><p class="text-muted">Ongoing support, updates, security patches and performance monitoring.</p><a href="<?=$site?>service/website-maintenance/">Learn More</a></div></div>
     </div>
   </div>
 </section>
@@ -159,8 +160,8 @@ $rating = average_client_rating();
   <div class="container text-center">
     <h2 class="text-white fw-bold mb-3">Let's Build Something Great for <?= htmlspecialchars($c['city_name']) ?></h2>
     <p class="text-light mb-4">Free consultation. No obligation. Get a quote in <?= htmlspecialchars($c['currency']) ?> within 24 hours.</p>
-    <a href="/contact/" class="btn btn-warning btn-lg fw-bold me-3">Start a Project</a>
-    <a href="/portfolio/" class="btn btn-outline-light btn-lg">See My Work</a>
+    <a href="<?=$site?>/contact/" class="btn btn-warning btn-lg fw-bold me-3">Start a Project</a>
+    <a href="<?=$site?>/portfolio/" class="btn btn-outline-light btn-lg">See My Work</a>
   </div>
 </section>
 

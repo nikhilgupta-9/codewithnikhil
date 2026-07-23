@@ -53,13 +53,35 @@ $services = get_sub_category($limit);
                   </ul>
                 </li>
 
+                <li><a href="<?=$site?>hire-freelance-web-developer/">Locations <i class="fa-solid fa-angle-down"></i></a>
+                  <ul class="dropdown-padding">
+                    <li><a href="<?= $site ?>web-developer-usa/">USA</a></li>
+                    <li><a href="<?= $site ?>web-developer-uk/">United Kingdom</a></li>
+                    <li><a href="<?= $site ?>web-developer-india/">India</a></li>
+                    <li><a href="<?= $site ?>web-developer-canada/">Canada</a></li>
+                    <li><a href="<?= $site ?>web-developer-australia/">Australia</a></li>
+                    <li><a href="<?= $site ?>web-developer-dubai/">UAE</a></li>
+                    <li><a href="<?= $site ?>web-developer-new-zealand/">New Zealand</a></li>
+                    <li><a href="<?= $site ?>web-developer-germany/">Germany</a></li>
+                    <li><a href="<?= $site ?>web-developer-singapore/">Singapore</a></li>
+                    <li><a href="<?= $site ?>hire-freelance-web-developer/">View All Locations</a></li>
+                  </ul>
+                </li>
+                <li><a href="<?=$site?>healthcare-website-design-usa/">Industries <i class="fa-solid fa-angle-down"></i></a>
+                  <ul class="dropdown-padding">
+                    <li><a href="<?= $site ?>healthcare-website-design-usa/">Healthcare</a></li>
+                    <li><a href="<?= $site ?>real-estate-website-design-usa/">Real Estate</a></li>
+                    <li><a href="<?= $site ?>junk-car-website-design-usa/">Junk Car Buyers</a></li>
+                    <li><a href="<?= $site ?>book-website-design-usa/">Books & Publishers</a></li>
+                  </ul>
+                </li>
                 <li><a href="<?= $site ?>portfolio/">Portfolio</a></li>
-                <li><a href="<?= $site ?>blogs/">Blogs</a></li>
-                <li><a href="<?= $site ?>testimonials/">Testimonials</a></li>
-                <li><a href="<?=$site?>pricing/">Pricing Plan</a>
+                <!-- <li><a href="<?= $site ?>blogs/">Blogs</a></li>
+                <li><a href="<?= $site ?>testimonials/">Testimonials</a></li> -->
+                <!-- <li><a href="<?=$site?>pricing/">Pricing Plan</a>
 
                 </li>
-                <li><a href="<?= $site ?>contact/">Contact Us</a></li>
+                <li><a href="<?= $site ?>contact/">Contact Us</a></li> -->
               </ul>
             </div>
 
@@ -116,6 +138,28 @@ $services = get_sub_category($limit);
           ?>
         </ul>
       </li>
+      <li><a href="<?= $site ?>hire-freelance-web-developer/">Locations</a>
+        <ul class="sub-menu">
+          <li><a href="<?= $site ?>web-developer-usa/">USA</a></li>
+          <li><a href="<?= $site ?>web-developer-uk/">United Kingdom</a></li>
+          <li><a href="<?= $site ?>web-developer-india/">India</a></li>
+          <li><a href="<?= $site ?>web-developer-canada/">Canada</a></li>
+          <li><a href="<?= $site ?>web-developer-australia/">Australia</a></li>
+          <li><a href="<?= $site ?>web-developer-dubai/">UAE</a></li>
+          <li><a href="<?= $site ?>web-developer-new-zealand/">New Zealand</a></li>
+          <li><a href="<?= $site ?>web-developer-germany/">Germany</a></li>
+          <li><a href="<?= $site ?>web-developer-singapore/">Singapore</a></li>
+          <li><a href="<?= $site ?>hire-freelance-web-developer/">View All Locations</a></li>
+        </ul>
+      </li>
+      <li><a href="<?= $site ?>healthcare-website-design-usa/">Industries</a>
+        <ul class="sub-menu">
+          <li><a href="<?= $site ?>healthcare-website-design-usa/">Healthcare</a></li>
+          <li><a href="<?= $site ?>real-estate-website-design-usa/">Real Estate</a></li>
+          <li><a href="<?= $site ?>junk-car-website-design-usa/">Junk Car Buyers</a></li>
+          <li><a href="<?= $site ?>book-website-design-usa/">Books & Publishers</a></li>
+        </ul>
+      </li>
       <li><a href="<?= $site ?>blogs/">Blogs</a></li>
       <li><a href="<?= $site ?>portfolio/">Portfolio</a></li>
       <li><a href="<?= $site ?>testimonials/">Testimonials</a></li>
@@ -157,8 +201,7 @@ $services = get_sub_category($limit);
                 <i class="fa-solid fa-location-dot"></i>
               </div>
               <div class="contact-info-text">
-                <a href="mailto:contact@nikhilworks.com">Karampura, Delhi
-                  States</a>
+                <a href="<?= $site ?>contact/">Karampura, New Delhi, India</a>
               </div>
             </div>
 

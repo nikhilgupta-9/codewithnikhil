@@ -2,7 +2,9 @@
 include_once "config/connect.php";
 include_once "util/function.php";
 
+$cityPages = include __DIR__ . '/data/services-crm-cities.php';
 $pages = include __DIR__ . '/data/services-crm.php';
+$pages += $cityPages;
 $page = $_GET['slug'] ?? '';
 
 if (!isset($pages[$page])) {
@@ -11,6 +13,8 @@ if (!isset($pages[$page])) {
 }
 
 $c = $pages[$page];
+$maintenanceSlugs = ['US' => 'website-maintenance-usa/', 'GB' => 'website-maintenance-uk/', 'IN' => 'website-maintenance-india/', 'AE' => 'website-maintenance-uae/', 'CA' => 'website-maintenance-canada/', 'AU' => 'website-maintenance-australia/'];
+$maintenanceLink = $maintenanceSlugs[$c['schema_country']] ?? 'services/';
 $projectCount = count_portfolio_projects();
 $yearsExperience = years_in_business(2021);
 $rating = average_client_rating();
@@ -53,7 +57,7 @@ $rating = average_client_rating();
 <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
 <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
 </head>
-<body>
+<body class="homepage4-body">
 <?php include_once "includes/header.php" ?>
 
 <section style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);padding:120px 0 80px;">
@@ -83,30 +87,40 @@ $rating = average_client_rating();
 
 <section class="py-5">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="fw-bold">Why Build a Custom CRM Instead of Buying One?</h2>
-      <p class="text-muted">Off-the-shelf CRMs force your team to adapt to their workflow. A custom CRM adapts to yours.</p>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card border-0 shadow-sm p-4 h-100 text-center">
-          <div style="font-size:3rem;">&#128200;</div>
-          <h3 class="h5 fw-bold mt-3">Matches Your Sales Process</h3>
-          <p class="text-muted">No forcing your pipeline into someone else's stages, fields and terminology.</p>
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
+          <img src="<?= $site ?>assets/img/all-images/about-img6.png" alt="Custom CRM development for <?= htmlspecialchars($c['country_name']) ?> businesses" style="width:100%;display:block;">
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card border-0 shadow-sm p-4 h-100 text-center">
-          <div style="font-size:3rem;">&#128279;</div>
-          <h3 class="h5 fw-bold mt-3">Connects to Your Stack</h3>
-          <p class="text-muted">Integrates with your website, WhatsApp, email, payment gateway and existing tools instead of living in a silo.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card border-0 shadow-sm p-4 h-100 text-center">
-          <div style="font-size:3rem;">&#128176;</div>
-          <h3 class="h5 fw-bold mt-3">No Per-Seat Licensing</h3>
-          <p class="text-muted">Pay once for the build instead of monthly per-user fees that scale against you as you grow.</p>
+      <div class="col-lg-6">
+        <h2 class="fw-bold mb-3">Why Build a Custom CRM Instead of Buying One?</h2>
+        <p class="text-muted mb-4">Off-the-shelf CRMs force your team to adapt to their workflow — new fields, unfamiliar terminology, features you'll never use. A custom CRM works the other way around: it's shaped by how your sales team actually operates, and it connects directly to the tools you already use instead of sitting in its own silo.</p>
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="fa-solid fa-diagram-project text-warning mt-1"></i>
+              <span>Matches Your Sales Process</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="fa-solid fa-link text-warning mt-1"></i>
+              <span>Connects to Your Stack</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="fa-solid fa-sack-dollar text-warning mt-1"></i>
+              <span>No Per-Seat Licensing</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="fa-solid fa-database text-warning mt-1"></i>
+              <span>You Own Your Data</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -117,14 +131,155 @@ $rating = average_client_rating();
   <div class="container">
     <div class="text-center mb-5">
       <h2 class="fw-bold">What's Included</h2>
+      <p class="text-muted">Everything needed to run your sales process from one system</p>
     </div>
     <div class="row g-4">
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Custom CRM Build</h3><p class="text-muted">Lead capture, pipeline stages, contact management and reporting built around your process.</p></div></div>
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Zoho / HubSpot / Salesforce Customization</h3><p class="text-muted">Custom modules, fields, workflows and third-party integrations on top of the CRM you already use.</p></div></div>
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Data Migration</h3><p class="text-muted">Clean migration from spreadsheets or a legacy CRM with no lost records.</p></div></div>
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Workflow Automation</h3><p class="text-muted">Automatic follow-up reminders, lead assignment and status updates so nothing falls through.</p></div></div>
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Dashboards & Reporting</h3><p class="text-muted">Real-time visibility into pipeline value, conversion rates and team performance.</p></div></div>
-      <div class="col-md-4"><div class="card border-0 shadow-sm p-4 h-100"><h3 class="h5 fw-bold">Ongoing Support</h3><p class="text-muted">Bug fixes, new modules and adjustments as your sales process evolves.</p></div></div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-solid fa-layer-group fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>Custom CRM Build</h3>
+          <p class="service-tagline">BUILT AROUND YOUR PROCESS</p>
+          <p class="service-description">Lead capture, pipeline stages, contact management and reporting built around how you actually sell.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Custom pipeline stages</li>
+            <li><i class="fa-solid fa-check"></i> Contact & deal tracking</li>
+            <li><i class="fa-solid fa-check"></i> Built-in reporting</li>
+          </ul>
+          <div class="service-cta"><a href="<?= $site ?>contact/" class="btn-service">Get Quote</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-solid fa-puzzle-piece fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>Zoho / HubSpot / Salesforce Customization</h3>
+          <p class="service-tagline">EXTEND WHAT YOU ALREADY USE</p>
+          <p class="service-description">Custom modules, fields, workflows and third-party integrations on top of your existing CRM.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Custom modules & fields</li>
+            <li><i class="fa-solid fa-check"></i> Third-party integrations</li>
+            <li><i class="fa-solid fa-check"></i> Workflow automation</li>
+          </ul>
+          <div class="service-cta"><a href="<?= $site ?>contact/" class="btn-service">Get Quote</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-solid fa-file-import fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>Data Migration</h3>
+          <p class="service-tagline">NO LOST RECORDS</p>
+          <p class="service-description">Clean migration from spreadsheets or a legacy CRM, verified record by record.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Spreadsheet/CSV import</li>
+            <li><i class="fa-solid fa-check"></i> Legacy CRM migration</li>
+            <li><i class="fa-solid fa-check"></i> Data validation</li>
+          </ul>
+          <div class="service-cta"><a href="<?= $site ?>contact/" class="btn-service">Get Quote</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-solid fa-robot fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>Workflow Automation</h3>
+          <p class="service-tagline">NOTHING FALLS THROUGH</p>
+          <p class="service-description">Automatic follow-up reminders, lead assignment and status updates on autopilot.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Follow-up reminders</li>
+            <li><i class="fa-solid fa-check"></i> Auto lead assignment</li>
+            <li><i class="fa-solid fa-check"></i> Status update triggers</li>
+          </ul>
+          <div class="service-cta"><a href="<?= $site ?>contact/" class="btn-service">Get Quote</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-solid fa-chart-line fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>Dashboards & Reporting</h3>
+          <p class="service-tagline">SEE WHAT'S ACTUALLY HAPPENING</p>
+          <p class="service-description">Real-time visibility into pipeline value, conversion rates and team performance.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Pipeline value tracking</li>
+            <li><i class="fa-solid fa-check"></i> Conversion rate reports</li>
+            <li><i class="fa-solid fa-check"></i> Team performance views</li>
+          </ul>
+          <div class="service-cta"><a href="<?= $site ?>contact/" class="btn-service">Get Quote</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-solid fa-shield-halved fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>Ongoing Support</h3>
+          <p class="service-tagline">GROWS WITH YOUR PROCESS</p>
+          <p class="service-description">Bug fixes, new modules and adjustments as your sales process evolves over time.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Bug fixes</li>
+            <li><i class="fa-solid fa-check"></i> New module builds</li>
+            <li><i class="fa-solid fa-check"></i> Process adjustments</li>
+          </ul>
+          <div class="service-cta"><a href="<?= $site ?>contact/" class="btn-service">Get Quote</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Frequently Asked Questions</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="accordion" id="crmFaq">
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#crm1">Should we build a custom CRM or customize Zoho/HubSpot/Salesforce?</button></h3>
+            <div id="crm1" class="accordion-collapse collapse show" data-bs-parent="#crmFaq">
+              <div class="accordion-body">If your team already uses one of these and mostly just needs custom fields, modules or integrations, customization is usually faster and cheaper. A fully custom build makes more sense when your process doesn't fit any existing CRM's structure, or you want to avoid ongoing per-seat licensing entirely.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crm2">Can the CRM integrate with our website and WhatsApp?</button></h3>
+            <div id="crm2" class="accordion-collapse collapse" data-bs-parent="#crmFaq">
+              <div class="accordion-body">Yes — connecting your website's lead forms, WhatsApp Business, email and payment gateway directly to the CRM is one of the most common requests, so leads land in the pipeline automatically instead of getting lost in inboxes.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crm3">How long does a CRM build take?</button></h3>
+            <div id="crm3" class="accordion-collapse collapse" data-bs-parent="#crmFaq">
+              <div class="accordion-body">A focused CRM customization typically takes 2-4 weeks. A fully custom CRM build ranges 4-10 weeks depending on how many modules, integrations and automations are involved.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crm4">Do you handle data migration from our current system?</button></h3>
+            <div id="crm4" class="accordion-collapse collapse" data-bs-parent="#crmFaq">
+              <div class="accordion-body">Yes — whether your data currently lives in spreadsheets or another CRM, we migrate and validate it as part of the build so you don't lose records in the switch.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crm5">What does CRM development typically cost?</button></h3>
+            <div id="crm5" class="accordion-collapse collapse" data-bs-parent="#crmFaq">
+              <div class="accordion-body">For <?= htmlspecialchars($c['country_name']) ?>, typical projects range <?= htmlspecialchars($c['price_range']) ?>, depending on scope — a light customization sits at the lower end, a fully custom CRM with automations and integrations at the higher end. You'll get a fixed-scope quote before any work starts.</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

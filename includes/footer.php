@@ -36,10 +36,10 @@
     <div class="row">
 
       <!-- About -->
-      <div class="col-lg-3 col-md-6">
+      <div class="col-lg-2 col-md-6">
         <div class="footer-logo-area">
           <h2 class="logo_header my-2">NikhilWorks</h2>
-          <p class="my-2">I am Nikhil Gupta, a passionate Web Developer specializing in MERN stack, PHP, Laravel, and modern web technologies to deliver powerful and user-friendly applications.</p>
+          <p class="my-2">Nikhil Gupta — web development, CRM, SEO and digital marketing for businesses across India, USA, UK, Canada, Australia, UAE and beyond.</p>
           <ul class="social-links" style="display: flex; gap: 12px; list-style: none; padding: 0; margin: 0;">
             <li>
               <a href="<?= $contact['facebook'] ?>" target="_blank" style="color: #104041; font-size: 22px;">
@@ -61,6 +61,10 @@
                 <i class="fab fa-twitter"></i>
               </a>
             </li>
+            
+          </ul>
+
+          <ul>
             <?php if (!empty($contact['github'])): ?>
             <li>
               <a href="<?= $contact['github'] ?>" target="_blank" style="color: #104041; font-size: 22px;">
@@ -68,7 +72,7 @@
               </a>
             </li>
             <?php endif; ?>
-            <br>
+          
             
             <?php if (!empty($contact['google_review'])): ?>
             <li>
@@ -93,6 +97,23 @@
             <li><a href="<?= $site ?>portfolio/">Projects</a></li>
             <li><a href="<?= $site ?>blogs/">Blog</a></li>
             <li><a href="<?= $site ?>contact/">Contact</a></li>
+            <li><a href="<?= $site ?>pricing/">Pricing Plan</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- We Serve (Locations & Industries) -->
+      <div class="col-lg-2 col-md-6">
+        <div class="footer-logo-area1">
+          <h3>We Serve</h3>
+          <ul>
+            <li><a href="<?= $site ?>web-developer-usa/">USA</a></li>
+            <li><a href="<?= $site ?>web-developer-uk/">United Kingdom</a></li>
+            <li><a href="<?= $site ?>web-developer-india/">India</a></li>
+            <li><a href="<?= $site ?>web-developer-canada/">Canada</a></li>
+            <li><a href="<?= $site ?>web-developer-australia/">Australia</a></li>
+            <li><a href="<?= $site ?>web-developer-dubai/">UAE</a></li>
+            <li><a href="<?= $site ?>hire-freelance-web-developer/">+ More Countries</a></li>
           </ul>
         </div>
       </div>
@@ -131,7 +152,7 @@
       </div>
 
       <!-- Newsletter -->
-      <div class="col-lg-4 col-md-6">
+      <div class="col-lg-3 col-md-6">
         <div class="footer-logo-area3">
           <h3>Subscribe to Updates</h3>
           <form action="#">
@@ -143,7 +164,7 @@
       </div>
 
     </div>
-    <div class="space80 d-lg-block d-none"></div>
+    <div class="space40 d-lg-block d-none"></div>
     <div class="space40 d-lg-none d-block"></div>
 
     <!-- Copyright -->

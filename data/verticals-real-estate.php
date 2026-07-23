@@ -1,0 +1,58 @@
+<?php
+// Data for vertical-real-estate.php -- real estate website design, by country.
+// To add a new country: add one entry here. No .htaccess change needed --
+// vertical-real-estate.php is routed via a generic ^real-estate-website-design-([a-z-]+)/?$ rule.
+return [
+  'real-estate-website-design-usa' => [
+    'title' => 'Real Estate Website Design in USA | IDX & Listings Websites - NikhilWorks',
+    'h1' => 'Real Estate Website Design for USA Agents & Brokers',
+    'description' => 'Real estate website design for USA agents, brokers and property management companies. IDX/MLS listing integration, property search, lead capture and mobile-first design.',
+    'keywords' => 'real estate website design usa, realtor website design usa, idx website usa, property listing website usa, real estate agent website usa',
+    'canonical' => 'https://nikhilworks.com/real-estate-website-design-usa/',
+    'hero_sub' => 'Listings that load fast, search that works, leads that convert.',
+    'country_name' => 'USA',
+    'currency' => 'USD',
+    'price_range' => 'USD 400 - 10,000',
+    'flag' => 'USA',
+    'schema_country' => 'US',
+  ],
+  'real-estate-website-design-uk' => [
+    'title' => 'Real Estate Website Design in UK | Property Listings Websites - NikhilWorks',
+    'h1' => 'Property Website Design for UK Agents & Agencies',
+    'description' => 'Property website design for UK estate agents and letting agencies. Rightmove/Zoopla-style listing search, lead capture forms and mobile-first design.',
+    'keywords' => 'real estate website design uk, estate agent website design uk, property website design uk, letting agency website uk, property listing website uk',
+    'canonical' => 'https://nikhilworks.com/real-estate-website-design-uk/',
+    'hero_sub' => 'Listings that load fast, search that works, leads that convert.',
+    'country_name' => 'United Kingdom',
+    'currency' => 'GBP',
+    'price_range' => 'GBP 300 - 8,000',
+    'flag' => 'UK',
+    'schema_country' => 'GB',
+  ],
+  'real-estate-website-design-canada' => [
+    'title' => 'Real Estate Website Design in Canada | IDX & Listings Websites - NikhilWorks',
+    'h1' => 'Real Estate Website Design for Canadian Agents & Brokers',
+    'description' => 'Real estate website design for Canadian agents, brokers and property management companies. IDX/MLS listing integration, property search, lead capture and mobile-first design.',
+    'keywords' => 'real estate website design canada, realtor website design canada, idx website canada, property listing website canada, real estate agent website canada',
+    'canonical' => 'https://nikhilworks.com/real-estate-website-design-canada/',
+    'hero_sub' => 'Listings that load fast, search that works, leads that convert.',
+    'country_name' => 'Canada',
+    'currency' => 'CAD',
+    'price_range' => 'CAD 500 - 12,000',
+    'flag' => 'Canada',
+    'schema_country' => 'CA',
+  ],
+  'real-estate-website-design-uae' => [
+    'title' => 'Real Estate Website Design in UAE | Property Listings Websites - NikhilWorks',
+    'h1' => 'Real Estate Website Design for UAE Agents & Developers',
+    'description' => 'Real estate website design for UAE agents, brokers and property developers. Property Finder-style listing search, lead capture forms and mobile-first design for Dubai and beyond.',
+    'keywords' => 'real estate website design uae, real estate website design dubai, property website design uae, property listing website dubai, real estate agent website uae',
+    'canonical' => 'https://nikhilworks.com/real-estate-website-design-uae/',
+    'hero_sub' => 'Listings that load fast, search that works, leads that convert.',
+    'country_name' => 'UAE',
+    'currency' => 'AED',
+    'price_range' => 'AED 2,000 - 80,000',
+    'flag' => 'UAE',
+    'schema_country' => 'AE',
+  ],
+];

@@ -2,10 +2,6 @@
 /vendor/
 /composer.phar
 
-# Uploaded files and dynamic content
-/uploads/
-/admin/uploads/
-/uploads/*
 
 # Environment and config
 /config/connect.php

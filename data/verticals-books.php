@@ -1,0 +1,58 @@
+<?php
+// Data for vertical-books.php -- bookstore/author/publisher website design, by country.
+// To add a new country: add one entry here. No .htaccess change needed --
+// vertical-books.php is routed via a generic ^book-website-design-([a-z-]+)/?$ rule.
+return [
+  'book-website-design-usa' => [
+    'title' => 'Book & Bookstore Website Design in USA | Author & Publisher Sites - NikhilWorks',
+    'h1' => 'Website Design for Authors, Publishers & Bookstores in USA',
+    'description' => 'Website design for authors, publishers and independent bookstores in the USA. Online catalogs, e-commerce checkout, book previews and author landing pages built to sell.',
+    'keywords' => 'book website design usa, bookstore website design usa, author website design usa, publisher website design usa, online bookstore website usa',
+    'canonical' => 'https://nikhilworks.com/book-website-design-usa/',
+    'hero_sub' => 'A website that sells your books, not just lists them.',
+    'country_name' => 'USA',
+    'currency' => 'USD',
+    'price_range' => 'USD 300 - 7,000',
+    'flag' => 'USA',
+    'schema_country' => 'US',
+  ],
+  'book-website-design-china' => [
+    'title' => 'Book & Bookstore Website Design in China | Author & Publisher Sites - NikhilWorks',
+    'h1' => 'Website Design for Authors, Publishers & Bookstores in China',
+    'description' => 'Website design for authors, publishers and bookstores serving the China market. Bilingual-ready catalogs, e-commerce checkout and author landing pages built to sell.',
+    'keywords' => 'book website design china, bookstore website design china, author website design china, publisher website design china, online bookstore website china',
+    'canonical' => 'https://nikhilworks.com/book-website-design-china/',
+    'hero_sub' => 'A website that sells your books, not just lists them.',
+    'country_name' => 'China',
+    'currency' => 'CNY',
+    'price_range' => 'CNY 2,000 - 45,000',
+    'flag' => 'China',
+    'schema_country' => 'CN',
+  ],
+  'book-website-design-uk' => [
+    'title' => 'Book & Bookstore Website Design in UK | Author & Publisher Sites - NikhilWorks',
+    'h1' => 'Website Design for Authors, Publishers & Bookstores in UK',
+    'description' => 'Website design for authors, publishers and independent bookstores in the UK. Online catalogs, e-commerce checkout, book previews and author landing pages built to sell.',
+    'keywords' => 'book website design uk, bookstore website design uk, author website design uk, publisher website design uk, online bookstore website uk',
+    'canonical' => 'https://nikhilworks.com/book-website-design-uk/',
+    'hero_sub' => 'A website that sells your books, not just lists them.',
+    'country_name' => 'United Kingdom',
+    'currency' => 'GBP',
+    'price_range' => 'GBP 250 - 5,500',
+    'flag' => 'UK',
+    'schema_country' => 'GB',
+  ],
+  'book-website-design-germany' => [
+    'title' => 'Book & Bookstore Website Design in Germany | Author & Publisher Sites - NikhilWorks',
+    'h1' => 'Website Design for Authors, Publishers & Bookstores in Germany',
+    'description' => 'Website design for authors, publishers and independent bookstores in Germany. Online catalogs, e-commerce checkout, book previews and author landing pages built to sell.',
+    'keywords' => 'book website design germany, bookstore website design germany, author website design germany, publisher website design germany, online bookstore website germany',
+    'canonical' => 'https://nikhilworks.com/book-website-design-germany/',
+    'hero_sub' => 'A website that sells your books, not just lists them.',
+    'country_name' => 'Germany',
+    'currency' => 'EUR',
+    'price_range' => 'EUR 250 - 6,000',
+    'flag' => 'Germany',
+    'schema_country' => 'DE',
+  ],
+];

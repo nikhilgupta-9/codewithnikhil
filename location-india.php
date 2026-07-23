@@ -59,7 +59,8 @@ $rating = average_client_rating();
 <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
 <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
 </head>
-<body>
+<body class="homepage4-body">
+
 <?php include_once "includes/header.php" ?>
 
 <section style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);padding:120px 0 80px;">
@@ -88,17 +89,146 @@ $rating = average_client_rating();
 
 <section class="py-5">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="fw-bold">Services for <?= htmlspecialchars($c['city_name']) ?> Businesses</h2>
-      <p class="text-muted">Everything you need to succeed online</p>
+    <div class="row align-items-center g-5 mb-5">
+      <div class="col-lg-6">
+        <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
+          <img src="<?= $site ?>assets/img/all-images/about-img6.png" alt="Web developer for <?= htmlspecialchars($c['city_name']) ?> businesses" style="width:100%;display:block;">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h2 class="fw-bold mb-3">Everything You Need to Succeed Online</h2>
+        <p class="text-muted mb-4">Most <?= htmlspecialchars($c['city_name']) ?> businesses don't need a dozen vendors — one developer who can handle design, development, SEO and ongoing support end to end is faster and cheaper than coordinating between an agency, a freelancer and a marketing consultant separately.</p>
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="fa-solid fa-code text-primary mt-1"></i>
+              <span>Custom Website Design</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="fa-solid fa-magnifying-glass text-primary mt-1"></i>
+              <span>SEO Services</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="fa-solid fa-cart-shopping text-primary mt-1"></i>
+              <span>E-Commerce Development</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="fa-solid fa-shield-halved text-primary mt-1"></i>
+              <span>Ongoing Maintenance</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row g-4">
-      <div class="col-md-4"><div class="card h-100 shadow-sm border-0 p-4"><div style="font-size:2.5rem;">&#128187;</div><h3 class="h5 fw-bold mt-3">Website Design</h3><p class="text-muted">Custom, responsive websites tailored to your business needs.</p><a href="/service/website-design-development/" class="text-primary fw-bold">Learn More</a></div></div>
-      <div class="col-md-4"><div class="card h-100 shadow-sm border-0 p-4"><div style="font-size:2.5rem;">&#128269;</div><h3 class="h5 fw-bold mt-3">SEO Services</h3><p class="text-muted">Rank higher on Google and get more organic traffic from <?= htmlspecialchars($c['city_name']) ?>.</p><a href="/service/search-engine-optimization/" class="text-primary fw-bold">Learn More</a></div></div>
-      <div class="col-md-4"><div class="card h-100 shadow-sm border-0 p-4"><div style="font-size:2.5rem;">&#128722;</div><h3 class="h5 fw-bold mt-3">E-Commerce</h3><p class="text-muted">Launch your online store with payment gateway integration.</p><a href="/service/e-commerce-website-development/" class="text-primary fw-bold">Learn More</a></div></div>
-      <div class="col-md-4"><div class="card h-100 shadow-sm border-0 p-4"><div style="font-size:2.5rem;">&#128241;</div><h3 class="h5 fw-bold mt-3">WordPress</h3><p class="text-muted">Professional WordPress websites with custom themes and plugins.</p><a href="/service/wordpress-website-development/" class="text-primary fw-bold">Learn More</a></div></div>
-      <div class="col-md-4"><div class="card h-100 shadow-sm border-0 p-4"><div style="font-size:2.5rem;">&#128226;</div><h3 class="h5 fw-bold mt-3">Social Media Marketing</h3><p class="text-muted">Grow your brand on Instagram, Facebook and LinkedIn.</p><a href="/service/social-media-marketing/" class="text-primary fw-bold">Learn More</a></div></div>
-      <div class="col-md-4"><div class="card h-100 shadow-sm border-0 p-4"><div style="font-size:2.5rem;">&#9881;</div><h3 class="h5 fw-bold mt-3">Website Maintenance</h3><p class="text-muted">Keep your website secure, updated and running smoothly.</p><a href="/service/website-maintenance/" class="text-primary fw-bold">Learn More</a></div></div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-solid fa-code fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>Website Design</h3>
+          <p class="service-tagline">TAILORED TO YOUR BUSINESS</p>
+          <p class="service-description">Custom, responsive websites tailored to your business needs, not a generic template.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Responsive design</li>
+            <li><i class="fa-solid fa-check"></i> Fast loading speed</li>
+            <li><i class="fa-solid fa-check"></i> SEO optimized</li>
+          </ul>
+          <div class="service-cta"><a href="/service/website-design-development/" class="btn-service">Learn More</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-solid fa-magnifying-glass fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>SEO Services</h3>
+          <p class="service-tagline">RANK HIGHER, LOCALLY</p>
+          <p class="service-description">Rank higher on Google and get more organic traffic from <?= htmlspecialchars($c['city_name']) ?>.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Keyword research</li>
+            <li><i class="fa-solid fa-check"></i> Local SEO</li>
+            <li><i class="fa-solid fa-check"></i> Monthly reporting</li>
+          </ul>
+          <div class="service-cta"><a href="/service/search-engine-optimization/" class="btn-service">Learn More</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-solid fa-cart-shopping fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>E-Commerce</h3>
+          <p class="service-tagline">LAUNCH YOUR ONLINE STORE</p>
+          <p class="service-description">Launch your online store with secure payment gateway integration.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Secure checkout</li>
+            <li><i class="fa-solid fa-check"></i> Inventory management</li>
+            <li><i class="fa-solid fa-check"></i> Order tracking</li>
+          </ul>
+          <div class="service-cta"><a href="/service/e-commerce-website-development/" class="btn-service">Learn More</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-brands fa-wordpress fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>WordPress</h3>
+          <p class="service-tagline">EASY TO MANAGE</p>
+          <p class="service-description">Professional WordPress websites with custom themes and plugins.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Custom theme development</li>
+            <li><i class="fa-solid fa-check"></i> Plugin customization</li>
+            <li><i class="fa-solid fa-check"></i> WooCommerce stores</li>
+          </ul>
+          <div class="service-cta"><a href="/service/wordpress-website-development/" class="btn-service">Learn More</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-solid fa-bullhorn fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>Social Media Marketing</h3>
+          <p class="service-tagline">GROW YOUR BRAND</p>
+          <p class="service-description">Grow your brand on Instagram, Facebook and LinkedIn with strategic content and ads.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Content strategy</li>
+            <li><i class="fa-solid fa-check"></i> Paid ad management</li>
+            <li><i class="fa-solid fa-check"></i> Audience targeting</li>
+          </ul>
+          <div class="service-cta"><a href="/service/social-media-marketing/" class="btn-service">Learn More</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-icon"><i class="fa-solid fa-shield-halved fa-2x"></i></div>
+            <div class="service-experience"><span>Since 2021</span></div>
+          </div>
+          <h3>Website Maintenance</h3>
+          <p class="service-tagline">STAYS SECURE AND FAST</p>
+          <p class="service-description">Keep your website secure, updated and running smoothly after launch.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Security patches</li>
+            <li><i class="fa-solid fa-check"></i> Daily backups</li>
+            <li><i class="fa-solid fa-check"></i> Uptime monitoring</li>
+          </ul>
+          <div class="service-cta"><a href="/website-maintenance-india/" class="btn-service">Learn More</a></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -124,6 +254,50 @@ $rating = average_client_rating();
           <div class="col-6"><div class="card border-0 shadow-sm text-center p-4"><div style="font-size:2.5rem;font-weight:800;color:#0d6efd;"><?= $yearsExperience ?>+</div><small class="text-muted">Years Experience</small></div></div>
           <div class="col-6"><div class="card border-0 shadow-sm text-center p-4"><div style="font-size:2.5rem;font-weight:800;color:#0d6efd;"><?= $projectCount ?>+</div><small class="text-muted">Happy Clients</small></div></div>
           <div class="col-6"><div class="card border-0 shadow-sm text-center p-4"><div style="font-size:2.5rem;font-weight:800;color:#0d6efd;">&lt;24 Hrs</div><small class="text-muted">Avg. Response Time</small></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Frequently Asked Questions</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="accordion" id="indiaCityFaq">
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#ic1">Do you work with clients outside <?= htmlspecialchars($c['city_name']) ?> too?</button></h3>
+            <div id="ic1" class="accordion-collapse collapse show" data-bs-parent="#indiaCityFaq">
+              <div class="accordion-body">Yes — most of the work happens remotely over video calls, WhatsApp and email, so location isn't a constraint. In-person meetings can be arranged where practical.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ic2">How much does a website cost?</button></h3>
+            <div id="ic2" class="accordion-collapse collapse" data-bs-parent="#indiaCityFaq">
+              <div class="accordion-body">Direct freelancer rates start at ₹7,999 for a basic business website, with pricing scaling based on pages, features and e-commerce needs. See our <a href="/website-development-cost-india/">website development cost guide</a> for a full breakdown, or get a fixed-scope quote for your specific project.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ic3">How long does a project take?</button></h3>
+            <div id="ic3" class="accordion-collapse collapse" data-bs-parent="#indiaCityFaq">
+              <div class="accordion-body">Most business websites are delivered in 7-21 days. E-commerce stores and custom applications typically take longer, with a specific timeline confirmed at the quote stage.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ic4">What happens after the website launches?</button></h3>
+            <div id="ic4" class="accordion-collapse collapse" data-bs-parent="#indiaCityFaq">
+              <div class="accordion-body">Every project includes 3 months of free support after delivery. Beyond that, <a href="/website-maintenance-india/">ongoing maintenance plans</a> cover security patches, backups and updates.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ic5">Can you also help with SEO and marketing, not just the website?</button></h3>
+            <div id="ic5" class="accordion-collapse collapse" data-bs-parent="#indiaCityFaq">
+              <div class="accordion-body">Yes — <a href="/seo-services-india/">SEO</a>, social media marketing, CRM development and paid ads are all available alongside the website build or as standalone services.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

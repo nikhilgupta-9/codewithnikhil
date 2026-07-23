@@ -44,15 +44,29 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 # ============================================
 # Fix -- .php extension URLs redirect
+# THE_REQUEST guards check the browser's original raw request line, not the
+# internal rewrite target -- without them, the clean-URL rules below (e.g.
+# ^about/?$ -> about.php [L]) trigger a mod_rewrite per-directory restart that
+# re-matches these same rules against "about.php" and causes every clean URL
+# to redirect to itself on the production domain (breaks local testing too).
 # ============================================
+RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
 RewriteRule ^index\.php$ https://nikhilworks.com/ [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+about\.php[\s?] [NC]
 RewriteRule ^about\.php$ https://nikhilworks.com/about/ [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+blog\.php[\s?] [NC]
 RewriteRule ^blog\.php$ https://nikhilworks.com/blogs/ [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+contact\.php[\s?] [NC]
 RewriteRule ^contact\.php$ https://nikhilworks.com/contact/ [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+pricing\.php[\s?] [NC]
 RewriteRule ^pricing\.php$ https://nikhilworks.com/pricing/ [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+portfolio\.php[\s?] [NC]
 RewriteRule ^portfolio\.php$ https://nikhilworks.com/portfolio/ [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+services\.php[\s?] [NC]
 RewriteRule ^services\.php$ https://nikhilworks.com/services/ [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+privacy-policy\.php[\s?] [NC]
 RewriteRule ^privacy-policy\.php$ https://nikhilworks.com/privacy-policy/ [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+terms-and-conditions\.php[\s?] [NC]
 RewriteRule ^terms-and-conditions\.php$ https://nikhilworks.com/terms-and-conditions/ [R=301,L]
 
 # ============================================
@@ -81,7 +95,7 @@ RewriteRule ^service/([a-z0-9_-]+)/?$ service.php?alias=$1 [QSA,L]
 RewriteRule ^blog/([a-z0-9_-]+)/?$ blog-detail.php?alias=$1 [QSA,L]
 
 # India location pages
-RewriteRule ^(web-designer-delhi|web-developer-india|seo-services-india|freelance-web-developer-india|website-development-cost-india|web-developer-mumbai|web-developer-bangalore|web-developer-gurgaon|web-developer-noida|web-developer-hyderabad|web-developer-ahmedabad)/?$ location-india.php?page=$1 [QSA,L]
+RewriteRule ^(web-designer-delhi|web-developer-india|seo-services-india|freelance-web-developer-india|website-development-cost-india|web-developer-mumbai|web-developer-bangalore|web-developer-gurgaon|web-developer-noida|web-developer-hyderabad|web-developer-ahmedabad|web-developer-kolkata|web-developer-chennai|web-developer-pune|web-developer-lucknow|web-developer-kanpur|web-developer-jaipur|web-developer-chandigarh|web-developer-indore|web-developer-ludhiana|web-developer-varanasi|web-developer-bhopal|web-developer-surat|web-developer-vadodara|web-developer-nagpur|web-developer-rajkot|web-developer-coimbatore|web-developer-kochi|web-developer-visakhapatnam|web-developer-bhubaneswar|web-developer-patna)/?$ location-india.php?page=$1 [QSA,L]
 
 # International location pages
 RewriteRule ^(web-developer-dubai|web-developer-usa|web-developer-uk|web-developer-australia|hire-freelance-web-developer|web-developer-canada|web-developer-singapore|web-developer-new-zealand|web-developer-russia|web-developer-south-africa|web-developer-saudi-arabia|web-developer-switzerland|web-developer-germany)/?$ location-international.php?page=$1 [QSA,L]
@@ -91,6 +105,31 @@ RewriteRule ^(web-developer-[a-z-]+)/?$ location-city.php?slug=$1 [QSA,L]
 
 # CRM development service pages (data-driven -- add new countries in data/services-crm.php, no .htaccess change needed)
 RewriteRule ^(crm-development-[a-z-]+)/?$ service-crm.php?slug=$1 [QSA,L]
+
+# SEO service pages (data-driven -- add new countries in data/services-seo.php, no .htaccess change needed)
+# Note: seo-services-india is matched by the India location rule above and takes precedence.
+RewriteRule ^(seo-services-[a-z-]+)/?$ service-seo.php?slug=$1 [QSA,L]
+
+# Website maintenance service pages (data-driven -- add new countries in data/services-maintenance.php, no .htaccess change needed)
+RewriteRule ^(website-maintenance-[a-z-]+)/?$ service-maintenance.php?slug=$1 [QSA,L]
+
+# Website redesign service pages (data-driven -- add new countries in data/services-redesign.php, no .htaccess change needed)
+RewriteRule ^(website-redesign-[a-z-]+)/?$ service-redesign.php?slug=$1 [QSA,L]
+
+# Website auditing service pages (data-driven -- add new countries in data/services-auditing.php, no .htaccess change needed)
+RewriteRule ^(website-auditing-[a-z-]+)/?$ service-auditing.php?slug=$1 [QSA,L]
+
+# Keyword promotion service pages (data-driven -- add new countries in data/services-keyword-promotion.php, no .htaccess change needed)
+RewriteRule ^(keyword-promotion-[a-z-]+)/?$ service-keyword-promotion.php?slug=$1 [QSA,L]
+
+# Google & Meta ads management service pages (data-driven -- add new countries in data/services-ads.php, no .htaccess change needed)
+RewriteRule ^(ads-management-[a-z-]+)/?$ service-ads.php?slug=$1 [QSA,L]
+
+# Vertical/industry category pages (data-driven -- add new countries/cities in the relevant data/verticals-*.php file, no .htaccess change needed)
+RewriteRule ^(healthcare-website-design-[a-z-]+)/?$ vertical-healthcare.php?slug=$1 [QSA,L]
+RewriteRule ^(real-estate-website-design-[a-z-]+)/?$ vertical-real-estate.php?slug=$1 [QSA,L]
+RewriteRule ^(junk-car-website-design-[a-z-]+)/?$ vertical-junk-cars.php?slug=$1 [QSA,L]
+RewriteRule ^(book-website-design-[a-z-]+)/?$ vertical-books.php?slug=$1 [QSA,L]
 
 # ============================================
 # Fix -- Trailing slash canonicalization

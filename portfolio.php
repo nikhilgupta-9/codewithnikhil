@@ -594,6 +594,14 @@ $yearsExperience = years_in_business(2021);
                   <a href="<?= $imgPath ?>" class="image-popup" title="View Full Image">
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </a>
+                  <?php if (!empty($portfolio['slug_url']) && str_starts_with($portfolio['slug_url'], 'http')): ?>
+                    <a href="<?= htmlspecialchars($portfolio['slug_url']) ?>"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       title="Visit Live Site">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                  <?php endif; ?>
                   <?php if (!empty($portfolio['slug_url'])): ?>
                     <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20saw%20your%20portfolio%20project%20and%20I%27m%20interested%20in%20your%20services."
                        target="_blank"
