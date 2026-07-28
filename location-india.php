@@ -6,8 +6,15 @@ $page = $_GET['page'] ?? 'web-developer-india';
 $city = $_GET['city'] ?? 'india';
 
 $pages = include __DIR__ . '/data/locations-india.php';
+$content = include __DIR__ . '/data/locations-india-content.php';
 
-$c = $pages[$page] ?? $pages['web-developer-india'];
+if (!isset($pages[$page]) || !isset($content[$page])) {
+  include_once "404.php";
+  exit;
+}
+
+$c = $pages[$page];
+$u = $content[$page];
 $contact = contact_us();
 $projectCount = count_portfolio_projects();
 $yearsExperience = years_in_business(2021);
@@ -32,23 +39,34 @@ $rating = average_client_rating();
 <meta property="og:image" content="https://nikhilworks.com/assets/img/logo/logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "NikhilWorks",
-  "url": "https://nikhilworks.com",
-  "logo": "https://nikhilworks.com/assets/img/logo/logo.png",
-  "description": "<?= addslashes($c['description']) ?>",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "<?= $c['schema_city'] ?>",
-    "addressRegion": "<?= $c['schema_region'] ?>",
-    "addressCountry": "<?= $c['schema_country'] ?>"
-  },
-  "geo": {"@type": "GeoCoordinates","latitude": "<?= $c['lat'] ?>","longitude": "<?= $c['lng'] ?>"},
-  "areaServed": "<?= htmlspecialchars($c['city_name']) ?>",
-  "priceRange": "INR 5000 - 200000"
-}
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'ProfessionalService',
+  'name' => 'NikhilWorks',
+  'url' => 'https://nikhilworks.com',
+  'logo' => 'https://nikhilworks.com/assets/img/logo/logo.png',
+  'description' => $c['description'],
+  'address' => [
+    '@type' => 'PostalAddress',
+    'addressLocality' => $c['schema_city'],
+    'addressRegion' => $c['schema_region'],
+    'addressCountry' => $c['schema_country'],
+  ],
+  'geo' => ['@type' => 'GeoCoordinates', 'latitude' => $c['lat'], 'longitude' => $c['lng']],
+  'areaServed' => $c['city_name'],
+  'priceRange' => 'INR 5000 - 200000',
+], JSON_UNESCAPED_SLASHES) ?>
+</script>
+<script type="application/ld+json">
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'FAQPage',
+  'mainEntity' => array_map(fn($faq) => [
+    '@type' => 'Question',
+    'name' => $faq['q'],
+    'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq['a']],
+  ], $u['faqs']),
+], JSON_UNESCAPED_SLASHES) ?>
 </script>
 <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
@@ -87,18 +105,20 @@ $rating = average_client_rating();
   </div>
 </section>
 
-<section class="py-5">
+<section class="py-5<?= $u['layout'] === 'B' ? ' bg-light' : '' ?>">
   <div class="container">
     <div class="row align-items-center g-5 mb-5">
-      <div class="col-lg-6">
+      <div class="col-lg-6<?= $u['layout'] === 'B' ? ' order-lg-2' : '' ?>">
         <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
           <img src="<?= $site ?>assets/img/all-images/about-img6.png" alt="Web developer for <?= htmlspecialchars($c['city_name']) ?> businesses" style="width:100%;display:block;">
         </div>
       </div>
-      <div class="col-lg-6">
-        <h2 class="fw-bold mb-3">Everything You Need to Succeed Online</h2>
-        <p class="text-muted mb-4">Most <?= htmlspecialchars($c['city_name']) ?> businesses don't need a dozen vendors — one developer who can handle design, development, SEO and ongoing support end to end is faster and cheaper than coordinating between an agency, a freelancer and a marketing consultant separately.</p>
-        <div class="row g-3">
+      <div class="col-lg-6<?= $u['layout'] === 'B' ? ' order-lg-1' : '' ?>">
+        <h2 class="fw-bold mb-3"><?= htmlspecialchars($u['intro_heading']) ?></h2>
+        <?php foreach ($u['intro'] as $para): ?>
+        <p class="text-muted mb-3"><?= htmlspecialchars($para) ?></p>
+        <?php endforeach; ?>
+        <div class="row g-3 mt-2">
           <div class="col-6">
             <div class="d-flex align-items-start gap-2">
               <i class="fa-solid fa-code text-primary mt-1"></i>
@@ -268,33 +288,21 @@ $rating = average_client_rating();
     <div class="row justify-content-center">
       <div class="col-lg-9">
         <div class="accordion" id="indiaCityFaq">
+          <?php foreach ($u['faqs'] as $i => $faq): ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#ic1">Do you work with clients outside <?= htmlspecialchars($c['city_name']) ?> too?</button></h3>
-            <div id="ic1" class="accordion-collapse collapse show" data-bs-parent="#indiaCityFaq">
-              <div class="accordion-body">Yes — most of the work happens remotely over video calls, WhatsApp and email, so location isn't a constraint. In-person meetings can be arranged where practical.</div>
+            <h3 class="accordion-header">
+              <button class="accordion-button<?= $i > 0 ? ' collapsed' : '' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#ifaq<?= $i ?>">
+                <?= htmlspecialchars($faq['q']) ?>
+              </button>
+            </h3>
+            <div id="ifaq<?= $i ?>" class="accordion-collapse collapse<?= $i === 0 ? ' show' : '' ?>" data-bs-parent="#indiaCityFaq">
+              <div class="accordion-body"><?= htmlspecialchars($faq['a']) ?></div>
             </div>
           </div>
+          <?php endforeach; ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ic2">How much does a website cost?</button></h3>
-            <div id="ic2" class="accordion-collapse collapse" data-bs-parent="#indiaCityFaq">
-              <div class="accordion-body">Direct freelancer rates start at ₹7,999 for a basic business website, with pricing scaling based on pages, features and e-commerce needs. See our <a href="/website-development-cost-india/">website development cost guide</a> for a full breakdown, or get a fixed-scope quote for your specific project.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ic3">How long does a project take?</button></h3>
-            <div id="ic3" class="accordion-collapse collapse" data-bs-parent="#indiaCityFaq">
-              <div class="accordion-body">Most business websites are delivered in 7-21 days. E-commerce stores and custom applications typically take longer, with a specific timeline confirmed at the quote stage.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ic4">What happens after the website launches?</button></h3>
-            <div id="ic4" class="accordion-collapse collapse" data-bs-parent="#indiaCityFaq">
-              <div class="accordion-body">Every project includes 3 months of free support after delivery. Beyond that, <a href="/website-maintenance-india/">ongoing maintenance plans</a> cover security patches, backups and updates.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ic5">Can you also help with SEO and marketing, not just the website?</button></h3>
-            <div id="ic5" class="accordion-collapse collapse" data-bs-parent="#indiaCityFaq">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ifaqSeo">Can you also help with SEO and marketing, not just the website?</button></h3>
+            <div id="ifaqSeo" class="accordion-collapse collapse" data-bs-parent="#indiaCityFaq">
               <div class="accordion-body">Yes — <a href="/seo-services-india/">SEO</a>, social media marketing, CRM development and paid ads are all available alongside the website build or as standalone services.</div>
             </div>
           </div>

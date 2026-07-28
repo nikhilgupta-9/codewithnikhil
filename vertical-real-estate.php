@@ -3,14 +3,16 @@ include_once "config/connect.php";
 include_once "util/function.php";
 
 $pages = include __DIR__ . '/data/verticals-real-estate.php';
+$content = include __DIR__ . '/data/verticals-real-estate-content.php';
 $page = $_GET['slug'] ?? '';
 
-if (!isset($pages[$page])) {
+if (!isset($pages[$page]) || !isset($content[$page])) {
   include_once "404.php";
   exit;
 }
 
 $c = $pages[$page];
+$u = $content[$page];
 $maintenanceSlugs = ['US' => 'website-maintenance-usa/', 'GB' => 'website-maintenance-uk/', 'CA' => 'website-maintenance-canada/', 'AE' => 'website-maintenance-uae/'];
 $maintenanceLink = $maintenanceSlugs[$c['schema_country']] ?? 'services/';
 $projectCount = count_portfolio_projects();
@@ -36,15 +38,28 @@ $rating = average_client_rating();
 <meta property="og:image" content="https://nikhilworks.com/assets/img/logo/logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Real Estate Website Design",
-  "provider": {"@type": "ProfessionalService", "name": "NikhilWorks", "url": "https://nikhilworks.com"},
-  "areaServed": "<?= htmlspecialchars($c['country_name']) ?>",
-  "description": "<?= addslashes($c['description']) ?>",
-  "priceRange": "<?= htmlspecialchars($c['price_range']) ?>"
-}
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'Service',
+  'serviceType' => 'Real Estate Website Design',
+  'provider' => ['@type' => 'ProfessionalService', 'name' => 'NikhilWorks', 'url' => 'https://nikhilworks.com', 'address' => ['@type' => 'PostalAddress', 'addressCountry' => 'IN']],
+  'areaServed' => ['@type' => 'Place', 'name' => $c['country_name']],
+  'description' => $c['description'],
+  'offers' => ['@type' => 'Offer', 'priceCurrency' => $c['currency'], 'priceRange' => $c['price_range']],
+], JSON_UNESCAPED_SLASHES) ?>
+</script>
+<script type="application/ld+json">
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'FAQPage',
+  'mainEntity' => array_map(function ($faq) {
+    return [
+      '@type' => 'Question',
+      'name' => $faq['q'],
+      'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq['a']],
+    ];
+  }, $u['faqs']),
+], JSON_UNESCAPED_SLASHES) ?>
 </script>
 <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
@@ -83,14 +98,16 @@ $rating = average_client_rating();
   </div>
 </section>
 
-<section class="py-5">
+<?php
+$introSection = '<section class="py-5' . ($u['layout'] === 'B' ? ' bg-light' : '') . '"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-6 order-lg-2"><div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);"><img src="' . $site . 'assets/img/all-images/service-img15.png" alt="Real estate website design for ' . htmlspecialchars($c['country_name']) . '" style="width:100%;display:block;"></div></div><div class="col-lg-6 order-lg-1"><h2 class="fw-bold mb-3">' . htmlspecialchars($u['intro_heading']) . '</h2>';
+foreach ($u['intro'] as $para) {
+  $introSection .= '<p class="text-muted mb-3">' . htmlspecialchars($para) . '</p>';
+}
+$introSection .= '</div></div></div></section>';
+
+$whyUsSection = '<section class="py-5' . ($u['layout'] === 'A' ? ' bg-light' : '') . '">
   <div class="container">
     <div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
-          <img src="<?= $site ?>assets/img/all-images/case-img1.png" alt="Real estate website design for <?= htmlspecialchars($c['country_name']) ?>" style="width:100%;display:block;">
-        </div>
-      </div>
       <div class="col-lg-6">
         <h2 class="fw-bold mb-3">Built to Sell Listings, Not Just Display Them</h2>
         <p class="text-muted mb-4">Buyers scroll past listing sites that load slowly or bury the search filters they actually need. A real estate website has one job: get a buyer from "browsing" to "I want to see this one" as fast as possible. That means live listing feeds, fast filtering, and a clear path to contact an agent — not a static gallery that goes stale the day it launches.</p>
@@ -121,11 +138,25 @@ $rating = average_client_rating();
           </div>
         </div>
       </div>
+      <div class="col-lg-6">
+        <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
+          <img src="' . $site . 'assets/img/all-images/service-img16.png" alt="Property listing search interface for ' . htmlspecialchars($c['country_name']) . '" style="width:100%;display:block;">
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</section>';
 
-<section class="py-5 bg-light">
+if ($u['layout'] === 'A') {
+  echo $introSection;
+  echo $whyUsSection;
+} else {
+  echo $whyUsSection;
+  echo $introSection;
+}
+?>
+
+<section class="py-5">
   <div class="container">
     <div class="text-center mb-5">
       <h2 class="fw-bold">What's Included</h2>
@@ -246,34 +277,18 @@ $rating = average_client_rating();
     <div class="row justify-content-center">
       <div class="col-lg-9">
         <div class="accordion" id="realEstateFaq">
+          <?php foreach ($u['faqs'] as $i => $faq): ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#re1">Can you connect to our existing MLS or IDX feed?</button></h3>
-            <div id="re1" class="accordion-collapse collapse show" data-bs-parent="#realEstateFaq">
-              <div class="accordion-body">In most cases, yes. We integrate with common MLS/IDX providers to pull live listings automatically. Share your provider details during discovery and we'll confirm compatibility before any work starts.</div>
+            <h3 class="accordion-header"><button class="accordion-button<?= $i === 0 ? '' : ' collapsed' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#re<?= $i ?>"><?= htmlspecialchars($faq['q']) ?></button></h3>
+            <div id="re<?= $i ?>" class="accordion-collapse collapse<?= $i === 0 ? ' show' : '' ?>" data-bs-parent="#realEstateFaq">
+              <div class="accordion-body"><?= htmlspecialchars($faq['a']) ?></div>
             </div>
           </div>
+          <?php endforeach; ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#re2">How many agents or listings can the site support?</button></h3>
-            <div id="re2" class="accordion-collapse collapse" data-bs-parent="#realEstateFaq">
-              <div class="accordion-body">The site is built to scale with your listing volume — from a single agent with a handful of properties to a brokerage with hundreds of active listings and multiple agent profiles.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#re3">Do you build the mortgage calculator and map search from scratch?</button></h3>
-            <div id="re3" class="accordion-collapse collapse" data-bs-parent="#realEstateFaq">
-              <div class="accordion-body">We typically use proven, well-tested tools for calculators and map search rather than reinventing them, then customize the styling and behavior to match your site — faster to ship and more reliable than a from-scratch build.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#re4">Can you also handle ongoing listing/content updates?</button></h3>
-            <div id="re4" class="accordion-collapse collapse" data-bs-parent="#realEstateFaq">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#reBonus">Can you also handle ongoing listing/content updates?</button></h3>
+            <div id="reBonus" class="accordion-collapse collapse" data-bs-parent="#realEstateFaq">
               <div class="accordion-body">Yes, through our <a href="<?= $site . $maintenanceLink ?>">website maintenance plans</a> — feed monitoring, new agent pages and security updates are all covered.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#re5">What does a real estate website typically cost?</button></h3>
-            <div id="re5" class="accordion-collapse collapse" data-bs-parent="#realEstateFaq">
-              <div class="accordion-body">For <?= htmlspecialchars($c['country_name']) ?>, typical projects range <?= htmlspecialchars($c['price_range']) ?>, depending on listing volume, the number of agents, and whether MLS/IDX integration is required. You'll get a fixed-scope quote before any work starts.</div>
             </div>
           </div>
         </div>

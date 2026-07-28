@@ -5,14 +5,16 @@ include_once "util/function.php";
 $cityPages = include __DIR__ . '/data/services-auditing-cities.php';
 $pages = include __DIR__ . '/data/services-auditing.php';
 $pages += $cityPages;
+$content = include __DIR__ . '/data/services-auditing-content.php';
 $page = $_GET['slug'] ?? '';
 
-if (!isset($pages[$page])) {
+if (!isset($pages[$page]) || !isset($content[$page])) {
   include_once "404.php";
   exit;
 }
 
 $c = $pages[$page];
+$u = $content[$page];
 $maintenanceSlugs = ['US' => 'website-maintenance-usa/', 'GB' => 'website-maintenance-uk/', 'IN' => 'website-maintenance-india/', 'AE' => 'website-maintenance-uae/', 'CA' => 'website-maintenance-canada/', 'AU' => 'website-maintenance-australia/'];
 $maintenanceLink = $maintenanceSlugs[$c['schema_country']] ?? 'services/';
 $projectCount = count_portfolio_projects();
@@ -38,15 +40,28 @@ $rating = average_client_rating();
 <meta property="og:image" content="https://nikhilworks.com/assets/img/logo/logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Website Audit",
-  "provider": {"@type": "ProfessionalService", "name": "NikhilWorks", "url": "https://nikhilworks.com"},
-  "areaServed": "<?= htmlspecialchars($c['country_name']) ?>",
-  "description": "<?= addslashes($c['description']) ?>",
-  "priceRange": "<?= htmlspecialchars($c['price_range']) ?>"
-}
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'Service',
+  'serviceType' => 'Website Audit',
+  'provider' => ['@type' => 'ProfessionalService', 'name' => 'NikhilWorks', 'url' => 'https://nikhilworks.com', 'address' => ['@type' => 'PostalAddress', 'addressCountry' => 'IN']],
+  'areaServed' => ['@type' => 'Place', 'name' => $c['country_name']],
+  'description' => $c['description'],
+  'offers' => ['@type' => 'Offer', 'priceCurrency' => $c['currency'], 'priceRange' => $c['price_range']],
+], JSON_UNESCAPED_SLASHES) ?>
+</script>
+<script type="application/ld+json">
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'FAQPage',
+  'mainEntity' => array_map(function ($faq) {
+    return [
+      '@type' => 'Question',
+      'name' => $faq['q'],
+      'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq['a']],
+    ];
+  }, $u['faqs']),
+], JSON_UNESCAPED_SLASHES) ?>
 </script>
 <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
@@ -85,14 +100,16 @@ $rating = average_client_rating();
   </div>
 </section>
 
-<section class="py-5">
+<?php
+$introSection = '<section class="py-5' . ($u['layout'] === 'B' ? ' bg-light' : '') . '"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-6 order-lg-2"><div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);"><img src="' . $site . 'assets/img/all-images/service-img7.png" alt="Website audit for ' . htmlspecialchars($c['country_name']) . ' businesses" style="width:100%;display:block;"></div></div><div class="col-lg-6 order-lg-1"><h2 class="fw-bold mb-3">' . htmlspecialchars($u['intro_heading']) . '</h2>';
+foreach ($u['intro'] as $para) {
+  $introSection .= '<p class="text-muted mb-3">' . htmlspecialchars($para) . '</p>';
+}
+$introSection .= '</div></div></div></section>';
+
+$whyUsSection = '<section class="py-5' . ($u['layout'] === 'A' ? ' bg-light' : '') . '">
   <div class="container">
     <div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
-          <img src="<?= $site ?>assets/img/all-images/service-img1.png" alt="Website audit for <?= htmlspecialchars($c['country_name']) ?> businesses" style="width:100%;display:block;">
-        </div>
-      </div>
       <div class="col-lg-6">
         <h2 class="fw-bold mb-3">Every Angle That Affects Whether Your Site Ranks, Loads and Converts</h2>
         <p class="text-muted mb-4">Most "audits" are auto-generated reports that dump 50 flagged issues with no sense of what actually matters. Ours combines automated scanning with a manual review, then ranks every issue by real impact — so you know exactly what to fix first, and what can wait.</p>
@@ -123,11 +140,25 @@ $rating = average_client_rating();
           </div>
         </div>
       </div>
+      <div class="col-lg-6">
+        <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
+          <img src="' . $site . 'assets/img/all-images/service-img8.png" alt="Website audit checklist for ' . htmlspecialchars($c['country_name']) . '" style="width:100%;display:block;">
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</section>';
 
-<section class="py-5 bg-light">
+if ($u['layout'] === 'A') {
+  echo $introSection;
+  echo $whyUsSection;
+} else {
+  echo $whyUsSection;
+  echo $introSection;
+}
+?>
+
+<section class="py-5">
   <div class="container">
     <div class="text-center mb-5">
       <h2 class="fw-bold">What the Audit Covers</h2>
@@ -248,34 +279,18 @@ $rating = average_client_rating();
     <div class="row justify-content-center">
       <div class="col-lg-9">
         <div class="accordion" id="auditFaq">
+          <?php foreach ($u['faqs'] as $i => $faq): ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#aud1">Is this just an automated tool report?</button></h3>
-            <div id="aud1" class="accordion-collapse collapse show" data-bs-parent="#auditFaq">
-              <div class="accordion-body">No — we run automated scans as a starting point, then manually review the findings and prioritize them by actual business impact. You get a short, actionable list, not 50 flagged items with no context.</div>
+            <h3 class="accordion-header"><button class="accordion-button<?= $i === 0 ? '' : ' collapsed' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#aud<?= $i ?>"><?= htmlspecialchars($faq['q']) ?></button></h3>
+            <div id="aud<?= $i ?>" class="accordion-collapse collapse<?= $i === 0 ? ' show' : '' ?>" data-bs-parent="#auditFaq">
+              <div class="accordion-body"><?= htmlspecialchars($faq['a']) ?></div>
             </div>
           </div>
+          <?php endforeach; ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aud2">Do you also implement the fixes?</button></h3>
-            <div id="aud2" class="accordion-collapse collapse" data-bs-parent="#auditFaq">
-              <div class="accordion-body">That's optional — some clients want the report to hand to their own team, others want us to implement the fixes directly. Either way, you get the full prioritized report first.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aud3">How long does an audit take?</button></h3>
-            <div id="aud3" class="accordion-collapse collapse" data-bs-parent="#auditFaq">
-              <div class="accordion-body">Most audits are delivered within 3-5 business days, followed by a walkthrough call to explain the findings in plain language.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aud4">Do you offer ongoing monitoring after the audit?</button></h3>
-            <div id="aud4" class="accordion-collapse collapse" data-bs-parent="#auditFaq">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#audBonus">Do you offer ongoing monitoring after the audit?</button></h3>
+            <div id="audBonus" class="accordion-collapse collapse" data-bs-parent="#auditFaq">
               <div class="accordion-body">Yes, through our <a href="<?= $site . $maintenanceLink ?>">website maintenance plans</a> — uptime monitoring, security patches and performance tuning are all covered on an ongoing basis.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aud5">What does an audit typically cost?</button></h3>
-            <div id="aud5" class="accordion-collapse collapse" data-bs-parent="#auditFaq">
-              <div class="accordion-body">For <?= htmlspecialchars($c['country_name']) ?>, typical audits range <?= htmlspecialchars($c['price_range']) ?>, depending on site size and depth of review needed. You'll know the exact price before starting.</div>
             </div>
           </div>
         </div>

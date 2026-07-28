@@ -5,14 +5,16 @@ include_once "util/function.php";
 $cityPages = include __DIR__ . '/data/services-redesign-cities.php';
 $pages = include __DIR__ . '/data/services-redesign.php';
 $pages += $cityPages;
+$content = include __DIR__ . '/data/services-redesign-content.php';
 $page = $_GET['slug'] ?? '';
 
-if (!isset($pages[$page])) {
+if (!isset($pages[$page]) || !isset($content[$page])) {
   include_once "404.php";
   exit;
 }
 
 $c = $pages[$page];
+$u = $content[$page];
 $maintenanceSlugs = ['US' => 'website-maintenance-usa/', 'GB' => 'website-maintenance-uk/', 'IN' => 'website-maintenance-india/', 'AE' => 'website-maintenance-uae/', 'CA' => 'website-maintenance-canada/', 'AU' => 'website-maintenance-australia/'];
 $maintenanceLink = $maintenanceSlugs[$c['schema_country']] ?? 'services/';
 $projectCount = count_portfolio_projects();
@@ -38,15 +40,28 @@ $rating = average_client_rating();
 <meta property="og:image" content="https://nikhilworks.com/assets/img/logo/logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Website Redesign",
-  "provider": {"@type": "ProfessionalService", "name": "NikhilWorks", "url": "https://nikhilworks.com"},
-  "areaServed": "<?= htmlspecialchars($c['country_name']) ?>",
-  "description": "<?= addslashes($c['description']) ?>",
-  "priceRange": "<?= htmlspecialchars($c['price_range']) ?>"
-}
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'Service',
+  'serviceType' => 'Website Redesign',
+  'provider' => ['@type' => 'ProfessionalService', 'name' => 'NikhilWorks', 'url' => 'https://nikhilworks.com', 'address' => ['@type' => 'PostalAddress', 'addressCountry' => 'IN']],
+  'areaServed' => ['@type' => 'Place', 'name' => $c['country_name']],
+  'description' => $c['description'],
+  'offers' => ['@type' => 'Offer', 'priceCurrency' => $c['currency'], 'priceRange' => $c['price_range']],
+], JSON_UNESCAPED_SLASHES) ?>
+</script>
+<script type="application/ld+json">
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'FAQPage',
+  'mainEntity' => array_map(function ($faq) {
+    return [
+      '@type' => 'Question',
+      'name' => $faq['q'],
+      'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq['a']],
+    ];
+  }, $u['faqs']),
+], JSON_UNESCAPED_SLASHES) ?>
 </script>
 <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
@@ -85,17 +100,19 @@ $rating = average_client_rating();
   </div>
 </section>
 
-<section class="py-5">
+<?php
+$introSection = '<section class="py-5' . ($u['layout'] === 'B' ? ' bg-light' : '') . '"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-6 order-lg-2"><div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);"><img src="' . $site . 'assets/img/all-images/service-img5.png" alt="Website redesign for ' . htmlspecialchars($c['country_name']) . ' businesses" style="width:100%;display:block;"></div></div><div class="col-lg-6 order-lg-1"><h2 class="fw-bold mb-3">' . htmlspecialchars($u['intro_heading']) . '</h2>';
+foreach ($u['intro'] as $para) {
+  $introSection .= '<p class="text-muted mb-3">' . htmlspecialchars($para) . '</p>';
+}
+$introSection .= '</div></div></div></section>';
+
+$whyUsSection = '<section class="py-5' . ($u['layout'] === 'A' ? ' bg-light' : '') . '">
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-6">
-        <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
-          <img src="<?= $site ?>assets/img/all-images/case-img1.png" alt="Website redesign for <?= htmlspecialchars($c['country_name']) ?> businesses" style="width:100%;display:block;">
-        </div>
-      </div>
-      <div class="col-lg-6">
         <h2 class="fw-bold mb-3">Signs Your Website Needs a Redesign</h2>
-        <p class="text-muted mb-4">An outdated website costs you more than it looks like. More than half your visitors are on mobile, and a layout that isn't built for that loses them instantly. Old code and bloated themes push people away before the page even loads. And if traffic is fine but it's not turning into leads or sales, the design — not the marketing — is usually the problem.</p>
+        <p class="text-muted mb-4">An outdated website costs you more than it looks like. More than half your visitors are on mobile, and a layout that isn\'t built for that loses them instantly. Old code and bloated themes push people away before the page even loads. And if traffic is fine but it\'s not turning into leads or sales, the design — not the marketing — is usually the problem.</p>
         <div class="row g-3">
           <div class="col-6">
             <div class="d-flex align-items-start gap-2">
@@ -123,11 +140,25 @@ $rating = average_client_rating();
           </div>
         </div>
       </div>
+      <div class="col-lg-6">
+        <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
+          <img src="' . $site . 'assets/img/all-images/service-img6.png" alt="Redesign checklist for ' . htmlspecialchars($c['country_name']) . ' businesses" style="width:100%;display:block;">
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</section>';
 
-<section class="py-5 bg-light">
+if ($u['layout'] === 'A') {
+  echo $introSection;
+  echo $whyUsSection;
+} else {
+  echo $whyUsSection;
+  echo $introSection;
+}
+?>
+
+<section class="py-5">
   <div class="container">
     <div class="text-center mb-5">
       <h2 class="fw-bold">What's Included in a Redesign</h2>
@@ -248,34 +279,18 @@ $rating = average_client_rating();
     <div class="row justify-content-center">
       <div class="col-lg-9">
         <div class="accordion" id="redesignFaq">
+          <?php foreach ($u['faqs'] as $i => $faq): ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#rd1">Will we lose our Google rankings during the redesign?</button></h3>
-            <div id="rd1" class="accordion-collapse collapse show" data-bs-parent="#redesignFaq">
-              <div class="accordion-body">Not if it's done correctly. We map every existing URL to its new equivalent with proper 301 redirects and keep the content structure Google already understands, so rankings carry over instead of resetting.</div>
+            <h3 class="accordion-header"><button class="accordion-button<?= $i === 0 ? '' : ' collapsed' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#rd<?= $i ?>"><?= htmlspecialchars($faq['q']) ?></button></h3>
+            <div id="rd<?= $i ?>" class="accordion-collapse collapse<?= $i === 0 ? ' show' : '' ?>" data-bs-parent="#redesignFaq">
+              <div class="accordion-body"><?= htmlspecialchars($faq['a']) ?></div>
             </div>
           </div>
+          <?php endforeach; ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rd2">Can you keep our current content and just redesign the look?</button></h3>
-            <div id="rd2" class="accordion-collapse collapse" data-bs-parent="#redesignFaq">
-              <div class="accordion-body">Yes — a redesign doesn't have to mean rewriting everything. We can carry over your existing copy, blog posts and media, and focus the work on design, speed and mobile experience.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rd3">How long does a redesign take?</button></h3>
-            <div id="rd3" class="accordion-collapse collapse" data-bs-parent="#redesignFaq">
-              <div class="accordion-body">Most redesigns take 2-4 weeks depending on site size. Larger sites with e-commerce or many content types can take 4-8 weeks.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rd4">Do you offer ongoing support after the redesign launches?</button></h3>
-            <div id="rd4" class="accordion-collapse collapse" data-bs-parent="#redesignFaq">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rdBonus">Do you offer ongoing support after the redesign launches?</button></h3>
+            <div id="rdBonus" class="accordion-collapse collapse" data-bs-parent="#redesignFaq">
               <div class="accordion-body">Yes, through our <a href="<?= $site . $maintenanceLink ?>">website maintenance plans</a> — security patches, updates and uptime monitoring are all covered after launch.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rd5">What does a redesign typically cost?</button></h3>
-            <div id="rd5" class="accordion-collapse collapse" data-bs-parent="#redesignFaq">
-              <div class="accordion-body">For <?= htmlspecialchars($c['country_name']) ?>, typical projects range <?= htmlspecialchars($c['price_range']) ?>, depending on site size and whether content migration or e-commerce is involved. You'll get a fixed-scope quote before any work starts.</div>
             </div>
           </div>
         </div>

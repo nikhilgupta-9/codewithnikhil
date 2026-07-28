@@ -5,14 +5,16 @@ include_once "util/function.php";
 $cityPages = include __DIR__ . '/data/services-crm-cities.php';
 $pages = include __DIR__ . '/data/services-crm.php';
 $pages += $cityPages;
+$content = include __DIR__ . '/data/services-crm-content.php';
 $page = $_GET['slug'] ?? '';
 
-if (!isset($pages[$page])) {
+if (!isset($pages[$page]) || !isset($content[$page])) {
   include_once "404.php";
   exit;
 }
 
 $c = $pages[$page];
+$u = $content[$page];
 $maintenanceSlugs = ['US' => 'website-maintenance-usa/', 'GB' => 'website-maintenance-uk/', 'IN' => 'website-maintenance-india/', 'AE' => 'website-maintenance-uae/', 'CA' => 'website-maintenance-canada/', 'AU' => 'website-maintenance-australia/'];
 $maintenanceLink = $maintenanceSlugs[$c['schema_country']] ?? 'services/';
 $projectCount = count_portfolio_projects();
@@ -38,15 +40,26 @@ $rating = average_client_rating();
 <meta property="og:image" content="https://nikhilworks.com/assets/img/logo/logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "CRM Development",
-  "provider": {"@type": "ProfessionalService", "name": "NikhilWorks", "url": "https://nikhilworks.com"},
-  "areaServed": "<?= htmlspecialchars($c['country_name']) ?>",
-  "description": "<?= addslashes($c['description']) ?>",
-  "priceRange": "<?= htmlspecialchars($c['price_range']) ?>"
-}
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'Service',
+  'serviceType' => 'CRM Development',
+  'provider' => ['@type' => 'ProfessionalService', 'name' => 'NikhilWorks', 'url' => 'https://nikhilworks.com', 'address' => ['@type' => 'PostalAddress', 'addressCountry' => 'IN']],
+  'areaServed' => $c['country_name'],
+  'description' => $c['description'],
+  'offers' => ['@type' => 'Offer', 'priceCurrency' => $c['currency'], 'priceRange' => $c['price_range']],
+], JSON_UNESCAPED_SLASHES) ?>
+</script>
+<script type="application/ld+json">
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'FAQPage',
+  'mainEntity' => array_map(fn($faq) => [
+    '@type' => 'Question',
+    'name' => $faq['q'],
+    'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq['a']],
+  ], $u['faqs']),
+], JSON_UNESCAPED_SLASHES) ?>
 </script>
 <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
@@ -85,18 +98,20 @@ $rating = average_client_rating();
   </div>
 </section>
 
-<section class="py-5">
+<section class="py-5<?= $u['layout'] === 'B' ? ' bg-light' : '' ?>">
   <div class="container">
     <div class="row align-items-center g-5">
-      <div class="col-lg-6">
+      <div class="col-lg-6<?= $u['layout'] === 'B' ? ' order-lg-2' : '' ?>">
         <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
           <img src="<?= $site ?>assets/img/all-images/about-img6.png" alt="Custom CRM development for <?= htmlspecialchars($c['country_name']) ?> businesses" style="width:100%;display:block;">
         </div>
       </div>
-      <div class="col-lg-6">
-        <h2 class="fw-bold mb-3">Why Build a Custom CRM Instead of Buying One?</h2>
-        <p class="text-muted mb-4">Off-the-shelf CRMs force your team to adapt to their workflow — new fields, unfamiliar terminology, features you'll never use. A custom CRM works the other way around: it's shaped by how your sales team actually operates, and it connects directly to the tools you already use instead of sitting in its own silo.</p>
-        <div class="row g-3">
+      <div class="col-lg-6<?= $u['layout'] === 'B' ? ' order-lg-1' : '' ?>">
+        <h2 class="fw-bold mb-3"><?= htmlspecialchars($u['intro_heading']) ?></h2>
+        <?php foreach ($u['intro'] as $para): ?>
+        <p class="text-muted mb-3"><?= htmlspecialchars($para) ?></p>
+        <?php endforeach; ?>
+        <div class="row g-3 mt-2">
           <div class="col-6">
             <div class="d-flex align-items-start gap-2">
               <i class="fa-solid fa-diagram-project text-warning mt-1"></i>
@@ -127,7 +142,7 @@ $rating = average_client_rating();
   </div>
 </section>
 
-<section class="py-5 bg-light">
+<section class="py-5<?= $u['layout'] === 'A' ? ' bg-light' : '' ?>">
   <div class="container">
     <div class="text-center mb-5">
       <h2 class="fw-bold">What's Included</h2>
@@ -248,34 +263,22 @@ $rating = average_client_rating();
     <div class="row justify-content-center">
       <div class="col-lg-9">
         <div class="accordion" id="crmFaq">
+          <?php foreach ($u['faqs'] as $i => $faq): ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#crm1">Should we build a custom CRM or customize Zoho/HubSpot/Salesforce?</button></h3>
-            <div id="crm1" class="accordion-collapse collapse show" data-bs-parent="#crmFaq">
-              <div class="accordion-body">If your team already uses one of these and mostly just needs custom fields, modules or integrations, customization is usually faster and cheaper. A fully custom build makes more sense when your process doesn't fit any existing CRM's structure, or you want to avoid ongoing per-seat licensing entirely.</div>
+            <h3 class="accordion-header">
+              <button class="accordion-button<?= $i > 0 ? ' collapsed' : '' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#crmfaq<?= $i ?>">
+                <?= htmlspecialchars($faq['q']) ?>
+              </button>
+            </h3>
+            <div id="crmfaq<?= $i ?>" class="accordion-collapse collapse<?= $i === 0 ? ' show' : '' ?>" data-bs-parent="#crmFaq">
+              <div class="accordion-body"><?= htmlspecialchars($faq['a']) ?></div>
             </div>
           </div>
+          <?php endforeach; ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crm2">Can the CRM integrate with our website and WhatsApp?</button></h3>
-            <div id="crm2" class="accordion-collapse collapse" data-bs-parent="#crmFaq">
-              <div class="accordion-body">Yes — connecting your website's lead forms, WhatsApp Business, email and payment gateway directly to the CRM is one of the most common requests, so leads land in the pipeline automatically instead of getting lost in inboxes.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crm3">How long does a CRM build take?</button></h3>
-            <div id="crm3" class="accordion-collapse collapse" data-bs-parent="#crmFaq">
-              <div class="accordion-body">A focused CRM customization typically takes 2-4 weeks. A fully custom CRM build ranges 4-10 weeks depending on how many modules, integrations and automations are involved.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crm4">Do you handle data migration from our current system?</button></h3>
-            <div id="crm4" class="accordion-collapse collapse" data-bs-parent="#crmFaq">
-              <div class="accordion-body">Yes — whether your data currently lives in spreadsheets or another CRM, we migrate and validate it as part of the build so you don't lose records in the switch.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crm5">What does CRM development typically cost?</button></h3>
-            <div id="crm5" class="accordion-collapse collapse" data-bs-parent="#crmFaq">
-              <div class="accordion-body">For <?= htmlspecialchars($c['country_name']) ?>, typical projects range <?= htmlspecialchars($c['price_range']) ?>, depending on scope — a light customization sits at the lower end, a fully custom CRM with automations and integrations at the higher end. You'll get a fixed-scope quote before any work starts.</div>
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#crmMaint">Do you also handle ongoing support after the CRM launches?</button></h3>
+            <div id="crmMaint" class="accordion-collapse collapse" data-bs-parent="#crmFaq">
+              <div class="accordion-body">Yes, through our <a href="<?= $site . $maintenanceLink ?>">website maintenance plans</a> if you'd like the same ongoing coverage for your website alongside the CRM — bug fixes, new modules and process adjustments are covered either way as your business evolves.</div>
             </div>
           </div>
         </div>

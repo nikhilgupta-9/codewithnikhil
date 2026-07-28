@@ -3,14 +3,16 @@ include_once "config/connect.php";
 include_once "util/function.php";
 
 $pages = include __DIR__ . '/data/locations-cities.php';
+$content = include __DIR__ . '/data/locations-cities-content.php';
 $page = $_GET['slug'] ?? '';
 
-if (!isset($pages[$page])) {
+if (!isset($pages[$page]) || !isset($content[$page])) {
   include_once "404.php";
   exit;
 }
 
 $c = $pages[$page];
+$u = $content[$page];
 $countrySlugs = ['US' => 'usa', 'GB' => 'uk', 'CA' => 'canada', 'AU' => 'australia', 'IN' => 'india', 'AE' => 'uae'];
 $countrySlug = $countrySlugs[$c['schema_country']] ?? null;
 $maintenanceLink = $countrySlug ? "website-maintenance-{$countrySlug}/" : 'services/';
@@ -40,23 +42,32 @@ $rating = average_client_rating();
 <meta property="og:image" content="https://nikhilworks.com/assets/img/logo/logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "NikhilWorks",
-  "url": "https://nikhilworks.com",
-  "logo": "https://nikhilworks.com/assets/img/logo/logo.png",
-  "description": "<?= addslashes($c['description']) ?>",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "<?= htmlspecialchars($c['city_name']) ?>",
-    "addressRegion": "<?= htmlspecialchars($c['schema_region']) ?>",
-    "addressCountry": "<?= htmlspecialchars($c['schema_country']) ?>"
-  },
-  "areaServed": "<?= htmlspecialchars($c['city_name']) ?>",
-  "priceRange": "<?= htmlspecialchars($c['price_range']) ?>",
-  "availableLanguage": "English"
-}
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'Service',
+  'serviceType' => 'Web Development',
+  'provider' => [
+    '@type' => 'ProfessionalService',
+    'name' => 'NikhilWorks',
+    'url' => 'https://nikhilworks.com',
+    'logo' => 'https://nikhilworks.com/assets/img/logo/logo.png',
+    'address' => ['@type' => 'PostalAddress', 'addressCountry' => 'IN'],
+  ],
+  'areaServed' => ['@type' => 'City', 'name' => $c['city_name']],
+  'description' => $c['description'],
+  'offers' => ['@type' => 'Offer', 'priceCurrency' => $c['currency'], 'priceRange' => $c['price_range']],
+], JSON_UNESCAPED_SLASHES) ?>
+</script>
+<script type="application/ld+json">
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type' => 'FAQPage',
+  'mainEntity' => array_map(fn($faq) => [
+    '@type' => 'Question',
+    'name' => $faq['q'],
+    'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq['a']],
+  ], $u['faqs']),
+], JSON_UNESCAPED_SLASHES) ?>
 </script>
 <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
@@ -105,18 +116,20 @@ $rating = average_client_rating();
   </div>
 </section>
 
-<section class="py-5">
+<section class="py-5<?= $u['layout'] === 'B' ? ' bg-light' : '' ?>">
   <div class="container">
     <div class="row align-items-center g-5">
-      <div class="col-lg-6">
+      <div class="col-lg-6<?= $u['layout'] === 'B' ? ' order-lg-2' : '' ?>">
         <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
           <img src="<?= $site ?>assets/img/all-images/about-img6.png" alt="Web developer for <?= htmlspecialchars($c['city_name']) ?> businesses" style="width:100%;display:block;">
         </div>
       </div>
-      <div class="col-lg-6">
-        <h2 class="fw-bold mb-3">Why Hire a Freelance Developer from India?</h2>
-        <p class="text-muted mb-4">The smart choice for <?= htmlspecialchars($c['city_name']) ?> businesses is a developer who delivers agency-quality work without the agency overhead. You get direct access to the person building your site, competitive rates, and clear communication throughout — not a project manager relaying messages between you and an offshore team you never talk to.</p>
-        <div class="row g-3">
+      <div class="col-lg-6<?= $u['layout'] === 'B' ? ' order-lg-1' : '' ?>">
+        <h2 class="fw-bold mb-3"><?= htmlspecialchars($u['intro_heading']) ?></h2>
+        <?php foreach ($u['intro'] as $para): ?>
+        <p class="text-muted mb-3"><?= htmlspecialchars($para) ?></p>
+        <?php endforeach; ?>
+        <div class="row g-3 mt-2">
           <div class="col-6">
             <div class="d-flex align-items-start gap-2">
               <i class="fa-solid fa-sack-dollar text-warning mt-1"></i>
@@ -147,7 +160,7 @@ $rating = average_client_rating();
   </div>
 </section>
 
-<section class="py-5 bg-light">
+<section class="py-5<?= $u['layout'] === 'A' ? ' bg-light' : '' ?>">
   <div class="container">
     <div class="text-center mb-5">
       <h2 class="fw-bold">Services Available for <?= htmlspecialchars($c['city_name']) ?></h2>
@@ -282,34 +295,22 @@ $rating = average_client_rating();
     <div class="row justify-content-center">
       <div class="col-lg-9">
         <div class="accordion" id="cityFaq">
+          <?php foreach ($u['faqs'] as $i => $faq): ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#city1">Do you work with clients in different time zones?</button></h3>
-            <div id="city1" class="accordion-collapse collapse show" data-bs-parent="#cityFaq">
-              <div class="accordion-body">Yes — most communication happens over video call, email and WhatsApp, and we schedule discovery calls and check-ins at times that work for <?= htmlspecialchars($c['city_name']) ?> business hours, not just ours.</div>
+            <h3 class="accordion-header">
+              <button class="accordion-button<?= $i > 0 ? ' collapsed' : '' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#cfaq<?= $i ?>">
+                <?= htmlspecialchars($faq['q']) ?>
+              </button>
+            </h3>
+            <div id="cfaq<?= $i ?>" class="accordion-collapse collapse<?= $i === 0 ? ' show' : '' ?>" data-bs-parent="#cityFaq">
+              <div class="accordion-body"><?= htmlspecialchars($faq['a']) ?></div>
             </div>
           </div>
+          <?php endforeach; ?>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#city2">How do payments work internationally?</button></h3>
-            <div id="city2" class="accordion-collapse collapse" data-bs-parent="#cityFaq">
-              <div class="accordion-body">Payments in <?= htmlspecialchars($c['currency']) ?> are accepted via PayPal, Wise or direct bank transfer, whichever is most convenient on your end. Pricing and invoices are quoted in your local currency, not a foreign one you have to convert.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#city3">How long does a typical website project take?</button></h3>
-            <div id="city3" class="accordion-collapse collapse" data-bs-parent="#cityFaq">
-              <div class="accordion-body">Most business websites are delivered in 7-21 days depending on scope. E-commerce stores and custom applications typically take longer — you'll get a specific timeline with your quote.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#city4">Do you offer ongoing support after launch?</button></h3>
-            <div id="city4" class="accordion-collapse collapse" data-bs-parent="#cityFaq">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cityMaint">Do you offer ongoing support after launch?</button></h3>
+            <div id="cityMaint" class="accordion-collapse collapse" data-bs-parent="#cityFaq">
               <div class="accordion-body">Yes, through our <a href="<?= $site . $maintenanceLink ?>">website maintenance plans</a> — security patches, backups, uptime monitoring and content updates are all covered.</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#city5">What does a website typically cost for <?= htmlspecialchars($c['city_name']) ?> businesses?</button></h3>
-            <div id="city5" class="accordion-collapse collapse" data-bs-parent="#cityFaq">
-              <div class="accordion-body">Typical projects range <?= htmlspecialchars($c['price_range']) ?>, depending on complexity, number of pages and whether e-commerce or custom features are involved. You'll get a fixed-scope quote in <?= htmlspecialchars($c['currency']) ?> within 24 hours.</div>
             </div>
           </div>
         </div>
