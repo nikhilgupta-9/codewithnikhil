@@ -18,6 +18,9 @@ $maintenanceLink = $maintenanceSlugs[$c['schema_country']] ?? 'services/';
 $projectCount = count_portfolio_projects();
 $yearsExperience = years_in_business(2021);
 $rating = average_client_rating();
+include_once "includes/remote-badges.php";
+include_once "includes/hub-crosslinks.php";
+$heroImage = hub_image_url($site, 'verticals', 'junk-cars-' . hub_country_slug($c['schema_country'])) ?? ($site . 'assets/img/all-images/service-img17.png');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +46,7 @@ $rating = average_client_rating();
   '@type' => 'Service',
   'serviceType' => 'Junk Car Buyer Website Design',
   'provider' => ['@type' => 'ProfessionalService', 'name' => 'NikhilWorks', 'url' => 'https://nikhilworks.com', 'address' => ['@type' => 'PostalAddress', 'addressCountry' => 'IN']],
-  'areaServed' => ['@type' => 'Place', 'name' => $c['country_name']],
+  'areaServed' => ['@type' => 'Country', 'name' => $c['country_name']],
   'description' => $c['description'],
   'offers' => ['@type' => 'Offer', 'priceCurrency' => $c['currency'], 'priceRange' => $c['price_range']],
 ], JSON_UNESCAPED_SLASHES) ?>
@@ -84,6 +87,7 @@ $rating = average_client_rating();
           <a href="<?=$site?>/contact/" class="btn btn-warning btn-lg me-3 fw-bold">Get a Free Quote</a>
           <a href="<?=$site?>/portfolio/" class="btn btn-outline-light btn-lg">View My Work</a>
         </div>
+        <?= render_remote_badges() ?>
       </div>
       <div class="col-lg-4 text-center mt-4 mt-lg-0">
         <div style="background:rgba(255,255,255,0.15);border-radius:20px;padding:30px;">
@@ -99,7 +103,7 @@ $rating = average_client_rating();
 </section>
 
 <?php
-$introSection = '<section class="py-5' . ($u['layout'] === 'B' ? ' bg-light' : '') . '"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-6 order-lg-2"><div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);"><img src="' . $site . 'assets/img/all-images/service-img17.png" alt="Junk car buyer website design for ' . htmlspecialchars($c['country_name']) . '" style="width:100%;display:block;"></div></div><div class="col-lg-6 order-lg-1"><h2 class="fw-bold mb-3">' . htmlspecialchars($u['intro_heading']) . '</h2>';
+$introSection = '<section class="py-5' . ($u['layout'] === 'B' ? ' bg-light' : '') . '"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-6 order-lg-2"><div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);"><img src="' . $heroImage . '" alt="Junk car buyer website design for ' . htmlspecialchars($c['country_name']) . '" style="width:100%;display:block;"></div></div><div class="col-lg-6 order-lg-1"><h2 class="fw-bold mb-3">' . htmlspecialchars($u['intro_heading']) . '</h2>';
 foreach ($u['intro'] as $para) {
   $introSection .= '<p class="text-muted mb-3">' . htmlspecialchars($para) . '</p>';
 }
@@ -305,6 +309,8 @@ if ($u['layout'] === 'A') {
     <a href="<?=$site?>/portfolio/" class="btn btn-outline-light btn-lg">See My Work</a>
   </div>
 </section>
+
+<?= render_hub_crosslinks($site, $c['schema_country'], $page . '/') ?>
 
 <?php include_once "includes/footer.php" ?>
 </body>

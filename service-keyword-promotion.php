@@ -4,6 +4,7 @@ include_once "util/function.php";
 
 $cityPages = include __DIR__ . '/data/services-keyword-promotion-cities.php';
 $pages = include __DIR__ . '/data/services-keyword-promotion.php';
+$hubSlugs = array_keys($pages);
 $pages += $cityPages;
 $content = include __DIR__ . '/data/services-keyword-promotion-content.php';
 $page = $_GET['slug'] ?? '';
@@ -15,11 +16,15 @@ if (!isset($pages[$page]) || !isset($content[$page])) {
 
 $c = $pages[$page];
 $u = $content[$page];
+$isHub = in_array($page, $hubSlugs, true);
 $maintenanceSlugs = ['US' => 'website-maintenance-usa/', 'GB' => 'website-maintenance-uk/', 'IN' => 'website-maintenance-india/', 'AE' => 'website-maintenance-uae/', 'CA' => 'website-maintenance-canada/', 'AU' => 'website-maintenance-australia/'];
 $maintenanceLink = $maintenanceSlugs[$c['schema_country']] ?? 'services/';
 $projectCount = count_portfolio_projects();
 $yearsExperience = years_in_business(2021);
 $rating = average_client_rating();
+include_once "includes/remote-badges.php";
+include_once "includes/hub-crosslinks.php";
+$heroImage = ($isHub ? hub_image_url($site, 'services-type', 'keyword-promotion') : null) ?? ($site . 'assets/img/all-images/service-img9.png');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +50,7 @@ $rating = average_client_rating();
   '@type' => 'Service',
   'serviceType' => 'Keyword Promotion',
   'provider' => ['@type' => 'ProfessionalService', 'name' => 'NikhilWorks', 'url' => 'https://nikhilworks.com', 'address' => ['@type' => 'PostalAddress', 'addressCountry' => 'IN']],
-  'areaServed' => ['@type' => 'Place', 'name' => $c['country_name']],
+  'areaServed' => ['@type' => $isHub ? 'Country' : 'City', 'name' => $c['country_name']],
   'description' => $c['description'],
   'offers' => ['@type' => 'Offer', 'priceCurrency' => $c['currency'], 'priceRange' => $c['price_range']],
 ], JSON_UNESCAPED_SLASHES) ?>
@@ -86,6 +91,7 @@ $rating = average_client_rating();
           <a href="/contact/" class="btn btn-warning btn-lg me-3 fw-bold">Get My Keywords Ranking</a>
           <a href="/portfolio/" class="btn btn-outline-light btn-lg">View My Work</a>
         </div>
+        <?= $isHub ? render_remote_badges() : '' ?>
       </div>
       <div class="col-lg-4 text-center mt-4 mt-lg-0">
         <div style="background:rgba(255,255,255,0.15);border-radius:20px;padding:30px;">
@@ -101,7 +107,7 @@ $rating = average_client_rating();
 </section>
 
 <?php
-$introSection = '<section class="py-5' . ($u['layout'] === 'B' ? ' bg-light' : '') . '"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-6 order-lg-2"><div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);"><img src="' . $site . 'assets/img/all-images/service-img9.png" alt="Keyword promotion for ' . htmlspecialchars($c['country_name']) . ' businesses" style="width:100%;display:block;"></div></div><div class="col-lg-6 order-lg-1"><h2 class="fw-bold mb-3">' . htmlspecialchars($u['intro_heading']) . '</h2>';
+$introSection = '<section class="py-5' . ($u['layout'] === 'B' ? ' bg-light' : '') . '"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-6 order-lg-2"><div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);"><img src="' . $heroImage . '" alt="Keyword promotion for ' . htmlspecialchars($c['country_name']) . ' businesses" style="width:100%;display:block;"></div></div><div class="col-lg-6 order-lg-1"><h2 class="fw-bold mb-3">' . htmlspecialchars($u['intro_heading']) . '</h2>';
 foreach ($u['intro'] as $para) {
   $introSection .= '<p class="text-muted mb-3">' . htmlspecialchars($para) . '</p>';
 }
@@ -321,6 +327,8 @@ if ($u['layout'] === 'A') {
     <a href="/portfolio/" class="btn btn-outline-light btn-lg">See My Work</a>
   </div>
 </section>
+
+<?= $isHub ? render_hub_crosslinks($site, $c['schema_country'], $page . '/') : '' ?>
 
 <?php include_once "includes/footer.php" ?>
 </body>

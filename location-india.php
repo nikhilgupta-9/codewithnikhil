@@ -19,6 +19,13 @@ $contact = contact_us();
 $projectCount = count_portfolio_projects();
 $yearsExperience = years_in_business(2021);
 $rating = average_client_rating();
+// web-developer-india is the country hub; seo-services-india is the SEO
+// service's India hub (services-seo.php delegates India here instead of
+// duplicating it) -- both get the cross-region hub treatment, city pages don't.
+$isPriorityHub = in_array($page, ['web-developer-india', 'seo-services-india'], true);
+include_once "includes/remote-badges.php";
+include_once "includes/hub-crosslinks.php";
+$heroImage = ($isPriorityHub ? hub_image_url($site, 'locations', 'india') : null) ?? ($site . 'assets/img/all-images/about-img6.png');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,6 +98,7 @@ $rating = average_client_rating();
           <a href="/contact/" class="btn btn-warning btn-lg me-3 fw-bold">Get Free Quote</a>
           <a href="/portfolio/" class="btn btn-outline-light btn-lg">View Portfolio</a>
         </div>
+        <?= $isPriorityHub ? render_remote_badges() : '' ?>
       </div>
       <div class="col-lg-4 text-center mt-4 mt-lg-0">
         <div style="background:rgba(255,255,255,0.1);border-radius:20px;padding:30px;">
@@ -110,7 +118,7 @@ $rating = average_client_rating();
     <div class="row align-items-center g-5 mb-5">
       <div class="col-lg-6<?= $u['layout'] === 'B' ? ' order-lg-2' : '' ?>">
         <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
-          <img src="<?= $site ?>assets/img/all-images/about-img6.png" alt="Web developer for <?= htmlspecialchars($c['city_name']) ?> businesses" style="width:100%;display:block;">
+          <img src="<?= $heroImage ?>" alt="Web developer for <?= htmlspecialchars($c['city_name']) ?> businesses" style="width:100%;display:block;">
         </div>
       </div>
       <div class="col-lg-6<?= $u['layout'] === 'B' ? ' order-lg-1' : '' ?>">
@@ -320,6 +328,8 @@ $rating = average_client_rating();
     <a href="/pricing/" class="btn btn-outline-light btn-lg">View Pricing</a>
   </div>
 </section>
+
+<?= $isPriorityHub ? render_hub_crosslinks($site, $c['schema_country'], $page . '/') : '' ?>
 
 <?php include_once "includes/footer.php" ?>
 </body>

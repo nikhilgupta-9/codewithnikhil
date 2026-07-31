@@ -28,6 +28,10 @@ if ($local) {
 
 global $site;
 
+// Free, no-cost key from https://www.pexels.com/api/new/ -- used only by
+// util/fetch_hub_images.php, a one-off script, not at request time.
+define('PEXELS_API_KEY', 'YOUR_PEXELS_API_KEY');
+
 $conn = new mysqli($host, $username, $password, $dbName);
 
 if ($conn->connect_error) {

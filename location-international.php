@@ -17,6 +17,8 @@ $projectCount = count_portfolio_projects();
 $yearsExperience = years_in_business(2021);
 $rating = average_client_rating();
 $gradient = $c['gradient'] ?? 'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)';
+include_once "includes/hub-crosslinks.php";
+$heroImage = hub_image_url($site, 'locations', hub_country_slug($c['schema_country'])) ?? ($site . 'assets/img/all-images/about-img6.png');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,7 +116,7 @@ $introSection = '
     <div class="row align-items-center g-5">
       <div class="col-lg-6' . ($c['layout'] === 'B' ? ' order-lg-2' : '') . '">
         <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);">
-          <img src="' . $site . 'assets/img/all-images/about-img6.png" alt="Web developer for businesses in ' . htmlspecialchars($c['city_name']) . '" style="width:100%;display:block;">
+          <img src="' . $heroImage . '" alt="Web developer for businesses in ' . htmlspecialchars($c['city_name']) . '" style="width:100%;display:block;">
         </div>
       </div>
       <div class="col-lg-6' . ($c['layout'] === 'B' ? ' order-lg-1' : '') . '">
@@ -297,6 +299,8 @@ if ($c['layout'] === 'A') {
     <a href="<?= $site ?>portfolio/" class="btn btn-outline-light btn-lg">See My Work</a>
   </div>
 </section>
+
+<?= render_hub_crosslinks($site, $c['schema_country'], $page . '/') ?>
 
 <?php include_once "includes/footer.php" ?>
 </body>
