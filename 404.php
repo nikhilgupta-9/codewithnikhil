@@ -1,6 +1,6 @@
 <?php
-include_once "config/connect.php";
-include_once "util/function.php";
+include_once __DIR__ . "/config/connect.php";
+include_once __DIR__ . "/util/function.php";
 http_response_code(404);
 ?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ http_response_code(404);
 <link rel="canonical" href="https://nikhilworks.com/">
 </head>
 <body>
-<?php include_once "includes/header.php" ?>
+<?php include_once __DIR__ . "/includes/header.php" ?>
 <section style="min-height:60vh;display:flex;align-items:center;justify-content:center;background:#f8f9fa;">
   <div class="container text-center py-5">
     <h1 style="font-size:6rem;font-weight:800;color:#0d6efd;margin:0;">404</h1>
@@ -33,6 +33,6 @@ http_response_code(404);
     </div>
   </div>
 </section>
-<?php include_once "includes/footer.php" ?>
+<?php include_once __DIR__ . "/includes/footer.php" ?>
 </body>
 </html>
