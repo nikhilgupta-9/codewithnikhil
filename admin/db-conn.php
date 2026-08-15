@@ -6,14 +6,14 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Database Configuration
-$local = false; // Set to false for live server
+$local = true; // Set to false for live server
 
 if ($local) {
     $host = 'localhost';
     $username = 'root';
     $password = '';
-    $dbName   = 'nikhil_backup';
-    $site     = 'http://localhost/nikhil-backup/';
+    $dbName   = 'nikhil_works_db';
+    $site     = 'http://localhost/codewithnikhil/';
 } else {
     $host = 'localhost';
     $username = 'u950539402_nikhil_work_db';

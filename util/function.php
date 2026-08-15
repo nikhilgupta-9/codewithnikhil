@@ -1,7 +1,14 @@
 <?php
 include_once __DIR__. "/../config/connect.php";
 
-// get category 
+// Safely escape a string for use inside a hand-built JSON-LD string value.
+// addslashes() produces \' which is not a valid JSON escape and breaks
+// structured data (Google Search Console: "Bad escape sequence in string").
+function json_ld_esc($value) {
+    return substr(json_encode((string) $value, JSON_UNESCAPED_UNICODE), 1, -1);
+}
+
+// get category
 function get_category() {
     global $conn;
 

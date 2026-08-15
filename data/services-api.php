@@ -19,7 +19,7 @@ return [
     'description' => 'Custom API integration services for Indian businesses -- payments, WhatsApp, CRM, SMS, maps, GST and any third-party REST API connected to your website or app. Fixed-scope quotes in INR.',
     'keywords' => 'API integration service india, third party API integration developer, REST API integration service, API integration company india, custom API integration, API development and integration india, web API integration service, API integration PHP developer, backend API integration service, API integration for website, API integration service for small business india, hire API integration developer india, third party API integration PHP MySQL, custom API development and integration delhi, affordable API integration service india',
     'canonical' => 'https://nikhilworks.com/api-integration-services-india/',
-    'hero_sub' => 'One developer, any API -- payments, messaging, CRM, shipping, maps or a system you already use.',
+    'hero_sub' => 'One developer, any API -- payments, <br>messaging, CRM, shipping, maps or a system you already use.',
     'country_name' => 'India',
     'currency' => 'INR',
     'price_range' => 'INR 5,000 - 2,00,000',

@@ -72,25 +72,27 @@ include_once "includes/api-crosslinks.php";
 <body class="homepage4-body">
 <?php include_once "includes/header.php" ?>
 
-<section style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);padding:120px 0 80px;">
+<section style="background-image:url(<?= $site ?>assets/img/api-img/api-banner-2.png);background-size:cover;background-position:center;background-repeat:no-repeat;padding:120px 0 80px;">
   <div class="container">
     <div class="row align-items-center">
-      <div class="col-lg-8">
-        <p class="text-warning mb-2 fw-bold"><i class="<?= htmlspecialchars($c['category_icon']) ?> me-2"></i>API Integration for <?= htmlspecialchars($c['flag']) ?> Businesses</p>
-        <h1 class="text-white fw-bold" style="font-size:2.8rem;"><?= htmlspecialchars($c['h1']) ?></h1>
-        <p class="text-light mt-3" style="font-size:1.2rem;"><?= htmlspecialchars($c['hero_sub']) ?></p>
-        <div class="mt-4">
-          <a href="/contact/" class="btn btn-warning btn-lg me-3 fw-bold">Get Free Quote</a>
-          <a href="/portfolio/" class="btn btn-outline-light btn-lg">View My Work</a>
+      <div class="col-lg-7">
+        <div class="hero-glass-panel">
+          <p class="mb-2 fw-bold" style="color:var(--ztc-text-text-11);"><i class="<?= htmlspecialchars($c['category_icon']) ?> me-2"></i>API Integration for <?= htmlspecialchars($c['flag']) ?> Businesses</p>
+          <h1 class="text-white fw-bold" style="font-size:2.8rem;"><?= htmlspecialchars($c['h1']) ?></h1>
+          <p class=" mt-3" style="font-size:1.2rem; color:var(--ztc-text-text-11);"><?= $c['hero_sub'] ?></p>
+          <div class="mt-4">
+            <a href="/contact/" class="header-btn11 me-3">Get Free Quote</a>
+            <a href="/portfolio/" class="btn btn-lg" style="border:2px solid var(--ztc-text-text-11);color:var(--ztc-text-text-11);">View My Work</a>
+          </div>
+          <?= render_remote_badges() ?>
         </div>
-        <?= render_remote_badges() ?>
       </div>
-      <div class="col-lg-4 text-center mt-4 mt-lg-0">
+      <div class="col-lg-5 text-center mt-4 mt-lg-0 d-none">
         <div style="background:rgba(255,255,255,0.1);border-radius:20px;padding:30px;">
-          <div class="text-warning" style="font-size:3rem;font-weight:800;"><?= $projectCount ?>+</div><div class="text-white">Projects Done</div>
-          <div class="text-warning mt-3" style="font-size:3rem;font-weight:800;"><?= $yearsExperience ?>+</div><div class="text-white">Years Experience</div>
+          <div style="font-size:3rem;font-weight:800;color:var(--ztc-text-text-11);"><?= $projectCount ?>+</div><div class="text-white">Projects Done</div>
+          <div class="mt-3" style="font-size:3rem;font-weight:800;color:var(--ztc-text-text-11);"><?= $yearsExperience ?>+</div><div class="text-white">Years Experience</div>
           <?php if ($rating['count'] > 0): ?>
-          <div class="text-warning mt-3" style="font-size:2rem;font-weight:800;"><?= $rating['avg'] ?>/5</div><div class="text-white">Client Rating</div>
+          <div class="mt-3" style="font-size:2rem;font-weight:800;color:var(--ztc-text-text-11);"><?= $rating['avg'] ?>/5</div><div class="text-white">Client Rating</div>
           <?php endif; ?>
         </div>
       </div>
@@ -98,16 +100,120 @@ include_once "includes/api-crosslinks.php";
   </div>
 </section>
 
+<style>
+.feature-showcase-panel {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(16, 64, 65, 0.25);
+  background: linear-gradient(135deg, var(--ztc-text-text-6), var(--ztc-text-text-12));
+  padding: 60px 40px;
+  text-align: center;
+}
+.feature-showcase-panel > i {
+  font-size: 8rem;
+  color: var(--ztc-text-text-11);
+}
+.feature-showcase-panel .feature-pill {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+.process-step-card {
+  border-radius: 16px;
+  border: 1px solid rgba(16, 64, 65, 0.08) !important;
+  transition: all 0.3s ease;
+}
+.process-step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(16, 64, 65, 0.12);
+}
+.step-number {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ztc-text-text-6), var(--ztc-text-text-12));
+  color: var(--ztc-text-text-11);
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+.comparison-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(16, 64, 65, 0.08);
+}
+.comparison-table thead th {
+  background: linear-gradient(135deg, var(--ztc-text-text-6), var(--ztc-text-text-12));
+  color: #fff;
+  padding: 16px;
+  text-align: left;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.comparison-table tbody td {
+  padding: 16px;
+  border-bottom: 1px solid rgba(16, 64, 65, 0.08);
+  background: #fff;
+  vertical-align: top;
+}
+.comparison-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.comparison-table tbody tr:hover td {
+  background: rgba(16, 64, 65, 0.03);
+}
+.mistake-card {
+  border-radius: 16px;
+  border: 1px solid rgba(16, 64, 65, 0.08) !important;
+  border-left: 4px solid var(--ztc-text-text-6) !important;
+  transition: all 0.3s ease;
+}
+.mistake-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(16, 64, 65, 0.1);
+}
+.mistake-card i {
+  color: var(--ztc-text-text-6);
+  font-size: 1.6rem;
+}
+.api-cta-section {
+  background: linear-gradient(135deg, var(--ztc-text-text-6), var(--ztc-text-text-12));
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+.api-cta-section::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: -120px;
+  right: -120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(173, 255, 28, 0.15), transparent 70%);
+}
+.api-cta-section .container {
+  position: relative;
+  z-index: 1;
+}
+</style>
+
 <section class="py-5<?= $u['layout'] === 'B' ? ' bg-light' : '' ?>">
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-6<?= $u['layout'] === 'B' ? ' order-lg-2' : '' ?>">
-        <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.12);background:linear-gradient(135deg,#0d6efd,#0a58ca);padding:60px 40px;text-align:center;">
-          <i class="<?= htmlspecialchars($c['category_icon']) ?>" style="font-size:8rem;color:#fff;"></i>
+        <div class="feature-showcase-panel">
+          <i class="<?= htmlspecialchars($c['category_icon']) ?>"></i>
           <div class="row g-3 mt-4 text-start">
             <?php foreach (array_slice($u['features'], 0, 3) as $f): ?>
             <div class="col-12">
-              <div class="d-flex align-items-center gap-2" style="background:rgba(255,255,255,0.12);border-radius:10px;padding:12px 16px;">
+              <div class="d-flex align-items-center gap-2 feature-pill">
                 <i class="<?= htmlspecialchars($f['icon']) ?> text-warning"></i>
                 <span class="text-white fw-semibold small"><?= htmlspecialchars($f['title']) ?></span>
               </div>
@@ -154,6 +260,14 @@ include_once "includes/api-crosslinks.php";
       <?php endforeach; ?>
     </div>
   </div>
+</section>
+
+<section>
+      <div class="container-fluid p-0">
+        <a href="<?=$site?>contact/">
+        <img src="<?=$site?>assets/img/api-img/api-banner-1.png" alt="">
+        </a>
+      </div>
 </section>
 
 <?php if ($isPillar): ?>
@@ -206,21 +320,81 @@ include_once "includes/api-crosslinks.php";
   </div>
 </section>
 
+<?php if (!empty($u['comparison'])): ?>
+<section class="py-5<?= $u['layout'] === 'B' ? '' : ' bg-light' ?>">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold"><?= htmlspecialchars($u['comparison']['heading']) ?></h2>
+      <?php if (!empty($u['comparison']['sub'])): ?>
+      <p class="text-muted"><?= htmlspecialchars($u['comparison']['sub']) ?></p>
+      <?php endif; ?>
+    </div>
+    <div class="table-responsive">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Best For</th>
+            <th>Worth Knowing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($u['comparison']['items'] as $row): ?>
+          <tr>
+            <td class="fw-bold"><?= htmlspecialchars($row['name']) ?></td>
+            <td><?= htmlspecialchars($row['best_for']) ?></td>
+            <td class="text-muted"><?= htmlspecialchars($row['note']) ?></td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if (!empty($u['mistakes'])): ?>
 <section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Where This Usually Goes Wrong</h2>
+      <p class="text-muted">Issues seen often enough on real projects to plan around from day one</p>
+    </div>
+    <div class="row g-4">
+      <?php foreach ($u['mistakes'] as $m): ?>
+      <div class="col-md-4">
+        <div class="card border-0 p-4 h-100 mistake-card">
+          <i class="fa-solid fa-triangle-exclamation mb-3"></i>
+          <h4 class="h6 fw-bold"><?= htmlspecialchars($m['title']) ?></h4>
+          <p class="text-muted small mb-0"><?= htmlspecialchars($m['desc']) ?></p>
+        </div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<section class="py-5<?= $u['layout'] === 'A' ? '' : ' bg-light' ?>">
   <div class="container">
     <div class="text-center mb-5">
       <h2 class="fw-bold">How the Integration Gets Built</h2>
     </div>
     <div class="row g-4">
-      <div class="col-md-3 text-center"><div class="card border-0 p-4"><div style="font-size:2.5rem;font-weight:800;color:#0d6efd;">1</div><h4 class="h6 fw-bold mt-2">Review the API</h4><p class="text-muted small">Docs, auth method and rate limits checked before scoping.</p></div></div>
-      <div class="col-md-3 text-center"><div class="card border-0 p-4"><div style="font-size:2.5rem;font-weight:800;color:#0d6efd;">2</div><h4 class="h6 fw-bold mt-2">Fixed-Scope Quote</h4><p class="text-muted small">A quote in <?= htmlspecialchars($c['currency']) ?> within 24-48 hours.</p></div></div>
-      <div class="col-md-3 text-center"><div class="card border-0 p-4"><div style="font-size:2.5rem;font-weight:800;color:#0d6efd;">3</div><h4 class="h6 fw-bold mt-2">Build & Sandbox Test</h4><p class="text-muted small">Integration built and tested in a sandbox/staging environment first.</p></div></div>
-      <div class="col-md-3 text-center"><div class="card border-0 p-4"><div style="font-size:2.5rem;font-weight:800;color:#0d6efd;">4</div><h4 class="h6 fw-bold mt-2">Go Live & Verify</h4><p class="text-muted small">Switched to production and verified with a real end-to-end test.</p></div></div>
+      <?php foreach ($u['process'] as $i => $step): ?>
+      <div class="col-md-3 text-center">
+        <div class="card border-0 p-4 process-step-card">
+          <div class="step-number"><?= $i + 1 ?></div>
+          <h4 class="h6 fw-bold mt-3"><?= htmlspecialchars($step['title']) ?></h4>
+          <p class="text-muted small"><?= htmlspecialchars($step['desc']) ?></p>
+        </div>
+      </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
 
-<section style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);padding:80px 0;">
+<section class="api-cta-section">
   <div class="container text-center">
     <h2 class="text-white fw-bold mb-3">Let's Get This API Connected and Tested</h2>
     <p class="text-light mb-4">Free consultation. No obligation. Get a fixed-scope quote in <?= htmlspecialchars($c['currency']) ?> within 24-48 hours.</p>

@@ -25,7 +25,7 @@ $services = get_sub_category($limit);
 <!--===== PROGRESS ENDS=======-->
 
 <!--=====HEADER START=======-->
-<header>
+<header class="mt-0">
   <div class="header-area homepage4 header header-sticky d-none d-lg-block " id="header">
     <div class="container">
       <div class="row">

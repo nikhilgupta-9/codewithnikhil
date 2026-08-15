@@ -154,8 +154,8 @@ $yearsExperience = years_in_business(2021);
       $pos = 1;
       $schemaItems = [];
       foreach ($portfolios as $p) {
-          $name = addslashes(strip_tags($p['pro_name'] ?? $p['brand_name'] ?? 'Web Project'));
-          $desc = addslashes(strip_tags(substr($p['short_desc'] ?? '', 0, 120)));
+          $name = json_ld_esc(strip_tags($p['pro_name'] ?? $p['brand_name'] ?? 'Web Project'));
+          $desc = json_ld_esc(strip_tags(substr($p['short_desc'] ?? '', 0, 120)));
           $schemaItems[] = '{"@type":"ListItem","position":' . $pos++ . ',"name":"' . $name . '","description":"' . $desc . '"}';
       }
       echo implode(",\n      ", $schemaItems);

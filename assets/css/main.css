@@ -1213,6 +1213,8 @@ Location:
   margin-bottom: 24px;
 }
 
+
+
 .heading11 h2 {
   font-family: var(--ztc-family-font1);
   font-size: var(--ztc-font-size-font-s44);
@@ -2202,6 +2204,14 @@ Location:
   top: 0;
   width: 100%;
   transition: all 0.4s;
+}
+
+.text-dark-theme{
+  color: var(--ztc-text-text-6);
+}
+
+.text.-light-theme{
+  color: var(--ztc-text-text-11);
 }
 
 .header-btn12 {
@@ -12698,7 +12708,7 @@ Location:
   transition: all 0.4s;
 }
 .footer4-section-area .footer-logo-area1 {
-  padding-left: 60px;
+  padding-left: 30px;
 }
 @media (max-width: 767px) {
   .footer4-section-area .footer-logo-area1 {
@@ -12721,7 +12731,7 @@ Location:
 }
 .footer4-section-area .footer-logo-area1 ul li a {
   font-family: var(--ztc-family-font1);
-  font-size: var(--ztc-font-size-font-s16);
+  font-size: var(--ztc-font-size-font-s14);
   line-height: var(--ztc-font-size-font-s16);
   font-weight: var(--ztc-weight-regular);
   color: var(--ztc-text-text-3);
@@ -16267,7 +16277,7 @@ Location:
   position: absolute;
   background: var(--ztc-text-text-1);
   top: 100px;
-  width: 250px;
+  width: 300px;
   z-index: 1;
   transition: all 0.4s;
   border-radius: 5px;
@@ -16296,7 +16306,7 @@ Location:
   /* font-weight: var(--ztc-weight-medium); */
   border-bottom: 1px solid black;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 15px;
   transition: all 0.4s;
   padding: 8px;
   display: block;
@@ -31718,3 +31728,37 @@ Location:
   position: relative;
   top: 13px;
 }
+
+ .hero-glass-panel {
+    background: rgba(29, 72, 73, 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+  @media (max-width: 767px) {
+    .hero-glass-panel { padding: 24px; }
+  }
+
+  .footer-glass-panel{
+    background: rgb(159 239 210 / 13%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+
+ .footer-glass-panel-2{
+    background: rgb(193 211 243 / 13%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+  

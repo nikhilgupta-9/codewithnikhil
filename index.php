@@ -374,7 +374,7 @@ $blogs = get_blog($limit);
   <script src="assets/js/plugins/jquery-3-6-0.min.js"></script>
 </head>
 
-<body class="homepage4-body">
+<body class="homepage4-body pt-0">
 
   <?php include_once "includes/header.php" ?>
 

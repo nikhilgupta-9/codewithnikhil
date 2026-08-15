@@ -96,7 +96,7 @@ $og_image = !empty($product_details['pro_img'])
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Home", "item": "<?= rtrim($site, '/') ?>"},
       {"@type": "ListItem", "position": 2, "name": "Services", "item": "<?= rtrim($site, '/') ?>/services/"},
-      {"@type": "ListItem", "position": 3, "name": "<?= addslashes($product_details['pro_name']) ?>", "item": "<?= $canonical_url ?>"}
+      {"@type": "ListItem", "position": 3, "name": "<?= json_ld_esc($product_details['pro_name']) ?>", "item": "<?= $canonical_url ?>"}
     ]
   }
   </script>
@@ -106,8 +106,8 @@ $og_image = !empty($product_details['pro_img'])
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "<?= addslashes($product_details['pro_name']) ?>",
-    "description": "<?= addslashes(strip_tags($product_details['meta_desc'])) ?>",
+    "name": "<?= json_ld_esc($product_details['pro_name']) ?>",
+    "description": "<?= json_ld_esc(strip_tags($product_details['meta_desc'])) ?>",
     "url": "<?= $canonical_url ?>",
     "provider": {
       "@type": "ProfessionalService",

@@ -13,8 +13,8 @@ if ($local) {
     $host     = 'localhost';
     $username = 'root';
     $password = '';
-    $dbName   = 'learn_with_nikhil_db';
-    $site     = 'http://localhost/learn-with-nikhil/';
+    $dbName   = 'nikhil_works_db';
+    $site     = 'http://localhost/codewithnikhil/';
 } else {
     error_reporting(0);
     ini_set('display_errors', 0);
