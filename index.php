@@ -55,6 +55,7 @@ $blogs = get_blog($limit);
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="NikhilWorks - Web Development & SEO Services">
+  <meta name="google-site-verification" content="CDIIrOxAgIwGM82moWkxmu4MN4lrxpLE6HdPVFlvXPE" />
 
   <!-- ✅ TWITTER CARD -->
   <meta name="twitter:card" content="summary_large_image">
