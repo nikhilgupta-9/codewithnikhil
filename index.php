@@ -23,7 +23,7 @@ $blogs = get_blog($limit);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- ✅ TITLE — 58 chars, keyword-rich, global -->
-  <title>NikhilWorks — Web Development & SEO | India & Global</title>
+    <title>NikhilWorks — Outsource Web Development Agency in India, United States America, United Kingdom, Australia | CRM Development Solutions in Dubai, UAE | SaaS Application Development Company In India, UK, USA, Australia, UAE, Germany | Outsource SEO Services & Google Promotion Company</title>
 
   <!-- ✅ META DESCRIPTION — 155 chars, compelling, international -->
   <meta name="description" content="Expert web development & SEO services by Nikhil Gupta. Custom websites, PHP apps, e-commerce & SEO for businesses in India, Dubai, USA, UK & Australia.">
