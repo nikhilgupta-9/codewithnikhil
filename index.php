@@ -29,7 +29,7 @@ $blogs = get_blog($limit);
   <meta name="description" content="Expert web development & SEO services by Nikhil Gupta. Custom websites, PHP apps, e-commerce & SEO for businesses in India, Dubai, USA, UK & Australia.">
 
   <!-- ✅ KEYWORDS -->
-  <meta name="keywords" content="web developer india, seo expert india, php developer, website development delhi, web development dubai, seo services usa, web design uk, freelance web developer india">
+  <meta name="keywords" content="web developer india, seo expert india, php developer, website development delhi, web development dubai, seo services usa, web design uk, freelance web developer india, Freelance Full-Stack Web Developer India, Professional Web Application Developer">
 
   <!-- ✅ ROBOTS -->
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
