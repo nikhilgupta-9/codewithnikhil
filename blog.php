@@ -28,8 +28,7 @@ $is_tag_page = !empty($_GET['tag']);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <?php if($is_tag_page): ?>
-  <!-- Tag pages — noindex karo, duplicate nahi banenge -->
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="index, follow">
   <title>Blogs | NikhilWorks</title>
   <?php else: ?>
   <!-- Main blogs page — index karo -->
