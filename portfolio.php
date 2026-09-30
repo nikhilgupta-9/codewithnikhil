@@ -4,7 +4,7 @@ include_once "util/function.php";
 
 $portfolios = get_portfolio();
 $projectCount = count_portfolio_projects();
-$yearsExperience = years_in_business(2021);
+$yearsExperience = years_in_business(2022, 8);
 ?>
 <!DOCTYPE html>
 <html lang="en">

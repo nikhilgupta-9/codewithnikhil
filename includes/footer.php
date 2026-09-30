@@ -72,8 +72,8 @@
 </style>
 
 <?php
-// Dynamic trust metrics
-$years = function_exists('years_in_business') ? years_in_business(2021) : '4';
+// Dynamic trust metrics - calculated from August 2022
+$years = function_exists('years_in_business') ? years_in_business(2022, 8) : '4';
 $projCount = function_exists('count_portfolio_projects') ? count_portfolio_projects() : 25;
 if ($projCount < 20) $projCount = 25; // Base minimum delivered projects
 $ratingData = function_exists('average_client_rating') ? average_client_rating() : ['avg' => 4.9, 'count' => 15];
@@ -130,7 +130,7 @@ $footerYearsInBusiness = (string)$years;
       <div class="col-lg-3 col-md-6">
         <div class="footer-logo-area">
           <h2 class="logo_header my-2">NikhilWorks</h2>
-          <p class="my-2">Nikhil Gupta — a freelance web development, CRM &amp; digital marketing studio helping businesses grow online across India, USA, UK, Canada, Australia, UAE and beyond.</p>
+          <p class="my-2">Nikhil Gupta — freelance web developer, CRM &amp; digital marketing consultant helping businesses grow online across India, USA, UK, Canada, Australia, UAE and beyond (since Aug 2022).</p>
 
           <ul class="footer-trust-stats">
             <li><strong><span class="footer-counter" data-counter-time="1200"><?= $footerGoogleRating ?></span>★</strong><span>Google Rating</span></li>
@@ -139,52 +139,52 @@ $footerYearsInBusiness = (string)$years;
           </ul>
 
           <p class="footer-follow-label">Follow Us</p>
-          <ul class="social-links" style="display: flex; gap: 12px; list-style: none; padding: 0; margin: 0; flex-wrap: wrap;">
+          <ul class="social-links" style="display: flex; gap: 10px; list-style: none; padding: 0; margin: 0; flex-wrap: wrap; align-items: center;">
             <?php if (!empty($contact['linkdin'])): ?>
             <li>
-              <a href="<?= $contact['linkdin'] ?>" target="_blank" rel="noopener" aria-label="LinkedIn" style="color: #104041; font-size: 22px;">
+              <a href="<?= $contact['linkdin'] ?>" target="_blank" rel="noopener" aria-label="LinkedIn" class="footer-social-btn" title="LinkedIn">
                 <i class="fab fa-linkedin-in"></i>
               </a>
             </li>
             <?php endif; ?>
             <?php if (!empty($contact['twitter'])): ?>
             <li>
-              <a href="<?= $contact['twitter'] ?>" target="_blank" rel="noopener" aria-label="X (Twitter)" style="color: #104041; font-size: 22px;">
-                <i class="fa-brands fa-x-twitter"></i>
+              <a href="<?= $contact['twitter'] ?>" target="_blank" rel="noopener" aria-label="X (Twitter)" class="footer-social-btn" title="X (Twitter)">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: inline-block; vertical-align: middle;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
               </a>
             </li>
             <?php endif; ?>
             <?php if (!empty($contact['github'])): ?>
             <li>
-              <a href="<?= $contact['github'] ?>" target="_blank" rel="noopener" aria-label="GitHub" style="color: #104041; font-size: 22px;">
+              <a href="<?= $contact['github'] ?>" target="_blank" rel="noopener" aria-label="GitHub" class="footer-social-btn" title="GitHub">
                 <i class="fab fa-github"></i>
               </a>
             </li>
             <?php endif; ?>
             <?php if (!empty($contact['facebook'])): ?>
             <li>
-              <a href="<?= $contact['facebook'] ?>" target="_blank" rel="noopener" aria-label="Facebook" style="color: #104041; font-size: 22px;">
+              <a href="<?= $contact['facebook'] ?>" target="_blank" rel="noopener" aria-label="Facebook" class="footer-social-btn" title="Facebook">
                 <i class="fab fa-facebook-f"></i>
               </a>
             </li>
             <?php endif; ?>
             <?php if (!empty($contact['instagram'])): ?>
             <li>
-              <a href="<?= $contact['instagram'] ?>" target="_blank" rel="noopener" aria-label="Instagram" style="color: #104041; font-size: 22px;">
+              <a href="<?= $contact['instagram'] ?>" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-btn" title="Instagram">
                 <i class="fab fa-instagram"></i>
               </a>
             </li>
             <?php endif; ?>
             <?php if (!empty($contact['devto'])): ?>
             <li>
-              <a href="<?= $contact['devto'] ?>" target="_blank" rel="noopener" aria-label="Dev.to" style="color: #104041; font-size: 22px;">
+              <a href="<?= $contact['devto'] ?>" target="_blank" rel="noopener" aria-label="Dev.to" class="footer-social-btn" title="Dev.to">
                 <i class="fab fa-dev"></i>
               </a>
             </li>
             <?php endif; ?>
             <?php if (!empty($contact['google_review'])): ?>
             <li>
-              <a href="<?= $contact['google_review'] ?>" target="_blank" rel="noopener" aria-label="Google Reviews" style="color: #104041; font-size: 22px;">
+              <a href="<?= $contact['google_review'] ?>" target="_blank" rel="noopener" aria-label="Google Reviews" class="footer-social-btn" title="Google Reviews">
                 <i class="fab fa-google"></i>
               </a>
             </li>
@@ -473,6 +473,26 @@ $footerYearsInBusiness = (string)$years;
     color: #104041;
     margin-bottom: 8px;
   }
+  .footer-social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #eef7f6;
+    color: #104041 !important;
+    font-size: 16px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    border: 1px solid rgba(16, 64, 65, 0.12);
+  }
+  .footer-social-btn:hover {
+    background: #104041;
+    color: #ADFF1C !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(16, 64, 65, 0.2);
+  }
 
   .footer-seo-section h4,
   .footer-region-section h4 {
@@ -527,8 +547,13 @@ $footerYearsInBusiness = (string)$years;
   }
 
   .footer-trust-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 14px;
+    padding: 24px 0 16px;
+    border-top: 1px solid #E5E7EB;
   }
   .footer-trust-badges {
     display: flex;
@@ -547,101 +572,133 @@ $footerYearsInBusiness = (string)$years;
     color: #104041;
     margin-right: 4px;
   }
-</style>
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!--===== JS SCRIPT LINK =======-->
-<!-- jQuery stays blocking — every plugin below and inline $(document).ready() blocks depend on it being available synchronously -->
-<script src="<?= $site ?>assets/js/plugins/bootstrap.min.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/fontawesome.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/aos.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/counter.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/gsap.min.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/ScrollTrigger.min.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/Splitetext.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/sidebar.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/magnific-popup.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/mobilemenu.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/owlcarousel.min.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/gsap-animation.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/nice-select.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/waypoints.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/slick-slider.js" defer></script>
-<script src="<?= $site ?>assets/js/plugins/circle-progress.js" defer></script>
-<script src="<?= $site ?>assets/js/main.js" defer></script>
-
-<script>
-  $(document).ready(function() {
-    $('.btn-group-toggle label').click(function() {
-      var target = $(this).find('input').attr('id');
-
-      // Hide all service categories
-      $('.service-category-content').addClass('d-none');
-
-      // Show selected category
-      if (target === 'option1') {
-        $('#web-development').removeClass('d-none');
-      } else if (target === 'option2') {
-        $('#digital-marketing').removeClass('d-none');
-      } else if (target === 'option3') {
-        $('#design-branding').removeClass('d-none');
-      }
-    });
-  });
-</script>
-
-<!--===== FOOTER INTERACTIVITY =======-->
-<style>
   /* Arrow-in link hover for the footer link columns */
   .footer-logo-area1 ul li a {
     position: relative;
+    transition: color 0.2s ease, padding-left 0.2s ease;
   }
-  .footer-logo-area1 ul li a::before {
-    content: "\2192";
-    position: absolute;
-    left: -14px;
-    top: 0;
-    opacity: 0;
-    color: var(--ztc-text-text-6);
-    transition: opacity 0.3s ease;
-  }
-  .footer-logo-area1 ul li a:hover::before {
-    opacity: 1;
+  .footer-logo-area1 ul li a:hover {
+    color: #104041;
+    padding-left: 4px;
   }
 
-  /* Mobile accordion for the footer link columns */
+  /* Mobile Responsive Overhauls */
   .footer-accordion-toggle {
     cursor: default;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 18px;
+    color: #104041;
+    margin-bottom: 16px;
   }
   .footer-accordion-toggle i {
     display: none;
     font-size: 14px;
     transition: transform 0.3s ease;
   }
+
   @media (max-width: 767px) {
+    .footer-cta-bar {
+      padding: 18px 0;
+    }
+    .footer-cta-card {
+      padding: 14px 16px;
+    }
+    .footer-trust-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 24px;
+      margin: 12px 0 16px;
+    }
+    .footer-trust-stats li strong {
+      font-size: 17px;
+    }
+    .footer-logo-area {
+      margin-bottom: 28px;
+    }
+    .footer-logo-area1 {
+      margin-bottom: 18px;
+    }
     .footer-accordion-toggle {
       cursor: pointer;
-      border-bottom: 1px solid rgba(16, 64, 65, 0.1);
-      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(16, 64, 65, 0.12);
+      padding: 10px 0;
+      margin-bottom: 0;
+      font-size: 16px;
+      font-weight: 700;
     }
     .footer-accordion-toggle i {
       display: inline-block;
+      color: #104041;
     }
     .footer-accordion-toggle.is-open i {
       transform: rotate(180deg);
     }
     .footer-logo-area1 ul {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease;
+      display: none;
+      padding: 12px 0 6px 10px;
+      margin: 0;
     }
     .footer-logo-area1 ul.is-open {
-      max-height: 500px;
+      display: block;
+    }
+    .footer-logo-area1 ul li {
+      margin-bottom: 10px;
+    }
+    .footer-logo-area1 ul li a {
+      font-size: 14px;
+      color: #3D4C5E;
+      display: inline-block;
+    }
+    .footer-seo-section, .footer-region-section {
+      padding: 20px 16px;
+      border-radius: 12px;
+      margin-top: 10px;
+    }
+    .footer-tag-grid {
+      gap: 8px;
+    }
+    .footer-tag-grid a {
+      font-size: 12px;
+      padding: 5px 10px;
+    }
+    .footer-region-grid .col-6 {
+      margin-bottom: 16px;
+    }
+    .copyright-area.footer-trust-bar {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      gap: 12px !important;
+      padding: 20px 0 !important;
+    }
+    .copyright-area.footer-trust-bar .pera p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .copyright-area.footer-trust-bar .footer-trust-badges {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .copyright-area.footer-trust-bar ul:last-child {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .copyright-area.footer-trust-bar ul:last-child li {
+      display: inline-block;
+    }
+    .copyright-area.footer-trust-bar ul:last-child li a {
+      margin: 0 !important;
+      font-size: 13px;
     }
   }
 </style>

@@ -20,7 +20,7 @@ $isHub = in_array($page, $hubSlugs, true);
 $maintenanceSlugs = ['US' => 'website-maintenance-usa/', 'GB' => 'website-maintenance-uk/', 'IN' => 'website-maintenance-india/', 'AE' => 'website-maintenance-uae/', 'CA' => 'website-maintenance-canada/', 'AU' => 'website-maintenance-australia/'];
 $maintenanceLink = $maintenanceSlugs[$c['schema_country']] ?? 'services/';
 $projectCount = count_portfolio_projects();
-$yearsExperience = years_in_business(2021);
+$yearsExperience = years_in_business(2022, 8);
 $rating = average_client_rating();
 include_once "includes/remote-badges.php";
 include_once "includes/hub-crosslinks.php";
@@ -175,7 +175,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-palette fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Fresh, Modern Design</h3>
           <p class="service-tagline">YOUR BRAND, TODAY</p>
@@ -192,7 +192,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>SEO-Safe Migration</h3>
           <p class="service-tagline">NO TRAFFIC LOST</p>
@@ -209,7 +209,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-mobile-screen fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Mobile-First Rebuild</h3>
           <p class="service-tagline">WORKS ON EVERY SCREEN</p>
@@ -226,7 +226,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-gauge-high fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Speed Optimization</h3>
           <p class="service-tagline">FASTER FROM DAY ONE</p>
@@ -243,7 +243,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-box-archive fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Content Migration</h3>
           <p class="service-tagline">NOTHING GETS LEFT BEHIND</p>
@@ -260,7 +260,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-chart-simple fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Analytics Continuity</h3>
           <p class="service-tagline">YOUR DATA HISTORY STAYS INTACT</p>

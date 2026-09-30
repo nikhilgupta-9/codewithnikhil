@@ -20,7 +20,7 @@ $isHub = in_array($page, $hubSlugs, true);
 $maintenanceSlugs = ['US' => 'website-maintenance-usa/', 'GB' => 'website-maintenance-uk/', 'IN' => 'website-maintenance-india/', 'AE' => 'website-maintenance-uae/', 'CA' => 'website-maintenance-canada/', 'AU' => 'website-maintenance-australia/'];
 $maintenanceLink = $maintenanceSlugs[$c['schema_country']] ?? 'services/';
 $projectCount = count_portfolio_projects();
-$yearsExperience = years_in_business(2021);
+$yearsExperience = years_in_business(2022, 8);
 $rating = average_client_rating();
 include_once "includes/remote-badges.php";
 include_once "includes/hub-crosslinks.php";
@@ -175,7 +175,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-bullseye fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Keyword Shortlist</h3>
           <p class="service-tagline">FOCUSED ON REVENUE, NOT VOLUME</p>
@@ -192,7 +192,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-file-lines fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Content & On-Page Work</h3>
           <p class="service-tagline">EVERY PAGE TARGETS A KEYWORD</p>
@@ -209,7 +209,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-link fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Authority Building</h3>
           <p class="service-tagline">PUSH YOUR PRIORITY PAGES UP</p>
@@ -226,7 +226,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-chart-line fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Weekly Position Tracking</h3>
           <p class="service-tagline">NO GUESSING</p>
@@ -243,7 +243,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-square-check fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Clear Success Criteria</h3>
           <p class="service-tagline">YOU KNOW WHAT "DONE" MEANS</p>
@@ -260,7 +260,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-file-invoice fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Monthly Ranking Reports</h3>
           <p class="service-tagline">PROOF, NOT PROMISES</p>

@@ -20,7 +20,7 @@ $isHub = in_array($page, $hubSlugs, true);
 $maintenanceSlugs = ['US' => 'website-maintenance-usa/', 'GB' => 'website-maintenance-uk/', 'IN' => 'website-maintenance-india/', 'AE' => 'website-maintenance-uae/', 'CA' => 'website-maintenance-canada/', 'AU' => 'website-maintenance-australia/'];
 $maintenanceLink = $maintenanceSlugs[$c['schema_country']] ?? 'services/';
 $projectCount = count_portfolio_projects();
-$yearsExperience = years_in_business(2021);
+$yearsExperience = years_in_business(2022, 8);
 $rating = average_client_rating();
 include_once "includes/remote-badges.php";
 include_once "includes/hub-crosslinks.php";
@@ -175,7 +175,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-gears fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Technical SEO</h3>
           <p class="service-tagline">FIX WHAT GOOGLE CAN'T SEE</p>
@@ -192,7 +192,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-gauge-high fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Performance</h3>
           <p class="service-tagline">FIND WHAT'S SLOWING YOU DOWN</p>
@@ -209,7 +209,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-shield-halved fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Security</h3>
           <p class="service-tagline">BEFORE IT'S EXPLOITED</p>
@@ -226,7 +226,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-file-lines fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>On-Page Content</h3>
           <p class="service-tagline">CLOSE THE GAP TO COMPETITORS</p>
@@ -243,7 +243,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-arrow-pointer fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>UX & Conversion</h3>
           <p class="service-tagline">FIND WHERE VISITORS DROP OFF</p>
@@ -260,7 +260,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-mobile-screen fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Mobile Experience</h3>
           <p class="service-tagline">TESTED ON REAL PHONES</p>

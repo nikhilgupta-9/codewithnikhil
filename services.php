@@ -187,7 +187,7 @@ $portfolios = get_portfolio();
           <div class="case-header-area heading2 text-center">
             <h2 class="text-anime-style-3">What I Offer</h2>
             <h3>Complete Digital Solutions for Your Business</h3>
-            <h5>With over 5 years of experience, we provide end-to-end web development and digital marketing services to help your business succeed online.</h5>
+            <h5>With professional experience since August 2022, we provide end-to-end web development and digital marketing services to help your business succeed online.</h5>
           </div>
         </div>
       </div>
@@ -222,7 +222,7 @@ $portfolios = get_portfolio();
                   <i class="fa-solid fa-code fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Website Design & Development</h3>
@@ -249,7 +249,7 @@ $portfolios = get_portfolio();
                   <i class="fa-solid fa-cart-shopping fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>E-Commerce Solutions</h3>
@@ -276,7 +276,7 @@ $portfolios = get_portfolio();
                   <i class="fa-brands fa-wordpress fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>WordPress Development</h3>
@@ -303,7 +303,7 @@ $portfolios = get_portfolio();
                   <i class="fa-brands fa-php fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>PHP Development</h3>
@@ -330,7 +330,7 @@ $portfolios = get_portfolio();
                   <i class="fa-solid fa-mobile-screen-button fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Mobile App Development</h3>
@@ -357,7 +357,7 @@ $portfolios = get_portfolio();
                   <i class="fa-solid fa-screwdriver-wrench fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Website Maintenance</h3>
@@ -391,7 +391,7 @@ $portfolios = get_portfolio();
                   <i class="fa-solid fa-magnifying-glass-chart fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>SEO Services</h3>
@@ -418,7 +418,7 @@ $portfolios = get_portfolio();
                   <i class="fa-solid fa-bullhorn fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Digital Marketing</h3>
@@ -452,7 +452,7 @@ $portfolios = get_portfolio();
                   <i class="fa-solid fa-pen-nib fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Graphic Design</h3>
@@ -479,7 +479,7 @@ $portfolios = get_portfolio();
                   <i class="fa-solid fa-copyright fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Logo Design</h3>

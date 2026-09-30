@@ -20,7 +20,7 @@ $isHub = in_array($page, $hubSlugs, true);
 $maintenanceSlugs = ['US' => 'website-maintenance-usa/', 'GB' => 'website-maintenance-uk/', 'IN' => 'website-maintenance-india/', 'AE' => 'website-maintenance-uae/', 'CA' => 'website-maintenance-canada/', 'AU' => 'website-maintenance-australia/'];
 $maintenanceLink = $maintenanceSlugs[$c['schema_country']] ?? 'services/';
 $projectCount = count_portfolio_projects();
-$yearsExperience = years_in_business(2021);
+$yearsExperience = years_in_business(2022, 8);
 $rating = average_client_rating();
 include_once "includes/remote-badges.php";
 include_once "includes/hub-crosslinks.php";
@@ -175,7 +175,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-magnifying-glass fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Keyword Research</h3>
           <p class="service-tagline">RANK FOR TERMS THAT CONVERT</p>
@@ -192,7 +192,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-gears fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Technical SEO</h3>
           <p class="service-tagline">FIX WHAT'S HOLDING YOU BACK</p>
@@ -209,7 +209,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-file-lines fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>On-Page Optimization</h3>
           <p class="service-description">Titles, meta descriptions, headings and content aligned to the keywords you actually want to rank for.</p>
@@ -226,7 +226,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-map-location-dot fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Local SEO</h3>
           <p class="service-tagline">SHOW UP NEARBY</p>
@@ -243,7 +243,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-link fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Link Building</h3>
           <p class="service-tagline">AUTHORITY, THE RIGHT WAY</p>
@@ -260,7 +260,7 @@ if ($u['layout'] === 'A') {
         <div class="service-card">
           <div class="service-header">
             <div class="service-icon"><i class="fa-solid fa-chart-line fa-2x"></i></div>
-            <div class="service-experience"><span>Since 2021</span></div>
+            <div class="service-experience"><span>Since Aug 2022</span></div>
           </div>
           <h3>Monthly Reporting</h3>
           <p class="service-tagline">NO VANITY METRICS</p>

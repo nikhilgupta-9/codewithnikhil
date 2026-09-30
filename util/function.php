@@ -504,11 +504,13 @@ function count_portfolio_projects()
     return intval($row['total'] ?? 0);
 }
 
-// ── Years in business, computed from founding year (avoids stale hardcoded stat) ──
-function years_in_business($foundingYear = 2021)
+// ── Years in business / experience, computed from August 2022 (avoids stale hardcoded stat) ──
+function years_in_business($foundingYear = 2022, $foundingMonth = 8)
 {
-    $currentYear = intval(date('Y'));
-    return max(1, $currentYear - intval($foundingYear));
+    $foundingDate = new DateTime(sprintf('%04d-%02d-01', $foundingYear, $foundingMonth));
+    $now = new DateTime();
+    $diff = $now->diff($foundingDate);
+    return max(1, $diff->y);
 }
 
 // ── Real average client rating, computed from the testimonials table ──

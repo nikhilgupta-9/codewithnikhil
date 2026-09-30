@@ -17,7 +17,7 @@ $u = $content[$slug];
 $contact = contact_us();
 $projectCount = count_portfolio_projects();
 if ($projectCount < 20) $projectCount = 25;
-$yearsExperience = years_in_business(2021);
+$yearsExperience = years_in_business(2022, 8);
 $rating = average_client_rating();
 $avgRating = ($rating['avg'] > 0) ? $rating['avg'] : '4.9';
 

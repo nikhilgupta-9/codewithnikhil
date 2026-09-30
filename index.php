@@ -83,7 +83,7 @@ $blogs = get_blog($limit);
     "image": "https://nikhilworks.com/assets/img/all-images/auhtor-img1.png",
     "email": "contact@nikhilworks.com",
     "telephone": "+91-8368552640",
-    "foundingDate": "2021",
+    "foundingDate": "2022-08",
     "priceRange": "₹₹",
     "currenciesAccepted": "INR, USD, GBP, AED",
     "paymentAccepted": "Bank Transfer, UPI, PayPal, Razorpay",
@@ -223,7 +223,7 @@ $blogs = get_blog($limit);
     "givenName": "Nikhil",
     "familyName": "Gupta",
     "jobTitle": "Web Developer & SEO Expert",
-    "description": "Nikhil Gupta is a professional web developer and SEO expert based in Delhi, India with 3+ years of experience building custom websites, PHP applications, and digital marketing solutions for businesses in India, Dubai, USA, UK and Australia.",
+    "description": "Nikhil Gupta is a freelance web developer and SEO expert based in Delhi, India with hands-on experience starting August 2022 building custom websites, PHP applications, and digital marketing solutions for businesses in India, Dubai, USA, UK and Australia.",
     "url": "https://nikhilworks.com",
     "image": "https://nikhilworks.com/assets/img/all-images/auhtor-img1.png",
     "email": "contact@nikhilworks.com",
@@ -701,7 +701,7 @@ $blogs = get_blog($limit);
             </p>
 
             <p data-aos="fade-up" data-aos-duration="1100">
-              With <strong>3+ years of hands-on experience</strong>, we specialize in
+              With <strong>proven experience since August 2022</strong>, we specialize in
               modern web development, performance optimization, and search engine
               visibility—ensuring every website is fast, secure, and built to convert.
             </p>
@@ -798,7 +798,7 @@ $blogs = get_blog($limit);
           <div class="case-header-area heading2 text-center">
             <h2 class="text-anime-style-3">What I Offer</h2>
             <h3>Complete Digital Solutions for Your Business</h3>
-            <h5>With over 3+ years of experience, we provide end-to-end web development and digital marketing services to help your business succeed online.</h5>
+            <h5>With professional experience since August 2022, we provide end-to-end web development and digital marketing services to help your business succeed online.</h5>
           </div>
         </div>
       </div>
@@ -833,7 +833,7 @@ $blogs = get_blog($limit);
                   <i class="fa-solid fa-code fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Website Design & Development</h3>
@@ -860,7 +860,7 @@ $blogs = get_blog($limit);
                   <i class="fa-solid fa-cart-shopping fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>E-Commerce Solutions</h3>
@@ -887,7 +887,7 @@ $blogs = get_blog($limit);
                   <i class="fa-brands fa-wordpress fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>WordPress Development</h3>
@@ -914,7 +914,7 @@ $blogs = get_blog($limit);
                   <i class="fa-brands fa-php fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>PHP Development</h3>
@@ -941,7 +941,7 @@ $blogs = get_blog($limit);
                   <i class="fa-solid fa-mobile-screen-button fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Mobile App Development</h3>
@@ -968,7 +968,7 @@ $blogs = get_blog($limit);
                   <i class="fa-solid fa-screwdriver-wrench fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Website Maintenance</h3>
@@ -1002,7 +1002,7 @@ $blogs = get_blog($limit);
                   <i class="fa-solid fa-magnifying-glass-chart fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>SEO Services</h3>
@@ -1029,7 +1029,7 @@ $blogs = get_blog($limit);
                   <i class="fa-solid fa-bullhorn fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Digital Marketing</h3>
@@ -1063,7 +1063,7 @@ $blogs = get_blog($limit);
                   <i class="fa-solid fa-pen-nib fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Graphic Design</h3>
@@ -1090,7 +1090,7 @@ $blogs = get_blog($limit);
                   <i class="fa-solid fa-copyright fa-2x"></i>
                 </div>
                 <div class="service-experience">
-                  <span>Since 2021</span>
+                  <span>Since Aug 2022</span>
                 </div>
               </div>
               <h3>Logo Design</h3>

@@ -270,7 +270,7 @@ include_once "config/connect.php";
               <i class="fa-solid fa-globe fa-2x"></i>
               <span class="step-number">02</span>
             </div>
-            <h4>UPSC Preparation (2019-2023)</h4>
+            <h4>UPSC Preparation (2019-2022)</h4>
             <p>
               Years of deep study in International Relations, Economics, and
               current affairs — understanding how global events shape markets
@@ -286,11 +286,11 @@ include_once "config/connect.php";
               <i class="fa-solid fa-code fa-2x"></i>
               <span class="step-number">03</span>
             </div>
-            <h4>Web Development (2023)</h4>
+            <h4>Web Development (Aug 2022-Present)</h4>
             <p>
-              In 2023, moved into technology — starting professional web
-              development training to apply this analytical thinking in a
-              more practical way.
+              In August 2022, started professional web development and freelancing,
+              applying analytical thinking to build scalable PHP, WordPress, and custom
+              web solutions for businesses worldwide.
             </p>
           </div>
         </div>
@@ -608,9 +608,10 @@ include_once "config/connect.php";
           </div>
         </div>
         <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="100">
+          <?php $aboutExpYears = function_exists('years_in_business') ? years_in_business(2022, 8) : '4'; ?>
           <div class="stat-box">
-            <h2 class="counter" data-count="3">3+</h2>
-            <p>Years Experience</p>
+            <h2 class="counter" data-count="<?= $aboutExpYears ?>"><?= $aboutExpYears ?>+</h2>
+            <p>Years Experience (Since Aug 2022)</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="200">
