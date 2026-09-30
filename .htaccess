@@ -123,6 +123,8 @@ ErrorDocument 404 /404.php
   RewriteRule ^website-cost-calculator/?$ website-cost-calculator.php [L]
   RewriteRule ^seo-auditor/?$ seo-auditor.php [L]
   RewriteRule ^free-seo-audit-tool/?$ seo-auditor.php [L]
+  RewriteRule ^pay/?$ pay.php [L]
+  RewriteRule ^make-payment/?$ pay.php [L]
   RewriteRule ^contact/?$ contact.php [L]
   RewriteRule ^blogs/?$ blog.php [L]
   RewriteRule ^testimonials/?$ testimonials.php [L]

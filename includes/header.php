@@ -107,7 +107,10 @@ $services = get_sub_category($limit);
               </ul>
             </div>
 
-            <div class="btn-area">
+            <div class="btn-area d-flex align-items-center gap-2">
+              <a href="<?= $site ?>pay/" class="header-pay-btn" title="Make Secure Payment">
+                <i class="fa-solid fa-qrcode"></i> Pay Now
+              </a>
               <a href="<?= $site ?>contact/" class="header-btn11">Get In Touch <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </div>
@@ -192,7 +195,12 @@ $services = get_sub_category($limit);
     </ul>
 
     <div class="allmobilesection">
-      <a href="<?= $site ?>contact/" class="header-btn11">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="d-flex flex-column gap-2 mb-3">
+        <a href="<?= $site ?>pay/" class="header-pay-btn-mobile text-center">
+          <i class="fa-solid fa-qrcode"></i> Pay Online (UPI / QR)
+        </a>
+        <a href="<?= $site ?>contact/" class="header-btn11 text-center">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
       <div class="single-footer">
         <h3>Contact Info</h3>
         <div class="footer1-contact-info">

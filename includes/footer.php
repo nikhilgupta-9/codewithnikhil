@@ -243,6 +243,7 @@ $footerYearsInBusiness = (string)$years;
           <ul>
             <li><a href="<?= $site ?>portfolio/">Portfolio</a></li>
             <li><a href="<?= $site ?>pricing/">Pricing Plans</a></li>
+            <li><a href="<?= $site ?>pay/"><i class="fa-solid fa-qrcode" style="color:#ADFF1C;"></i> Pay Online (UPI / QR)</a></li>
             <li><a href="<?= $site ?>website-cost-calculator/">Website Cost Calculator</a></li>
             <li><a href="<?= $site ?>seo-auditor/">Free SEO Audit Tool</a></li>
             <li><a href="<?= $site ?>testimonials/">Testimonials</a></li>
@@ -261,6 +262,7 @@ $footerYearsInBusiness = (string)$years;
     <div class="footer-seo-section footer-glass-panel">
       <h4>Popular Searches &amp; Free Tools</h4>
       <div class="footer-tag-grid">
+        <a href="<?= $site ?>pay/">Pay Online / Make Payment</a>
         <a href="<?= $site ?>website-cost-calculator/">Website Cost Calculator</a>
         <a href="<?= $site ?>seo-auditor/">Free SEO Audit Tool</a>
         <a href="<?= $site ?>service/website-design-development/">Web Design &amp; Development</a>

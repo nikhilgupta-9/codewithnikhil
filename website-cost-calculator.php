@@ -567,6 +567,55 @@ $canonicalUrl = $isIndiaCostPage ? "https://nikhilworks.com/website-development-
       background: #f7faf9;
     }
 
+    /* FAQ ACCORDION STYLES */
+    .loc-faq-item {
+      background: #FFFFFF;
+      border: 1px solid #E2EDED;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(16, 64, 65, 0.04);
+    }
+    .loc-faq-item:hover {
+      border-color: #104041;
+      box-shadow: 0 8px 24px rgba(16, 64, 65, 0.08);
+    }
+    .loc-faq-btn {
+      width: 100%;
+      text-align: left;
+      padding: 22px 25px;
+      background: #ffffff;
+      border: none;
+      font-weight: 700;
+      font-size: 1.08rem;
+      color: #0f2d2e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .loc-faq-btn:hover {
+      background: #f7faf9;
+      color: #104041;
+    }
+    .loc-faq-btn i {
+      color: #104041;
+      font-size: 14px;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+      margin-left: 14px;
+    }
+    .loc-faq-content {
+      padding: 0 25px 22px;
+      color: #557273;
+      line-height: 1.7;
+      font-size: 1rem;
+      border-top: 1px solid #edf4f3;
+      padding-top: 16px;
+    }
+
     @keyframes pingPulse {
       0% { transform: scale(0.9); opacity: 0.8; }
       50% { transform: scale(1.35); opacity: 1; filter: drop-shadow(0 0 6px #ADFF1C); }
