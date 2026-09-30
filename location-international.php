@@ -436,6 +436,27 @@ $heroImage = hub_image_url($site, 'locations', hub_country_slug($c['schema_count
 </section>
 
 <!--===== SERVICES SECTION =====-->
+<?php
+$servicesList = $c['services'] ?? [
+  [
+    'name' => 'Custom Website Design & Development',
+    'desc' => 'High-performance, bespoke websites tailored for ' . htmlspecialchars($c['city_name']) . ' businesses with clean code, fast load times, and SEO foundations.',
+    'link' => $site . 'service/website-design-development/'
+  ],
+  [
+    'name' => 'Full-Stack Web Applications & CRM',
+    'desc' => 'Scalable custom PHP/MySQL and React platforms with automated workflows, customer dashboards, and API integrations.',
+    'link' => $site . 'service/custom-php-development-/'
+  ],
+  [
+    'name' => 'Search Engine Optimization (SEO)',
+    'desc' => 'Technical, On-Page, and conversion-focused SEO to boost organic search rankings across ' . htmlspecialchars($c['city_name']) . ' search queries.',
+    'link' => $site . 'service/search-engine-optimization/'
+  ]
+];
+$faqsHeading = $c['faqs_heading'] ?? ('Frequently Asked Questions for ' . htmlspecialchars($c['city_name']));
+$faqsList = $c['faqs'] ?? [];
+?>
 <section class="py-5" style="background: #FFFFFF;">
   <div class="container py-4">
     <div class="text-center mb-5">
@@ -444,7 +465,7 @@ $heroImage = hub_image_url($site, 'locations', hub_country_slug($c['schema_count
     </div>
 
     <div class="row g-4">
-      <?php foreach ($c['services'] as $idx => $s): ?>
+      <?php foreach ($servicesList as $idx => $s): ?>
       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?= $idx * 100 ?>">
         <div class="loc-service-card">
           <div>
@@ -452,8 +473,8 @@ $heroImage = hub_image_url($site, 'locations', hub_country_slug($c['schema_count
             <h3 class="h4 fw-bold" style="color: var(--nw-text-dark);"><?= htmlspecialchars($s['name']) ?></h3>
             <p class="text-muted my-3"><?= htmlspecialchars($s['desc']) ?></p>
           </div>
-          <a href="<?= $site ?>contact/" class="loc-btn-primary justify-content-center text-center">
-            <span>Get Quote</span> <i class="fa-solid fa-arrow-right"></i>
+          <a href="<?= htmlspecialchars($s['link'] ?? ($site . 'contact/')) ?>" class="loc-btn-primary justify-content-center text-center">
+            <span>Learn More</span> <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
       </div>
@@ -467,7 +488,7 @@ $heroImage = hub_image_url($site, 'locations', hub_country_slug($c['schema_count
   <div class="container py-4">
     <div class="text-center mb-5">
       <span class="text-uppercase fw-bold text-muted" style="letter-spacing: 1.5px; font-size: 0.85rem;">Got Questions?</span>
-      <h2 class="fw-bold mt-2" style="color: var(--nw-text-dark);"><?= htmlspecialchars($c['faqs_heading']) ?></h2>
+      <h2 class="fw-bold mt-2" style="color: var(--nw-text-dark);"><?= htmlspecialchars($faqsHeading) ?></h2>
     </div>
 
     <div class="row justify-content-center">
