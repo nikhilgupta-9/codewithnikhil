@@ -46,7 +46,6 @@ ErrorDocument 404 /404.php
 # ============================================
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /
 
   # 1. Force HTTPS on Production
   RewriteCond %{HTTPS} off
@@ -99,16 +98,16 @@ ErrorDocument 404 /404.php
   RewriteRule ^terms-and-conditions\.php$ https://nikhilworks.com/terms-and-conditions/ [R=301,L]
 
   # 4. Old & Duplicate URL Fixes
-  RewriteRule ^services/([a-z0-9_-]+)/?$ /service/$1/ [R=301,L]
-  RewriteRule ^service-details/website-design-services/?$ /service/website-design-development/ [R=301,L]
-  RewriteRule ^service/website-maintenance/?$ /service/website-maintenance-support/ [R=301,L]
+  RewriteRule ^services/([a-z0-9_-]+)/?$ service/$1/ [R=301,L]
+  RewriteRule ^service-details/website-design-services/?$ service/website-design-development/ [R=301,L]
+  RewriteRule ^service/website-maintenance/?$ service/website-maintenance-support/ [R=301,L]
 
   # 5. Trailing Slash Canonicalization (Ensures single canonical URL for search engines)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} !/$
   RewriteCond %{REQUEST_URI} !\.(php|xml|txt|css|js|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot|pdf|zip)$ [NC]
-  RewriteRule ^(.*)$ /$1/ [R=301,L]
+  RewriteRule ^(.*)$ $1/ [R=301,L]
 
   # 6. Sitemaps
   RewriteRule ^sitemap\.xml$ sitemap.xml [L]
