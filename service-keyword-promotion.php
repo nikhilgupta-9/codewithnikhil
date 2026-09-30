@@ -2,11 +2,11 @@
 include_once "config/connect.php";
 include_once "util/function.php";
 
-$cityPages = include __DIR__ . '/data/services-keyword-cities.php';
+$cityPages = include __DIR__ . '/data/services-keyword-promotion-cities.php';
 $pages = include __DIR__ . '/data/services-keyword-promotion.php';
 $hubSlugs = array_keys($pages);
 $pages += $cityPages;
-$content = include __DIR__ . '/data/services-keyword-content.php';
+$content = include __DIR__ . '/data/services-keyword-promotion-content.php';
 $page = $_GET['slug'] ?? '';
 
 if (!isset($pages[$page]) || !isset($content[$page])) {
