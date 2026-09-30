@@ -6,12 +6,34 @@ $limit = 10;
 $services = get_sub_category($limit);
 ?>
 <!--===== PRELOADER STARTS =======-->
-<div class="preloader preloader3">
+<div class="preloader preloader3" id="sitePreloader">
   <div class="loading-container">
     <div class="loading"></div>
     <div id="loading-icon"><img src="<?= $site ?>assets/img/logo/preloader4.png" alt=""></div>
   </div>
 </div>
+<script>
+  (function() {
+    function dismissPreloader() {
+      var p = document.getElementById('sitePreloader') || document.querySelector('.preloader');
+      if (p) {
+        p.style.transition = 'opacity 0.35s ease, visibility 0.35s ease';
+        p.style.opacity = '0';
+        p.style.visibility = 'hidden';
+        p.style.pointerEvents = 'none';
+        setTimeout(function() {
+          if (p && p.parentNode) p.parentNode.removeChild(p);
+        }, 350);
+      }
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(dismissPreloader, 100);
+    } else {
+      window.addEventListener('load', function() { setTimeout(dismissPreloader, 150); });
+      setTimeout(dismissPreloader, 900);
+    }
+  })();
+</script>
 <!--===== PRELOADER ENDS =======-->
 
 <!--===== PROGRESS STARTS=======-->

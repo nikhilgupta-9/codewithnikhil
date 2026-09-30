@@ -706,7 +706,9 @@ $footerYearsInBusiness = (string)$years;
   $(document).ready(function() {
 
     // Count up the trust-stat numbers once they scroll into view
-    $('.footer-counter').countUp();
+    if (typeof $.fn.countUp === 'function') {
+      $('.footer-counter').countUp();
+    }
 
     // Mobile accordion for the footer link columns
     function isMobile() {
@@ -882,3 +884,22 @@ $footerYearsInBusiness = (string)$years;
     font-weight: 600;
   }
 </style>
+
+<!--===== JS SCRIPT LINK =======-->
+<script src="<?= $site ?>assets/js/plugins/bootstrap.min.js"></script>
+<script src="<?= $site ?>assets/js/plugins/fontawesome.js"></script>
+<script src="<?= $site ?>assets/js/plugins/aos.js"></script>
+<script src="<?= $site ?>assets/js/plugins/counter.js"></script>
+<script src="<?= $site ?>assets/js/plugins/gsap.min.js"></script>
+<script src="<?= $site ?>assets/js/plugins/ScrollTrigger.min.js"></script>
+<script src="<?= $site ?>assets/js/plugins/Splitetext.js"></script>
+<script src="<?= $site ?>assets/js/plugins/sidebar.js"></script>
+<script src="<?= $site ?>assets/js/plugins/magnific-popup.js"></script>
+<script src="<?= $site ?>assets/js/plugins/mobilemenu.js"></script>
+<script src="<?= $site ?>assets/js/plugins/owlcarousel.min.js"></script>
+<script src="<?= $site ?>assets/js/plugins/gsap-animation.js"></script>
+<script src="<?= $site ?>assets/js/plugins/nice-select.js"></script>
+<script src="<?= $site ?>assets/js/plugins/waypoints.js"></script>
+<script src="<?= $site ?>assets/js/plugins/slick-slider.js"></script>
+<script src="<?= $site ?>assets/js/plugins/circle-progress.js"></script>
+<script src="<?= $site ?>assets/js/main.js"></script>

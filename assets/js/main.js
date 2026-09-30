@@ -694,88 +694,100 @@ $('.testimonial15-slider').owlCarousel({
   }
 });
 //========== PRELOADER ============= //
-$(window).on("load", function (event) {
-  setTimeout(function () {
-    $(".preloader").fadeToggle();
-  }, 200);
+function safeHidePreloader() {
+  var $p = $(".preloader");
+  if ($p.length) {
+    $p.fadeOut(300, function () {
+      $p.remove();
+    });
+  }
+}
+
+if (document.readyState === 'complete') {
+  setTimeout(safeHidePreloader, 100);
+} else {
+  $(window).on("load", function () {
+    setTimeout(safeHidePreloader, 150);
+  });
+  setTimeout(safeHidePreloader, 800);
+}
 
 //========== GSAP AREA ============= //
 
-if ($('.text-anime-style-1').length) {
-  let staggerAmount 	= 0.05,
-  translateXValue = 0,
-  delayValue 		= 0.5,
-   animatedTextElements = document.querySelectorAll('.text-anime-style-1');
+if (typeof gsap !== 'undefined' && typeof SplitText !== 'undefined') {
+  if ($('.text-anime-style-1').length) {
+    let staggerAmount 	= 0.05,
+    translateXValue = 0,
+    delayValue 		= 0.5,
+     animatedTextElements = document.querySelectorAll('.text-anime-style-1');
 
-  animatedTextElements.forEach((element) => {
-  let animationSplitText = new SplitText(element, { type: "chars, words" });
-    gsap.from(animationSplitText.words, {
-    duration: 1,
-    delay: delayValue,
-    x: 20,
-    autoAlpha: 0,
-    stagger: staggerAmount,
-    scrollTrigger: { trigger: element, start: "top 85%" },
+    animatedTextElements.forEach((element) => {
+    let animationSplitText = new SplitText(element, { type: "chars, words" });
+      gsap.from(animationSplitText.words, {
+      duration: 1,
+      delay: delayValue,
+      x: 20,
+      autoAlpha: 0,
+      stagger: staggerAmount,
+      scrollTrigger: { trigger: element, start: "top 85%" },
+      });
     });
-  });
   }
 
   if ($('.text-anime-style-2').length) {
-  let	 staggerAmount 		= 0.05,
-   translateXValue	= 20,
-   delayValue 		= 0.5,
-   easeType 			= "power2.out",
-   animatedTextElements = document.querySelectorAll('.text-anime-style-2');
+    let	 staggerAmount 		= 0.05,
+     translateXValue	= 20,
+     delayValue 		= 0.5,
+     easeType 			= "power2.out",
+     animatedTextElements = document.querySelectorAll('.text-anime-style-2');
 
-  animatedTextElements.forEach((element) => {
-  let animationSplitText = new SplitText(element, { type: "chars, words" });
-    gsap.from(animationSplitText.chars, {
-      duration: 1,
-      delay: delayValue,
-      x: translateXValue,
-      autoAlpha: 0,
-      stagger: staggerAmount,
-      ease: easeType,
-      scrollTrigger: { trigger: element, start: "top 85%"},
+    animatedTextElements.forEach((element) => {
+    let animationSplitText = new SplitText(element, { type: "chars, words" });
+      gsap.from(animationSplitText.chars, {
+        duration: 1,
+        delay: delayValue,
+        x: translateXValue,
+        autoAlpha: 0,
+        stagger: staggerAmount,
+        ease: easeType,
+        scrollTrigger: { trigger: element, start: "top 85%"},
+      });
     });
-  });
   }
-
   if ($('.text-anime-style-3').length) {
-  let	animatedTextElements = document.querySelectorAll('.text-anime-style-3');
+    let animatedTextElements = document.querySelectorAll('.text-anime-style-3');
 
-  animatedTextElements.forEach((element) => {
-  //Reset if needed
-  if (element.animation) {
-    element.animation.progress(1).kill();
-    element.split.revert();
+    animatedTextElements.forEach((element) => {
+      //Reset if needed
+      if (element.animation) {
+        element.animation.progress(1).kill();
+        element.split.revert();
+      }
+
+      element.split = new SplitText(element, {
+        type: "lines,words,chars",
+        linesClass: "split-line",
+      });
+      gsap.set(element, { perspective: 400 });
+
+      gsap.set(element.split.chars, {
+        opacity: 0,
+        x: "50",
+      });
+
+      element.animation = gsap.to(element.split.chars, {
+        scrollTrigger: { trigger: element, start: "top 90%" },
+        x: "0",
+        y: "0",
+        rotateX: "0",
+        opacity: 1,
+        duration: 1,
+        ease: Back.easeOut,
+        stagger: 0.02,
+      });
+    });
   }
-
-  element.split = new SplitText(element, {
-    type: "lines,words,chars",
-    linesClass: "split-line",
-  });
-  gsap.set(element, { perspective: 400 });
-
-  gsap.set(element.split.chars, {
-    opacity: 0,
-    x: "50",
-  });
-
-  element.animation = gsap.to(element.split.chars, {
-    scrollTrigger: { trigger: element,	start: "top 90%" },
-    x: "0",
-    y: "0",
-    rotateX: "0",
-    opacity: 1,
-    duration: 1,
-    ease: Back.easeOut,
-    stagger: 0.02,
-  });
-  });
-  }
-
-});
+}
 //========== PRELOADER AREA ============= //
 
 /*-------------------- 16. progressbar ----------------------------*/
