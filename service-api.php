@@ -81,8 +81,8 @@ include_once "includes/api-crosslinks.php";
           <h1 class="text-white fw-bold" style="font-size:2.8rem;"><?= htmlspecialchars($c['h1']) ?></h1>
           <p class=" mt-3" style="font-size:1.2rem; color:var(--ztc-text-text-11);"><?= $c['hero_sub'] ?></p>
           <div class="mt-4">
-            <a href="/contact/" class="header-btn11 me-3">Get Free Quote</a>
-            <a href="/portfolio/" class="btn btn-lg" style="border:2px solid var(--ztc-text-text-11);color:var(--ztc-text-text-11);">View My Work</a>
+            <a href="<?= $site ?>contact/" class="header-btn11 me-3">Get Free Quote</a>
+            <a href="<?= $site ?>portfolio/" class="btn btn-lg" style="border:2px solid var(--ztc-text-text-11);color:var(--ztc-text-text-11);">View My Work</a>
           </div>
           <?= render_remote_badges() ?>
         </div>
@@ -398,8 +398,8 @@ include_once "includes/api-crosslinks.php";
   <div class="container text-center">
     <h2 class="text-white fw-bold mb-3">Let's Get This API Connected and Tested</h2>
     <p class="text-light mb-4">Free consultation. No obligation. Get a fixed-scope quote in <?= htmlspecialchars($c['currency']) ?> within 24-48 hours.</p>
-    <a href="/contact/" class="btn btn-warning btn-lg fw-bold me-3">Start a Project</a>
-    <a href="/portfolio/" class="btn btn-outline-light btn-lg">See My Work</a>
+    <a href="<?= $site ?>contact/" class="btn btn-warning btn-lg fw-bold me-3">Start a Project</a>
+    <a href="<?= $site ?>portfolio/" class="btn btn-outline-light btn-lg">See My Work</a>
   </div>
 </section>
 
