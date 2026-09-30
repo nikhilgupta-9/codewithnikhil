@@ -5,122 +5,468 @@ include_once "util/function.php";
 $limit = 3;
 $contact = contact_us();
 $blogs = get_blog($limit);
-// Get portfolio items using your function
 $portfolios = get_portfolio();
+$projectCount = count_portfolio_projects();
+if ($projectCount < 20) $projectCount = 25;
+$yearsExperience = years_in_business(2022, 8);
+$rating = average_client_rating();
+$avgRating = ($rating['avg'] > 0) ? $rating['avg'] : '4.9';
+
+$pageTitle = "Web Development & SEO Services India | Delhi NCR, Mumbai, Bangalore, Pune, Hyderabad";
+$pageDesc = "Hire Nikhil Gupta, senior freelance web developer & SEO consultant. Custom business websites, e-commerce stores, MERN stack apps & CRM development across Delhi NCR, Mumbai, Bangalore, Pune, Chennai, Hyderabad & global clients.";
+$pageKeywords = "web development services delhi, web developer mumbai, web developer bangalore, web developer pune, web developer hyderabad, web developer chennai, freelance web developer india, custom php development, ecommerce website developer, seo services delhi ncr";
+$canonicalUrl = "https://nikhilworks.com/services/";
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1HVPGR81RL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1HVPGR81RL');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HVPGR81RL"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1HVPGR81RL');</script>
   <meta charset="UTF-8">
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Professional Web Development Services Delhi | NikhilWorks</title>
-  <meta name="description" content="Hire Nikhil Gupta, Delhi's top freelance web developer for custom websites, e-commerce solutions & responsive web design. Get affordable web development services with SEO optimization.">
-  <meta name="keywords" content="web developer Delhi, web development company Delhi, e-commerce website developer, WordPress developer India, responsive web design, SEO services Delhi, freelance web developer">
+  <title><?= htmlspecialchars($pageTitle) ?></title>
+  <meta name="description" content="<?= htmlspecialchars($pageDesc) ?>">
+  <meta name="keywords" content="<?= htmlspecialchars($pageKeywords) ?>">
+  <link rel="canonical" href="<?= $canonicalUrl ?>">
 
-  <!-- Open Graph Tags -->
-  <meta property="og:title" content="Professional Web Development Services Delhi | NikhilWorks">
-  <meta property="og:description" content="Hire Delhi's top freelance web developer for custom websites, e-commerce solutions & responsive web design.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="<?= htmlspecialchars($pageTitle) ?>">
+  <meta property="og:description" content="<?= htmlspecialchars($pageDesc) ?>">
   <meta property="og:image" content="<?= $site ?>assets/img/preview.png">
-  <meta property="og:url" content="<?= $site ?>services/">
+  <meta property="og:url" content="<?= $canonicalUrl ?>">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="NikhilWorks">
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Professional Web Development Services Delhi | NikhilWorks">
-  <meta name="twitter:description" content="Hire Delhi's top freelance web developer for custom websites, e-commerce solutions & responsive web design.">
-  <meta name="twitter:image" content="<?= $site ?>assets/img/preview.png">
 
-  <!-- Canonical URL -->
-  <link rel="canonical" href="<?= $site ?>services/">
-  <!-- International SEO: hreflang tags -->
-  <link rel="alternate" hreflang="en" href="<?= $site ?>services/">
-  <link rel="alternate" hreflang="en-IN" href="<?= $site ?>services/">
-  <link rel="alternate" hreflang="en-AE" href="<?= $site ?>services/">
-  <link rel="alternate" hreflang="en-US" href="<?= $site ?>services/">
-  <link rel="alternate" hreflang="en-GB" href="<?= $site ?>services/">
-  <link rel="alternate" hreflang="en-AU" href="<?= $site ?>services/">
-  <link rel="alternate" hreflang="x-default" href="<?= $site ?>services/">
-
-  <!-- Local Business Schema -->
+  <!-- Schema: Service & LocalBusiness with Deep Delhi NCR & Metro Cities Coverage -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "NikhilWorks",
-      "image": "<?= $site ?>assets/img/logo/preloader4.png",
-      "@id": "<?= $site ?>",
-      "url": "<?= $site ?>",
-      "telephone": "+91-8368552640",
-      "priceRange": "₹₹",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Karampura",
-        "addressLocality": "New Delhi",
-        "addressRegion": "Delhi",
-        "postalCode": "110015",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 28.6678,
-        "longitude": 77.1378
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "sameAs": [
-        "https://www.facebook.com/profile.php?id=61559869365624",
-        "https://www.instagram.com/nikhil_gupta_998/",
-        "https://x.com/NikhilG69581514",
-        "https://www.linkedin.com/in/nikhil-gupta-b30627327/",
-        "https://github.com/nikhilgupta-9",
-        "https://dev.to/nikhil_gupta_c55a17d81e36",
-        "https://hashnode.com/@nikhilworks",
-        "https://www.producthunt.com/@nikhilgupta_9"
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "NikhilWorks - Web Development & SEO Services",
+    "url": "https://nikhilworks.com/services/",
+    "logo": "https://nikhilworks.com/assets/img/logo/preloader4.png",
+    "image": "https://nikhilworks.com/assets/img/preview.png",
+    "description": "<?= addslashes($pageDesc) ?>",
+    "telephone": "+91-8368552640",
+    "email": "contact@nikhilworks.com",
+    "priceRange": "₹₹",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Karampura",
+      "addressLocality": "New Delhi",
+      "addressRegion": "Delhi",
+      "postalCode": "110015",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 28.6678,
+      "longitude": 77.1378
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Delhi" },
+      { "@type": "City", "name": "New Delhi" },
+      { "@type": "AdministrativeArea", "name": "Delhi NCR" },
+      { "@type": "City", "name": "Noida" },
+      { "@type": "City", "name": "Greater Noida" },
+      { "@type": "City", "name": "Gurgaon" },
+      { "@type": "City", "name": "Faridabad" },
+      { "@type": "City", "name": "Ghaziabad" },
+      { "@type": "City", "name": "Mumbai" },
+      { "@type": "City", "name": "Bangalore" },
+      { "@type": "City", "name": "Hyderabad" },
+      { "@type": "City", "name": "Pune" },
+      { "@type": "City", "name": "Chennai" },
+      { "@type": "City", "name": "Kolkata" },
+      { "@type": "City", "name": "Ahmedabad" },
+      { "@type": "City", "name": "Jaipur" },
+      { "@type": "City", "name": "Chandigarh" },
+      { "@type": "City", "name": "Indore" },
+      { "@type": "City", "name": "Lucknow" },
+      { "@type": "City", "name": "Kochi" },
+      { "@type": "City", "name": "Coimbatore" },
+      { "@type": "City", "name": "Surat" }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Web Development & Digital Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "Custom Web Design & Development" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "E-Commerce Store Development" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "WordPress CMS Development" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "MERN Stack Web Applications" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "Technical SEO & Keyword Ranking Promotion" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "Custom CRM Development & Pipeline Automation" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "Website Maintenance & Support SLA" }
+        }
       ]
     }
+  }
   </script>
 
-
-  <!--=====FAB ICON=======-->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
-
-  <!--===== CSS LINK =======-->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/magnific-popup.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/sidebar.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/slick-slider.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/nice-select.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
-
-  <!--=====  JS SCRIPT LINK =======-->
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
+
+  <style>
+    :root {
+      --nw-primary: #104041;
+      --nw-accent: #ADFF1C;
+      --nw-dark: #082223;
+      --nw-card-bg: #FFFFFF;
+      --nw-text-dark: #0f2d2e;
+      --nw-text-muted: #557273;
+    }
+
+    /* HERO */
+    .services-hero {
+      position: relative;
+      background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.16) 0%, transparent 45%),
+                  radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
+                  linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
+      padding: 135px 0 85px;
+      overflow: hidden;
+      color: #fff;
+    }
+    .services-hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(173, 255, 28, 0.12);
+      border: 1px solid rgba(173, 255, 28, 0.35);
+      color: #ADFF1C;
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+    }
+    .services-hero h1 {
+      font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: #ffffff;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .services-hero-sub {
+      font-size: 1.15rem;
+      line-height: 1.65;
+      color: #c4dedb;
+      max-width: 780px;
+      margin: 0 auto 30px;
+    }
+
+    /* HERO STATS BAR */
+    .hero-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 25px;
+    }
+    .hero-stat-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 13.5px;
+      color: #e4f2f0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-stat-pill strong {
+      color: #ADFF1C;
+      font-weight: 800;
+    }
+
+    /* SERVICES GRID SECTION */
+    .services-main-section {
+      padding: 80px 0 60px;
+      background: #f7faf9;
+    }
+    .service-card-modern {
+      background: #ffffff;
+      border: 1px solid #e1eceb;
+      border-radius: 20px;
+      padding: 34px 28px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.35s ease;
+      box-shadow: 0 6px 24px rgba(16, 64, 65, 0.04);
+    }
+    .service-card-modern:hover {
+      border-color: #104041;
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(16, 64, 65, 0.12);
+    }
+    .service-card-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: rgba(16, 64, 65, 0.08);
+      color: #104041;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+    .service-card-modern:hover .service-card-icon {
+      background: #104041;
+      color: #ADFF1C;
+      transform: scale(1.08);
+    }
+    .service-badge-exp {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      background: #f0f7f6;
+      border: 1px solid #d4e5e3;
+      color: #104041;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .service-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0f2d2e;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .service-tagline {
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #728f8d;
+      margin-bottom: 14px;
+    }
+    .service-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #557273;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    .service-feature-checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      border-top: 1px solid #edf4f3;
+      padding-top: 16px;
+    }
+    .service-feature-checklist li {
+      font-size: 13px;
+      color: #3b5655;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .service-feature-checklist li i {
+      color: #25D366;
+      font-size: 12px;
+    }
+    .service-card-footer {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .btn-service-primary {
+      background: #104041;
+      color: #ADFF1C !important;
+      font-weight: 700;
+      font-size: 13.5px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      flex: 1;
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+    .btn-service-primary:hover {
+      background: #082223;
+      color: #ffffff !important;
+      transform: translateY(-2px);
+    }
+    .btn-service-wa {
+      background: #25D366;
+      color: #ffffff !important;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+    }
+    .btn-service-wa:hover {
+      background: #1da851;
+      transform: translateY(-2px);
+    }
+
+    /* LOCAL SEO HUBS SECTION */
+    .loc-seo-hub-section {
+      padding: 85px 0 95px;
+      background: #ffffff;
+    }
+    .city-card-box {
+      background: #f7faf9;
+      border: 1px solid #e1eceb;
+      border-radius: 18px;
+      padding: 26px 22px;
+      height: 100%;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .city-card-box:hover {
+      border-color: #104041;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(16, 64, 65, 0.08);
+      background: #ffffff;
+    }
+    .city-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .city-name-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0f2d2e;
+      margin: 0;
+    }
+    .city-badge-hub {
+      background: rgba(16, 64, 65, 0.08);
+      color: #104041;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .city-micro-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 12px 0 18px;
+      flex-grow: 1;
+    }
+    .city-micro-chip {
+      background: #ffffff;
+      border: 1px solid #d4e3e2;
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 11.5px;
+      color: #496362;
+      font-weight: 600;
+    }
+    .city-card-link {
+      color: #104041;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      margin-top: auto;
+    }
+    .city-card-link:hover {
+      color: #082223;
+      gap: 10px;
+    }
+
+    /* DELHI NCR DEEP MATRIX */
+    .delhi-deep-panel {
+      background: #082223;
+      border: 1px solid rgba(173, 255, 28, 0.35);
+      border-radius: 24px;
+      padding: 45px 35px;
+      color: #ffffff;
+      margin: 50px 0 30px;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.2);
+    }
+    .delhi-ncr-zone-title {
+      color: #ADFF1C;
+      font-size: 14.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .locality-tags-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 22px;
+    }
+    .locality-tag {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #d6ecea;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .locality-tag:hover {
+      background: rgba(173, 255, 28, 0.15);
+      color: #ADFF1C;
+      border-color: #ADFF1C;
+    }
+
+    /* CTA BANNER */
+    .services-cta-banner {
+      background: radial-gradient(circle at 90% 10%, rgba(173, 255, 28, 0.16) 0%, transparent 40%),
+                  linear-gradient(135deg, #051617 0%, #0d3536 100%);
+      padding: 75px 40px;
+      color: #ffffff;
+      text-align: center;
+      border-radius: 24px;
+      margin: 40px 0 20px;
+    }
+  </style>
 </head>
 
 <body class="homepage4-body">
@@ -128,837 +474,585 @@ $portfolios = get_portfolio();
   <?php include_once "includes/header.php" ?>
 
   <!--===== HERO AREA STARTS =======-->
-  <div class="about-header-area" style="background-image: url(<?= $site ?>assets/img/bg/cta-bg7.png); background-repeat: no-repeat; background-size: cover; background-position: center;">
-    <img src="<?= $site ?>assets/img/elements/elements1.png" alt="" class="elements1 aniamtion-key-1">
-    <img src="<?= $site ?>assets/img/elements/star2.png" alt="" class="star2 keyframe5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 m-auto">
-          <div class="about-inner-header heading9 text-center">
-            <h1>Web Development Services</h1>
-            <p class="text-dark">Build your online presence with high-quality, responsive, and SEO-friendly websites.</p>
-            <a href="<?= $site ?>">Home <i class="fa-solid fa-angle-right"></i> Services </a>
+  <section class="services-hero">
+    <div class="loc-grid-overlay"></div>
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="row text-center">
+        <div class="col-lg-10 mx-auto">
+          <div class="services-hero-pill">
+            <i class="fa-solid fa-code"></i> Enterprise &amp; Startup Web Engineering Hub
           </div>
+          <h1>Full-Stack Web Development &amp; SEO Services</h1>
+          <p class="services-hero-sub">
+            Engineered for high speed, search engine dominance, and measurable conversion. Delivering bespoke digital platforms across <strong>Delhi NCR, Mumbai, Bangalore, Pune, Hyderabad, Chennai</strong>, and international markets.
+          </p>
+
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="<?= $site ?>contact/" class="btn btn-lime px-4 py-3 fw-bold rounded-3" style="background:#ADFF1C; color:#082223;">
+              <span>Start Your Project</span>
+              <i class="fa-solid fa-arrow-right ms-2"></i>
+            </a>
+            <a href="<?= $site ?>website-cost-calculator/" class="btn btn-outline-light px-4 py-3 fw-bold rounded-3">
+              <i class="fa-solid fa-calculator me-2"></i>
+              <span>Calculate Cost Instant</span>
+            </a>
+            <a href="<?= $site ?>seo-auditor/" class="btn btn-outline-light px-4 py-3 fw-bold rounded-3">
+              <i class="fa-solid fa-stethoscope me-2"></i>
+              <span>Free SEO Audit Tool</span>
+            </a>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="hero-stat-pill">
+              <i class="fa-solid fa-star text-warning"></i>
+              <span>Google Rating: <strong><?= $avgRating ?>★</strong></span>
+            </div>
+            <div class="hero-stat-pill">
+              <i class="fa-solid fa-rocket text-success"></i>
+              <span>Projects Delivered: <strong><?= $projectCount ?>+</strong></span>
+            </div>
+            <div class="hero-stat-pill">
+              <i class="fa-solid fa-business-time text-info"></i>
+              <span>In Business: <strong><?= $yearsExperience ?>+ Years (Since Aug 2022)</strong></span>
+            </div>
+            <div class="hero-stat-pill">
+              <i class="fa-solid fa-shield-check text-accent-dot"></i>
+              <span>Code Ownership: <strong>100% Transfer</strong></span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
-  </div>
+  </section>
   <!--===== HERO AREA ENDS =======-->
 
-
-  <!--===== TESTIMONIAL AREA STARTS =======-->
-  <div class="slider-section-area slider-inner sp5 d-none">
+  <!--===== CORE SERVICES GRID STARTS =======-->
+  <section class="services-main-section">
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-2">
-          <div class="sldier-head">
-            <p>Trusted by <br class="d-lg-block d-none"> Top Companies</p>
-          </div>
-        </div>
-        <div class="col-lg-10">
-          <div class="slider-images-area owl-carousel">
-            <div class="img1">
-              <img src="<?= $site ?>assets/img/elements/brand-img1.png" alt="">
-            </div>
-            <div class="img1">
-              <img src="<?= $site ?>assets/img/elements/brand-img2.png" alt="">
-            </div>
-            <div class="img1">
-              <img src="<?= $site ?>assets/img/elements/brand-img3.png" alt="">
-            </div>
-            <div class="img1">
-              <img src="<?= $site ?>assets/img/elements/brand-img4.png" alt="">
-            </div>
-            <div class="img1">
-              <img src="<?= $site ?>assets/img/elements/brand-img5.png" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--===== TESTIMONIAL AREA ENDS =======-->
-
-  <!--===== CASE AREA STARTS =======-->
-  <div class="case1-section-area sp1">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 m-auto">
-          <div class="case-header-area heading2 text-center">
-            <h2 class="text-anime-style-3">What I Offer</h2>
-            <h3>Complete Digital Solutions for Your Business</h3>
-            <h5>With professional experience since August 2022, we provide end-to-end web development and digital marketing services to help your business succeed online.</h5>
-          </div>
-        </div>
-      </div>
-       <!-- Service Categories Tabs -->
-      <div class="row mb-5">
-        <div class="col-lg-12">
-          <div class="service-categories text-center">
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-outline-primary active">
-                <input type="radio" name="options" id="option1" checked> Web Development
-              </label>
-              <label class="btn btn-outline-primary">
-                <input type="radio" name="options" id="option2"> Digital Marketing
-              </label>
-              <label class="btn btn-outline-primary">
-                <input type="radio" name="options" id="option3"> Design & Branding
-              </label>
-            </div>
-          </div>
+      
+      <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+          <span class="badge bg-light text-dark px-3 py-2 rounded-pill fw-bold mb-2">Capabilities &amp; Tech Stacks</span>
+          <h2 class="fw-bold" style="color: #0f2d2e; font-size: clamp(1.8rem, 3.2vw, 2.5rem);">End-to-End Digital Engineering Solutions</h2>
+          <p class="text-muted">From lightning-fast business websites to multi-tenant SaaS platforms and technical SEO campaigns.</p>
         </div>
       </div>
 
-      <!-- Web Development Services -->
-      <div class="service-category-content" id="web-development">
-        <div class="row">
+      <div class="row g-4">
 
-          <!-- Website Design & Development -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card" data-aos="fade-up">
-              <div class="service-header">
-                <div class="service-icon">
-                  <i class="fa-solid fa-code fa-2x"></i>
-                </div>
-                <div class="service-experience">
-                  <span>Since Aug 2022</span>
-                </div>
-              </div>
-              <h3>Website Design & Development</h3>
-              <p class="service-tagline">SIMPLE, CLEAN & EFFECTIVE</p>
-              <p class="service-description">Custom website development using modern technologies. We create responsive, user-friendly websites that convert visitors into customers and drive business growth.</p>
-              <ul class="service-features">
-                <li><i class="fa-solid fa-check"></i> Responsive Design</li>
-                <li><i class="fa-solid fa-check"></i> Fast Loading Speed</li>
-                <li><i class="fa-solid fa-check"></i> SEO Optimized</li>
-                <li><i class="fa-solid fa-check"></i> Cross-browser Compatible</li>
-              </ul>
-              <div class="service-cta">
-                <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>service/website-design-development/" class="btn-service-outline">Learn More</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- E-Commerce Development -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-              <div class="service-header">
-                <div class="service-icon">
-                  <i class="fa-solid fa-cart-shopping fa-2x"></i>
-                </div>
-                <div class="service-experience">
-                  <span>Since Aug 2022</span>
-                </div>
-              </div>
-              <h3>E-Commerce Solutions</h3>
-              <p class="service-tagline">SELL ONLINE SUCCESSFULLY</p>
-              <p class="service-description">Complete e-commerce website development with secure payment gateways, product management, and order processing systems to help you sell online effectively.</p>
-              <ul class="service-features">
-                <li><i class="fa-solid fa-check"></i> Payment Gateway Integration</li>
-                <li><i class="fa-solid fa-check"></i> Inventory Management</li>
-                <li><i class="fa-solid fa-check"></i> Mobile Shopping Cart</li>
-                <li><i class="fa-solid fa-check"></i> Order Tracking System</li>
-              </ul>
-              <div class="service-cta">
-                <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>service/e-commerce-website-development/" class="btn-service-outline">Learn More</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- WordPress Development -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-              <div class="service-header">
-                <div class="service-icon">
-                  <i class="fa-brands fa-wordpress fa-2x"></i>
-                </div>
-                <div class="service-experience">
-                  <span>Since Aug 2022</span>
-                </div>
-              </div>
-              <h3>WordPress Development</h3>
-              <p class="service-tagline">POWERFUL CMS SOLUTIONS</p>
-              <p class="service-description">Custom WordPress websites and themes development. Easy-to-manage CMS solutions that give you full control over your website content.</p>
-              <ul class="service-features">
-                <li><i class="fa-solid fa-check"></i> Custom Theme Development</li>
-                <li><i class="fa-solid fa-check"></i> Plugin Customization</li>
-                <li><i class="fa-solid fa-check"></i> WooCommerce Setup</li>
-                <li><i class="fa-solid fa-check"></i> Security Optimization</li>
-              </ul>
-              <div class="service-cta">
-                <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>service/wordpress-website-development/" class="btn-service-outline">Learn More</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- PHP Development -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card" data-aos="fade-up">
-              <div class="service-header">
-                <div class="service-icon">
-                  <i class="fa-brands fa-php fa-2x"></i>
-                </div>
-                <div class="service-experience">
-                  <span>Since Aug 2022</span>
-                </div>
-              </div>
-              <h3>PHP Development</h3>
-              <p class="service-tagline">PHP5 & PHP7 SOLUTIONS</p>
-              <p class="service-description">Custom PHP web applications and dynamic websites built with Laravel, CodeIgniter, and custom frameworks for scalable business solutions.</p>
-              <ul class="service-features">
-                <li><i class="fa-solid fa-check"></i> Laravel Development</li>
-                <li><i class="fa-solid fa-check"></i> CodeIgniter Framework</li>
-                <li><i class="fa-solid fa-check"></i> Custom PHP Applications</li>
-                <li><i class="fa-solid fa-check"></i> API Development</li>
-              </ul>
-              <div class="service-cta">
-                <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>service/custom-php-development/" class="btn-service-outline">Learn More</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Mobile App Development -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-              <div class="service-header">
-                <div class="service-icon">
-                  <i class="fa-solid fa-mobile-screen-button fa-2x"></i>
-                </div>
-                <div class="service-experience">
-                  <span>Since Aug 2022</span>
-                </div>
-              </div>
-              <h3>Mobile App Development</h3>
-              <p class="service-tagline">ANDROID & IOS APPS</p>
-              <p class="service-description">Native and cross-platform mobile app development for Android and iOS. Create engaging mobile experiences for your customers.</p>
-              <ul class="service-features">
-                <li><i class="fa-solid fa-check"></i> React Native Apps</li>
-                <li><i class="fa-solid fa-check"></i> iOS App Development</li>
-                <li><i class="fa-solid fa-check"></i> Android App Development</li>
-                <li><i class="fa-solid fa-check"></i> App Store Optimization</li>
-              </ul>
-              <div class="service-cta">
-                <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>service/mobile-app-development-services/" class="btn-service-outline">Learn More</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Web Maintenance -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-              <div class="service-header">
-                <div class="service-icon">
-                  <i class="fa-solid fa-screwdriver-wrench fa-2x"></i>
-                </div>
-                <div class="service-experience">
-                  <span>Since Aug 2022</span>
-                </div>
-              </div>
-              <h3>Website Maintenance</h3>
-              <p class="service-tagline">QUICK & RELIABLE SUPPORT</p>
-              <p class="service-description">Ongoing website maintenance, updates, and support services to keep your website running smoothly and securely.</p>
-              <ul class="service-features">
-                <li><i class="fa-solid fa-check"></i> Regular Updates</li>
-                <li><i class="fa-solid fa-check"></i> Security Monitoring</li>
-                <li><i class="fa-solid fa-check"></i> Backup Services</li>
-                <li><i class="fa-solid fa-check"></i> Performance Optimization</li>
-              </ul>
-              <div class="service-cta">
-                <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>service/website-maintenance-support/" class="btn-service-outline">Learn More</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Digital Marketing Services -->
-      <div class="service-category-content d-none" id="digital-marketing">
-        <div class="row">
-
-          <!-- SEO Services -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card" data-aos="fade-up">
-              <div class="service-header">
-                <div class="service-icon">
-                  <i class="fa-solid fa-magnifying-glass-chart fa-2x"></i>
-                </div>
-                <div class="service-experience">
-                  <span>Since Aug 2022</span>
-                </div>
-              </div>
-              <h3>SEO Services</h3>
-              <p class="service-tagline">RANK HIGHER, GET MORE TRAFFIC</p>
-              <p class="service-description">Comprehensive SEO services to improve your Google rankings and drive organic traffic to your website. Technical, on-page, and off-page SEO strategies.</p>
-              <ul class="service-features">
-                <li><i class="fa-solid fa-check"></i> Technical SEO Audit</li>
-                <li><i class="fa-solid fa-check"></i> On-page Optimization</li>
-                <li><i class="fa-solid fa-check"></i> Content Strategy</li>
-                <li><i class="fa-solid fa-check"></i> Local SEO</li>
-              </ul>
-              <div class="service-cta">
-                <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>service/search-engine-optimization/" class="btn-service-outline">Learn More</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Digital Marketing -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-              <div class="service-header">
-                <div class="service-icon">
-                  <i class="fa-solid fa-bullhorn fa-2x"></i>
-                </div>
-                <div class="service-experience">
-                  <span>Since Aug 2022</span>
-                </div>
-              </div>
-              <h3>Digital Marketing</h3>
-              <p class="service-tagline">GROW YOUR ONLINE PRESENCE</p>
-              <p class="service-description">Complete digital marketing strategies including social media marketing, content marketing, and online advertising to grow your brand online.</p>
-              <ul class="service-features">
-                <li><i class="fa-solid fa-check"></i> Social Media Marketing</li>
-                <li><i class="fa-solid fa-check"></i> Content Strategy</li>
-                <li><i class="fa-solid fa-check"></i> PPC Advertising</li>
-                <li><i class="fa-solid fa-check"></i> Analytics & Reporting</li>
-              </ul>
-              <div class="service-cta">
-                <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>service/website-redesign/" class="btn-service-outline">Learn More</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Design & Branding Services -->
-      <div class="service-category-content d-none" id="design-branding">
-        <div class="row">
-
-          <!-- Graphic Design -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card" data-aos="fade-up">
-              <div class="service-header">
-                <div class="service-icon">
-                  <i class="fa-solid fa-pen-nib fa-2x"></i>
-                </div>
-                <div class="service-experience">
-                  <span>Since Aug 2022</span>
-                </div>
-              </div>
-              <h3>Graphic Design</h3>
-              <p class="service-tagline">VISUALLY STUNNING DESIGNS</p>
-              <p class="service-description">Creative graphic design services including brochures, banners, social media graphics, and marketing materials that reflect your brand identity.</p>
-              <ul class="service-features">
-                <li><i class="fa-solid fa-check"></i> Brand Identity Design</li>
-                <li><i class="fa-solid fa-check"></i> Marketing Materials</li>
-                <li><i class="fa-solid fa-check"></i> Social Media Graphics</li>
-                <li><i class="fa-solid fa-check"></i> Print Design</li>
-              </ul>
-              <div class="service-cta">
-                <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>service/landing-page-design/" class="btn-service-outline">Learn More</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Logo Design -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-              <div class="service-header">
-                <div class="service-icon">
-                  <i class="fa-solid fa-copyright fa-2x"></i>
-                </div>
-                <div class="service-experience">
-                  <span>Since Aug 2022</span>
-                </div>
-              </div>
-              <h3>Logo Design</h3>
-              <p class="service-tagline">MEMORABLE BRAND IDENTITY</p>
-              <p class="service-description">Professional logo design services that create memorable brand identities. We design logos that communicate your brand values and attract your target audience.</p>
-              <ul class="service-features">
-                <li><i class="fa-solid fa-check"></i> Custom Logo Design</li>
-                <li><i class="fa-solid fa-check"></i> Brand Style Guide</li>
-                <li><i class="fa-solid fa-check"></i> Multiple Concepts</li>
-                <li><i class="fa-solid fa-check"></i> Vector Format Delivery</li>
-              </ul>
-              <div class="service-cta">
-                <a href="<?= $site ?>contact/" class="btn-service">Get Quote</a>
-                <a href="<?= $site ?>service/landing-page-design/" class="btn-service-outline">Learn More</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--===== CASE AREA ENDS =======-->
-
-  <!--===== PRICING AREA STARTS =======-->
-  <div class="pricing-inner-section-area sp1 bg2">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 m-auto">
-          <div class="pricing-header heading8 text-center">
-            <h5 data-aos="fade-up" data-aos-duration="1000"><img src="assets/img/icons/logo-icons6.svg" alt="">Pricing &
-              Plan</h5>
-            <h2 class="text-anime-style-1">NikhilWorks <span>Pricing Plan <img src="assets/img/elements/line-img2.png"
-                  alt=""></span></h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <!-- Static Website -->
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="pricing-boxarea" data-aos="fade-up">
-            <div class="pricing-badge">Most Popular</div>
-            <h4>Static Website</h4>
-            <p>Perfect for startups & personal portfolios</p>
-            <div class="price-india">
-              <h3 class="price-heading">₹3,999 <span>One-Time</span></h3>
-            </div>
-            <div class="price-international d-none">
-              <h3 class="price-heading">$49 <span>One-Time</span></h3>
-            </div>
-            <div class="space20"></div>
-            <ul>
-              <li><i class="fa-solid fa-check text-success"></i> 3-5 Pages (HTML5, CSS3, Bootstrap)</li>
-              <li><i class="fa-solid fa-check text-success"></i> Mobile-First Responsive Design</li>
-              <li><i class="fa-solid fa-check text-success"></i> JavaScript/jQuery Interactions</li>
-              <li><i class="fa-solid fa-check text-success"></i> SEO Optimized Structure</li>
-              <li><i class="fa-solid fa-check text-success"></i> Free Hosting Guidance</li>
-              <li><i class="fa-solid fa-check text-success"></i> 1 Month Technical Support</li>
+        <!-- 1. Custom Website Design & Development -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up">
+          <div class="service-card-modern">
+            <div class="service-badge-exp">Core Speciality</div>
+            <div class="service-card-icon"><i class="fa-solid fa-laptop-code"></i></div>
+            <h3 class="service-title">Web Design &amp; Development</h3>
+            <div class="service-tagline">Clean, Modern &amp; Conversion-Driven</div>
+            <p class="service-desc">Bespoke responsive websites engineered with clean semantic HTML5, modern CSS/Bootstrap, PHP, and JavaScript. Zero bloated page builders.</p>
+            <ul class="service-feature-checklist">
+              <li><i class="fa-solid fa-check"></i> 100% Mobile &amp; Tablet Responsive</li>
+              <li><i class="fa-solid fa-check"></i> Sub-second 95+ PageSpeed Score</li>
+              <li><i class="fa-solid fa-check"></i> On-Page SEO &amp; Schema Built-In</li>
             </ul>
-            <div class="space24"></div>
-            <a href="https://wa.me/918368552640?text=Hi! I'm interested in Static Website package (₹3,499)" class="header-btn11">Get Started <span><i class="fa-solid fa-arrow-right"></i></span></a>
+            <div class="service-card-footer">
+              <a href="<?= $site ?>service/website-design-development/" class="btn-service-primary">Explore Service <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20am%20interested%20in%20Web%20Design%20%26%20Development" class="btn-service-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
           </div>
         </div>
 
-        <!-- Dynamic Website -->
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="pricing-boxarea active" data-aos="fade-up" data-aos-delay="100">
-            <div class="pricing-badge">Best Value</div>
-            <h4>Dynamic Website</h4>
-            <p>Database-driven business websites</p>
-            <div class="price-india">
-              <h3 class="price-heading">₹8,999 <span>One-Time</span></h3>
-            </div>
-            <div class="price-international d-none">
-              <h3 class="price-heading">$99 <span>One-Time</span></h3>
-            </div>
-            <div class="space20"></div>
-            <ul class="text-light">
-              <li><i class="fa-solid fa-check text-success"></i> 5-10 Pages (PHP + MySQL)</li>
-              <li><i class="fa-solid fa-check text-success"></i> Admin Dashboard Panel</li>
-              <li><i class="fa-solid fa-check text-success"></i> Contact Form + Email System</li>
-              <li><i class="fa-solid fa-check text-success"></i> User Registration & Login</li>
-              <li><i class="fa-solid fa-check text-success"></i> Content Management System</li>
-              <li><i class="fa-solid fa-check text-success"></i> 3 Months Support & Maintenance</li>
+        <!-- 2. E-Commerce Store Development -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card-modern">
+            <div class="service-badge-exp">High Conversion</div>
+            <div class="service-card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+            <h3 class="service-title">E-Commerce Development</h3>
+            <div class="service-tagline">WooCommerce, Shopify &amp; Custom Cart</div>
+            <p class="service-desc">Scalable online storefronts with Razorpay, Stripe, Paytm, and Cashfree payment gateways, automated inventory, and instant WhatsApp order alerts.</p>
+            <ul class="service-feature-checklist">
+              <li><i class="fa-solid fa-check"></i> Multi-Currency &amp; GST Invoicing</li>
+              <li><i class="fa-solid fa-check"></i> Abandoned Cart Recovery Funnels</li>
+              <li><i class="fa-solid fa-check"></i> Shipping &amp; Logistics API Sync</li>
             </ul>
-            <div class="space24"></div>
-            <a href="https://wa.me/918368552640?text=Hi! I'm interested in Dynamic Website package (₹7,999)" class="header-btn9">Get Started <span><i class="fa-solid fa-arrow-right"></i></span></a>
+            <div class="service-card-footer">
+              <a href="<?= $site ?>service/e-commerce-website-development/" class="btn-service-primary">Explore Service <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20need%20an%20E-Commerce%20Website" class="btn-service-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
           </div>
         </div>
 
-        <!-- WordPress Website -->
-       <div class="col-lg-4 col-md-6 mb-4">
-          <div class="pricing-boxarea" data-aos="fade-up" data-aos-delay="200">
-            <h4>WordPress Website</h4>
-            <p>Easy-to-manage CMS solution</p>
-            <div class="price-india">
-              <h3 class="price-heading">₹5,999 <span>One-Time</span></h3>
-            </div>
-            <div class="price-international d-none">
-              <h3 class="price-heading">$79 <span>One-Time</span></h3>
-            </div>
-            <div class="space20"></div>
-            <ul>
-              <li><i class="fa-solid fa-check text-success"></i> Premium Theme Installation</li>
-              <li><i class="fa-solid fa-check text-success"></i> Essential Plugins Setup</li>
-              <li><i class="fa-solid fa-check text-success"></i> Blog + Contact Forms</li>
-              <li><i class="fa-solid fa-check text-success"></i> SEO Optimization</li>
-              <li><i class="fa-solid fa-check text-success"></i> Basic Security Configuration</li>
-              <li><i class="fa-solid fa-check text-success"></i> 2 Months Support</li>
+        <!-- 3. WordPress Development -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card-modern">
+            <div class="service-badge-exp">Easy CMS</div>
+            <div class="service-card-icon"><i class="fa-brands fa-wordpress"></i></div>
+            <h3 class="service-title">WordPress Development</h3>
+            <div class="service-tagline">Custom Elementor &amp; Gutenberg</div>
+            <p class="service-desc">Custom WordPress builds engineered for simplicity. Manage blogs, testimonials, products, and landing pages without writing a single line of code.</p>
+            <ul class="service-feature-checklist">
+              <li><i class="fa-solid fa-check"></i> Custom Lightweight Theme Architecture</li>
+              <li><i class="fa-solid fa-check"></i> Security Hardening &amp; Spam Shield</li>
+              <li><i class="fa-solid fa-check"></i> Easy Drag &amp; Drop Client Handover</li>
             </ul>
-            <div class="space24"></div>
-            <a href="https://wa.me/918368552640?text=Hi! I'm interested in WordPress Website package (₹5,999)" class="header-btn11">Get Started <span><i class="fa-solid fa-arrow-right"></i></span></a>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <!-- View More Button -->
-        <div class="btn-area1 text-center" data-aos="fade-up" data-aos-duration="1200">
-          <a href="<?= $site ?>pricing/" class="header-btn11">View All Pricing <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <!--===== PRICING AREA ENDS =======-->
-
-
-
-  <!--===== CHOOSE AREA STARTS =======-->
-  <div class="choose-section-area sp1">
-    <img src="<?= $site ?>assets/img/bg/cta-bg1.png" alt="" class="cta-bg1 aniamtion-key-2">
-    <img src="<?= $site ?>assets/img/bg/cta-bg2.png" alt="" class="cta-bg2 aniamtion-key-1">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 m-auto">
-          <div class="choose-header-area text-center heading2">
-            <h5>Why Choose Us</h5>
-            <h2>Why Choose NikhilWorks?</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row align-items-center">
-        <div class="col-lg-6">
-          <div class="accordian-tabs-area">
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-
-              <!-- Item 1 -->
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseOne" aria-expanded="true"
-                    aria-controls="flush-collapseOne">
-                    1. Custom Web Solutions
-                  </button>
-                </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse show"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    I build responsive, performance-focused websites using the latest technologies
-                    like MERN stack, Laravel, and WordPress—tailored to your business goals.
-                  </div>
-                  <div class="space10"></div>
-                  <div class="accordion-body body2">
-                    Whether it’s an e-commerce store or a personal portfolio, I ensure
-                    scalable code and clean UI/UX.
-                  </div>
-                </div>
-              </div>
-              <div class="space24"></div>
-
-              <!-- Item 2 -->
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                    aria-controls="flush-collapseTwo">
-                    2. Transparent Communication
-                  </button>
-                </h2>
-                <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    I provide regular progress updates, clear timelines, and open
-                    communication so you’re never left guessing.
-                  </div>
-                  <div class="space10"></div>
-                  <div class="accordion-body body2">
-                    From kickoff to launch, every milestone is shared and documented.
-                  </div>
-                </div>
-              </div>
-              <div class="space24"></div>
-
-              <!-- Item 3 -->
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree" aria-expanded="false"
-                    aria-controls="flush-collapseThree">
-                    3. Proven Results
-                  </button>
-                </h2>
-                <div id="flush-collapseThree" class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    My projects consistently improve client visibility, conversions,
-                    and performance across devices and search engines.
-                  </div>
-                  <div class="space10"></div>
-                  <div class="accordion-body body2">
-                    Real-world results: faster load times, higher SEO rankings, and measurable growth.
-                  </div>
-                </div>
-              </div>
-              <div class="space24"></div>
-
-              <!-- Item 4 -->
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseFour" aria-expanded="false"
-                    aria-controls="flush-collapseFour">
-                    4. End-to-End Support
-                  </button>
-                </h2>
-                <div id="flush-collapseFour" class="accordion-collapse collapse"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    From concept and design to deployment and maintenance,
-                    I provide full support for smooth project delivery.
-                  </div>
-                  <div class="space10"></div>
-                  <div class="accordion-body body2">
-                    Need updates or new features later? I’m here for long-term collaboration.
-                  </div>
-                </div>
-              </div>
-
+            <div class="service-card-footer">
+              <a href="<?= $site ?>service/wordpress-website-development/" class="btn-service-primary">Explore Service <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20need%20a%20WordPress%20Website" class="btn-service-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-6">
-          <div class="about-all-images-area">
-            <img src="<?= $site ?>assets/img/elements/elements12.png" alt="" class="elements12 keyframe5">
-            <img src="<?= $site ?>assets/img/elements/elements13.png" alt="" class="elements13 keyframe5">
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-                <div class="img1">
-                  <div class="space100"></div>
-                  <img src="<?= $site ?>assets/img/all-images/service-img5.png" alt="">
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6">
-                <div class="img2">
-                  <img src="<?= $site ?>assets/img/all-images/service-img9.png" alt="">
-                </div>
-              </div>
+        <!-- 4. Custom CRM & Portal Development -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up">
+          <div class="service-card-modern">
+            <div class="service-badge-exp">Enterprise</div>
+            <div class="service-card-icon"><i class="fa-solid fa-diagram-project"></i></div>
+            <h3 class="service-title">Custom CRM Development</h3>
+            <div class="service-tagline">Lead Pipelines &amp; Operations Automation</div>
+            <p class="service-desc">Bespoke CRM solutions tailored to your business workflow. Role-based user dashboards, automated lead assignment, PDF quote generation, and webhook triggers.</p>
+            <ul class="service-feature-checklist">
+              <li><i class="fa-solid fa-check"></i> Multi-Role RBAC Security Permissions</li>
+              <li><i class="fa-solid fa-check"></i> WhatsApp &amp; SMS Communication Sync</li>
+              <li><i class="fa-solid fa-check"></i> Real-time Analytics &amp; Reports</li>
+            </ul>
+            <div class="service-card-footer">
+              <a href="<?= $site ?>crm-development-india/" class="btn-service-primary">Explore Service <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20am%20interested%20in%20CRM%20Development" class="btn-service-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <!--===== CHOOSE AREA ENDS =======-->
 
-
-  <!--===== BLOG AREA STARTS =======-->
-  <div class="blog1-scetion-area sp2 bg2">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 m-auto">
-          <div class="blog-hedaer-area heading2 text-center">
-            <h2>More Blogs & News</h2>
+        <!-- 5. Technical SEO & Organic Ranking -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card-modern">
+            <div class="service-badge-exp">Rank #1 Google</div>
+            <div class="service-card-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h3 class="service-title">SEO Services &amp; Promotion</h3>
+            <div class="service-tagline">Technical, On-Page &amp; Local Pack</div>
+            <p class="service-desc">Dominate Google organic search and Google Maps 3-pack for high-intent business keywords. Comprehensive crawl audits, Schema JSON-LD, and keyword clusters.</p>
+            <ul class="service-feature-checklist">
+              <li><i class="fa-solid fa-check"></i> Google Local Business Profile Optimization</li>
+              <li><i class="fa-solid fa-check"></i> Schema.org Entity &amp; Rich Snippets</li>
+              <li><i class="fa-solid fa-check"></i> 100% White-Hat Algorithm Compliance</li>
+            </ul>
+            <div class="service-card-footer">
+              <a href="<?= $site ?>seo-services-india/" class="btn-service-primary">Explore Service <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20want%20to%20grow%20my%20SEO%20rankings" class="btn-service-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
           </div>
         </div>
+
+        <!-- 6. Website Maintenance & Support -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card-modern">
+            <div class="service-badge-exp">Peace of Mind</div>
+            <div class="service-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 class="service-title">Website Maintenance SLA</h3>
+            <div class="service-tagline">24/7 Security, Backups &amp; Bugfixes</div>
+            <p class="service-desc">Ensure zero downtime with proactive maintenance. Includes daily/weekly cloud backups, malware scanning, plugin updates, speed monitoring, and content additions.</p>
+            <ul class="service-feature-checklist">
+              <li><i class="fa-solid fa-check"></i> 24/7 Server Uptime &amp; Speed Monitoring</li>
+              <li><i class="fa-solid fa-check"></i> Database Optimization &amp; Backups</li>
+              <li><i class="fa-solid fa-check"></i> Priority Direct Developer Support</li>
+            </ul>
+            <div class="service-card-footer">
+              <a href="<?= $site ?>service/website-maintenance-support/" class="btn-service-primary">Explore Service <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20need%20Website%20Maintenance" class="btn-service-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Website Redesign & Conversion Fix -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up">
+          <div class="service-card-modern">
+            <div class="service-badge-exp">Modernization</div>
+            <div class="service-card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <h3 class="service-title">Website Redesign</h3>
+            <div class="service-tagline">UI/UX Upgrade &amp; Speed Overhaul</div>
+            <p class="service-desc">Transform outdated, slow websites into high-converting modern experiences with contemporary typography, glassmorphism, micro-interactions, and mobile speed.</p>
+            <ul class="service-feature-checklist">
+              <li><i class="fa-solid fa-check"></i> Modern UI/UX Wireframes &amp; Layouts</li>
+              <li><i class="fa-solid fa-check"></i> Zero SEO Loss with 301 Redirect Mapping</li>
+              <li><i class="fa-solid fa-check"></i> Higher Conversion Rate &amp; Lower Bounce</li>
+            </ul>
+            <div class="service-card-footer">
+              <a href="<?= $site ?>service/website-redesign/" class="btn-service-primary">Explore Service <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20want%20to%20Redesign%20my%20Website" class="btn-service-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. API & Third-Party Integrations -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card-modern">
+            <div class="service-badge-exp">Seamless Connect</div>
+            <div class="service-card-icon"><i class="fa-solid fa-network-wired"></i></div>
+            <h3 class="service-title">API &amp; System Integration</h3>
+            <div class="service-tagline">Payment, WhatsApp, CRM &amp; Logistics</div>
+            <p class="service-desc">Connect your web platform with Razorpay, Stripe, Meta Graph APIs, WhatsApp Cloud API, Shiprocket logistics, Zoho, HubSpot, and custom REST/GraphQL endpoints.</p>
+            <ul class="service-feature-checklist">
+              <li><i class="fa-solid fa-check"></i> Secure Webhook Handling &amp; Logging</li>
+              <li><i class="fa-solid fa-check"></i> Instant Event Notifications</li>
+              <li><i class="fa-solid fa-check"></i> Custom Third-Party Middleware</li>
+            </ul>
+            <div class="service-card-footer">
+              <a href="<?= $site ?>api-integration-services-india/" class="btn-service-primary">Explore Service <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20need%20API%20Integration%20Services" class="btn-service-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Google & Meta Ads Management -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card-modern">
+            <div class="service-badge-exp">Paid Traffic</div>
+            <div class="service-card-icon"><i class="fa-solid fa-bullseye"></i></div>
+            <h3 class="service-title">Google &amp; Meta Ads</h3>
+            <div class="service-tagline">High-ROI Paid Lead Generation</div>
+            <p class="service-desc">Precision paid advertising campaigns on Google Search, Performance Max, Facebook, and Instagram to generate qualified B2B and B2C sales inquiries from day one.</p>
+            <ul class="service-feature-checklist">
+              <li><i class="fa-solid fa-check"></i> Negative Keyword Filtering &amp; Low CPC</li>
+              <li><i class="fa-solid fa-check"></i> Conversion Tracking &amp; GTM Setup</li>
+              <li><i class="fa-solid fa-check"></i> Transparent Analytics &amp; ROAS Reporting</li>
+            </ul>
+            <div class="service-card-footer">
+              <a href="<?= $site ?>ads-management-india/" class="btn-service-primary">Explore Service <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20want%20to%20run%20Google%20or%20Meta%20Ads" class="btn-service-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="row">
-        <?php
-        foreach ($blogs as $blog) {
-        ?>
+
+    </div>
+  </section>
+  <!--===== CORE SERVICES GRID ENDS =======-->
+
+  <!--===== DEEP LOCAL SEO HUBS SECTION (DELHI NCR & ALL MAJOR METROS) =======-->
+  <section class="loc-seo-hub-section">
+    <div class="container">
+      
+      <div class="row text-center mb-5">
+        <div class="col-lg-9 mx-auto">
+          <span class="badge bg-light text-dark px-3 py-2 rounded-pill fw-bold mb-2">Localized Delivery Network</span>
+          <h2 class="fw-bold" style="color: #0f2d2e; font-size: clamp(1.8rem, 3.2vw, 2.5rem);">Web Development &amp; SEO Services Across India</h2>
+          <p class="text-muted">Serving startups, local businesses, manufacturers, corporate enterprises, and export houses across Delhi NCR and every major commercial city in India.</p>
+        </div>
+      </div>
+
+      <!-- Tier 1 Metros Grid -->
+      <div class="row g-4">
+        
+        <!-- Delhi NCR Hub -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up">
+          <div class="city-card-box">
+            <div class="city-card-header">
+              <h3 class="city-name-title">Delhi NCR</h3>
+              <span class="city-badge-hub">Local HQ</span>
+            </div>
+            <p class="text-muted small mb-1">In-person consultations available across all Delhi districts &amp; NCR satellite cities.</p>
+            <div class="city-micro-list">
+              <span class="city-micro-chip">Karampura</span>
+              <span class="city-micro-chip">Connaught Place</span>
+              <span class="city-micro-chip">Nehru Place</span>
+              <span class="city-micro-chip">Noida Sec 62</span>
+              <span class="city-micro-chip">Gurgaon Cyber City</span>
+              <span class="city-micro-chip">Dwarka</span>
+              <span class="city-micro-chip">Janakpuri</span>
+              <span class="city-micro-chip">Pitampura</span>
+            </div>
+            <a href="<?= $site ?>web-designer-delhi/" class="city-card-link">Web Developer Delhi <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+          </div>
+        </div>
+
+        <!-- Mumbai -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+          <div class="city-card-box">
+            <div class="city-card-header">
+              <h3 class="city-name-title">Mumbai</h3>
+              <span class="city-badge-hub">Financial Hub</span>
+            </div>
+            <p class="text-muted small mb-1">Web development for finance, trading, Bollywood entertainment, and retail brands.</p>
+            <div class="city-micro-list">
+              <span class="city-micro-chip">BKC</span>
+              <span class="city-micro-chip">Nariman Point</span>
+              <span class="city-micro-chip">Andheri East/West</span>
+              <span class="city-micro-chip">Lower Parel</span>
+              <span class="city-micro-chip">Powai</span>
+              <span class="city-micro-chip">Navi Mumbai</span>
+              <span class="city-micro-chip">Thane</span>
+            </div>
+            <a href="<?= $site ?>web-developer-mumbai/" class="city-card-link">Web Developer Mumbai <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+          </div>
+        </div>
+
+        <!-- Bangalore -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="city-card-box">
+            <div class="city-card-header">
+              <h3 class="city-name-title">Bangalore (Bengaluru)</h3>
+              <span class="city-badge-hub">IT &amp; Startup Capital</span>
+            </div>
+            <p class="text-muted small mb-1">Product-focused, high-tech web applications and SaaS platforms for tech startups.</p>
+            <div class="city-micro-list">
+              <span class="city-micro-chip">Whitefield</span>
+              <span class="city-micro-chip">Electronic City</span>
+              <span class="city-micro-chip">Koramangala</span>
+              <span class="city-micro-chip">Indiranagar</span>
+              <span class="city-micro-chip">HSR Layout</span>
+              <span class="city-micro-chip">Manyata Tech Park</span>
+            </div>
+            <a href="<?= $site ?>web-developer-bangalore/" class="city-card-link">Web Developer Bangalore <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+          </div>
+        </div>
+
+        <!-- Hyderabad -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up">
+          <div class="city-card-box">
+            <div class="city-card-header">
+              <h3 class="city-name-title">Hyderabad</h3>
+              <span class="city-badge-hub">Cyberabad &amp; Pharma</span>
+            </div>
+            <p class="text-muted small mb-1">High-speed web portals, pharma B2B sites, and modern IT service business platforms.</p>
+            <div class="city-micro-list">
+              <span class="city-micro-chip">Hitech City</span>
+              <span class="city-micro-chip">Gachibowli</span>
+              <span class="city-micro-chip">Madhapur</span>
+              <span class="city-micro-chip">Jubilee Hills</span>
+              <span class="city-micro-chip">Banjara Hills</span>
+              <span class="city-micro-chip">Secunderabad</span>
+            </div>
+            <a href="<?= $site ?>web-developer-hyderabad/" class="city-card-link">Web Developer Hyderabad <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+          </div>
+        </div>
+
+        <!-- Pune -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+          <div class="city-card-box">
+            <div class="city-card-header">
+              <h3 class="city-name-title">Pune</h3>
+              <span class="city-badge-hub">IT &amp; Auto Hub</span>
+            </div>
+            <p class="text-muted small mb-1">B2B industrial supplier websites, automotive portals, and IT tech consulting sites.</p>
+            <div class="city-micro-list">
+              <span class="city-micro-chip">Hinjewadi IT Park</span>
+              <span class="city-micro-chip">Magarpatta</span>
+              <span class="city-micro-chip">Viman Nagar</span>
+              <span class="city-micro-chip">Baner</span>
+              <span class="city-micro-chip">Kharadi</span>
+              <span class="city-micro-chip">Kothrud</span>
+            </div>
+            <a href="<?= $site ?>web-developer-pune/" class="city-card-link">Web Developer Pune <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+          </div>
+        </div>
+
+        <!-- Chennai -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="city-card-box">
+            <div class="city-card-header">
+              <h3 class="city-name-title">Chennai</h3>
+              <span class="city-badge-hub">SaaS &amp; Manufacturing</span>
+            </div>
+            <p class="text-muted small mb-1">Engineering, healthcare, SaaS tools, and export enterprise web platforms.</p>
+            <div class="city-micro-list">
+              <span class="city-micro-chip">OMR IT Corridor</span>
+              <span class="city-micro-chip">T. Nagar</span>
+              <span class="city-micro-chip">Guindy</span>
+              <span class="city-micro-chip">Anna Nagar</span>
+              <span class="city-micro-chip">Velachery</span>
+              <span class="city-micro-chip">Nungambakkam</span>
+            </div>
+            <a href="<?= $site ?>web-developer-chennai/" class="city-card-link">Web Developer Chennai <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+          </div>
+        </div>
+
+        <!-- Kolkata -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up">
+          <div class="city-card-box">
+            <div class="city-card-header">
+              <h3 class="city-name-title">Kolkata</h3>
+              <span class="city-badge-hub">East India Hub</span>
+            </div>
+            <p class="text-muted small mb-1">Websites for manufacturing, logistics, tea exports, and professional service agencies.</p>
+            <div class="city-micro-list">
+              <span class="city-micro-chip">Salt Lake Sector V</span>
+              <span class="city-micro-chip">Rajarhat</span>
+              <span class="city-micro-chip">New Town</span>
+              <span class="city-micro-chip">Park Street</span>
+              <span class="city-micro-chip">Howrah</span>
+            </div>
+            <a href="<?= $site ?>web-developer-kolkata/" class="city-card-link">Web Developer Kolkata <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+          </div>
+        </div>
+
+        <!-- Ahmedabad & Gujarat -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+          <div class="city-card-box">
+            <div class="city-card-header">
+              <h3 class="city-name-title">Ahmedabad &amp; Surat</h3>
+              <span class="city-badge-hub">Trade &amp; Textile</span>
+            </div>
+            <p class="text-muted small mb-1">E-Commerce catalogs, chemical suppliers, diamond &amp; textile manufacturers.</p>
+            <div class="city-micro-list">
+              <span class="city-micro-chip">SG Highway</span>
+              <span class="city-micro-chip">Prahlad Nagar</span>
+              <span class="city-micro-chip">GIFT City</span>
+              <span class="city-micro-chip">Surat Ring Road</span>
+              <span class="city-micro-chip">Varachha</span>
+            </div>
+            <a href="<?= $site ?>web-developer-ahmedabad/" class="city-card-link">Web Developer Ahmedabad <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+          </div>
+        </div>
+
+        <!-- Tier 2 Tech & Business Hubs -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="city-card-box">
+            <div class="city-card-header">
+              <h3 class="city-name-title">North &amp; Central Hubs</h3>
+              <span class="city-badge-hub">Emerging Hubs</span>
+            </div>
+            <p class="text-muted small mb-1">Fast-growing businesses in Rajasthan, Punjab, MP, and UP looking for modern sites.</p>
+            <div class="city-micro-list">
+              <span class="city-micro-chip">Jaipur</span>
+              <span class="city-micro-chip">Chandigarh</span>
+              <span class="city-micro-chip">Indore</span>
+              <span class="city-micro-chip">Lucknow</span>
+              <span class="city-micro-chip">Kanpur</span>
+              <span class="city-micro-chip">Ludhiana</span>
+              <span class="city-micro-chip">Bhopal</span>
+            </div>
+            <a href="<?= $site ?>web-developer-jaipur/" class="city-card-link">Explore Regional Hubs <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- DELHI NCR DEEP LOCALITY MATRIX (Special High-Tech Block) -->
+      <div class="delhi-deep-panel" data-aos="fade-up">
+        <div class="row align-items-center mb-4">
+          <div class="col-lg-8">
+            <span class="badge bg-success text-white px-3 py-1 rounded-pill fw-bold mb-2">HQ Presence • Delhi NCR</span>
+            <h3 class="fw-bold mb-2" style="font-size: 1.6rem; color: #ADFF1C;">Deep Local Coverage Across All Delhi &amp; NCR Localities</h3>
+            <p class="text-light small mb-0">From small business storefronts to corporate headquarters, we provide fast delivery, localized on-page SEO, and optional in-person kickoff meetings.</p>
+          </div>
+          <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+            <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20am%20from%20Delhi%20NCR%20and%20need%20a%20website" class="btn btn-outline-light px-4 py-2 fw-bold rounded-pill" target="_blank" rel="noopener" style="border-color:#ADFF1C; color:#ADFF1C;">
+              <i class="fa-brands fa-whatsapp me-2"></i> Discuss Delhi Project
+            </a>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          
           <div class="col-lg-4 col-md-6">
-            <div class="blog-author-boxarea">
-              <div class="img1">
-                <img src="<?= $site ?>admin/uploads/blogs/<?= $blog['image'] ?>" alt="">
-              </div>
-              <div class="content-area">
-                <div class="tags-area">
-                  <ul>
-                    <li><a href="#"><img src="<?= $site ?>assets/img/icons/contact1.svg" alt=""><?= $blog['author'] ?></a></li>
-                    <li><a href="#"><img src="<?= $site ?>assets/img/icons/calender1.svg" alt=""><?= date('d M Y h:i A', strtotime($blog['created_at'])) ?></a></li>
-                  </ul>
-                </div>
-                <a href="<?= $site ?>blog/<?= $blog['slug_url'] ?>"><?= $blog['title'] ?></a>
-                <p><?= $blog['meta_description'] ?> </p>
-                <a href="<?= $site ?>blog/<?= $blog['slug_url'] ?>" class="readmore">Read More <i class="fa-solid fa-arrow-right"></i></a>
-              </div>
+            <div class="delhi-ncr-zone-title"><i class="fa-solid fa-location-crosshairs"></i> West &amp; Central Delhi</div>
+            <div class="locality-tags-cloud">
+              <span class="locality-tag">Karampura (Base)</span>
+              <span class="locality-tag">Connaught Place</span>
+              <span class="locality-tag">Patel Nagar</span>
+              <span class="locality-tag">Rajouri Garden</span>
+              <span class="locality-tag">Janakpuri</span>
+              <span class="locality-tag">Dwarka</span>
+              <span class="locality-tag">Punjabi Bagh</span>
+              <span class="locality-tag">Kirti Nagar</span>
+              <span class="locality-tag">Naraina Ind. Area</span>
+              <span class="locality-tag">Tilak Nagar</span>
             </div>
-            <div class="space30"></div>
           </div>
-        <?php
-        }
-        ?>
 
-
-      </div>
-    </div>
-  </div>
-  <!--===== BLOG AREA ENDS =======-->
-
-  <!--===== CTA AREA STARTS =======-->
-  <div class="cta4-section-area">
-    <img src="<?= $site ?>assets/img/bg/cta-bg5.png" alt="" class="cta-bg1 aniamtion-key-2">
-    <img src="<?= $site ?>assets/img/bg/cta-bg4.png" alt="" class="cta-bg2 aniamtion-key-1">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 m-auto">
-          <div class="cta-header-area text-center sp4 heading2">
-            <h2 class="text-anime-style-1 text-light">Contact Nikhil Gupta <br class="d-md-block d-none"> Professional Web Developer & SEO Expert</h2>
-            <p data-aos="fade-up" data-aos-duration="1000">Looking to create a stunning website or improve your Google rankings? <br class="d-md-block d-none">Have a project in mind? Looking for a reliable <strong>web developer</strong> or <strong>SEO expert in India</strong> to grow your business online? I’m here to help! Whether you need a responsive website, a complete <strong>SEO strategy</strong>, or <strong>digital marketing solutions</strong>, feel free to reach out. I usually respond within 24 hours.</p>
-            <div class="btn-area text-center" data-aos="fade-up" data-aos-duration="1200">
-              <a href="<?= $site ?>contact/" class="header-btn9"> Get A Free Consultation <i
-                  class="fa-solid fa-arrow-right"></i></a>
+          <div class="col-lg-4 col-md-6">
+            <div class="delhi-ncr-zone-title"><i class="fa-solid fa-location-crosshairs"></i> South &amp; East Delhi</div>
+            <div class="locality-tags-cloud">
+              <span class="locality-tag">Nehru Place (IT Hub)</span>
+              <span class="locality-tag">Saket</span>
+              <span class="locality-tag">Hauz Khas</span>
+              <span class="locality-tag">Greater Kailash (GK)</span>
+              <span class="locality-tag">Okhla Ind. Estate</span>
+              <span class="locality-tag">Laxmi Nagar</span>
+              <span class="locality-tag">Preet Vihar</span>
+              <span class="locality-tag">Mayur Vihar</span>
+              <span class="locality-tag">Defence Colony</span>
+              <span class="locality-tag">Kalkaji</span>
             </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="delhi-ncr-zone-title"><i class="fa-solid fa-location-crosshairs"></i> North Delhi &amp; NSP</div>
+            <div class="locality-tags-cloud">
+              <span class="locality-tag">Netaji Subhash Place (NSP)</span>
+              <span class="locality-tag">Pitampura</span>
+              <span class="locality-tag">Rohini</span>
+              <span class="locality-tag">Model Town</span>
+              <span class="locality-tag">Civil Lines</span>
+              <span class="locality-tag">Ashok Vihar</span>
+              <span class="locality-tag">Shalimar Bagh</span>
+              <span class="locality-tag">Kamla Nagar</span>
+              <span class="locality-tag">GT Karnal Road</span>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="delhi-ncr-zone-title"><i class="fa-solid fa-location-crosshairs"></i> Noida &amp; Greater Noida</div>
+            <div class="locality-tags-cloud">
+              <span class="locality-tag">Sector 62 (IT Park)</span>
+              <span class="locality-tag">Sector 18 (Atta)</span>
+              <span class="locality-tag">Sector 63 / 64 / 65</span>
+              <span class="locality-tag">Noida Expressway</span>
+              <span class="locality-tag">Sector 135 / 142</span>
+              <span class="locality-tag">Greater Noida Knowledge Park</span>
+              <span class="locality-tag">Pari Chowk</span>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="delhi-ncr-zone-title"><i class="fa-solid fa-location-crosshairs"></i> Gurgaon (Gurugram)</div>
+            <div class="locality-tags-cloud">
+              <span class="locality-tag">DLF Cyber City</span>
+              <span class="locality-tag">Golf Course Road</span>
+              <span class="locality-tag">Udyog Vihar</span>
+              <span class="locality-tag">Sohna Road</span>
+              <span class="locality-tag">MG Road</span>
+              <span class="locality-tag">Sector 29</span>
+              <span class="locality-tag">Manesar IMT</span>
+              <span class="locality-tag">Cyber Hub</span>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="delhi-ncr-zone-title"><i class="fa-solid fa-location-crosshairs"></i> Faridabad &amp; Ghaziabad</div>
+            <div class="locality-tags-cloud">
+              <span class="locality-tag">Indirapuram</span>
+              <span class="locality-tag">Vaishali</span>
+              <span class="locality-tag">Kaushambi</span>
+              <span class="locality-tag">Raj Nagar Ext.</span>
+              <span class="locality-tag">Sector 15 Faridabad</span>
+              <span class="locality-tag">Mathura Road Ind. Area</span>
+              <span class="locality-tag">Mohan Cooperative</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Free Tools & Calculator CTA Banner -->
+      <div class="services-cta-banner">
+        <div class="row align-items-center">
+          <div class="col-lg-8 text-lg-start mb-4 mb-lg-0">
+            <h3 class="fw-bold mb-2" style="font-size: 1.8rem;">Ready to Build or Upgrade Your Website?</h3>
+            <p class="text-white-50 mb-0">Get a 100% transparent quote using our real-time calculator or chat with Nikhil on WhatsApp.</p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a href="<?= $site ?>website-cost-calculator/" class="btn btn-lime px-4 py-3 fw-bold rounded-3" style="background:#ADFF1C; color:#082223;">
+              <i class="fa-solid fa-calculator me-2"></i> Use Cost Calculator
+            </a>
           </div>
         </div>
       </div>
+
     </div>
-  </div>
-  <!--===== CTA AREA ENDS =======-->
+  </section>
+  <!--===== DEEP LOCAL SEO HUBS SECTION ENDS =======-->
 
   <?php include_once "includes/footer.php" ?>
 
-  <!-- Service Categories Script -->
-  <script>
-  $(document).ready(function() {
-    $('.btn-group-toggle label').click(function() {
-      var target = $(this).find('input').attr('id');
-      
-      // Hide all service categories
-      $('.service-category-content').addClass('d-none');
-      
-      // Show selected category
-      if (target === 'option1') {
-        $('#web-development').removeClass('d-none');
-      } else if (target === 'option2') {
-        $('#digital-marketing').removeClass('d-none');
-      } else if (target === 'option3') {
-        $('#design-branding').removeClass('d-none');
-      }
-    });
-  });
-  </script>
-
-  <style>
-  .service-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    border: 1px solid #f0f0f0;
-    height: 100%;
-  }
-  
-  .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-  }
-  
-  .service-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-  }
-  
-  .service-icon {
-    color: #104041;
-  }
-  
-  .service-experience span {
-    background: #104041;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  
-  .service-card h3 {
-    color: #104041;
-    margin-bottom: 5px;
-    font-size: 1.5rem;
-  }
-  
-  .service-tagline {
-    color: #666;
-    font-weight: 600;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-  }
-  
-  .service-description {
-    color: #666;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-  
-  .service-features {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 25px;
-  }
-  
-  .service-features li {
-    padding: 5px 0;
-    color: #555;
-  }
-  
-  .service-features i {
-    color: #28a745;
-    margin-right: 10px;
-  }
-  
-  .service-cta {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .btn-service {
-    background: #ADFF1C;
-    color: #0a2b2c;
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    flex: 1;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-service:hover {
-    background: #0a2b2c;
-    color: white;
-    transform: translateY(-2px);
-  }
-  
-  .btn-service-outline {
-    border: 2px solid #104041;
-    color: #104041;
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    flex: 1;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-service-outline:hover {
-    background: #104041;
-    color: white;
-  }
-  
-  .service-categories {
-    margin-bottom: 40px;
-  }
-  
-  .service-categories .btn {
-    margin: 0 5px;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-weight: 600;
-  }
-  </style>
-
 </body>
-
-<!-- Mirrored from seoc-html-v2.vercel.app/service3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 07 Sep 2025 00:36:18 GMT -->
-
 </html>
