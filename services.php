@@ -721,6 +721,26 @@ $canonicalUrl = "https://nikhilworks.com/services/";
           </div>
         </div>
 
+        <!-- 10. AI Integration & Workflow Automation -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-card-modern" style="border: 2px solid #104041; background: linear-gradient(180deg, #ffffff 0%, #f4fbf9 100%);">
+            <div class="service-badge-exp" style="background:#104041; color:#ADFF1C;"><i class="fa-solid fa-sparkles me-1"></i> Next-Gen AI</div>
+            <div class="service-card-icon" style="background:#104041; color:#ADFF1C;"><i class="fa-solid fa-brain"></i></div>
+            <h3 class="service-title">AI &amp; Workflow Automation</h3>
+            <div class="service-tagline">Gemini, OpenAI, RAG &amp; n8n Workflows</div>
+            <p class="service-desc">Supercharge web applications with custom LLMs, 24/7 AI customer service chatbots, enterprise RAG vector search, and automated zero-click business workflows.</p>
+            <ul class="service-feature-checklist">
+              <li><i class="fa-solid fa-check"></i> 24/7 AI Chatbot for Web &amp; WhatsApp</li>
+              <li><i class="fa-solid fa-check"></i> Private Document Q&amp;A Vector Search</li>
+              <li><i class="fa-solid fa-check"></i> n8n / Zapier Automated Workflows</li>
+            </ul>
+            <div class="service-card-footer">
+              <a href="<?= $site ?>ai-integration-services/" class="btn-service-primary" style="background:#104041; color:#ADFF1C !important;">Explore AI Services <i class="fa-solid fa-arrow-right fa-xs"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20am%20interested%20in%20AI%20Integration%20and%20Automation" class="btn-service-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </div>

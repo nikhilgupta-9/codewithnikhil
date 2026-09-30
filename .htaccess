@@ -128,6 +128,9 @@ ErrorDocument 404 /404.php
   RewriteRule ^contact/?$ contact.php [L]
   RewriteRule ^blogs/?$ blog.php [L]
   RewriteRule ^testimonials/?$ testimonials.php [L]
+  RewriteRule ^ai-integration-services/?$ ai-integration-services.php [L]
+  RewriteRule ^ai-workflow-automation/?$ ai-integration-services.php [L]
+  RewriteRule ^ai-services/?$ ai-integration-services.php [L]
   RewriteRule ^privacy-policy/?$ privacy-policy.php [L]
   RewriteRule ^terms-and-conditions/?$ terms-and-conditions.php [L]
 
