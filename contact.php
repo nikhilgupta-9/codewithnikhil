@@ -164,7 +164,7 @@ include_once "config/connect.php";
       background: radial-gradient(circle at 85% 15%, rgba(173, 255, 28, 0.18) 0%, transparent 45%),
                   radial-gradient(circle at 10% 85%, rgba(16, 64, 65, 0.9) 0%, transparent 55%),
                   linear-gradient(135deg, #041213 0%, #0a292a 50%, #030d0e 100%);
-      padding: 145px 0 95px;
+      padding: 45px 0 50px;
       overflow: hidden;
       color: #ffffff;
     }
