@@ -47,10 +47,10 @@ $canonicalUrl = "https://nikhilworks.com/pay/";
       },
       {
         "@type": "Question",
-        "name": "Why is the payment beneficiary name Sant Lal Gupta?",
+        "name": "How does milestone-based payment work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sant Lal Gupta is the official registered banking entity and primary account under which NikhilWorks operations and tax-compliant billing are processed."
+          "text": "All fixed-price projects follow a clear milestone structure: 50% advance to initiate architecture & design, and the remaining 50% upon final sign-off before server deployment."
         }
       },
       {
@@ -421,11 +421,11 @@ $canonicalUrl = "https://nikhilworks.com/pay/";
 
             <!-- PhonePe Official QR Frame -->
             <div class="qr-img-frame">
-              <img src="<?= $site ?>assets/img/payment/phonepe-qr.jpg" alt="NikhilWorks Official PhonePe UPI QR Code - Sant Lal Gupta">
+              <img src="<?= $site ?>assets/img/payment/phonepe-qr.jpg" alt="NikhilWorks Official PhonePe UPI QR Code">
             </div>
 
-            <div class="qr-holder-name">Sant Lal Gupta</div>
-            <div class="qr-holder-entity">Official Business Entity for NikhilWorks</div>
+            <div class="qr-holder-name">Nikhil Gupta</div>
+            <div class="qr-holder-entity">Official UPI Payment Account for NikhilWorks</div>
 
             <!-- Copyable UPI Details -->
             <div class="upi-details-list">
@@ -452,7 +452,7 @@ $canonicalUrl = "https://nikhilworks.com/pay/";
 
             <!-- Mobile UPI Intent Button (works directly on phones) -->
             <div class="w-100 d-block d-md-none mb-3">
-              <a href="upi://pay?pa=8368552640@ybl&pn=Sant%20Lal%20Gupta&cu=INR" class="btn btn-dark w-100 py-3 fw-bold rounded-3" style="background:#104041; color:#ADFF1C;">
+              <a href="upi://pay?pa=8368552640@ybl&pn=Nikhil%20Gupta&cu=INR" class="btn btn-dark w-100 py-3 fw-bold rounded-3" style="background:#104041; color:#ADFF1C;">
                 <i class="fa-solid fa-mobile-screen-button me-2"></i> Pay via UPI App (Mobile)
               </a>
             </div>
@@ -485,9 +485,9 @@ $canonicalUrl = "https://nikhilworks.com/pay/";
             <div class="upi-copy-row">
               <div class="text-start">
                 <span class="upi-copy-label">Account Beneficiary Name</span>
-                <span class="upi-copy-value" style="font-family: inherit; font-size: 14px;">Sant Lal Gupta</span>
+                <span class="upi-copy-value" style="font-family: inherit; font-size: 14px;">Nikhil Gupta</span>
               </div>
-              <button type="button" class="btn-copy-mini" onclick="copyText('Sant Lal Gupta', this)">
+              <button type="button" class="btn-copy-mini" onclick="copyText('Nikhil Gupta', this)">
                 <i class="fa-regular fa-copy"></i> Copy
               </button>
             </div>
@@ -597,11 +597,11 @@ $canonicalUrl = "https://nikhilworks.com/pay/";
 
           <div class="loc-faq-item">
             <button class="loc-faq-btn" type="button">
-              <span>Why is the payment recipient name Sant Lal Gupta?</span>
+              <span>How does milestone-based project payment work?</span>
               <i class="fa-solid fa-plus"></i>
             </button>
             <div class="loc-faq-content" style="display: none;">
-              Sant Lal Gupta is the official registered banking entity and primary legal account under which NikhilWorks freelancing operations, IT development services, and tax-compliant accounting are processed.
+              All standard projects follow a transparent 50-50 milestone structure: 50% deposit to initiate architecture, design, and staging environments, and the final 50% balance upon completed testing and sign-off before production handover.
             </div>
           </div>
 

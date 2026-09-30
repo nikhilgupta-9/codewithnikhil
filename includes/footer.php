@@ -5,8 +5,8 @@
 <style>
   .sticky-whatsapp-cta {
     position: fixed;
-    right: 30px;
-    bottom: 104px;
+    right: 28px;
+    bottom: 96px;
     width: 56px;
     height: 56px;
     background: #25D366;
@@ -16,17 +16,17 @@
     align-items: center;
     justify-content: center;
     font-size: 28px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     z-index: 999;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   .sticky-whatsapp-cta:hover {
     color: #fff;
-    transform: scale(1.08);
-    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.32);
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
   }
   @media (max-width: 576px) {
-    .sticky-whatsapp-cta { right: 16px; bottom: 16px; width: 50px; height: 50px; font-size: 24px; }
+    .sticky-whatsapp-cta { right: 16px; bottom: 18px; width: 48px; height: 48px; font-size: 24px; }
   }
 </style>
 
@@ -37,25 +37,25 @@
 <style>
   .footer-back-to-top {
     position: fixed;
-    left: 30px;
-    bottom: 30px;
-    width: 48px;
-    height: 48px;
-    border: none;
+    left: 28px;
+    bottom: 28px;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(173, 255, 28, 0.4);
     border-radius: 50%;
-    background: #104041;
+    background: #082223;
     color: #ADFF1C;
-    font-size: 18px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
     z-index: 999;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
     transform: translateY(12px);
-    transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease, visibility 0.25s ease;
+    transition: all 0.25s ease;
   }
   .footer-back-to-top.is-visible {
     opacity: 1;
@@ -64,10 +64,11 @@
   }
   .footer-back-to-top:hover {
     background: #ADFF1C;
-    color: #104041;
+    color: #082223;
+    box-shadow: 0 8px 25px rgba(173, 255, 28, 0.45);
   }
   @media (max-width: 576px) {
-    .footer-back-to-top { left: 16px; bottom: 78px; width: 42px; height: 42px; font-size: 16px; }
+    .footer-back-to-top { left: 16px; bottom: 76px; width: 40px; height: 40px; font-size: 14px; }
   }
 </style>
 
@@ -75,7 +76,7 @@
 // Dynamic trust metrics - calculated from August 2022
 $years = function_exists('years_in_business') ? years_in_business(2022, 8) : '4';
 $projCount = function_exists('count_portfolio_projects') ? count_portfolio_projects() : 25;
-if ($projCount < 20) $projCount = 25; // Base minimum delivered projects
+if ($projCount < 20) $projCount = 25;
 $ratingData = function_exists('average_client_rating') ? average_client_rating() : ['avg' => 4.9, 'count' => 15];
 $footerGoogleRating = ($ratingData['avg'] > 0) ? $ratingData['avg'] : '4.9';
 $footerProjectsDelivered = (string)$projCount;
@@ -90,7 +91,7 @@ $footerYearsInBusiness = (string)$years;
         <a class="footer-cta-card" href="mailto:contact@nikhilworks.com">
           <span class="footer-cta-icon"><i class="fa-solid fa-envelope"></i></span>
           <span class="footer-cta-text">
-            <strong>Email Us</strong>
+            <strong>Direct Email</strong>
             <span>contact@nikhilworks.com</span>
           </span>
           <span class="footer-cta-copy" data-copy="contact@nikhilworks.com" title="Copy email"><i class="fa-regular fa-copy"></i></span>
@@ -100,7 +101,7 @@ $footerYearsInBusiness = (string)$years;
         <a class="footer-cta-card" href="tel:+918368552640">
           <span class="footer-cta-icon"><i class="fa-solid fa-phone-volume"></i></span>
           <span class="footer-cta-text">
-            <strong>Call Us Now</strong>
+            <strong>Call / WhatsApp</strong>
             <span>+91 83685 52640</span>
           </span>
           <span class="footer-cta-copy" data-copy="+918368552640" title="Copy number"><i class="fa-regular fa-copy"></i></span>
@@ -110,7 +111,7 @@ $footerYearsInBusiness = (string)$years;
         <div class="footer-cta-card footer-cta-card-static">
           <span class="footer-cta-icon"><i class="fa-solid fa-location-dot"></i></span>
           <span class="footer-cta-text">
-            <strong>Visit Our Office</strong>
+            <strong>Studio Location</strong>
             <span>Karampura, New Delhi, India</span>
             <span class="footer-cta-hours">Mon – Sat, 10:00 AM – 7:00 PM IST</span>
           </span>
@@ -122,24 +123,44 @@ $footerYearsInBusiness = (string)$years;
 <!--===== FOOTER TOP CTA BAR ENDS =======-->
 
 <!--===== FOOTER AREA STARTS =======-->
-<div class="footer4-section-area">
-  <div class="container">
-    <div class="row">
+<footer class="footer4-section-area">
+  <div class="loc-grid-overlay"></div>
+  <div class="container" style="position: relative; z-index: 2;">
+    
+    <!-- Top 5-Column Navigation Grid -->
+    <div class="row g-4 g-lg-5">
 
-      <!-- Company Branding & Info -->
+      <!-- Column 1: Company Branding & Trust Stats -->
       <div class="col-lg-3 col-md-6">
-        <div class="footer-logo-area">
-          <h2 class="logo_header my-2">NikhilWorks</h2>
-          <p class="my-2">Nikhil Gupta — freelance web developer, CRM &amp; digital marketing consultant helping businesses grow online across India, USA, UK, Canada, Australia, UAE and beyond (since Aug 2022).</p>
+        <div class="footer-brand-box">
+          <div class="site-logo mb-3">
+            <a href="<?= $site ?>" class="d-inline-flex align-items-center gap-2 text-decoration-none">
+              <h2 class="footer-brand-heading">NikhilWorks<span class="text-accent-dot">.</span></h2>
+            </a>
+          </div>
+          <p class="footer-brand-bio">
+            Nikhil Gupta — senior freelance web architect, CRM engineer &amp; SEO consultant delivering high-ROI digital platforms across India, USA, UK, UAE, Canada, and Australia (since Aug 2022).
+          </p>
 
+          <!-- Live Trust Counters -->
           <ul class="footer-trust-stats">
-            <li><strong><span class="footer-counter" data-counter-time="1200"><?= $footerGoogleRating ?></span>★</strong><span>Google Rating</span></li>
-            <li><strong><span class="footer-counter" data-counter-time="1600"><?= $footerProjectsDelivered ?></span>+</strong><span>Projects Delivered</span></li>
-            <li><strong><span class="footer-counter" data-counter-time="1200"><?= $footerYearsInBusiness ?></span>+</strong><span>Years in Business</span></li>
+            <li>
+              <strong><span class="footer-counter"><?= $footerGoogleRating ?></span>★</strong>
+              <span>Google Rating</span>
+            </li>
+            <li>
+              <strong><span class="footer-counter"><?= $footerProjectsDelivered ?></span>+</strong>
+              <span>Projects</span>
+            </li>
+            <li>
+              <strong><span class="footer-counter"><?= $footerYearsInBusiness ?></span>+</strong>
+              <span>Years Exp</span>
+            </li>
           </ul>
 
-          <p class="footer-follow-label">Follow Us</p>
-          <ul class="social-links" style="display: flex; gap: 10px; list-style: none; padding: 0; margin: 0; flex-wrap: wrap; align-items: center;">
+          <!-- Social Links -->
+          <p class="footer-follow-label">Connect Directly</p>
+          <ul class="footer-social-list">
             <?php if (!empty($contact['linkdin'])): ?>
             <li>
               <a href="<?= $contact['linkdin'] ?>" target="_blank" rel="noopener" aria-label="LinkedIn" class="footer-social-btn" title="LinkedIn">
@@ -150,7 +171,7 @@ $footerYearsInBusiness = (string)$years;
             <?php if (!empty($contact['twitter'])): ?>
             <li>
               <a href="<?= $contact['twitter'] ?>" target="_blank" rel="noopener" aria-label="X (Twitter)" class="footer-social-btn" title="X (Twitter)">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: inline-block; vertical-align: middle;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: inline-block; vertical-align: middle;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
               </a>
             </li>
             <?php endif; ?>
@@ -190,14 +211,18 @@ $footerYearsInBusiness = (string)$years;
             </li>
             <?php endif; ?>
           </ul>
+
         </div>
       </div>
 
-      <!-- Our Services -->
-      <div class="col-lg-2 col-md-6">
-        <div class="footer-logo-area1">
-          <h3 class="footer-accordion-toggle">Our Services <i class="fa-solid fa-chevron-down"></i></h3>
-          <ul>
+      <!-- Column 2: Our Services -->
+      <div class="col-lg-2 col-md-6 col-12">
+        <div class="footer-nav-col">
+          <h3 class="footer-nav-title footer-accordion-toggle">
+            <span>Our Services</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </h3>
+          <ul class="footer-nav-links">
             <?php foreach ($services as $serv): ?>
               <li><a href="<?= $site ?>service/<?= $serv['slug_url'] ?>/"><?= $serv['categories'] ?></a></li>
             <?php endforeach; ?>
@@ -206,71 +231,83 @@ $footerYearsInBusiness = (string)$years;
         </div>
       </div>
 
-      <!-- Our Products / Solutions -->
-      <div class="col-lg-2 col-md-6">
-        <div class="footer-logo-area1">
-          <h3 class="footer-accordion-toggle">Products &amp; Solutions <i class="fa-solid fa-chevron-down"></i></h3>
-          <ul>
+      <!-- Column 3: Products, Tools & Solutions -->
+      <div class="col-lg-2 col-md-6 col-12">
+        <div class="footer-nav-col">
+          <h3 class="footer-nav-title footer-accordion-toggle">
+            <span>Tools &amp; Solutions</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </h3>
+          <ul class="footer-nav-links">
+            <li><a href="<?= $site ?>pay/" class="link-highlight-pay"><i class="fa-solid fa-qrcode text-accent-dot me-1"></i> Pay Online (UPI / QR)</a></li>
+            <li><a href="<?= $site ?>website-cost-calculator/"><i class="fa-solid fa-calculator text-accent-dot me-1"></i> Cost Calculator</a></li>
+            <li><a href="<?= $site ?>seo-auditor/"><i class="fa-solid fa-stethoscope text-accent-dot me-1"></i> Free SEO Auditor</a></li>
             <li><a href="<?= $site ?>crm-development-india/">CRM Development</a></li>
-            <li><a href="<?= $site ?>api-integration-services-india/">API &amp; Integrations</a></li>
             <li><a href="<?= $site ?>service/website-maintenance-support/">Website Maintenance</a></li>
             <li><a href="<?= $site ?>service/website-redesign/">Website Redesign</a></li>
-            <li><a href="<?= $site ?>website-auditing-india/">Website Auditing</a></li>
-            <li><a href="<?= $site ?>keyword-promotion-india/">Keyword Promotion</a></li>
             <li><a href="<?= $site ?>ads-management-india/">Google &amp; Meta Ads</a></li>
           </ul>
         </div>
       </div>
 
-      <!-- Company -->
-      <div class="col-lg-2 col-md-6">
-        <div class="footer-logo-area1">
-          <h3 class="footer-accordion-toggle">Company <i class="fa-solid fa-chevron-down"></i></h3>
-          <ul>
+      <!-- Column 4: Company -->
+      <div class="col-lg-2 col-md-6 col-12">
+        <div class="footer-nav-col">
+          <h3 class="footer-nav-title footer-accordion-toggle">
+            <span>Company</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </h3>
+          <ul class="footer-nav-links">
             <li><a href="<?= $site ?>about/">About Us</a></li>
             <li><a href="<?= $site ?>contact/">Contact Us</a></li>
-            <li><a href="<?= $site ?>blogs/">Blog</a></li>
+            <li><a href="<?= $site ?>blogs/">Blog &amp; Insights</a></li>
+            <li><a href="<?= $site ?>testimonials/">Testimonials</a></li>
             <li><a href="<?= $site ?>privacy-policy/">Privacy Policy</a></li>
             <li><a href="<?= $site ?>terms-and-conditions/">Terms &amp; Conditions</a></li>
           </ul>
         </div>
       </div>
 
-      <!-- Quick Links / Resources -->
-      <div class="col-lg-3 col-md-6">
-        <div class="footer-logo-area1">
-          <h3 class="footer-accordion-toggle">Quick Links <i class="fa-solid fa-chevron-down"></i></h3>
-          <ul>
-            <li><a href="<?= $site ?>portfolio/">Portfolio</a></li>
+      <!-- Column 5: Quick Links & Engagement -->
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="footer-nav-col">
+          <h3 class="footer-nav-title footer-accordion-toggle">
+            <span>Quick Links</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </h3>
+          <ul class="footer-nav-links">
+            <li><a href="<?= $site ?>portfolio/">Portfolio &amp; Showcase</a></li>
             <li><a href="<?= $site ?>pricing/">Pricing Plans</a></li>
-            <li><a href="<?= $site ?>pay/"><i class="fa-solid fa-qrcode" style="color:#ADFF1C;"></i> Pay Online (UPI / QR)</a></li>
-            <li><a href="<?= $site ?>website-cost-calculator/">Website Cost Calculator</a></li>
-            <li><a href="<?= $site ?>seo-auditor/">Free SEO Audit Tool</a></li>
-            <li><a href="<?= $site ?>testimonials/">Testimonials</a></li>
-            <li><a href="<?= $site ?>contact/">Get a Free Consultation</a></li>
             <li><a href="<?= $site ?>hire-freelance-web-developer/">Hire a Freelance Developer</a></li>
+            <li><a href="<?= $site ?>website-development-cost-india/">Website Development Cost</a></li>
+            <li><a href="<?= $site ?>contact/">Book Free Consultation</a></li>
           </ul>
+
+          <div class="mt-4 pt-2">
+            <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20would%20like%20to%20discuss%20a%20project." class="footer-quick-wa-btn" target="_blank" rel="noopener">
+              <i class="fa-brands fa-whatsapp"></i> Chat with Nikhil
+            </a>
+          </div>
         </div>
       </div>
 
     </div>
 
-    <div class="space40 d-lg-block d-none"></div>
-    <div class="space40 d-lg-none d-block"></div>
+    <!-- Divider -->
+    <div class="footer-inner-divider"></div>
 
-    <!-- SEO Keyword / Popular Pages tag grid -->
-    <div class="footer-seo-section footer-glass-panel">
-      <h4>Popular Searches &amp; Free Tools</h4>
+    <!-- Popular Searches Tag Grid -->
+    <div class="footer-seo-panel">
+      <h4 class="footer-panel-title"><i class="fa-solid fa-bolt text-accent-dot me-2"></i>Popular Searches &amp; Free Utilities</h4>
       <div class="footer-tag-grid">
-        <a href="<?= $site ?>pay/">Pay Online / Make Payment</a>
-        <a href="<?= $site ?>website-cost-calculator/">Website Cost Calculator</a>
-        <a href="<?= $site ?>seo-auditor/">Free SEO Audit Tool</a>
+        <a href="<?= $site ?>pay/" class="tag-featured"><i class="fa-solid fa-qrcode me-1"></i> Pay Online</a>
+        <a href="<?= $site ?>website-cost-calculator/" class="tag-featured"><i class="fa-solid fa-calculator me-1"></i> Website Cost Calculator</a>
+        <a href="<?= $site ?>seo-auditor/" class="tag-featured"><i class="fa-solid fa-stethoscope me-1"></i> Free SEO Audit Tool</a>
         <a href="<?= $site ?>service/website-design-development/">Web Design &amp; Development</a>
         <a href="<?= $site ?>service/e-commerce-website-development/">E-commerce Website Development</a>
         <a href="<?= $site ?>service/wordpress-website-development/">WordPress Development</a>
         <a href="<?= $site ?>service/landing-page-design/">Landing Page Design</a>
         <a href="<?= $site ?>service/mobile-app-development-services/">Mobile App Development</a>
-        <a href="<?= $site ?>service/social-media-marketing/">Social Media Marketing</a>
         <a href="<?= $site ?>seo-services-india/">SEO Services India</a>
         <a href="<?= $site ?>seo-services-usa/">SEO Services USA</a>
         <a href="<?= $site ?>crm-development-india/">CRM Development India</a>
@@ -289,13 +326,10 @@ $footerYearsInBusiness = (string)$years;
       </div>
     </div>
 
-    <div class="space40 d-lg-block d-none"></div>
-    <div class="space40 d-lg-none d-block"></div>
-
-    <!-- Global / Regional Coverage grid -->
-    <div class="footer-region-section footer-glass-panel-2">
-      <h4>Where We Work</h4>
-      <div class="row footer-region-grid">
+    <!-- Global Regional Hubs Grid -->
+    <div class="footer-region-panel">
+      <h4 class="footer-panel-title"><i class="fa-solid fa-globe text-accent-dot me-2"></i>Global Delivery Locations</h4>
+      <div class="row g-3 footer-region-grid">
         <div class="col-lg-2 col-md-4 col-6">
           <h5>India</h5>
           <ul>
@@ -345,54 +379,100 @@ $footerYearsInBusiness = (string)$years;
       </div>
     </div>
 
-    <div class="space40 d-lg-block d-none"></div>
-    <div class="space40 d-lg-none d-block"></div>
-
-    <!-- Trust & Security Bar / Copyright -->
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="copyright-area footer-trust-bar">
-          <div class="pera">
-            <p>ⓒ Copyright <?= date('Y') ?> <a href="<?=$site?>">Nikhil Works</a>. All Rights Reserved.</p>
-          </div>
-          <ul class="footer-trust-badges">
-            <li><i class="fa-solid fa-lock"></i> SSL Secured</li>
+    <!-- Bottom Copyright & Security Bar -->
+    <div class="footer-bottom-bar">
+      <div class="row align-items-center g-3">
+        <div class="col-md-5 text-center text-md-start">
+          <p class="footer-copyright-text mb-0">
+            © <?= date('Y') ?> <strong>NikhilWorks</strong> • Handcrafted with <span style="color:#ADFF1C;">♥</span> by Nikhil Gupta.
+          </p>
+        </div>
+        <div class="col-md-3 text-center">
+          <ul class="footer-security-badges">
+            <li><i class="fa-solid fa-lock text-accent-dot"></i> 256-Bit SSL Secured</li>
             <?php if (!empty($contact['google_review'])): ?>
-              <li><a href="<?= $contact['google_review'] ?>" target="_blank" rel="noopener"><i class="fab fa-google"></i> Read Our Reviews</a></li>
+              <li><a href="<?= $contact['google_review'] ?>" target="_blank" rel="noopener"><i class="fab fa-google text-warning"></i> Reviews</a></li>
             <?php endif; ?>
           </ul>
-          <ul>
-            <li><a href="<?= $site ?>terms-and-conditions/">Terms & Conditions</a></li>
-            <li><a href="<?= $site ?>privacy-policy/" class="m-0">Privacy Policy</a></li>
+        </div>
+        <div class="col-md-4 text-center text-md-end">
+          <ul class="footer-legal-links mb-0">
+            <li><a href="<?= $site ?>pay/">Pay Online</a></li>
+            <li><a href="<?= $site ?>terms-and-conditions/">Terms</a></li>
+            <li><a href="<?= $site ?>privacy-policy/">Privacy</a></li>
           </ul>
         </div>
       </div>
     </div>
 
   </div>
-</div>
+</footer>
 <!--===== FOOTER AREA ENDS =======-->
 
 <style>
+  /* ===== ULTRA-PREMIUM FOOTER STYLES ===== */
   .footer-cta-bar {
-    background: #0A2828;
-    padding: 28px 0;
+    background: #051617;
+    border-bottom: 1px solid rgba(173, 255, 28, 0.12);
+    padding: 30px 0;
   }
   .footer-cta-card {
     position: relative;
     display: flex;
     align-items: center;
     gap: 16px;
-    background: #104041;
-    border-radius: 12px;
-    padding: 18px 20px;
+    background: rgba(16, 64, 65, 0.45);
+    border: 1px solid rgba(173, 255, 28, 0.2);
+    border-radius: 16px;
+    padding: 18px 22px;
     height: 100%;
     text-decoration: none;
-    transition: transform 0.25s ease, background 0.25s ease;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
   }
   a.footer-cta-card:hover {
-    background: #14524f;
+    background: rgba(16, 64, 65, 0.85);
+    border-color: #ADFF1C;
     transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  .footer-cta-card-static {
+    cursor: default;
+  }
+  .footer-cta-icon {
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #ADFF1C;
+    color: #082223;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 15px rgba(173, 255, 28, 0.3);
+  }
+  .footer-cta-text {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    line-height: 1.4;
+  }
+  .footer-cta-text strong {
+    font-size: 14.5px;
+    font-weight: 800;
+    color: #ADFF1C;
+    margin-bottom: 2px;
+  }
+  .footer-cta-text span {
+    font-size: 13.5px;
+    color: #e4f2f0;
+    word-break: break-word;
+  }
+  .footer-cta-hours {
+    font-size: 11.5px !important;
+    color: #8dafae !important;
+    margin-top: 2px;
   }
   .footer-cta-copy {
     margin-left: auto;
@@ -403,80 +483,86 @@ $footerYearsInBusiness = (string)$years;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #b7cfcb;
-    font-size: 14px;
-    opacity: 0;
-    transform: translateX(-6px);
-    transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease;
-  }
-  a.footer-cta-card:hover .footer-cta-copy {
-    opacity: 1;
-    transform: translateX(0);
+    color: #8dafae;
+    font-size: 13px;
+    transition: all 0.2s ease;
   }
   .footer-cta-copy:hover,
   .footer-cta-copy.is-copied {
     background: #ADFF1C;
-    color: #104041;
-  }
-  @media (max-width: 767px) {
-    .footer-cta-copy { opacity: 1; transform: none; }
-  }
-  .footer-cta-icon {
-    flex: 0 0 auto;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: #ADFF1C;
-    color: #0a2b2c;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-  }
-  .footer-cta-text {
-    display: flex;
-    flex-direction: column;
-    color: #fff;
-    line-height: 1.4;
-  }
-  .footer-cta-text strong {
-    font-size: 15px;
-    color: #ADFF1C;
-  }
-  .footer-cta-text span {
-    font-size: 14px;
-    color: #e8f5f2;
-  }
-  .footer-cta-hours {
-    font-size: 12px !important;
-    color: #b7cfcb !important;
+    color: #082223;
   }
 
+  /* MAIN FOOTER CONTAINER */
+  .footer4-section-area {
+    position: relative;
+    background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 10% 80%, rgba(16, 64, 65, 0.6) 0%, transparent 50%),
+                linear-gradient(180deg, #051617 0%, #082223 100%);
+    padding: 85px 0 35px;
+    overflow: hidden;
+    color: #ffffff;
+  }
+  .footer-brand-heading {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.5px;
+  }
+  .text-accent-dot {
+    color: #ADFF1C;
+  }
+  .footer-brand-bio {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #9fbab8;
+    margin-bottom: 20px;
+  }
   .footer-trust-stats {
     display: flex;
-    gap: 18px;
+    gap: 12px;
     list-style: none;
     padding: 0;
-    margin: 6px 0 16px;
+    margin: 0 0 22px;
   }
   .footer-trust-stats li {
-    display: flex;
-    flex-direction: column;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px 14px;
+    text-align: center;
+    flex: 1;
   }
-  .footer-trust-stats strong {
-    color: #104041;
-    font-size: 18px;
-    font-weight: 700;
+  .footer-trust-stats li strong {
+    color: #ADFF1C;
+    font-size: 16px;
+    font-weight: 800;
+    display: block;
+    line-height: 1.2;
   }
-  .footer-trust-stats span {
-    font-size: 12px;
-    color: #6a6a6a;
+  .footer-trust-stats li span {
+    font-size: 11px;
+    color: #8faea9;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
   }
   .footer-follow-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #104041;
-    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #ADFF1C;
+    margin-bottom: 10px;
+  }
+  .footer-social-list {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+    align-items: center;
   }
   .footer-social-btn {
     display: inline-flex;
@@ -485,247 +571,270 @@ $footerYearsInBusiness = (string)$years;
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #eef7f6;
-    color: #104041 !important;
-    font-size: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff !important;
+    font-size: 14px;
     transition: all 0.25s ease;
     text-decoration: none;
-    border: 1px solid rgba(16, 64, 65, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
   .footer-social-btn:hover {
-    background: #104041;
-    color: #ADFF1C !important;
+    background: #ADFF1C;
+    color: #082223 !important;
+    border-color: #ADFF1C;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(16, 64, 65, 0.2);
+    box-shadow: 0 4px 12px rgba(173, 255, 28, 0.35);
   }
 
-  .footer-seo-section h4,
-  .footer-region-section h4 {
-    color: #104041;
+  /* NAVIGATION COLUMNS */
+  .footer-nav-col {
+    height: 100%;
+  }
+  .footer-nav-title {
     font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 18px;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-nav-title i {
+    display: none;
+    font-size: 13px;
+    transition: transform 0.3s ease;
+  }
+  .footer-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-nav-links li {
+    margin-bottom: 11px;
+  }
+  .footer-nav-links li a {
+    color: #a3c4c0;
+    font-size: 13.5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+  }
+  .footer-nav-links li a:hover {
+    color: #ADFF1C;
+    transform: translateX(4px);
+  }
+  .link-highlight-pay {
+    color: #ADFF1C !important;
     font-weight: 700;
-    margin-bottom: 16px;
+  }
+  .footer-quick-wa-btn {
+    background: #25D366;
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  }
+  .footer-quick-wa-btn:hover {
+    background: #1da851;
+    transform: translateY(-2px);
+  }
+
+  /* DIVIDER */
+  .footer-inner-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(173, 255, 28, 0.25) 50%, transparent 100%);
+    margin: 50px 0 40px;
+  }
+
+  /* SEO & REGION GLASS PANELS */
+  .footer-seo-panel,
+  .footer-region-panel {
+    background: rgba(16, 64, 65, 0.3);
+    border: 1px solid rgba(173, 255, 28, 0.15);
+    border-radius: 18px;
+    padding: 28px 30px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(12px);
+  }
+  .footer-panel-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 18px;
+    letter-spacing: 0.3px;
   }
   .footer-tag-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
   }
   .footer-tag-grid a {
     display: inline-block;
-    padding: 5px 10px;
-    border-radius: 20px;
-    border: 1px solid #82d300;
-    color: #104041;
-    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: #c4e0dd;
+    font-size: 12.5px;
     text-decoration: none;
     transition: all 0.2s ease;
   }
   .footer-tag-grid a:hover {
     background: #104041;
-    border-color: #104041;
-    color: #fff;
+    border-color: #ADFF1C;
+    color: #ADFF1C;
+    transform: translateY(-2px);
+  }
+  .footer-tag-grid a.tag-featured {
+    background: rgba(173, 255, 28, 0.12);
+    border-color: rgba(173, 255, 28, 0.4);
+    color: #ADFF1C;
+    font-weight: 700;
   }
 
+  /* REGIONAL GRID */
   .footer-region-grid h5 {
-    color: #104041;
-    font-size: 14px;
-    font-weight: 700;
+    color: #ADFF1C;
+    font-size: 13.5px;
+    font-weight: 800;
     margin-bottom: 10px;
   }
   .footer-region-grid ul {
     list-style: none;
     padding: 0;
-    margin: 0 0 20px;
+    margin: 0;
   }
   .footer-region-grid ul li {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .footer-region-grid ul li a {
-    color: #3D4C5E;
-    font-size: 13px;
+    color: #9eb8b5;
+    font-size: 12.5px;
     text-decoration: none;
+    transition: color 0.2s ease;
   }
   .footer-region-grid ul li a:hover {
-    color: #104041;
+    color: #ffffff;
     text-decoration: underline;
   }
 
-  .footer-trust-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 14px;
-    padding: 24px 0 16px;
-    border-top: 1px solid #E5E7EB;
+  /* BOTTOM BAR */
+  .footer-bottom-bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 24px;
+    margin-top: 24px;
   }
-  .footer-trust-badges {
+  .footer-copyright-text {
+    font-size: 13px;
+    color: #8dafae;
+  }
+  .footer-security-badges {
     display: flex;
+    justify-content: center;
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 12.5px;
+    color: #8dafae;
+  }
+  .footer-security-badges a {
+    color: #8dafae;
+    text-decoration: none;
+  }
+  .footer-security-badges a:hover {
+    color: #ffffff;
+  }
+  .footer-legal-links {
+    display: flex;
+    justify-content: flex-end;
     gap: 18px;
     list-style: none;
     padding: 0;
     margin: 0;
+  }
+  .footer-legal-links li a {
+    color: #8dafae;
     font-size: 13px;
-    color: #6a6a6a;
-  }
-  .footer-trust-badges a {
-    color: #6a6a6a;
     text-decoration: none;
+    transition: color 0.2s ease;
   }
-  .footer-trust-badges i {
-    color: #104041;
-    margin-right: 4px;
-  }
-
-  /* Arrow-in link hover for the footer link columns */
-  .footer-logo-area1 ul li a {
-    position: relative;
-    transition: color 0.2s ease, padding-left 0.2s ease;
-  }
-  .footer-logo-area1 ul li a:hover {
-    color: #104041;
-    padding-left: 4px;
+  .footer-legal-links li a:hover {
+    color: #ADFF1C;
   }
 
-  /* Mobile Responsive Overhauls */
-  .footer-accordion-toggle {
-    cursor: default;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 18px;
-    color: #104041;
-    margin-bottom: 16px;
-  }
-  .footer-accordion-toggle i {
-    display: none;
-    font-size: 14px;
-    transition: transform 0.3s ease;
-  }
-
+  /* MOBILE RESPONSIVE ACCORDION */
   @media (max-width: 767px) {
     .footer-cta-bar {
-      padding: 18px 0;
+      padding: 16px 0;
     }
     .footer-cta-card {
       padding: 14px 16px;
     }
-    .footer-trust-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px 24px;
-      margin: 12px 0 16px;
+    .footer4-section-area {
+      padding: 50px 0 25px;
     }
-    .footer-trust-stats li strong {
-      font-size: 17px;
-    }
-    .footer-logo-area {
-      margin-bottom: 28px;
-    }
-    .footer-logo-area1 {
-      margin-bottom: 18px;
+    .footer-nav-col {
+      margin-bottom: 6px;
     }
     .footer-accordion-toggle {
       cursor: pointer;
-      border-bottom: 1px solid rgba(16, 64, 65, 0.12);
-      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 0;
       margin-bottom: 0;
-      font-size: 16px;
-      font-weight: 700;
+      user-select: none;
     }
     .footer-accordion-toggle i {
       display: inline-block;
-      color: #104041;
+      color: #ADFF1C;
     }
     .footer-accordion-toggle.is-open i {
       transform: rotate(180deg);
     }
-    .footer-logo-area1 ul {
+    .footer-nav-links {
       display: none;
-      padding: 12px 0 6px 10px;
-      margin: 0;
+      padding: 14px 0 8px 10px;
     }
-    .footer-logo-area1 ul.is-open {
+    .footer-nav-links.is-open {
       display: block;
     }
-    .footer-logo-area1 ul li {
-      margin-bottom: 10px;
-    }
-    .footer-logo-area1 ul li a {
-      font-size: 14px;
-      color: #3D4C5E;
-      display: inline-block;
-    }
-    .footer-seo-section, .footer-region-section {
+    .footer-seo-panel, .footer-region-panel {
       padding: 20px 16px;
-      border-radius: 12px;
+      border-radius: 14px;
+    }
+    .footer-legal-links {
+      justify-content: center;
       margin-top: 10px;
-    }
-    .footer-tag-grid {
-      gap: 8px;
-    }
-    .footer-tag-grid a {
-      font-size: 12px;
-      padding: 5px 10px;
-    }
-    .footer-region-grid .col-6 {
-      margin-bottom: 16px;
-    }
-    .copyright-area.footer-trust-bar {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      text-align: center !important;
-      gap: 12px !important;
-      padding: 20px 0 !important;
-    }
-    .copyright-area.footer-trust-bar .pera p {
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-    .copyright-area.footer-trust-bar .footer-trust-badges {
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .copyright-area.footer-trust-bar ul:last-child {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-    .copyright-area.footer-trust-bar ul:last-child li {
-      display: inline-block;
-    }
-    .copyright-area.footer-trust-bar ul:last-child li a {
-      margin: 0 !important;
-      font-size: 13px;
     }
   }
 </style>
+
 <script>
   $(document).ready(function() {
-
-    // Count up the trust-stat numbers once they scroll into view
+    // Count up trust metrics
     if (typeof $.fn.countUp === 'function') {
       $('.footer-counter').countUp();
     }
 
-    // Mobile accordion for the footer link columns
-    function isMobile() {
+    // Mobile accordion for footer links
+    function isMobileFooter() {
       return window.matchMedia('(max-width: 767px)').matches;
     }
     $('.footer-accordion-toggle').on('click', function() {
-      if (!isMobile()) return;
+      if (!isMobileFooter()) return;
       $(this).toggleClass('is-open');
-      $(this).next('ul').toggleClass('is-open');
+      $(this).next('.footer-nav-links').slideToggle(250);
     });
 
-    // Copy email / phone from the top CTA cards
+    // Copy to clipboard from CTA cards
     $('.footer-cta-copy').on('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -752,7 +861,7 @@ $footerYearsInBusiness = (string)$years;
       }
     });
 
-    // Back-to-top button
+    // Back to top
     var $backToTop = $('#footerBackToTop');
     $(window).on('scroll', function() {
       if ($(window).scrollTop() > 400) {
@@ -762,133 +871,10 @@ $footerYearsInBusiness = (string)$years;
       }
     });
     $backToTop.on('click', function() {
-      $('html, body').animate({ scrollTop: 0 }, 500);
+      $('html, body').animate({ scrollTop: 0 }, 400);
     });
   });
 </script>
-
-<style>
-  .service-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    border: 1px solid #f0f0f0;
-    height: 100%;
-  }
-
-  .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-  }
-
-  .service-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-  }
-
-  .service-icon {
-    color: #104041;
-  }
-
-  .service-experience span {
-    background: #104041;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-
-  .service-card h3 {
-    color: #104041;
-    margin-bottom: 5px;
-    font-size: 1.5rem;
-  }
-
-  .service-tagline {
-    color: #666;
-    font-weight: 600;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-  }
-
-  .service-description {
-    color: #666;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-
-  .service-features {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 25px;
-  }
-
-  .service-features li {
-    padding: 5px 0;
-    color: #555;
-  }
-
-  .service-features i {
-    color: #28a745;
-    margin-right: 10px;
-  }
-
-  .service-cta {
-    display: flex;
-    gap: 10px;
-  }
-
-  .btn-service {
-    background: #ADFF1C;
-    color: #0a2b2c;
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    flex: 1;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-
-  .btn-service:hover {
-    background: #0a2b2c;
-    color: white;
-    transform: translateY(-2px);
-  }
-
-  .btn-service-outline {
-    border: 2px solid #104041;
-    color: #104041;
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    flex: 1;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-
-  .btn-service-outline:hover {
-    background: #104041;
-    color: white;
-  }
-
-  .service-categories {
-    margin-bottom: 40px;
-  }
-
-  .service-categories .btn {
-    margin: 0 5px;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-weight: 600;
-  }
-</style>
 
 <!--===== JS SCRIPT LINK =======-->
 <script src="<?= $site ?>assets/js/plugins/bootstrap.min.js"></script>
