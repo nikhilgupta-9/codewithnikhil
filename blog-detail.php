@@ -84,7 +84,7 @@ if ($relatedRes) {
 $metaTitle     = !empty($blog['meta_title'])       ? $blog['meta_title']       : $blog['title'];
 $metaDesc      = !empty($blog['meta_description']) ? $blog['meta_description'] : mb_substr(strip_tags($blog['content']), 0, 155);
 $blogImage     = $site . 'admin/uploads/blogs/' . $blog['image'];
-$canonicalURL  = $site . 'blog/' . $blog['slug_url'];
+$canonicalURL  = $site . 'blog/' . $blog['slug_url'] . '/';
 $datePublished = date('c', strtotime($blog['created_at']));
 $dateModified  = date('c', strtotime(!empty($blog['updated_at']) ? $blog['updated_at'] : $blog['created_at']));
 ?>
@@ -500,26 +500,27 @@ $dateModified  = date('c', strtotime(!empty($blog['updated_at']) ? $blog['update
   <?php include_once "includes/header.php" ?>
 
   <!--===== HERO / BREADCRUMB =======-->
-  <div class="about-header-area" style="background-image:url(<?= $site ?>assets/img/bg/inner-header.png); background-repeat:no-repeat; background-size:cover; background-position:center;">
-    <img src="<?= $site ?>assets/img/elements/elements1.png" alt="" class="elements1 aniamtion-key-1">
-    <img src="<?= $site ?>assets/img/elements/star2.png" alt="" class="star2 keyframe5">
+  <section style="position:relative;background:radial-gradient(circle at 80% 20%, rgba(173,255,28,0.12) 0%, transparent 45%), radial-gradient(circle at 15% 85%, rgba(16,64,65,0.75) 0%, transparent 50%), linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);padding:130px 0 70px;overflow:hidden;color:#fff;">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 m-auto">
-          <div class="about-inner-header heading9 text-center">
-            <h1 class="fs-3"><?= htmlspecialchars($blog['title']) ?></h1>
-            <nav aria-label="breadcrumb">
-              <a href="<?= $site ?>">Home</a>
-              <i class="fa-solid fa-angle-right mx-1"></i>
-              <a href="<?= $site ?>blogs/">Blog</a>
-              <i class="fa-solid fa-angle-right mx-1"></i>
-              <span><?= htmlspecialchars(mb_substr($blog['title'], 0, 50)) ?><?= mb_strlen($blog['title']) > 50 ? '…' : '' ?></span>
-            </nav>
+        <div class="col-lg-9 mx-auto text-center">
+          <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background:rgba(173,255,28,0.12);border:1px solid rgba(173,255,28,0.35);color:#ADFF1C;font-size:12px;font-weight:700;letter-spacing:0.4px;">
+            <i class="fa-solid fa-book-open"></i> ARTICLE GUIDE
           </div>
+          <h1 class="text-white fw-bold mb-3" style="font-size:clamp(1.8rem, 3.5vw, 2.7rem);line-height:1.25;letter-spacing:-0.5px;">
+            <?= htmlspecialchars($blog['title']) ?>
+          </h1>
+          <nav aria-label="breadcrumb" class="d-flex justify-content-center align-items-center flex-wrap gap-2" style="font-size:14px;color:#b7cfcb;">
+            <a href="<?= $site ?>" style="color:#cde5e2;text-decoration:none;">Home</a>
+            <i class="fa-solid fa-angle-right fa-xs" style="color:#6c8a88;"></i>
+            <a href="<?= $site ?>blogs/" style="color:#cde5e2;text-decoration:none;">Blog</a>
+            <i class="fa-solid fa-angle-right fa-xs" style="color:#6c8a88;"></i>
+            <span style="color:#ADFF1C;font-weight:600;"><?= htmlspecialchars(mb_substr($blog['title'], 0, 45)) ?><?= mb_strlen($blog['title']) > 45 ? '…' : '' ?></span>
+          </nav>
         </div>
       </div>
     </div>
-  </div>
+  </section>
   <!--===== HERO ENDS =======-->
 
   <!--===== BLOG DETAIL =======-->
@@ -888,11 +889,11 @@ $dateModified  = date('c', strtotime(!empty($blog['updated_at']) ? $blog['update
                          onerror="this.src='<?= $site ?>assets/img/all-images/post-img1.png'">
                   </div>
                   <div class="content">
-                    <a href="<?= $site ?>blog/<?= htmlspecialchars($rp['slug_url']) ?>" class="date">
+                    <a href="<?= $site ?>blog/<?= htmlspecialchars($rp['slug_url']) ?>/" class="date">
                       <img src="<?= $site ?>assets/img/icons/calender1.svg" alt="">
                       <?= date('d M Y', strtotime($rp['created_at'])) ?>
                     </a>
-                    <a href="<?= $site ?>blog/<?= htmlspecialchars($rp['slug_url']) ?>" class="head">
+                    <a href="<?= $site ?>blog/<?= htmlspecialchars($rp['slug_url']) ?>/" class="head">
                       <?= htmlspecialchars(mb_substr($rp['title'], 0, 60)) ?><?= mb_strlen($rp['title']) > 60 ? '…' : '' ?>
                     </a>
                   </div>
@@ -1020,7 +1021,7 @@ $dateModified  = date('c', strtotime(!empty($blog['updated_at']) ? $blog['update
                         
                         <!-- Title -->
                         <h5 class="card-title mb-2" style="font-weight: 600; font-size: 18px; line-height: 1.4;">
-                            <a href="<?= $site ?>blog/<?= htmlspecialchars($relatedBlog['slug_url']) ?>" 
+                            <a href="<?= $site ?>blog/<?= htmlspecialchars($relatedBlog['slug_url']) ?>/" 
                                class="text-decoration-none" 
                                style="color: #104041; transition: color 0.3s;">
                                 <?= htmlspecialchars($relatedBlog['title']) ?>
@@ -1038,7 +1039,7 @@ $dateModified  = date('c', strtotime(!empty($blog['updated_at']) ? $blog['update
                         
                         <!-- Read More Link -->
                         <div class="mt-3 pt-2 border-top" style="border-color: #f0f0f0 !important;">
-                            <a href="<?= $site ?>blog/<?= htmlspecialchars($relatedBlog['slug_url']) ?>" 
+                            <a href="<?= $site ?>blog/<?= htmlspecialchars($relatedBlog['slug_url']) ?>/" 
                                class="text-decoration-none fw-semibold d-inline-flex align-items-center gap-2"
                                style="color: #104041; font-size: 14px; transition: all 0.3s;">
                                 Read More
