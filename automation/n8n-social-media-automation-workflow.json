@@ -1,0 +1,78 @@
+{
+  "name": "NikhilWorks - Multi-Platform Social Media Auto-Poster",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "nikhilworks-social-post",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "node-webhook",
+      "name": "Webhook: Receive Post Update",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.body.platforms.twitter }}",
+        "additionalFields": {}
+      },
+      "id": "node-twitter",
+      "name": "Twitter / X Post",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [500, 160]
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.body.platforms.linkedin }}",
+        "postAs": "person",
+        "additionalFields": {}
+      },
+      "id": "node-linkedin",
+      "name": "LinkedIn Share",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "@nikhilworks_updates",
+        "text": "=🚀 *New Update from NikhilWorks:*\n\n{{ $json.body.platforms.twitter }}\n\n🔗 {{ $json.body.url }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "node-telegram",
+      "name": "Telegram Broadcast",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [500, 440]
+    }
+  ],
+  "connections": {
+    "Webhook: Receive Post Update": {
+      "main": [
+        [
+          {
+            "node": "Twitter / X Post",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "LinkedIn Share",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Telegram Broadcast",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NikhilWorks Launch Video - Brag Composition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #020708;
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+    .video-viewport {
+      width: 960px;
+      height: 540px;
+      position: relative;
+      background: #041213;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(16, 64, 65, 0.4), 0 0 0 1px rgba(173, 255, 28, 0.3);
+    }
+    .video-viewport.vertical {
+      width: 405px;
+      height: 720px;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+      pointer-events: none;
+    }
+    .controls-panel {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #082223;
+      padding: 14px 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(173, 255, 28, 0.3);
+    }
+    .control-btn {
+      background: #adff1c;
+      color: #041213;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .control-btn:hover {
+      background: #c3ff5c;
+      transform: scale(1.04);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .time-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: #adff1c;
+      min-width: 90px;
+    }
+    .progress-bar-wrap {
+      width: 260px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #adff1c;
+      transition: width 0.05s linear;
+    }
+
+    /* Scene Elements inside Canvas/Overlay */
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(173, 255, 28, 0.15);
+      border: 1px solid #adff1c;
+      color: #adff1c;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .scene-title {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 12px;
+      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    }
+    .highlight-lime {
+      color: #adff1c;
+      text-shadow: 0 0 24px rgba(173, 255, 28, 0.5);
+    }
+    .scene-desc {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 680px;
+      line-height: 1.5;
+    }
+    .card-grid {
+      display: flex;
+      gap: 16px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    .feature-box {
+      background: rgba(16, 64, 65, 0.7);
+      border: 1px solid rgba(173, 255, 28, 0.3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      backdrop-filter: blur(8px);
+      text-align: left;
+    }
+    .feature-box h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #adff1c;
+      margin-bottom: 4px;
+    }
+    .feature-box p {
+      font-size: 12px;
+      color: #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="margin-bottom: 16px; font-weight: 800; color: #adff1c; letter-spacing: -0.5px;">
+    ⚡ NikhilWorks — 18s /brag Launch Video
+  </h2>
+
+  <!-- 16:9 Viewport -->
+  <div class="video-viewport" id="viewport">
+    <canvas id="videoCanvas" width="1920" height="1080"></canvas>
+    <div class="video-overlay" id="overlay">
+      <!-- Dynamic Scene Content Rendered via JS -->
+    </div>
+  </div>
+
+  <!-- Player Controls -->
+  <div class="controls-panel">
+    <button class="control-btn" id="playBtn" onclick="togglePlay()">▶ Play Video</button>
+    <button class="control-btn btn-secondary" onclick="restartVideo()">⏮ Replay</button>
+    <div class="progress-bar-wrap" onclick="seekVideo(event)">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="time-display" id="timeDisplay">00:00 / 00:18</div>
+    <button class="control-btn btn-secondary" onclick="toggleAspectRatio()">📱 Toggle 9:16</button>
+    <button class="control-btn" onclick="capturePoster()">📸 Export Poster</button>
+  </div>
+
+  <div style="margin-top: 16px; font-size: 13px; color: #64748b; text-align: center;">
+    Rendered with HTML5 Canvas & Web Audio Synthesizer &bull; Ready for export to MP4/WebM
+  </div>
+
+  <script>
+    const canvas = document.getElementById('videoCanvas');
+    const ctx = canvas.getContext('2d');
+    const overlay = document.getElementById('overlay');
+    const progressBar = document.getElementById('progressBar');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const playBtn = document.getElementById('playBtn');
+
+    const TOTAL_DURATION = 18.0; // Seconds
+    let currentTime = 0;
+    let isPlaying = false;
+    let lastTimestamp = 0;
+    let audioCtx = null;
+
+    // Grid Particles
+    const particles = Array.from({ length: 60 }, () => ({
+      x: Math.random() * 1920,
+      y: Math.random() * 1080,
+      size: Math.random() * 3 + 1,
+      speedY: Math.random() * 0.8 + 0.2,
+      opacity: Math.random() * 0.7 + 0.3
+    }));
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playSynthBeep(freq = 440, type = 'sine', duration = 0.2) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    function drawBackground(t) {
+      // Deep cyber teal radial gradient
+      const grad = ctx.createRadialGradient(960, 540, 100, 960, 540, 1100);
+      grad.addColorStop(0, '#0a2e30');
+      grad.addColorStop(0.6, '#041516');
+      grad.addColorStop(1, '#020808');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1920, 1080);
+
+      // Tech Grid
+      ctx.strokeStyle = 'rgba(173, 255, 28, 0.06)';
+      ctx.lineWidth = 1.5;
+      const gridSize = 60;
+      const offset = (t * 20) % gridSize;
+
+      for (let x = 0; x <= 1920; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 1080);
+        ctx.stroke();
+      }
+      for (let y = offset; y <= 1080; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(1920, y);
+        ctx.stroke();
+      }
+
+      // Moving Particles
+      particles.forEach(p => {
+        ctx.fillStyle = `rgba(173, 255, 28, ${p.opacity * 0.6})`;
+        ctx.beginPath();
+        ctx.arc(p.x, (p.y - t * 30 * p.speedY) % 1080, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    function renderScene(t) {
+      drawBackground(t);
+
+      let content = '';
+
+      if (t < 3.0) {
+        // Scene 1: The Hook (0s - 3s)
+        const progress = t / 3.0;
+        const scale = 1 + (1 - progress) * 0.15;
+        content = `
+          <div style="transform: scale(${scale});">
+            <div class="badge-pill">⚠️ The Agency Bottleneck</div>
+            <div class="scene-title">Stop Waiting <span class="highlight-lime">8 Weeks</span><br>For Slow Agency Websites.</div>
+            <div class="scene-desc">High costs. Clunky templates. Zero conversion focus.<br>There is a much faster way to launch.</div>
+          </div>
+        `;
+      } else if (t < 6.5) {
+        // Scene 2: The Reveal (3s - 6.5s)
+        content = `
+          <div style="animation: fadeIn 0.4s ease;">
+            <div class="badge-pill">⚡ Direct Developer Access</div>
+            <div class="scene-title">Meet <span class="highlight-lime">NikhilWorks</span></div>
+            <div class="scene-desc">Elite Full-Stack Web Engineering + Autonomous AI Workflow Automations</div>
+            <div class="card-grid">
+              <div class="feature-box">
+                <h4>🚀 3-7 Days</h4>
+                <p>Rapid Turnaround</p>
+              </div>
+              <div class="feature-box">
+                <h4>⚡ 100/100</h4>
+                <p>Google PageSpeed</p>
+              </div>
+              <div class="feature-box">
+                <h4>🤖 Native AI</h4>
+                <p>Autonomous Bots</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (t < 10.0) {
+        // Scene 3: Tech & Performance (6.5s - 10s)
+        content = `
+          <div>
+            <div class="badge-pill">🛠️ Modern Architecture</div>
+            <div class="scene-title">Built with <span class="highlight-lime">Pure Speed</span> & Zero Bloat</div>
+            <div class="scene-desc">React, Node.js, PHP MySQL & Custom High-Converting WordPress</div>
+            <div class="card-grid">
+              <div class="feature-box" style="border-color: #adff1c;">
+                <h4>⚡ Lighthouse Score</h4>
+                <p style="font-size: 20px; font-weight: 800; color: #adff1c;">100 / 100</p>
+              </div>
+              <div class="feature-box">
+                <h4>📱 Ultra-Responsive</h4>
+                <p>Mobile-First UX</p>
+              </div>
+              <div class="feature-box">
+                <h4>🔒 Enterprise Security</h4>
+                <p>SSL & Hardened Code</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (t < 13.5) {
+        // Scene 4: AI & Workflows (10s - 13.5s)
+        content = `
+          <div>
+            <div class="badge-pill">🤖 AI Automation</div>
+            <div class="scene-title">Automate Workflows with <span class="highlight-lime">Gemini & n8n</span></div>
+            <div class="scene-desc">Turn static websites into 24/7 autonomous sales and customer engines</div>
+            <div class="card-grid">
+              <div class="feature-box">
+                <h4>💬 WhatsApp AI Bots</h4>
+                <p>Instant Client Replies</p>
+              </div>
+              <div class="feature-box">
+                <h4>📊 RAG Knowledge Search</h4>
+                <p>Trained on Your Docs</p>
+              </div>
+              <div class="feature-box">
+                <h4>⚡ n8n Pipelines</h4>
+                <p>Auto-CRM & Lead Sync</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (t < 16.0) {
+        // Scene 5: Transparent Pricing & Tools (13.5s - 16s)
+        content = `
+          <div>
+            <div class="badge-pill">💰 100% Transparent</div>
+            <div class="scene-title">Fixed Rates Starting at <span class="highlight-lime">₹7,999 ($99)</span></div>
+            <div class="scene-desc">Free Interactive Cost Calculator & Live SEO Auditor Built-in</div>
+            <div class="card-grid">
+              <div class="feature-box">
+                <h4>🌐 WordPress Website</h4>
+                <p>₹7,999 / $99</p>
+              </div>
+              <div class="feature-box">
+                <h4>⚡ MERN Stack App</h4>
+                <p>₹18,999 / $249</p>
+              </div>
+              <div class="feature-box">
+                <h4>🛒 E-Commerce Store</h4>
+                <p>₹21,999 / $289</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        // Scene 6: Outro (16s - 18s)
+        content = `
+          <div>
+            <div class="badge-pill">🟢 Available for New Projects</div>
+            <div class="scene-title">Let's Build Something <span class="highlight-lime">Extraordinary</span></div>
+            <div class="scene-desc">Delhi NCR &bull; Pan-India &bull; Global Clients (USA, UK, UAE)</div>
+            <div style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: #adff1c; text-shadow: 0 0 20px rgba(173,255,28,0.5);">
+              🌐 nikhilworks.com &bull; 📲 +91 83685 52640
+            </div>
+          </div>
+        `;
+      }
+
+      overlay.innerHTML = content;
+    }
+
+    function updateProgressUI() {
+      const pct = (currentTime / TOTAL_DURATION) * 100;
+      progressBar.style.width = pct + '%';
+      
+      const curSec = Math.floor(currentTime).toString().padStart(2, '0');
+      const totSec = Math.floor(TOTAL_DURATION).toString().padStart(2, '0');
+      timeDisplay.innerText = `00:${curSec} / 00:${totSec}`;
+    }
+
+    function animate(timestamp) {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const delta = (timestamp - lastTimestamp) / 1000;
+      lastTimestamp = timestamp;
+
+      if (isPlaying) {
+        currentTime += delta;
+        if (currentTime >= TOTAL_DURATION) {
+          currentTime = TOTAL_DURATION;
+          isPlaying = false;
+          playBtn.innerText = '⏮ Replay Video';
+        }
+      }
+
+      renderScene(currentTime);
+      updateProgressUI();
+
+      requestAnimationFrame(animate);
+    }
+
+    function togglePlay() {
+      initAudio();
+      if (currentTime >= TOTAL_DURATION) {
+        currentTime = 0;
+      }
+      isPlaying = !isPlaying;
+      playBtn.innerText = isPlaying ? '⏸ Pause' : '▶ Play Video';
+      if (isPlaying) {
+        playSynthBeep(520, 'triangle', 0.15);
+      }
+    }
+
+    function restartVideo() {
+      initAudio();
+      currentTime = 0;
+      isPlaying = true;
+      playBtn.innerText = '⏸ Pause';
+      playSynthBeep(660, 'sine', 0.2);
+    }
+
+    function seekVideo(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const pct = clickX / rect.width;
+      currentTime = pct * TOTAL_DURATION;
+      updateProgressUI();
+      renderScene(currentTime);
+    }
+
+    function toggleAspectRatio() {
+      const vp = document.getElementById('viewport');
+      vp.classList.toggle('vertical');
+    }
+
+    function capturePoster() {
+      // Seek to scene 2 hero reveal
+      currentTime = 4.5;
+      renderScene(currentTime);
+      const link = document.createElement('a');
+      link.download = 'nikhilworks-brag-poster.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // Start render loop
+    requestAnimationFrame(animate);
+  </script>
+</body>
+</html>
