@@ -9,15 +9,16 @@ $ratingData = average_client_rating();
 $avgRating = ($ratingData['avg'] > 0) ? $ratingData['avg'] : '4.9';
 $totalReviews = ($ratingData['count'] > 0) ? $ratingData['count'] : 18;
 
-$limit = 3;
+$limit = 2;
 $blogs = get_blog($limit);
 $canonical_url = rtrim($site, '/') . '/';
 $og_image = rtrim($site, '/') . '/assets/img/preview.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HVPGR81RL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -31,9 +32,9 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary SEO Meta Tags (High-End Keyword Optimised) -->
-  <title>NikhilWorks | Freelance Web Developer, AI Solutions & SEO Expert India</title>
-  <meta name="description" content="Hire Nikhil Gupta — Senior Freelance Web Developer & AI Solutions Engineer in India. Custom PHP, MERN stack, WordPress, 24/7 AI Chatbots, n8n automations & Technical SEO services across Delhi NCR, Mumbai, Bangalore, USA, UK, UAE & Australia.">
-  <meta name="keywords" content="freelance web developer india, web developer delhi ncr, full stack web developer india, ai integration services, ai chatbot developer, custom php developer, mern stack developer, wordpress developer delhi, ecommerce website developer india, local seo expert delhi, hire web developer india, website cost calculator india, n8n automation developer">
+  <title>NikhilWorks | Top Freelance Web Developer, AI Solutions & SEO Expert India</title>
+  <meta name="description" content="Hire Nikhil Gupta — Senior Freelance Full-Stack Web Developer & AI Solutions Engineer in India. Custom PHP 8.2, MERN Stack, WordPress, 24/7 AI Chatbots, n8n automations & Google #1 SEO rankings across Delhi NCR, Mumbai, Bangalore, USA, UK, UAE & Australia.">
+  <meta name="keywords" content="freelance web developer india, web developer delhi ncr, full stack developer india, ai integration services, ai chatbot developer, mern stack developer, custom php developer, wordpress developer delhi, ecommerce website developer india, local seo expert delhi, hire freelance web developer, website cost calculator india, n8n automation developer">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="author" content="Nikhil Gupta - NikhilWorks">
 
@@ -59,12 +60,12 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="en_IN">
   <meta property="og:title" content="NikhilWorks — Freelance Web Developer, AI Solutions & SEO Expert">
-  <meta property="og:description" content="High-performance custom web applications, e-commerce stores, AI chatbots & technical SEO for businesses in India, USA, UK, UAE & Australia.">
+  <meta property="og:description" content="Custom full-stack web applications, e-commerce platforms, 24/7 AI chatbots & Google #1 SEO rankings for businesses in India, USA, UK, UAE & Australia.">
   <meta property="og:url" content="<?= $canonical_url ?>">
   <meta property="og:image" content="<?= $og_image ?>">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="NikhilWorks - Web Development, AI Integration and SEO Services">
+  <meta property="og:image:alt" content="NikhilWorks - Web Development & AI Solutions">
   <meta name="google-site-verification" content="CDIIrOxAgIwGM82moWkxmu4MN4lrxpLE6HdPVFlvXPE" />
 
   <!-- Twitter Card -->
@@ -322,12 +323,17 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/magnific-popup.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/sidebar.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/slick-slider.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/nice-select.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
 
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
 
+  <!-- Google Labs / DeepMind Inspired Tech UI Enhancements -->
   <style>
     :root {
       --nw-primary: #104041;
@@ -338,13 +344,13 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
       --nw-text-muted: #557273;
     }
 
-    /* ---- HERO SECTION UPGRADE ---- */
-    .home-hero-section {
+    /* ---- GOOGLE LAB GLOWING HERO ---- */
+    .hero5-section-area {
       position: relative;
       background: radial-gradient(circle at 85% 15%, rgba(173, 255, 28, 0.18) 0%, transparent 45%),
                   radial-gradient(circle at 10% 85%, rgba(16, 64, 65, 0.9) 0%, transparent 55%),
                   linear-gradient(135deg, #041213 0%, #0a292a 50%, #030d0e 100%);
-      padding: 145px 0 90px;
+      padding: 145px 0 85px;
       overflow: hidden;
       color: #fff;
     }
@@ -385,349 +391,247 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.35; transform: scale(0.8); }
     }
-    .home-hero-section h1 {
-      font-size: clamp(2.3rem, 4.8vw, 3.6rem);
+    .hero5-section-area h1 {
+      color: #ffffff;
+      font-size: clamp(2.3rem, 4.5vw, 3.5rem);
       font-weight: 800;
       line-height: 1.15;
-      color: #ffffff;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       letter-spacing: -0.5px;
     }
-    .home-hero-section h1 span.highlight {
+    .hero5-section-area h1 span.highlight {
       color: #ADFF1C;
       background: linear-gradient(120deg, #ADFF1C 0%, #7dffb3 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .home-hero-section p.lead-text {
-      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+    .hero5-section-area p.lead-text {
+      font-size: clamp(1rem, 1.7vw, 1.15rem);
       color: #d6ecea;
-      max-width: 860px;
-      margin: 0 auto 34px;
       line-height: 1.7;
-    }
-    .hero-action-buttons {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 45px;
-    }
-    .btn-hero-main {
-      background: #ADFF1C;
-      color: #082223 !important;
-      font-weight: 800;
-      font-size: 15.5px;
-      padding: 14px 30px;
-      border-radius: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(173, 255, 28, 0.28);
-      text-decoration: none;
-    }
-    .btn-hero-main:hover {
-      background: #ffffff;
-      color: #082223 !important;
-      transform: translateY(-3px);
-      box-shadow: 0 14px 35px rgba(255, 255, 255, 0.35);
-    }
-    .btn-hero-sec {
-      background: rgba(255, 255, 255, 0.08);
-      color: #ffffff !important;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      font-weight: 600;
-      font-size: 15px;
-      padding: 14px 26px;
-      border-radius: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(8px);
-      text-decoration: none;
-    }
-    .btn-hero-sec:hover {
-      background: rgba(255, 255, 255, 0.18);
-      border-color: #ffffff;
-      transform: translateY(-3px);
+      margin-bottom: 30px;
     }
 
-    /* ---- LIVE TRUST STATS ROW ---- */
-    .hero-trust-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      align-items: center;
-      padding-top: 25px;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    /* Floating Author Animation Frame */
+    .hero-images-area {
+      position: relative;
     }
-    .hero-stat-pill {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      padding: 8px 16px;
-      border-radius: 50px;
-      font-size: 13px;
-      color: #e0f2f1;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    .author-img1 {
+      border-radius: 24px;
+      border: 2px solid rgba(173, 255, 28, 0.3);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      transition: transform 0.4s ease;
     }
-    .hero-stat-pill strong {
-      color: #ADFF1C;
+    .author-img1:hover {
+      transform: scale(1.02);
+      border-color: #ADFF1C;
     }
 
-    /* ---- QUICK UTILITIES COMMAND CENTER ---- */
-    .command-center-section {
+    /* ---- COMMAND CENTER TOOL BAR ---- */
+    .command-center-bar {
       background: #082223;
-      padding: 30px 0 45px;
+      padding: 26px 0 35px;
       border-bottom: 1px solid rgba(173, 255, 28, 0.2);
     }
-    .tool-quick-card {
-      background: rgba(16, 64, 65, 0.4);
+    .tool-quick-box {
+      background: rgba(16, 64, 65, 0.45);
       border: 1px solid rgba(173, 255, 28, 0.2);
       border-radius: 16px;
-      padding: 22px 20px;
+      padding: 18px 18px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       text-decoration: none;
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
       height: 100%;
     }
-    .tool-quick-card:hover {
+    .tool-quick-box:hover {
       background: rgba(173, 255, 28, 0.12);
       border-color: #ADFF1C;
       transform: translateY(-4px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     }
-    .tool-icon-circle {
-      width: 48px;
-      height: 48px;
+    .tool-icon-wrap {
+      width: 44px;
+      height: 44px;
       border-radius: 12px;
       background: rgba(173, 255, 28, 0.15);
       color: #ADFF1C;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 19px;
       flex-shrink: 0;
     }
-    .tool-info-title {
-      font-size: 15px;
+    .tool-box-title {
+      font-size: 14.5px;
       font-weight: 800;
       color: #ffffff;
       margin-bottom: 2px;
     }
-    .tool-info-sub {
+    .tool-box-desc {
       font-size: 12px;
       color: #9ebdbb;
       margin: 0;
     }
 
-    /* ---- SERVICES SECTION ---- */
-    .services-modern-grid {
-      padding: 85px 0 95px;
-      background: #f7faf9;
+    /* Local SEO Badges */
+    .local-seo-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
     }
-    .service-card-main {
+    .local-seo-badges .badge-item {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #d6ecea;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .local-seo-badges .badge-item:hover {
+      background: rgba(173, 255, 28, 0.15);
+      color: #ADFF1C;
+      border-color: #ADFF1C;
+      transform: translateY(-2px);
+    }
+
+    /* ---- SERVICE CATEGORY TABS & CARDS ---- */
+    .service-tab-btn {
+      background: #f0f7f6;
+      border: 2px solid #e1eceb;
+      color: #104041;
+      font-weight: 700;
+      font-size: 14.5px;
+      padding: 10px 24px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      margin: 0 5px;
+    }
+    .service-tab-btn.active, .service-tab-btn:hover {
+      background: #104041;
+      color: #ADFF1C;
+      border-color: #104041;
+    }
+    .service-card {
       background: #ffffff;
       border: 1px solid #e1eceb;
       border-radius: 20px;
-      padding: 35px 28px;
+      padding: 32px 24px;
       height: 100%;
       display: flex;
       flex-direction: column;
       transition: all 0.35s ease;
       position: relative;
     }
-    .service-card-main:hover {
+    .service-card:hover {
       border-color: #104041;
       transform: translateY(-6px);
       box-shadow: 0 16px 40px rgba(16, 64, 65, 0.1);
     }
-    .service-card-main.featured-ai {
-      background: linear-gradient(180deg, #ffffff 0%, #f3fcf8 100%);
-      border: 2px solid #104041;
-    }
-    .service-icon-box {
-      width: 58px;
-      height: 58px;
-      background: #f0f7f6;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
+    .service-icon {
       color: #104041;
-      margin-bottom: 20px;
-      transition: all 0.3s ease;
+      margin-bottom: 16px;
     }
-    .service-card-main:hover .service-icon-box {
-      background: #104041;
-      color: #ADFF1C;
-      transform: rotate(6deg) scale(1.05);
+    .service-card:hover .service-icon {
+      color: #0b9e84;
+      transform: scale(1.08);
+      transition: transform 0.3s ease;
     }
-    .service-heading-title {
-      font-size: 1.3rem;
+    .service-experience span {
+      background: #eaf8e2;
+      color: #104041;
+      font-size: 11px;
       font-weight: 800;
-      color: #0f2d2e;
-      margin-bottom: 10px;
-    }
-    .service-desc-text {
-      font-size: 14px;
-      color: #557273;
-      line-height: 1.7;
-      margin-bottom: 20px;
-      flex-grow: 1;
-    }
-    .service-bullets {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 22px;
-    }
-    .service-bullets li {
-      font-size: 13px;
-      color: #2b4546;
-      padding: 5px 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .service-bullets li i {
-      color: #25D366;
-      font-size: 12px;
-    }
-    .service-btn-group {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-top: auto;
-    }
-    .btn-card-action {
-      background: #104041;
-      color: #ADFF1C !important;
-      font-weight: 700;
-      font-size: 13.5px;
-      padding: 10px 18px;
-      border-radius: 10px;
-      text-decoration: none;
-      flex: 1;
-      text-align: center;
-      transition: all 0.25s ease;
-    }
-    .btn-card-action:hover {
-      background: #082223;
-      color: #ffffff !important;
-      transform: translateY(-2px);
-    }
-    .btn-card-wa {
-      background: #25D366;
-      color: #ffffff !important;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.25s ease;
-    }
-    .btn-card-wa:hover {
-      background: #1da851;
-      transform: translateY(-2px);
-    }
-
-    /* ---- FREELANCER VS AGENCY COMPARISON ---- */
-    .compare-section {
-      background: #ffffff;
-      padding: 85px 0;
-    }
-    .compare-table-box {
-      background: #f7faf9;
-      border: 1px solid #e1eceb;
+      padding: 4px 10px;
       border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(16, 64, 65, 0.06);
-    }
-    .compare-header-row {
-      background: #082223;
-      color: #ffffff;
-      padding: 22px 28px;
-    }
-    .compare-item-row {
-      padding: 18px 28px;
-      border-bottom: 1px solid #e5efee;
-      display: flex;
-      align-items: center;
-    }
-    .compare-item-row:last-child {
-      border-bottom: none;
+      text-transform: uppercase;
     }
 
-    /* ---- PRICING SECTION ---- */
-    .pricing-home-section {
-      background: #f7faf9;
-      padding: 90px 0;
+    /* ---- SIMPLE PORTFOLIO CARDS ---- */
+    .simple-portfolio-card {
+      background: #ffffff;
+      border: 1px solid #e1eceb;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.35s ease;
+      height: 100%;
     }
-    .home-pricing-card {
+    .simple-portfolio-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 35px rgba(16, 64, 65, 0.12);
+      border-color: #104041;
+    }
+    .project-image {
+      position: relative;
+      height: 210px;
+      overflow: hidden;
+      background: #082223;
+    }
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .simple-portfolio-card:hover .project-image img {
+      transform: scale(1.05);
+    }
+    .live-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: #25D366;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ---- PRICING CARDS ---- */
+    .pricing-boxarea {
       background: #ffffff;
       border: 2px solid #e1eceb;
-      border-radius: 22px;
-      padding: 38px 28px;
+      border-radius: 20px;
+      padding: 35px 26px;
+      transition: all 0.35s ease;
       height: 100%;
       display: flex;
       flex-direction: column;
-      transition: all 0.35s ease;
-      position: relative;
     }
-    .home-pricing-card.featured {
+    .pricing-boxarea.active {
       background: #082223;
       border-color: #ADFF1C;
       color: #ffffff;
-      transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      transform: translateY(-6px);
+      box-shadow: 0 18px 45px rgba(16, 64, 65, 0.25);
     }
-    .home-pricing-card:hover {
+    .pricing-boxarea:hover {
       border-color: #ADFF1C;
-      transform: translateY(-8px);
-      box-shadow: 0 18px 45px rgba(16, 64, 65, 0.12);
-    }
-    .home-price-val {
-      font-size: 2.2rem;
-      font-weight: 800;
-      margin: 16px 0 8px;
-    }
-    .price-popular-badge {
-      position: absolute;
-      top: -14px;
-      right: 25px;
-      background: #ADFF1C;
-      color: #082223;
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 20px;
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(16, 64, 65, 0.12);
     }
 
-    /* ---- LOCAL SEO MATRIX ---- */
-    .loc-seo-home-section {
+    /* ---- DELHI NCR DEEP LOCAL SEO PANEL ---- */
+    .delhi-ncr-seo-panel {
       background: #082223;
-      padding: 90px 0;
+      border: 1px solid rgba(173, 255, 28, 0.35);
+      border-radius: 24px;
+      padding: 40px 30px;
       color: #ffffff;
+      margin: 40px 0;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.2);
     }
-    .delhi-ncr-deep-grid {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(173, 255, 28, 0.3);
-      border-radius: 20px;
-      padding: 35px 28px;
-      margin-top: 35px;
-    }
-    .locality-chip-link {
+    .ncr-chip-tag {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #d6ecea;
@@ -739,14 +643,14 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
       text-decoration: none;
       display: inline-block;
     }
-    .locality-chip-link:hover {
+    .ncr-chip-tag:hover {
       background: rgba(173, 255, 28, 0.15);
       color: #ADFF1C;
       border-color: #ADFF1C;
       transform: translateY(-2px);
     }
 
-    /* ---- FAQ SECTION ---- */
+    /* ---- FAQ ACCORDION ---- */
     .faq-item {
       border: 1px solid #dde9dd !important;
       border-radius: 12px !important;
@@ -776,551 +680,237 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
   <?php include_once "includes/header.php" ?>
 
   <!--===== HERO AREA STARTS =======-->
-  <section class="home-hero-section">
+  <div class="hero5-section-area">
     <div class="loc-grid-overlay"></div>
     <div class="container" style="position: relative; z-index: 2;">
-      <div class="row text-center">
-        <div class="col-lg-10 mx-auto">
-          
-          <div class="hero-status-pill" data-aos="fade-down">
-            <span class="pulse-dot"></span>
-            Senior Freelance Full-Stack Developer &amp; AI Engineer · Delhi NCR &amp; Global
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="header-content-area heading9">
+            
+            <div class="hero-status-pill" data-aos="fade-down">
+              <span class="pulse-dot"></span>
+              Top Freelance Web Developer &amp; AI Engineer · Delhi NCR &amp; Global
+            </div>
+
+            <h1 class="text-anime-style-2">
+              Custom Web Applications, <span class="highlight">AI Workflows</span> &amp; High-Rank SEO Systems
+            </h1>
+
+            <p class="lead-text" data-aos="fade-left" data-aos-duration="1000">
+              NikhilWorks provides expert full-stack web development, custom AI integrations, and Google #1 SEO engineering in Delhi NCR, Mumbai, Bangalore, and globally across USA, UK, UAE &amp; Australia. Build fast, secure, conversion-ready web platforms with 100% direct communication &amp; complete code ownership.
+            </p>
+
+            <div class="btn-area1 d-flex flex-wrap gap-3" data-aos="fade-left" data-aos-duration="1200">
+              <a href="<?= $site ?>contact/" class="header-btn9">Get Free Consultation <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="<?= $site ?>portfolio/" class="header-btn10">View Our Work <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20to%20discuss%20a%20project" target="_blank" rel="noopener" class="header-btn8" style="background:#25D366; color:#fff !important;">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+
+            <!-- Local SEO Badges -->
+            <div class="local-seo-badges" data-aos="fade-up" data-aos-duration="1500">
+              <a href="<?= $site ?>web-designer-delhi/" class="badge-item">Web Developer Delhi</a>
+              <a href="<?= $site ?>web-developer-gurgaon/" class="badge-item">SEO Expert Gurgaon</a>
+              <a href="<?= $site ?>web-developer-noida/" class="badge-item">Noida Tech Hub</a>
+              <a href="<?= $site ?>ai-integration-services/" class="badge-item" style="border-color:#ADFF1C; color:#ADFF1C;"><i class="fa-solid fa-sparkles me-1"></i> AI &amp; Workflow Automations</a>
+            </div>
+
           </div>
+        </div>
 
-          <h1 data-aos="fade-up" data-aos-duration="700">
-            Custom Web Applications, <span class="highlight">AI Workflows</span> &amp; High-Rank SEO Systems
-          </h1>
-
-          <p class="lead-text" data-aos="fade-up" data-aos-duration="900">
-            Get lightning-fast, custom-coded web solutions built for maximum conversions. Specializing in PHP 8.2, MERN Stack, WordPress, 24/7 AI Chatbots, n8n automations, and Google Local #1 SEO rankings with 100% direct communication &amp; complete code ownership.
-          </p>
-
-          <div class="hero-action-buttons" data-aos="fade-up" data-aos-duration="1100">
-            <a href="<?= $site ?>contact/" class="btn-hero-main">
-              <i class="fa-solid fa-paper-plane"></i> Start Your Project
-            </a>
-            <a href="<?= $site ?>website-cost-calculator/" class="btn-hero-sec">
-              <i class="fa-solid fa-calculator"></i> Calculate Cost Instant
-            </a>
-            <a href="<?= $site ?>seo-auditor/" class="btn-hero-sec">
-              <i class="fa-solid fa-stethoscope"></i> Free SEO Audit
-            </a>
-            <a href="<?= $site ?>ai-integration-services/" class="btn-hero-sec" style="border-color:#ADFF1C; color:#ADFF1C !important;">
-              <i class="fa-solid fa-sparkles"></i> AI Services
-            </a>
-            <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20am%20interested%20in%20discussing%20a%20project" target="_blank" rel="noopener" class="btn-hero-sec" style="background:#25D366; border-color:#25D366; color:#fff !important;">
-              <i class="fa-brands fa-whatsapp"></i> WhatsApp
-            </a>
+        <div class="col-lg-6">
+          <div class="hero-images-area">
+            <div class="imges">
+              <img src="<?= $site ?>assets/img/all-images/header-img8.png" alt="Full Stack Web Developer" data-aos="zoom-in" data-aos-duration="1000">
+            </div>
+            <div class="imges1">
+              <img src="<?= $site ?>assets/img/bg/header-bg6.png" alt="">
+            </div>
+            <div class="auhtor-images">
+              <div class="img1">
+                <img src="<?= $site ?>assets/img/all-images/auhtor-img1.png" alt="Nikhil Gupta Web Developer" class="author-img1 aniamtion-key-2">
+                <img src="<?= $site ?>assets/img/icons/sound-icons3.svg" alt="" class="sound-icons3 aniamtion-key-1">
+                <img src="<?= $site ?>assets/img/icons/lite-icons2.svg" alt="" class="lite-icons2 aniamtion-key-1">
+                <img src="<?= $site ?>assets/img/elements/elements11.svg" alt="" class="elements11">
+              </div>
+            </div>
           </div>
-
-          <!-- Hero Trust Metrics Strip -->
-          <div class="hero-trust-bar" data-aos="fade-up" data-aos-duration="1300">
-            <div class="hero-stat-pill"><i class="fa-solid fa-star text-warning"></i> Google Rating: <strong><?= $avgRating ?>★ (<?= $totalReviews ?> Reviews)</strong></div>
-            <div class="hero-stat-pill"><i class="fa-solid fa-rocket text-success"></i> Delivered: <strong><?= $projectCount ?>+ Projects</strong></div>
-            <div class="hero-stat-pill"><i class="fa-solid fa-calendar-check text-info"></i> Experience: <strong><?= $yearsExperience ?>+ Years (Since Aug 2022)</strong></div>
-            <div class="hero-stat-pill"><i class="fa-solid fa-shield-halved text-accent-dot"></i> Code Transfer: <strong>100% IP Ownership</strong></div>
-          </div>
-
         </div>
       </div>
     </div>
-  </section>
+  </div>
   <!--===== HERO AREA ENDS =======-->
 
   <!--===== QUICK UTILITIES COMMAND CENTER =======-->
-  <section class="command-center-section">
+  <div class="command-center-bar">
     <div class="container">
       <div class="row g-3">
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="500">
-          <a href="<?= $site ?>website-cost-calculator/" class="tool-quick-card">
-            <div class="tool-icon-circle"><i class="fa-solid fa-calculator"></i></div>
+          <a href="<?= $site ?>website-cost-calculator/" class="tool-quick-box">
+            <div class="tool-icon-wrap"><i class="fa-solid fa-calculator"></i></div>
             <div>
-              <div class="tool-info-title">Cost Calculator</div>
-              <p class="tool-info-sub">Instant accurate project price estimator</p>
+              <div class="tool-box-title">Cost Calculator</div>
+              <p class="tool-box-desc">Instant accurate project price estimator</p>
             </div>
           </a>
         </div>
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="700">
-          <a href="<?= $site ?>seo-auditor/" class="tool-quick-card">
-            <div class="tool-icon-circle"><i class="fa-solid fa-stethoscope"></i></div>
+          <a href="<?= $site ?>seo-auditor/" class="tool-quick-box">
+            <div class="tool-icon-wrap"><i class="fa-solid fa-stethoscope"></i></div>
             <div>
-              <div class="tool-info-title">Free SEO Auditor</div>
-              <p class="tool-info-sub">Audit on-page SEO, speed &amp; score</p>
+              <div class="tool-box-title">Free SEO Auditor</div>
+              <p class="tool-box-desc">Audit on-page SEO, speed &amp; score</p>
             </div>
           </a>
         </div>
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="900">
-          <a href="<?= $site ?>ai-integration-services/" class="tool-quick-card">
-            <div class="tool-icon-circle" style="background:rgba(173,255,28,0.2);"><i class="fa-solid fa-brain"></i></div>
+          <a href="<?= $site ?>ai-integration-services/" class="tool-quick-box">
+            <div class="tool-icon-wrap" style="background:rgba(173,255,28,0.2);"><i class="fa-solid fa-brain"></i></div>
             <div>
-              <div class="tool-info-title">AI &amp; Automations</div>
-              <p class="tool-info-sub">Gemini, GPT-4o &amp; n8n workflows</p>
+              <div class="tool-box-title">AI &amp; Automations</div>
+              <p class="tool-box-desc">Gemini, GPT-4o &amp; n8n workflows</p>
             </div>
           </a>
         </div>
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="1100">
-          <a href="<?= $site ?>pay/" class="tool-quick-card">
-            <div class="tool-icon-circle"><i class="fa-solid fa-qrcode"></i></div>
+          <a href="<?= $site ?>pay/" class="tool-quick-box">
+            <div class="tool-icon-wrap"><i class="fa-solid fa-qrcode"></i></div>
             <div>
-              <div class="tool-info-title">Pay Online</div>
-              <p class="tool-info-sub">Instant zero-fee UPI / QR checkout</p>
+              <div class="tool-box-title">Pay Online</div>
+              <p class="tool-box-desc">Instant zero-fee UPI / QR checkout</p>
             </div>
           </a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!--===== CORE SERVICES GRID =======-->
-  <section class="services-modern-grid">
+  <!--===== SLIDER AREA STARTS =======-->
+  <section class="slider5-section-area">
     <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto heading2">
-          <h5>Core Capabilities</h5>
-          <h2>Engineered for Performance, Speed &amp; Search Dominance</h2>
-          <p class="text-muted">Explore high-end digital engineering services built without bloated page builders or vendor lock-in.</p>
-        </div>
-      </div>
-
-      <div class="row g-4">
-        <!-- 1. Custom Web Application Development -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="500">
-          <div class="service-card-main">
-            <div class="service-icon-box"><i class="fa-solid fa-code"></i></div>
-            <h3 class="service-heading-title">Custom Web Development</h3>
-            <p class="service-desc-text">
-              High-performance dynamic websites and portals built with PHP 8.2, MySQL, REST APIs, and modern JavaScript. Sub-second load times and robust admin control panels.
-            </p>
-            <ul class="service-bullets">
-              <li><i class="fa-solid fa-check"></i> 100% Mobile &amp; Tablet Responsive</li>
-              <li><i class="fa-solid fa-check"></i> Sub-Second 95+ Core Web Vitals Score</li>
-              <li><i class="fa-solid fa-check"></i> Secure SQL injection &amp; XSS protection</li>
-            </ul>
-            <div class="service-btn-group">
-              <a href="<?= $site ?>service/website-design-development/" class="btn-card-action">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
-              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20am%20interested%20in%20Custom%20Web%20Development" target="_blank" rel="noopener" class="btn-card-wa"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. AI Integration & Automation (Featured) -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="700">
-          <div class="service-card-main featured-ai">
-            <div class="service-icon-box" style="background:#104041; color:#ADFF1C;"><i class="fa-solid fa-brain"></i></div>
-            <h3 class="service-heading-title">AI &amp; Workflow Automation</h3>
-            <p class="service-desc-text">
-              Integrate Google Gemini, OpenAI GPT-4o, and RAG vector search into your web apps. 24/7 smart customer chatbots and zero-click n8n/Zapier business workflows.
-            </p>
-            <ul class="service-bullets">
-              <li><i class="fa-solid fa-check"></i> 24/7 Knowledge Base AI Chatbot</li>
-              <li><i class="fa-solid fa-check"></i> Multi-Document RAG Vector Search</li>
-              <li><i class="fa-solid fa-check"></i> n8n Auto Lead Scoring &amp; CRM Sync</li>
-            </ul>
-            <div class="service-btn-group">
-              <a href="<?= $site ?>ai-integration-services/" class="btn-card-action" style="background:#104041; color:#ADFF1C !important;">Explore AI Solutions <i class="fa-solid fa-arrow-right"></i></a>
-              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20am%20interested%20in%20AI%20Integration" target="_blank" rel="noopener" class="btn-card-wa"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. E-Commerce Store Development -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="900">
-          <div class="service-card-main">
-            <div class="service-icon-box"><i class="fa-solid fa-cart-shopping"></i></div>
-            <h3 class="service-heading-title">E-Commerce Development</h3>
-            <p class="service-desc-text">
-              Complete online shopping platforms with Razorpay, Stripe, and Cashfree gateways, inventory management, abandoned cart recovery, and instant WhatsApp order notifications.
-            </p>
-            <ul class="service-bullets">
-              <li><i class="fa-solid fa-check"></i> Multi-Currency &amp; GST Invoicing</li>
-              <li><i class="fa-solid fa-check"></i> Automated Shipping &amp; Logistics Sync</li>
-              <li><i class="fa-solid fa-check"></i> Instant WhatsApp &amp; SMS Order Alerts</li>
-            </ul>
-            <div class="service-btn-group">
-              <a href="<?= $site ?>service/e-commerce-website-development/" class="btn-card-action">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
-              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20need%20an%20E-Commerce%20Website" target="_blank" rel="noopener" class="btn-card-wa"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4. WordPress & Headless CMS -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="500">
-          <div class="service-card-main">
-            <div class="service-icon-box"><i class="fa-brands fa-wordpress"></i></div>
-            <h3 class="service-heading-title">WordPress Development</h3>
-            <p class="service-desc-text">
-              Custom WordPress websites engineered without slow page-builder bloat. Easily manage blogs, media, products, and landing pages with custom Gutenberg blocks.
-            </p>
-            <ul class="service-bullets">
-              <li><i class="fa-solid fa-check"></i> Custom Lightweight Theme Architecture</li>
-              <li><i class="fa-solid fa-check"></i> Security Hardening &amp; Spam Filtering</li>
-              <li><i class="fa-solid fa-check"></i> Easy Drag &amp; Drop Client Handover</li>
-            </ul>
-            <div class="service-btn-group">
-              <a href="<?= $site ?>service/wordpress-website-development/" class="btn-card-action">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
-              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20need%20a%20WordPress%20Website" target="_blank" rel="noopener" class="btn-card-wa"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. Technical SEO & Local Pack Rankings -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="700">
-          <div class="service-card-main">
-            <div class="service-icon-box"><i class="fa-solid fa-chart-line"></i></div>
-            <h3 class="service-heading-title">SEO Services &amp; Local Pack</h3>
-            <p class="service-desc-text">
-              Dominate organic Google searches and the Google Maps 3-Pack. Technical on-page audits, structured Schema JSON-LD markup, and high-intent keyword clustering.
-            </p>
-            <ul class="service-bullets">
-              <li><i class="fa-solid fa-check"></i> Google Business Profile 3-Pack Optimization</li>
-              <li><i class="fa-solid fa-check"></i> Schema.org Entity &amp; Rich Snippets</li>
-              <li><i class="fa-solid fa-check"></i> 100% White-Hat Algorithm Compliance</li>
-            </ul>
-            <div class="service-btn-group">
-              <a href="<?= $site ?>seo-services-india/" class="btn-card-action">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
-              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20to%20rank%20#1%20on%20Google" target="_blank" rel="noopener" class="btn-card-wa"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6. Custom CRM & Operations Systems -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="900">
-          <div class="service-card-main">
-            <div class="service-icon-box"><i class="fa-solid fa-diagram-project"></i></div>
-            <h3 class="service-heading-title">Custom CRM Development</h3>
-            <p class="service-desc-text">
-              Tailor-made CRM and ERP dashboards engineered around your specific workflow. Role-based user authentication (RBAC), lead tracking, automated quotes, and analytics.
-            </p>
-            <ul class="service-bullets">
-              <li><i class="fa-solid fa-check"></i> Multi-Role RBAC Security Controls</li>
-              <li><i class="fa-solid fa-check"></i> WhatsApp &amp; Email Communication Webhooks</li>
-              <li><i class="fa-solid fa-check"></i> Real-time Business Analytics &amp; Reports</li>
-            </ul>
-            <div class="service-btn-group">
-              <a href="<?= $site ?>crm-development-india/" class="btn-card-action">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
-              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20need%20Custom%20CRM%20Development" target="_blank" rel="noopener" class="btn-card-wa"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--===== WHY HIRE NIKHILWORKS (FREELANCER VS AGENCY) =======-->
-  <section class="compare-section">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto heading2">
-          <h5>The Freelancer Advantage</h5>
-          <h2>Why Businesses Choose NikhilWorks Over Traditional Agencies</h2>
-          <p class="text-muted">Direct communication, faster turnarounds, zero agency markups, and pure technical focus.</p>
+      <!-- SEO Heading -->
+      <div class="row">
+        <div class="col-lg-12 text-center mb-4">
+          <h2>Our Web Design &amp; Digital Engineering Services in Delhi NCR</h2>
+          <p>We provide professional website development, AI workflows, SEO, and digital marketing services across Delhi, Gurgaon, and India.</p>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-lg-10 mx-auto">
-          <div class="compare-table-box" data-aos="fade-up">
-            <div class="compare-header-row d-flex justify-content-between align-items-center">
-              <div class="fw-bold" style="flex: 2;">Project Factor</div>
-              <div class="fw-bold text-center" style="flex: 2; color:#ADFF1C;">Working with NikhilWorks</div>
-              <div class="fw-bold text-center text-white-50" style="flex: 2;">Traditional Agencies</div>
-            </div>
-
-            <div class="compare-item-row">
-              <div style="flex: 2; font-weight:700; color:#0f2d2e;">Direct Communication</div>
-              <div style="flex: 2;" class="text-center text-success fw-bold"><i class="fa-solid fa-circle-check me-1"></i> Direct 1-on-1 with Developer</div>
-              <div style="flex: 2;" class="text-center text-muted">Middlemen &amp; Account Managers</div>
-            </div>
-
-            <div class="compare-item-row">
-              <div style="flex: 2; font-weight:700; color:#0f2d2e;">Turnaround Speed</div>
-              <div style="flex: 2;" class="text-center text-success fw-bold"><i class="fa-solid fa-bolt me-1"></i> 3x Faster (3–7 Days MVP)</div>
-              <div style="flex: 2;" class="text-center text-muted">Weeks of Meetings &amp; Red Tape</div>
-            </div>
-
-            <div class="compare-item-row">
-              <div style="flex: 2; font-weight:700; color:#0f2d2e;">Pricing &amp; Cost</div>
-              <div style="flex: 2;" class="text-center text-success fw-bold"><i class="fa-solid fa-circle-check me-1"></i> 50–60% Lower (Zero Overhead)</div>
-              <div style="flex: 2;" class="text-center text-muted">High Agency Retainers &amp; Markups</div>
-            </div>
-
-            <div class="compare-item-row">
-              <div style="flex: 2; font-weight:700; color:#0f2d2e;">Source Code Ownership</div>
-              <div style="flex: 2;" class="text-center text-success fw-bold"><i class="fa-solid fa-circle-check me-1"></i> 100% IP Transfer &amp; GitHub Access</div>
-              <div style="flex: 2;" class="text-center text-muted">Proprietary Lock-in &amp; Host Retainers</div>
-            </div>
-
-            <div class="compare-item-row">
-              <div style="flex: 2; font-weight:700; color:#0f2d2e;">Post-Launch Warranty</div>
-              <div style="flex: 2;" class="text-center text-success fw-bold"><i class="fa-solid fa-circle-check me-1"></i> 30–90 Days Free Warranty Included</div>
-              <div style="flex: 2;" class="text-center text-muted">Charged Extra for Every Small Fix</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--===== PRICING PACKAGES (INTERNATIONAL STANDARD) =======-->
-  <section class="pricing-home-section">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto heading2">
-          <h5>Fixed-Price Investment</h5>
-          <h2>Transparent, International-Standard Pricing</h2>
-          <p class="text-muted">No hidden fees, no recurring surprises. 100% complete source code transfer and post-launch warranty included.</p>
-        </div>
-      </div>
-
-      <div class="row g-4">
-        <!-- 1. WordPress Website -->
-        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="500">
-          <div class="home-pricing-card">
-            <h4>WordPress Website</h4>
-            <p class="text-muted small">Ideal for corporate websites, blogs &amp; service businesses.</p>
-            <div class="home-price-val" style="color: #104041;">₹7,999 <span style="font-size:14px; font-weight:500; color:#6c757d;">/ $99</span></div>
-            <ul class="price-features-list">
-              <li><i class="fa-solid fa-check"></i> 1-5 Custom WordPress Pages</li>
-              <li><i class="fa-solid fa-check"></i> Elementor / Block Editor Ready</li>
-              <li><i class="fa-solid fa-check"></i> Contact Form + WhatsApp Chat</li>
-              <li><i class="fa-solid fa-check"></i> Mobile Responsive &amp; Fast Speed</li>
-              <li><i class="fa-solid fa-check"></i> 30-Day Bug-Free Warranty</li>
-            </ul>
-            <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20WordPress%20Package" target="_blank" rel="noopener" class="header-btn11 w-100 text-center mt-auto">
-              Choose WordPress <i class="fa-solid fa-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 2. Dynamic Website (Featured) -->
-        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="700">
-          <div class="home-pricing-card featured">
-            <span class="price-popular-badge">Most Popular</span>
-            <h4 class="text-white">Dynamic Website</h4>
-            <p class="text-white-50 small">Custom PHP &amp; MySQL with powerful admin dashboard.</p>
-            <div class="home-price-val text-white" style="color: #ADFF1C !important;">₹9,999 <span style="font-size:14px; font-weight:500; color:#d8ecea;">/ $129</span></div>
-            <ul class="price-features-list">
-              <li><i class="fa-solid fa-check" style="color:#ADFF1C;"></i> 5-10 Custom Dynamic Pages</li>
-              <li><i class="fa-solid fa-check" style="color:#ADFF1C;"></i> Admin Panel for CMS Control</li>
-              <li><i class="fa-solid fa-check" style="color:#ADFF1C;"></i> Lead Management &amp; Email Alerts</li>
-              <li><i class="fa-solid fa-check" style="color:#ADFF1C;"></i> On-Page SEO &amp; Schema Markup</li>
-              <li><i class="fa-solid fa-check" style="color:#ADFF1C;"></i> 60-Day Dedicated Support</li>
-            </ul>
-            <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20Dynamic%20Website%20Package" target="_blank" rel="noopener" class="header-btn8 w-100 text-center mt-auto" style="background:#ADFF1C; color:#082223 !important; font-weight:700;">
-              Choose Dynamic <i class="fa-solid fa-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 3. MERN Web App -->
-        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="900">
-          <div class="home-pricing-card">
-            <h4>MERN Full-Stack</h4>
-            <p class="text-muted small">React.js, Node.js &amp; MongoDB for scalable web apps.</p>
-            <div class="home-price-val" style="color: #104041;">₹18,999 <span style="font-size:14px; font-weight:500; color:#6c757d;">/ $249</span></div>
-            <ul class="price-features-list">
-              <li><i class="fa-solid fa-check"></i> Single Page React (SPA) / Next.js</li>
-              <li><i class="fa-solid fa-check"></i> REST API Backend Architecture</li>
-              <li><i class="fa-solid fa-check"></i> JWT Auth &amp; Role-Based Access</li>
-              <li><i class="fa-solid fa-check"></i> MongoDB Database Design</li>
-              <li><i class="fa-solid fa-check"></i> 90-Day Priority Support</li>
-            </ul>
-            <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20MERN%20Full-Stack%20Package" target="_blank" rel="noopener" class="header-btn11 w-100 text-center mt-auto">
-              Choose MERN <i class="fa-solid fa-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 4. E-Commerce Store -->
-        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="1100">
-          <div class="home-pricing-card">
-            <h4>E-Commerce Store</h4>
-            <p class="text-muted small">Complete online store with payment gateway.</p>
-            <div class="home-price-val" style="color: #104041;">₹21,999 <span style="font-size:14px; font-weight:500; color:#6c757d;">/ $289</span></div>
-            <ul class="price-features-list">
-              <li><i class="fa-solid fa-check"></i> Product Catalog &amp; Category System</li>
-              <li><i class="fa-solid fa-check"></i> Razorpay / Stripe / PayPal Gateway</li>
-              <li><i class="fa-solid fa-check"></i> Cart, Checkout &amp; Order Invoices</li>
-              <li><i class="fa-solid fa-check"></i> Inventory &amp; Coupon Management</li>
-              <li><i class="fa-solid fa-check"></i> 90-Day VIP Support &amp; Training</li>
-            </ul>
-            <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20Ecommerce%20Store%20Package" target="_blank" rel="noopener" class="header-btn11 w-100 text-center mt-auto">
-              Choose E-Commerce <i class="fa-solid fa-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--===== LOCAL SEO MATRIX: DELHI NCR & PAN-INDIA TECH HUBS =======-->
-  <section class="loc-seo-home-section">
-    <div class="container">
-      <div class="row text-center mb-4">
-        <div class="col-lg-9 mx-auto">
-          <span class="badge px-3 py-2 text-uppercase mb-2" style="background:#eaf8e2; color:#104041; font-weight:800; letter-spacing:0.5px;">
-            Geographic Coverage
-          </span>
-          <h2 class="h1 fw-bold text-white">Serving Delhi NCR Micro-Markets &amp; Major Indian Commercial Hubs</h2>
-          <p class="text-white-50">
-            Available on-site across Delhi NCR (Karampura, Connaught Place, Pitampura, NSP, Noida, Gurgaon) and 100% remote across Mumbai, Bangalore, Pune, Hyderabad, and global markets.
-          </p>
-        </div>
-      </div>
-
-      <div class="delhi-ncr-deep-grid" data-aos="fade-up">
-        <div class="row g-4">
-          <div class="col-lg-3 col-md-6">
-            <h5 class="text-uppercase fw-bold mb-3" style="color:#ADFF1C; font-size:13.5px;"><i class="fa-solid fa-map-pin me-1"></i> West &amp; Central Delhi</h5>
-            <div class="d-flex flex-wrap gap-2">
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Karampura</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Connaught Place</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Punjabi Bagh</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Patel Nagar</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Rajouri Garden</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Janakpuri</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Dwarka</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Kirti Nagar</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <h5 class="text-uppercase fw-bold mb-3" style="color:#ADFF1C; font-size:13.5px;"><i class="fa-solid fa-map-pin me-1"></i> South &amp; East Delhi</h5>
-            <div class="d-flex flex-wrap gap-2">
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Nehru Place</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Saket</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Hauz Khas</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Greater Kailash</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Okhla Industrial</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Laxmi Nagar</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Preet Vihar</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <h5 class="text-uppercase fw-bold mb-3" style="color:#ADFF1C; font-size:13.5px;"><i class="fa-solid fa-map-pin me-1"></i> North &amp; Outer Delhi</h5>
-            <div class="d-flex flex-wrap gap-2">
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Netaji Subhash Place (NSP)</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Pitampura</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Rohini</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Model Town</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Civil Lines</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="locality-chip-link">Wazirpur</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <h5 class="text-uppercase fw-bold mb-3" style="color:#ADFF1C; font-size:13.5px;"><i class="fa-solid fa-map-pin me-1"></i> NCR Corporate Hubs</h5>
-            <div class="d-flex flex-wrap gap-2">
-              <a href="<?= $site ?>web-developer-gurgaon/" class="locality-chip-link">Cyber City Gurgaon</a>
-              <a href="<?= $site ?>web-developer-gurgaon/" class="locality-chip-link">Golf Course Road</a>
-              <a href="<?= $site ?>web-developer-gurgaon/" class="locality-chip-link">Udyog Vihar</a>
-              <a href="<?= $site ?>web-developer-noida/" class="locality-chip-link">Noida Sector 62</a>
-              <a href="<?= $site ?>web-developer-noida/" class="locality-chip-link">Noida Sector 18</a>
-              <a href="<?= $site ?>web-developer-noida/" class="locality-chip-link">Indirapuram Ghaziabad</a>
-              <a href="<?= $site ?>web-developer-gurgaon/" class="locality-chip-link">Faridabad</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pan-India Major Cities -->
-        <div class="pt-3 mt-4 border-top border-secondary">
-          <div class="d-flex flex-wrap gap-2 align-items-center">
-            <span class="text-white-50 small fw-bold me-2"><i class="fa-solid fa-globe" style="color:#ADFF1C;"></i> Other Major Indian Tech Hubs:</span>
-            <a href="<?= $site ?>web-developer-mumbai/" class="locality-chip-link">Mumbai</a>
-            <a href="<?= $site ?>web-developer-bangalore/" class="locality-chip-link">Bangalore</a>
-            <a href="<?= $site ?>web-developer-hyderabad/" class="locality-chip-link">Hyderabad</a>
-            <a href="<?= $site ?>web-developer-pune/" class="locality-chip-link">Pune</a>
-            <a href="<?= $site ?>web-developer-chennai/" class="locality-chip-link">Chennai</a>
-            <a href="<?= $site ?>web-developer-kolkata/" class="locality-chip-link">Kolkata</a>
-            <a href="<?= $site ?>web-developer-ahmedabad/" class="locality-chip-link">Ahmedabad</a>
-            <a href="<?= $site ?>web-developer-surat/" class="locality-chip-link">Surat</a>
-            <a href="<?= $site ?>web-developer-jaipur/" class="locality-chip-link">Jaipur</a>
-            <a href="<?= $site ?>web-developer-chandigarh/" class="locality-chip-link">Chandigarh</a>
-            <a href="<?= $site ?>web-developer-lucknow/" class="locality-chip-link">Lucknow</a>
-            <a href="<?= $site ?>web-developer-indore/" class="locality-chip-link">Indore</a>
-            <a href="<?= $site ?>web-developer-kochi/" class="locality-chip-link">Kochi</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--===== FAQ SECTION =======-->
-  <section class="sp1 bg-white">
-    <div class="container">
-      <div class="row mb-5 text-center">
-        <div class="col-lg-7 mx-auto heading2">
-          <h5>Got Questions?</h5>
-          <h2>Frequently Asked Questions</h2>
-          <p class="text-muted">Clear answers regarding hiring, technical stack, pricing, and project workflows.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <div class="accordion d-flex flex-column gap-3" id="homeFaqAccordion">
-            <div class="accordion-item faq-item">
-              <h3 class="accordion-header">
-                <button class="accordion-button faq-btn" type="button" data-bs-toggle="collapse" data-bs-target="#hfaq1" aria-expanded="true">
-                  Why should I hire NikhilWorks instead of a large agency?
-                </button>
-              </h3>
-              <div id="hfaq1" class="accordion-collapse collapse show" data-bs-parent="#homeFaqAccordion">
-                <div class="accordion-body text-muted">
-                  You work directly 1-on-1 with a senior developer without slow account managers or bureaucratic bottlenecks. You get <strong>3x faster turnarounds</strong>, <strong>60% lower costs</strong>, and <strong>100% full source code ownership</strong> with zero ongoing vendor lock-in.
-                </div>
+        <div class="col-lg-12">
+          <!-- First Slider -->
+          <div class="slider-all-boxarea">
+            <div class="slider-boxarea">
+              <div class="content">
+                <a href="<?= $site ?>service/website-design-development/" title="Professional Website Design Services in Delhi NCR">
+                  Website Design Services
+                </a>
+              </div>
+              <div class="img1 reveal">
+                <img src="<?= $site ?>assets/img/all-images/brand-img2.png" alt="Custom website design services in Delhi NCR by NikhilWorks">
               </div>
             </div>
 
-            <div class="accordion-item faq-item">
-              <h3 class="accordion-header">
-                <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hfaq2" aria-expanded="false">
-                  How much does a website cost in India?
-                </button>
-              </h3>
-              <div id="hfaq2" class="accordion-collapse collapse" data-bs-parent="#homeFaqAccordion">
-                <div class="accordion-body text-muted">
-                  We offer transparent fixed pricing: <strong>WordPress websites start at ₹7,999 ($99)</strong>, <strong>Dynamic custom PHP/MySQL websites start at ₹9,999 ($129)</strong>, <strong>MERN full-stack web apps start at ₹18,999 ($249)</strong>, and <strong>E-commerce stores start at ₹21,999 ($289)</strong>.
-                </div>
+            <div class="slider-boxarea">
+              <div class="content">
+                <a href="<?= $site ?>ai-integration-services/" title="AI Integration & Workflow Automation">
+                  AI &amp; Workflow Automations
+                </a>
+              </div>
+              <div class="img1 reveal">
+                <img src="<?= $site ?>assets/img/all-images/brand-img1.png" alt="AI integration services">
               </div>
             </div>
 
-            <div class="accordion-item faq-item">
-              <h3 class="accordion-header">
-                <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hfaq3" aria-expanded="false">
-                  Can you integrate AI Chatbots and automated workflows into my web app?
-                </button>
-              </h3>
-              <div id="hfaq3" class="accordion-collapse collapse" data-bs-parent="#homeFaqAccordion">
-                <div class="accordion-body text-muted">
-                  Yes! We build custom <strong>24/7 AI customer service chatbots</strong> trained on your company knowledge base, integrate <strong>Google Gemini &amp; OpenAI GPT-4o APIs</strong>, setup RAG vector search, and build zero-click automated workflows on n8n and Zapier.
-                </div>
+            <div class="slider-boxarea">
+              <div class="content">
+                <a href="<?= $site ?>service/search-engine-optimization/" title="Affordable SEO Services in Delhi NCR">
+                  SEO Services
+                </a>
+              </div>
+              <div class="img1 reveal">
+                <img src="<?= $site ?>assets/img/all-images/brand-img3.png" alt="SEO optimization services in Delhi NCR for business growth">
               </div>
             </div>
 
-            <div class="accordion-item faq-item">
-              <h3 class="accordion-header">
-                <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hfaq4" aria-expanded="false">
-                  Do you work with international clients in the USA, UK, UAE &amp; Australia?
-                </button>
-              </h3>
-              <div id="hfaq4" class="accordion-collapse collapse" data-bs-parent="#homeFaqAccordion">
-                <div class="accordion-body text-muted">
-                  Yes, we regularly deliver projects for clients in the <strong>USA, UK, UAE (Dubai), Australia, Canada, and Europe</strong>. Communication happens seamlessly via WhatsApp, Zoom, or email, with international payments accepted via Stripe, PayPal, and Bank Wire.
-                </div>
+            <div class="slider-boxarea">
+              <div class="content">
+                <a href="<?= $site ?>service/e-commerce-website-development/" title="Ecommerce Website Development Company in Delhi">
+                  Ecommerce Development
+                </a>
+              </div>
+              <div class="img1 reveal">
+                <img src="<?= $site ?>assets/img/all-images/brand-img1.png" alt="Ecommerce website development solutions in India">
               </div>
             </div>
 
-            <div class="accordion-item faq-item">
-              <h3 class="accordion-header">
-                <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hfaq5" aria-expanded="false">
-                  Will my website be mobile-responsive and rank on Google?
-                </button>
-              </h3>
-              <div id="hfaq5" class="accordion-collapse collapse" data-bs-parent="#homeFaqAccordion">
-                <div class="accordion-body text-muted">
-                  Yes! Every website is built mobile-first, scores <strong>90+ on Google Core Web Vitals</strong>, and includes comprehensive on-page technical SEO: JSON-LD Schema markup, XML sitemaps, open-graph tags, and keyword-targeted headings.
-                </div>
+            <div class="slider-boxarea">
+              <div class="content">
+                <a href="<?= $site ?>service/wordpress-website-development/" title="Hire WordPress Developer in Delhi NCR">
+                  WordPress Development
+                </a>
+              </div>
+              <div class="img1">
+                <img src="<?= $site ?>assets/img/all-images/brand-img2.png" alt="WordPress website development services in Delhi NCR">
+              </div>
+            </div>
+          </div>
+
+          <!-- Second Slider -->
+          <div class="slider-all-boxarea2">
+            <div class="slider-boxarea">
+              <div class="content">
+                <a href="<?= $site ?>service/website-redesign/" title="Website Redesign Services in Delhi NCR">
+                  Website Redesign
+                </a>
+              </div>
+              <div class="img1">
+                <img src="<?= $site ?>assets/img/all-images/brand-img4.png" alt="Modern website redesign services for better UX and SEO">
+              </div>
+            </div>
+
+            <div class="slider-boxarea">
+              <div class="content">
+                <a href="<?= $site ?>crm-development-india/" title="Custom CRM Development Services">
+                  Custom CRM Portals
+                </a>
+              </div>
+              <div class="img1">
+                <img src="<?= $site ?>assets/img/all-images/brand-img5.png" alt="Custom CRM development in India">
+              </div>
+            </div>
+
+            <div class="slider-boxarea">
+              <div class="content">
+                <a href="<?= $site ?>service/website-design-development/" title="Web Development Company in Delhi NCR">
+                  Web Development
+                </a>
+              </div>
+              <div class="img1">
+                <img src="<?= $site ?>assets/img/all-images/brand-img6.png" alt="Full stack web development services in India">
+              </div>
+            </div>
+
+            <div class="slider-boxarea">
+              <div class="content">
+                <a href="<?= $site ?>service/website-design-development/" title="Responsive Web Design Services in India">
+                  Responsive Web Design
+                </a>
+              </div>
+              <div class="img1">
+                <img src="<?= $site ?>assets/img/all-images/brand-img7.png" alt="Mobile friendly responsive website design services">
+              </div>
+            </div>
+
+            <div class="slider-boxarea">
+              <div class="content">
+                <a href="<?= $site ?>seo-services-india/" title="Local SEO Services for Delhi Businesses">
+                  Local SEO Services
+                </a>
+              </div>
+              <div class="img1">
+                <img src="<?= $site ?>assets/img/all-images/brand-img8.png" alt="Local SEO services to rank your business in Google Maps">
               </div>
             </div>
           </div>
@@ -1328,77 +918,78 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
       </div>
     </div>
   </section>
+  <!--===== SLIDER AREA ENDS =======-->
 
-  <!--===== TESTIMONIALS SLIDER =======-->
-  <div class="testimonial1-section-area sp1 bg2">
+  <!--===== WHO WE ARE / ABOUT SECTION =======-->
+  <div class="testimonial4-section-area sp1">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12 m-auto">
-          <div class="testimonial-header heading2 text-center">
-            <img src="<?= $site ?>assets/img/elements/elements13.png" alt="" class="star2 keyframe5">
-            <img src="<?= $site ?>assets/img/elements/elements13.png" alt="" class="star3 keyframe5">
-            <h5>Testimonials</h5>
-            <h2>What Clients Say On Google Reviews</h2>
-            <p>Verified 5-star reviews from business owners, founders, and entrepreneurs.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-8 m-auto">
-          <div class="testimonials-slider-area owl-carousel">
-            <div class="testimonial-boxarea">
-              <div class="row">
-                <div class="col-lg-5">
-                  <div class="pera">
-                    <p>"Nikhil built my business website Bestok and handled everything from design to SEO. Very professional, fast, and supportive. Highly recommended!"</p>
-                    <div class="space30"></div>
-                    <div class="list-area">
-                      <div class="list">
-                        <ul>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                        </ul>
-                        <a href="#">Priya (Noida)</a>
-                      </div>
-                      <img src="<?= $site ?>assets/img/icons/google.svg" alt="Google Review">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-7">
-                  <div class="images">
-                    <img src="<?= $site ?>assets/img/all-images/testimonials-img4.jpg" alt="Client Priya Noida">
-                  </div>
-                </div>
+      <div class="row align-items-center">
+        <!-- Left Content -->
+        <div class="col-lg-6">
+          <div class="about-header heading8">
+            <h5 data-aos="fade-up" data-aos-duration="800">Who We Are</h5>
+            <h2 class="text-anime-style-1">About <span>NikhilWorks <img src="<?= $site ?>assets/img/elements/line-img1.png" alt=""></span></h2>
+            <div class="space10 d-lg-block d-none"></div>
+            <p data-aos="fade-up" data-aos-duration="1000">
+              NikhilWorks is a premier freelance web development, AI integration, and SEO brand led by <strong>Nikhil Gupta</strong>, focused on helping businesses build high-converting, scalable online platforms.
+            </p>
+            <p data-aos="fade-up" data-aos-duration="1100">
+              With <strong>proven experience since August 2022</strong>, we specialize in modern web architectures, Core Web Vitals speed optimization, 24/7 AI chatbots, and search engine visibility—ensuring every website is fast, secure, and built to convert.
+            </p>
+
+            <div class="space20"></div>
+
+            <div class="works-content-box" data-aos="fade-up" data-aos-duration="1200">
+              <div class="icons"><i class="fa-solid fa-laptop-code" style="font-size:22px; color:#104041;"></i></div>
+              <div class="content">
+                <a href="<?= $site ?>services/">Full-Stack Web &amp; App Development</a>
+                <p>Expertise in <strong>MERN Stack, PHP 8.2, WordPress, and Custom Laravel</strong> solutions to build responsive, scalable websites for real business needs.</p>
               </div>
             </div>
-            <div class="testimonial-boxarea">
-              <div class="row">
-                <div class="col-lg-5">
-                  <div class="pera">
-                    <p>"Amazing work! Nikhil developed an e-commerce website for my shop and integrated online payments seamlessly. Great experience!"</p>
-                    <div class="space30"></div>
-                    <div class="list-area">
-                      <div class="list">
-                        <ul>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                        </ul>
-                        <a href="#">Harsh Patel (Nasik)</a>
-                      </div>
-                      <img src="<?= $site ?>assets/img/icons/google.svg" alt="Google Review">
-                    </div>
-                  </div>
+
+            <div class="space16"></div>
+
+            <div class="works-content-box" data-aos="fade-up" data-aos-duration="1300">
+              <div class="icons"><i class="fa-solid fa-brain" style="font-size:22px; color:#104041;"></i></div>
+              <div class="content">
+                <a href="<?= $site ?>ai-integration-services/">AI Integration &amp; Workflow Automations</a>
+                <p>Integrate <strong>Google Gemini, OpenAI GPT-4o, RAG vector search, and n8n automations</strong> to eliminate manual operational friction.</p>
+              </div>
+            </div>
+
+            <div class="space16"></div>
+
+            <div class="works-content-box" data-aos="fade-up" data-aos-duration="1400">
+              <div class="icons"><i class="fa-solid fa-chart-line" style="font-size:22px; color:#104041;"></i></div>
+              <div class="content">
+                <a href="<?= $site ?>seo-services-india/">SEO &amp; Growth Strategy</a>
+                <p>Strong focus on <strong>Google rankings, organic traffic, and technical schema SEO</strong> to help brands scale visibility and qualified leads consistently.</p>
+              </div>
+            </div>
+
+            <div class="space32"></div>
+
+            <div class="btn-area1" data-aos="fade-up" data-aos-duration="1500">
+              <a href="<?= $site ?>about/" class="header-btn11">More About Me <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Images with Animation -->
+        <div class="col-lg-6">
+          <div class="about-all-images-area">
+            <img src="<?= $site ?>assets/img/elements/elements12.png" alt="" class="elements12 keyframe5">
+            <img src="<?= $site ?>assets/img/elements/elements13.png" alt="" class="elements13 keyframe5">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <div class="img1 image-anime">
+                  <div class="space100"></div>
+                  <img src="<?= $site ?>assets/img/all-images/about-img6.png" alt="Web Development Projects">
                 </div>
-                <div class="col-lg-7">
-                  <div class="images">
-                    <img src="<?= $site ?>assets/img/all-images/testimonials-img5.jpg" alt="Client Harsh Patel">
-                  </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <div class="img2 image-anime">
+                  <img src="<?= $site ?>assets/img/all-images/about-img5.png" alt="SEO Services Delhi NCR">
                 </div>
               </div>
             </div>
@@ -1408,22 +999,775 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
     </div>
   </div>
 
-  <!--===== CTA BANNER =======-->
+  <!--===== WHAT I OFFER / SERVICES TABS =======-->
+  <div class="case1-section-area sp1 bg2">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 m-auto">
+          <div class="case-header-area heading2 text-center">
+            <h2 class="text-anime-style-3">What I Offer</h2>
+            <h3>Complete Digital Engineering Solutions for Your Business</h3>
+            <h5>With professional experience since August 2022, we provide end-to-end web development, AI automation, and digital growth services.</h5>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service Categories Tabs -->
+      <div class="row mb-5">
+        <div class="col-lg-12 text-center">
+          <div class="d-inline-flex flex-wrap gap-2 justify-content-center">
+            <button class="service-tab-btn active" onclick="switchServiceCategory('web-dev', this)">
+              <i class="fa-solid fa-code me-1"></i> Web &amp; App Development
+            </button>
+            <button class="service-tab-btn" onclick="switchServiceCategory('ai-auto', this)">
+              <i class="fa-solid fa-sparkles me-1"></i> AI &amp; Automations
+            </button>
+            <button class="service-tab-btn" onclick="switchServiceCategory('digital-mktg', this)">
+              <i class="fa-solid fa-chart-line me-1"></i> SEO &amp; Digital Marketing
+            </button>
+            <button class="service-tab-btn" onclick="switchServiceCategory('design-brand', this)">
+              <i class="fa-solid fa-pen-nib me-1"></i> Design &amp; Branding
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 1: Web Development Services -->
+      <div class="service-tab-panel" id="web-dev">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="service-card" data-aos="fade-up">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-code fa-2x"></i></div>
+                <div class="service-experience"><span>Since Aug 2022</span></div>
+              </div>
+              <h3 class="fw-bold">Website Design &amp; Development</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Simple, Clean &amp; Effective</p>
+              <p class="text-muted small">Custom website development using modern technologies. Responsive, user-friendly websites that convert visitors into paying clients.</p>
+              <ul class="service-features list-unstyled mb-4">
+                <li><i class="fa-solid fa-check text-success me-2"></i> Responsive on All Devices</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Sub-Second 95+ PageSpeed</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Clean PHP 8.2 &amp; MySQL Code</li>
+              </ul>
+              <div class="mt-auto d-flex gap-2">
+                <a href="<?= $site ?>contact/" class="btn-card-action">Get Quote</a>
+                <a href="<?= $site ?>service/website-design-development/" class="btn btn-outline-dark btn-sm rounded-3">Details</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-cart-shopping fa-2x"></i></div>
+                <div class="service-experience"><span>Since Aug 2022</span></div>
+              </div>
+              <h3 class="fw-bold">E-Commerce Solutions</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Sell Online Successfully</p>
+              <p class="text-muted small">Online stores with Razorpay, Stripe, and Cashfree gateways, inventory controls, and instant WhatsApp order alerts.</p>
+              <ul class="service-features list-unstyled mb-4">
+                <li><i class="fa-solid fa-check text-success me-2"></i> Payment Gateway Integration</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Abandoned Cart Recovery</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> WhatsApp &amp; SMS Order Sync</li>
+              </ul>
+              <div class="mt-auto d-flex gap-2">
+                <a href="<?= $site ?>contact/" class="btn-card-action">Get Quote</a>
+                <a href="<?= $site ?>service/e-commerce-website-development/" class="btn btn-outline-dark btn-sm rounded-3">Details</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-brands fa-wordpress fa-2x"></i></div>
+                <div class="service-experience"><span>Since Aug 2022</span></div>
+              </div>
+              <h3 class="fw-bold">WordPress &amp; Headless CMS</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Powerful CMS Solutions</p>
+              <p class="text-muted small">Custom WordPress websites engineered without slow page-builder bloat. Easily manage content, blogs, and landing pages.</p>
+              <ul class="service-features list-unstyled mb-4">
+                <li><i class="fa-solid fa-check text-success me-2"></i> Custom Theme Architecture</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> WooCommerce Setup</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Security &amp; Speed Hardening</li>
+              </ul>
+              <div class="mt-auto d-flex gap-2">
+                <a href="<?= $site ?>contact/" class="btn-card-action">Get Quote</a>
+                <a href="<?= $site ?>service/wordpress-website-development/" class="btn btn-outline-dark btn-sm rounded-3">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: AI & Automations -->
+      <div class="service-tab-panel d-none" id="ai-auto">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="service-card">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-comments fa-2x text-primary"></i></div>
+                <div class="service-experience"><span>Next-Gen AI</span></div>
+              </div>
+              <h3 class="fw-bold">24/7 AI Smart Chatbots</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Instant Customer Support</p>
+              <p class="text-muted small">Custom conversational AI assistants trained on your company FAQs, service catalog, and documentation with WhatsApp API sync.</p>
+              <ul class="service-features list-unstyled mb-4">
+                <li><i class="fa-solid fa-check text-success me-2"></i> Website &amp; WhatsApp Integration</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Multi-Lingual Intelligence</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Seamless Live Human Handover</li>
+              </ul>
+              <div class="mt-auto d-flex gap-2">
+                <a href="<?= $site ?>ai-integration-services/" class="btn-card-action">Explore AI Bot</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-card">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-diagram-project fa-2x text-success"></i></div>
+                <div class="service-experience"><span>Zero Hallucination</span></div>
+              </div>
+              <h3 class="fw-bold">RAG Vector Search</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Enterprise Knowledge Search</p>
+              <p class="text-muted small">Connect your private company PDFs, databases, and catalogs using Pinecone and pgvector embeddings for factual Q&amp;A.</p>
+              <ul class="service-features list-unstyled mb-4">
+                <li><i class="fa-solid fa-check text-success me-2"></i> Pinecone &amp; ChromaDB Embeddings</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Exact Source Citations</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Sub-Second Retrieval Latency</li>
+              </ul>
+              <div class="mt-auto d-flex gap-2">
+                <a href="<?= $site ?>ai-integration-services/" class="btn-card-action">Explore RAG</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-card">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-gears fa-2x text-warning"></i></div>
+                <div class="service-experience"><span>Zero-Click Ops</span></div>
+              </div>
+              <h3 class="fw-bold">n8n &amp; Zapier Automations</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Business Workflow Automation</p>
+              <p class="text-muted small">Automated lead qualification, CRM syncing, webhook triggers, and automated document parsing without manual overhead.</p>
+              <ul class="service-features list-unstyled mb-4">
+                <li><i class="fa-solid fa-check text-success me-2"></i> Self-Hosted n8n Architecture</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Automated Lead Qualification</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> CRM &amp; Accounting Synchronization</li>
+              </ul>
+              <div class="mt-auto d-flex gap-2">
+                <a href="<?= $site ?>ai-integration-services/" class="btn-card-action">Explore Workflows</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Digital Marketing Services -->
+      <div class="service-tab-panel d-none" id="digital-mktg">
+        <div class="row g-4">
+          <div class="col-lg-6 col-md-6">
+            <div class="service-card">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart fa-2x"></i></div>
+                <div class="service-experience"><span>Rank #1 Google</span></div>
+              </div>
+              <h3 class="fw-bold">Technical &amp; Local SEO</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Rank Higher, Get Organic Leads</p>
+              <p class="text-muted small">Comprehensive on-page audits, schema markup, Google Maps 3-Pack optimization, and high-intent keyword clustering.</p>
+              <div class="mt-auto">
+                <a href="<?= $site ?>seo-services-india/" class="btn-card-action">Explore SEO</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6">
+            <div class="service-card">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-bullhorn fa-2x"></i></div>
+                <div class="service-experience"><span>High ROI Ads</span></div>
+              </div>
+              <h3 class="fw-bold">Google &amp; Meta Ads Management</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Paid Traffic &amp; Lead Funnels</p>
+              <p class="text-muted small">Targeted search ads, conversion tracking, GTM event setup, and negative keyword filtering to maximize return on ad spend.</p>
+              <div class="mt-auto">
+                <a href="<?= $site ?>ads-management-india/" class="btn-card-action">Explore Ads</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Design & Branding Services -->
+      <div class="service-tab-panel d-none" id="design-brand">
+        <div class="row g-4">
+          <div class="col-lg-6 col-md-6">
+            <div class="service-card">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles fa-2x"></i></div>
+                <div class="service-experience"><span>UI/UX Upgrade</span></div>
+              </div>
+              <h3 class="fw-bold">Website Redesign &amp; UI Overhaul</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Modernize Your Digital Presence</p>
+              <p class="text-muted small">Revamp slow, outdated websites into sleek, responsive experiences with contemporary typography and micro-interactions.</p>
+              <div class="mt-auto">
+                <a href="<?= $site ?>service/website-redesign/" class="btn-card-action">Explore Redesign</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6">
+            <div class="service-card">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-shield-halved fa-2x"></i></div>
+                <div class="service-experience"><span>24/7 SLA</span></div>
+              </div>
+              <h3 class="fw-bold">Website Maintenance &amp; SLA</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Zero Downtime &amp; Backups</p>
+              <p class="text-muted small">Proactive uptime checks, weekly backups, security patches, plugin updates, and direct developer support retainers.</p>
+              <div class="mt-auto">
+                <a href="<?= $site ?>service/website-maintenance-support/" class="btn-card-action">Explore Maintenance</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5" data-aos="fade-up">
+        <a href="<?= $site ?>services/" class="header-btn11">View All Services <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!--===== PORTFOLIO & REAL CASE STUDIES =======-->
+  <div class="portfolio-section-area sp2">
+    <div class="container">
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-5">
+          <div class="portfolio-header heading8">
+            <h5 data-aos="fade-up" data-aos-duration="800">My Work</h5>
+            <h2 class="text-anime-style-1">See What <span>I've Built <img src="<?= $site ?>assets/img/elements/line-img1.png" alt=""></span></h2>
+            <div class="space10"></div>
+            <p data-aos="fade-up" data-aos-duration="1000">Real, live client websites engineered with high speed, clean code, and search visibility.</p>
+          </div>
+        </div>
+        <div class="col-lg-7 text-lg-end" data-aos="fade-up">
+          <a href="<?= $site ?>portfolio/" class="header-btn11">See All Projects <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Simple Portfolio Grid -->
+      <div class="row g-4">
+        <!-- Project 1: Rejuvenate Digital Health -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="700">
+          <div class="simple-portfolio-card">
+            <div class="project-image">
+              <img src="<?= $site ?>assets/img/portfolio/rejuvenate-digital-health.jpeg" alt="Rejuvenate Digital Health">
+              <div class="view-overlay">
+                <a href="javascript:void(0)" class="view-details details-btn" data-project="restaurant">View Details</a>
+              </div>
+            </div>
+            <div class="project-info p-3">
+              <h4 class="fw-bold mb-1" style="color:#104041;">Rejuvenate Digital Health</h4>
+              <p class="text-muted small mb-2">Digital Healthcare &amp; Consultation</p>
+              <p class="text-secondary small mb-3">Online appointment booking, service showcases, and patient intake forms.</p>
+              <button class="details-btn btn btn-sm btn-light border" data-project="restaurant">
+                <i class="fa-solid fa-circle-info text-primary me-1"></i> See Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: Earnova.co.in -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="850">
+          <div class="simple-portfolio-card">
+            <div class="project-image">
+              <a href="https://earnova.co.in/" target="_blank" rel="noopener">
+                <img src="<?= $site ?>assets/img/portfolio/earnova.png" alt="Earnova Education Website">
+                <div class="live-badge"><i class="fa-solid fa-globe me-1"></i> Live Website</div>
+              </a>
+            </div>
+            <div class="project-info p-3">
+              <h4 class="fw-bold mb-1" style="color:#104041;">Earnova.co.in</h4>
+              <p class="text-muted small mb-2">Education &amp; E-Learning Portal</p>
+              <p class="text-secondary small mb-3">Courses, student enrollment dashboards, and interactive learning resources.</p>
+              <a href="https://earnova.co.in/" target="_blank" rel="noopener" class="btn btn-sm text-white" style="background:#104041;">
+                <i class="fa-solid fa-external-link-alt me-1"></i> Visit Website
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: Market Mind Insight -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1000">
+          <div class="simple-portfolio-card">
+            <div class="project-image">
+              <a href="https://marketmindinsight.com/" target="_blank" rel="noopener">
+                <img src="<?= $site ?>assets/img/portfolio/market-mind-dashboard.png" alt="Market Mind Insight">
+                <div class="live-badge"><i class="fa-solid fa-globe me-1"></i> Live Website</div>
+              </a>
+            </div>
+            <div class="project-info p-3">
+              <h4 class="fw-bold mb-1" style="color:#104041;">MarketMindInsight.com</h4>
+              <p class="text-muted small mb-2">Business Intelligence Dashboard</p>
+              <p class="text-secondary small mb-3">Data analytics dashboard, financial calculators, and lead management.</p>
+              <a href="https://marketmindinsight.com/" target="_blank" rel="noopener" class="btn btn-sm text-white" style="background:#104041;">
+                <i class="fa-solid fa-external-link-alt me-1"></i> Visit Website
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: Bestok.in -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="700">
+          <div class="simple-portfolio-card">
+            <div class="project-image">
+              <a href="https://bestok.in/" target="_blank" rel="noopener">
+                <img src="<?= $site ?>assets/img/portfolio/bestok-thumb.png" alt="Bestok Shopping Website">
+                <div class="live-badge"><i class="fa-solid fa-globe me-1"></i> Live Website</div>
+              </a>
+            </div>
+            <div class="project-info p-3">
+              <h4 class="fw-bold mb-1" style="color:#104041;">Bestok.in</h4>
+              <p class="text-muted small mb-2">Online E-Commerce Store</p>
+              <p class="text-secondary small mb-3">Complete online store with Razorpay checkout, product catalogs, and cart.</p>
+              <a href="https://bestok.in/" target="_blank" rel="noopener" class="btn btn-sm text-white" style="background:#104041;">
+                <i class="fa-solid fa-external-link-alt me-1"></i> Visit Website
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5: Maple Stripe -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="850">
+          <div class="simple-portfolio-card">
+            <div class="project-image">
+              <img src="<?= $site ?>assets/img/portfolio/maple-stripe.png" alt="Maple Stripe Book Store">
+              <div class="live-badge"><i class="fa-solid fa-globe me-1"></i> Live Platform</div>
+            </div>
+            <div class="project-info p-3">
+              <h4 class="fw-bold mb-1" style="color:#104041;">Maple Stripe</h4>
+              <p class="text-muted small mb-2">Canada-Based Online Book Store</p>
+              <p class="text-secondary small mb-3">Publisher storefront with global shipping, ISBN search, and author portals.</p>
+              <button class="details-btn btn btn-sm btn-light border" data-project="seo">
+                <i class="fa-solid fa-circle-info text-primary me-1"></i> See Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6: Dubey Printers -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1000">
+          <div class="simple-portfolio-card">
+            <div class="project-image">
+              <img src="<?= $site ?>assets/img/portfolio/dubey-printers.png" alt="Dubey Printers Portal">
+              <div class="live-badge"><i class="fa-solid fa-mobile-screen me-1"></i> Web &amp; Mobile App</div>
+            </div>
+            <div class="project-info p-3">
+              <h4 class="fw-bold mb-1" style="color:#104041;">Dubey Printers</h4>
+              <p class="text-muted small mb-2">Commercial Printing &amp; Custom Orders</p>
+              <p class="text-secondary small mb-3">Custom printing order calculation, PDF uploads, and WhatsApp checkout.</p>
+              <button class="details-btn btn btn-sm btn-light border" data-project="mobile-app">
+                <i class="fa-solid fa-circle-info text-primary me-1"></i> See Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Details Modal -->
+  <div class="simple-modal" id="projectModal">
+    <div class="simple-modal-content">
+      <span class="simple-close">&times;</span>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!--===== PRICING PLANS (UPDATED & INTERNATIONAL STANDARD) =======-->
+  <div class="pricing-section-area sp2 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 m-auto">
+          <div class="pricing-header heading8 text-center">
+            <h5 data-aos="fade-up" data-aos-duration="1000"><img src="<?= $site ?>assets/img/icons/logo-icons6.svg" alt="">Pricing &amp; Plan</h5>
+            <h2 class="text-anime-style-1">Transparent <span>Pricing Plans <img src="<?= $site ?>assets/img/elements/line-img2.png" alt=""></span></h2>
+            <p class="text-muted small">Fixed investment packages with 100% IP ownership transfer &amp; post-launch warranty.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- 1. WordPress Website -->
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="500">
+          <div class="pricing-boxarea">
+            <h4>WordPress Website</h4>
+            <p class="text-muted small">Perfect for blogs, portfolios &amp; corporate portals.</p>
+            <h3 class="price-heading" style="color:#104041;">₹7,999 <span style="font-size:14px; font-weight:500; color:#6c757d;">/ $99</span></h3>
+            <div class="space20"></div>
+            <ul class="list-unstyled">
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> 1-5 Custom WordPress Pages</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> Mobile Responsive &amp; Speed Ready</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> Contact Form + WhatsApp Chat</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> 30-Day Bug-Free Warranty</li>
+            </ul>
+            <div class="mt-auto pt-3">
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20WordPress%20Package" target="_blank" rel="noopener" class="header-btn11 w-100 text-center">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Dynamic Website (Featured) -->
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="700">
+          <div class="pricing-boxarea active">
+            <span class="badge position-absolute top-0 end-0 m-3 px-3 py-1" style="background:#ADFF1C; color:#082223; font-weight:800;">Most Popular</span>
+            <h4 class="text-white">Dynamic Website</h4>
+            <p class="text-white-50 small">PHP &amp; MySQL custom database web application.</p>
+            <h3 class="price-heading text-white" style="color:#ADFF1C !important;">₹9,999 <span style="font-size:14px; font-weight:500; color:#d8ecea;">/ $129</span></h3>
+            <div class="space20"></div>
+            <ul class="list-unstyled text-light">
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> 5-10 Custom Dynamic Pages</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> Admin Panel for CMS Control</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> Lead Ingestion &amp; Email Alerts</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> 60-Day Dedicated Support</li>
+            </ul>
+            <div class="mt-auto pt-3">
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20Dynamic%20Website%20Package" target="_blank" rel="noopener" class="header-btn8 w-100 text-center" style="background:#ADFF1C; color:#082223 !important; font-weight:700;">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. MERN Stack Web App -->
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="900">
+          <div class="pricing-boxarea">
+            <h4>MERN Full-Stack</h4>
+            <p class="text-muted small">React.js, Node.js &amp; MongoDB scalable web apps.</p>
+            <h3 class="price-heading" style="color:#104041;">₹18,999 <span style="font-size:14px; font-weight:500; color:#6c757d;">/ $249</span></h3>
+            <div class="space20"></div>
+            <ul class="list-unstyled">
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> Single Page React / Next.js SPA</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> REST API Backend Architecture</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> JWT Auth &amp; MongoDB Database</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> 90-Day Priority Support</li>
+            </ul>
+            <div class="mt-auto pt-3">
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20MERN%20Full-Stack%20Package" target="_blank" rel="noopener" class="header-btn11 w-100 text-center">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. E-Commerce Store -->
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="1100">
+          <div class="pricing-boxarea">
+            <h4>E-Commerce Store</h4>
+            <p class="text-muted small">Complete online store with payment gateway.</p>
+            <h3 class="price-heading" style="color:#104041;">₹21,999 <span style="font-size:14px; font-weight:500; color:#6c757d;">/ $289</span></h3>
+            <div class="space20"></div>
+            <ul class="list-unstyled">
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> Razorpay / Stripe / PayPal Gateway</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> Cart, Checkout &amp; Order Invoices</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> Inventory &amp; Coupon Management</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> 90-Day VIP Support &amp; Training</li>
+            </ul>
+            <div class="mt-auto pt-3">
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20Ecommerce%20Store%20Package" target="_blank" rel="noopener" class="header-btn11 w-100 text-center">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--===== LOCAL SEO COVERAGE: DELHI NCR & TOP INDIAN METROS =======-->
+  <section class="py-5" style="background:#082223; color:#fff;">
+    <div class="container py-4">
+      <div class="delhi-ncr-seo-panel" data-aos="fade-up">
+        <div class="row mb-4 text-center">
+          <div class="col-lg-10 mx-auto">
+            <span class="badge px-3 py-2 text-uppercase mb-2" style="background:rgba(173,255,28,0.2); color:#ADFF1C; font-weight:800;">
+              Local &amp; Regional Reach
+            </span>
+            <h3 class="h2 fw-bold text-white">Serving Delhi NCR Micro-Markets &amp; Major Indian Commercial Hubs</h3>
+            <p class="text-white-50 small">
+              Instant on-demand consultation, fast delivery, and dedicated support for all prime business districts across West, South, North, East, and Central Delhi NCR:
+            </p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-uppercase fw-bold mb-3" style="color:#ADFF1C; font-size:13.5px;"><i class="fa-solid fa-map-pin me-1"></i> West &amp; Central Delhi</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Karampura</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Connaught Place</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Punjabi Bagh</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Patel Nagar</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Rajouri Garden</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Janakpuri</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Dwarka</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Kirti Nagar</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-uppercase fw-bold mb-3" style="color:#ADFF1C; font-size:13.5px;"><i class="fa-solid fa-map-pin me-1"></i> South &amp; East Delhi</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Nehru Place</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Saket</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Hauz Khas</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Greater Kailash</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Okhla Industrial</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Laxmi Nagar</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Preet Vihar</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-uppercase fw-bold mb-3" style="color:#ADFF1C; font-size:13.5px;"><i class="fa-solid fa-map-pin me-1"></i> North &amp; Outer Delhi</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Netaji Subhash Place (NSP)</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Pitampura</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Rohini</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Model Town</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Civil Lines</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="ncr-chip-tag">Wazirpur</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-uppercase fw-bold mb-3" style="color:#ADFF1C; font-size:13.5px;"><i class="fa-solid fa-map-pin me-1"></i> NCR Corporate Hubs</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="<?= $site ?>web-developer-gurgaon/" class="ncr-chip-tag">Cyber City Gurgaon</a>
+              <a href="<?= $site ?>web-developer-gurgaon/" class="ncr-chip-tag">Golf Course Road</a>
+              <a href="<?= $site ?>web-developer-gurgaon/" class="ncr-chip-tag">Udyog Vihar</a>
+              <a href="<?= $site ?>web-developer-noida/" class="ncr-chip-tag">Noida Sector 62</a>
+              <a href="<?= $site ?>web-developer-noida/" class="ncr-chip-tag">Noida Sector 18</a>
+              <a href="<?= $site ?>web-developer-noida/" class="ncr-chip-tag">Indirapuram Ghaziabad</a>
+              <a href="<?= $site ?>web-developer-gurgaon/" class="ncr-chip-tag">Faridabad</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-3 mt-4 border-top border-secondary">
+          <div class="d-flex flex-wrap gap-2 align-items-center">
+            <span class="text-white-50 small fw-bold me-2"><i class="fa-solid fa-globe" style="color:#ADFF1C;"></i> Other Major Indian Hubs:</span>
+            <a href="<?= $site ?>web-developer-mumbai/" class="ncr-chip-tag">Mumbai</a>
+            <a href="<?= $site ?>web-developer-bangalore/" class="ncr-chip-tag">Bangalore</a>
+            <a href="<?= $site ?>web-developer-hyderabad/" class="ncr-chip-tag">Hyderabad</a>
+            <a href="<?= $site ?>web-developer-pune/" class="ncr-chip-tag">Pune</a>
+            <a href="<?= $site ?>web-developer-chennai/" class="ncr-chip-tag">Chennai</a>
+            <a href="<?= $site ?>web-developer-kolkata/" class="ncr-chip-tag">Kolkata</a>
+            <a href="<?= $site ?>web-developer-ahmedabad/" class="ncr-chip-tag">Ahmedabad</a>
+            <a href="<?= $site ?>web-developer-surat/" class="ncr-chip-tag">Surat</a>
+            <a href="<?= $site ?>web-developer-jaipur/" class="ncr-chip-tag">Jaipur</a>
+            <a href="<?= $site ?>web-developer-chandigarh/" class="ncr-chip-tag">Chandigarh</a>
+            <a href="<?= $site ?>web-developer-lucknow/" class="ncr-chip-tag">Lucknow</a>
+            <a href="<?= $site ?>web-developer-indore/" class="ncr-chip-tag">Indore</a>
+            <a href="<?= $site ?>web-developer-kochi/" class="ncr-chip-tag">Kochi</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--===== TESTIMONIALS (GOOGLE REVIEWS) =======-->
+  <div class="testimonial4-section-area sp1">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 m-auto">
+          <div class="testimonia4-header text-center heading8">
+            <h5 data-aos="fade-up" data-aos-duration="1000"><img src="<?= $site ?>assets/img/icons/logo-icons6.svg" alt="">Client Testimonials</h5>
+            <h2 class="text-anime-style-1">“What Our <span>Clients Say” <img src="<?= $site ?>assets/img/elements/line-img2.png" alt=""></span> </h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12" data-aos="zoom-out" data-aos-duration="1200">
+          <div class="testimonial4-slider-area owl-carousel">
+            <?php
+            $tests = testimonial();
+            foreach ($tests as $test) {
+            ?>
+              <div class="testimonial-boxarea">
+                <div class="space14"></div>
+                <div class="auhtor-logo">
+                  <div class="text">
+                    <span class="first-letter"><?= strtoupper(substr($test['client_name'], 0, 1)) ?></span>
+                    <a href="javascript:void(0)"><?= $test['client_name'] ?></a><br>
+                    <?php if ($test['client_title']) { ?>
+                      <span style="margin-left: 50px; font-size:13px"><?= $test['client_title'] ?></span>
+                    <?php } ?>
+                    <ul style="margin-left: 50px; font-size:12px">
+                      <?php
+                      $rating = (int)($test['rating'] ?? 0);
+                      for ($i = 1; $i <= 5; $i++):
+                      ?>
+                        <li><i class="<?= $i <= $rating ? 'fa-solid' : 'fa-regular' ?> fa-star"></i></li>
+                      <?php endfor; ?>
+                    </ul>
+                  </div>
+                  <div class="logo">
+                    <img src="<?= $site ?>assets/img/icons/google1.svg" alt="Google Review" style="max-width: 80%;">
+                  </div>
+                </div>
+                <p><?= $test['testimonial_text'] ?></p>
+              </div>
+            <?php } ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--===== BLOG SECTION =======-->
+  <div class="blog4-section-area sp2 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 m-auto">
+          <div class="blog4-header text-center heading8">
+            <h5 data-aos="fade-up" data-aos-duration="1000"><img src="<?= $site ?>assets/img/icons/logo-icons6.svg" alt="">Blog &amp; News</h5>
+            <h2 class="text-anime-style-1">"Insights &amp; Updates <span>Digital Engineering <img src="<?= $site ?>assets/img/elements/line-img1.png" alt=""></span> </h2>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4">
+        <?php foreach ($blogs as $blog) { ?>
+          <div class="col-lg-6 col-md-6" data-aos="zoom-out" data-aos-duration="1000">
+            <div class="blog-auhtor-boxarea">
+              <div class="blog-content-area">
+                <ul>
+                  <li><a href="#"><i class="fa-regular fa-circle-user"></i><?= $blog['author'] ?></a></li>
+                  <li><a href="#"><i class="fa-solid fa-calendar-days"></i><?= date('d M Y h:i A', strtotime($blog['created_at'])) ?> </a></li>
+                </ul>
+                <div class="space16"></div>
+                <a href="<?= $site ?>blog/<?= $blog['slug_url'] ?>/" class="h5 fw-bold d-block text-dark"><?= $blog['title'] ?></a>
+                <div class="space16"></div>
+                <p><?= $blog['meta_description'] ?></p>
+                <a href="<?= $site ?>blog/<?= $blog['slug_url'] ?>/" class="readmore">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+              </div>
+              <div class="space24"></div>
+              <div class="img1">
+                <figure class="image-anime">
+                  <img src="<?= $site ?>admin/uploads/blogs/<?= $blog['image'] ?>" alt="<?= htmlspecialchars($blog['title']) ?>">
+                </figure>
+              </div>
+            </div>
+          </div>
+        <?php } ?>
+      </div>
+    </div>
+  </div>
+
+  <!--===== FAQ SECTION =======-->
+  <div class="choose-section-area sp1">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 m-auto">
+          <div class="choose-header-area text-center heading2">
+            <h5 data-aos="fade-up" data-aos-duration="1000"><img src="<?= $site ?>assets/img/icons/logo-icons5.svg" alt="">FAQ</h5>
+            <h2 class="text-anime-style-1">Frequently Asked <span>Questions <img src="<?= $site ?>assets/img/elements/line-img1.png" alt=""></span></h2>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="accordian-tabs-area">
+            <div class="accordion accordion-flush d-flex flex-column gap-3" id="homeFaqAccordion">
+              <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button faq-btn" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne" aria-expanded="true">
+                    1. Why should I hire NikhilWorks as a freelance developer?
+                  </button>
+                </h2>
+                <div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#homeFaqAccordion">
+                  <div class="accordion-body text-muted">
+                    You work directly 1-on-1 with a senior full-stack developer. You get <strong>3x faster delivery</strong>, <strong>60% lower costs</strong> with zero agency markups, and <strong>100% source code ownership</strong> with zero vendor lock-in.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo" aria-expanded="false">
+                    2. Can you build websites from scratch &amp; integrate AI?
+                  </button>
+                </h2>
+                <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#homeFaqAccordion">
+                  <div class="accordion-body text-muted">
+                    Yes. We design and develop custom websites completely from scratch using PHP 8.2, MERN Stack, or WordPress, and integrate 24/7 AI Chatbots, Google Gemini / OpenAI APIs, and n8n automated workflows.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree" aria-expanded="false">
+                    3. Will my website be mobile-friendly and SEO optimized?
+                  </button>
+                </h2>
+                <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#homeFaqAccordion">
+                  <div class="accordion-body text-muted">
+                    Absolutely. Every website is built mobile-first, scores <strong>90+ on Google Core Web Vitals</strong>, and includes JSON-LD Schema markup, XML sitemaps, and keyword-targeted headings for Google #1 rankings.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFour" aria-expanded="false">
+                    4. How much does a website cost in India?
+                  </button>
+                </h2>
+                <div id="faqFour" class="accordion-collapse collapse" data-bs-parent="#homeFaqAccordion">
+                  <div class="accordion-body text-muted">
+                    WordPress websites start at ₹7,999 ($99), Dynamic custom websites start at ₹9,999 ($129), full-stack MERN apps start at ₹18,999 ($249), and E-Commerce stores start at ₹21,999 ($289).
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="about-all-images-area">
+            <img src="<?= $site ?>assets/img/elements/elements12.png" alt="" class="elements12 keyframe5">
+            <img src="<?= $site ?>assets/img/elements/elements13.png" alt="" class="elements13 keyframe5">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <div class="img1">
+                  <div class="space100"></div>
+                  <img src="<?= $site ?>assets/img/all-images/service-img5.png" alt="Web Development Support">
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <div class="img2">
+                  <img src="<?= $site ?>assets/img/all-images/service-img9.png" alt="SEO Services Consultation">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--===== CTA AREA STARTS =======-->
   <div class="cta4-section-area">
     <img src="<?= $site ?>assets/img/bg/cta-bg5.png" alt="" class="cta-bg1 aniamtion-key-2">
     <img src="<?= $site ?>assets/img/bg/cta-bg4.png" alt="" class="cta-bg2 aniamtion-key-1">
     <div class="container">
       <div class="row">
-        <div class="col-lg-10 mx-auto">
+        <div class="col-lg-12 m-auto">
           <div class="cta-header-area text-center sp4 heading2">
-            <h2 class="text-anime-style-1 text-light">Ready to Scale Your Business with a High-Performance Website &amp; AI?</h2>
-            <p data-aos="fade-up" data-aos-duration="1000">
-              Get an instant quotation, clear technical roadmap, and start development with 100% direct communication today.
-            </p>
+            <h2 class="text-anime-style-1 text-light">Contact Nikhil Gupta <br class="d-md-block d-none"> Professional Web Developer &amp; SEO Expert</h2>
+            <p data-aos="fade-up" data-aos-duration="1000">Looking to create a stunning website, integrate AI workflows, or improve your Google rankings? I usually respond within 24 hours.</p>
             <div class="btn-area text-center d-flex gap-3 justify-content-center flex-wrap" data-aos="fade-up" data-aos-duration="1200">
               <a href="<?= $site ?>contact/" class="header-btn9">Get A Free Consultation <i class="fa-solid fa-arrow-right"></i></a>
-              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20am%20ready%20to%20start%20my%20project" target="_blank" rel="noopener" class="header-btn8" style="background:#25D366; color:#fff !important;">
-                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+              <a href="https://wa.me/918368552640" target="_blank" rel="noopener" class="header-btn8" style="background:#25D366; color:#fff !important;">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp Direct
               </a>
             </div>
           </div>
@@ -1431,8 +1775,92 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
       </div>
     </div>
   </div>
+  <!--===== CTA AREA ENDS =======-->
 
-  <?php include_once "includes/footer.php"; ?>
-  <script src="<?= $site ?>assets/js/plugins/bootstrap.bundle.min.js"></script>
+  <?php include_once "includes/footer.php" ?>
+
+  <!-- Scripts -->
+  <script>
+    // Tab switching for services
+    function switchServiceCategory(tabId, btn) {
+      document.querySelectorAll('.service-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.service-tab-panel').forEach(p => p.classList.add('d-none'));
+      const target = document.getElementById(tabId);
+      if (target) target.classList.remove('d-none');
+    }
+
+    // Modal for project details
+    $(document).ready(function() {
+      $('.details-btn').click(function() {
+        const project = $(this).data('project');
+        showProjectDetails(project);
+      });
+
+      $('.simple-close').click(function() {
+        $('.simple-modal').hide();
+      });
+
+      $(window).click(function(event) {
+        if ($(event.target).hasClass('simple-modal')) {
+          $('.simple-modal').hide();
+        }
+      });
+
+      function showProjectDetails(project) {
+        const modalContent = $('#modalContent');
+        let content = '';
+
+        switch (project) {
+          case 'restaurant':
+            content = `
+              <h3 style="color:#104041; font-weight:800;">Rejuvenate Digital Health</h3>
+              <p><strong>Project Scope:</strong> Digital Healthcare & Consultation Platform</p>
+              <p><strong>Key Deliverables:</strong></p>
+              <ul>
+                <li>Online Doctor Consultation Booking</li>
+                <li>Digital Patient Intake Forms</li>
+                <li>Fast, Mobile-First Healthcare UI</li>
+                <li>HIPAA & Privacy Compliance Ready</li>
+              </ul>
+              <p class="text-success fw-bold">Result: 240% increase in patient appointment inquiries.</p>
+            `;
+            break;
+
+          case 'seo':
+            content = `
+              <h3 style="color:#104041; font-weight:800;">Maple Stripe Book Store</h3>
+              <p><strong>Project Scope:</strong> E-Commerce Store & International SEO</p>
+              <p><strong>Key Deliverables:</strong></p>
+              <ul>
+                <li>International Currency & Stripe Checkout</li>
+                <li>Rich Schema.org Product & Book Structured Data</li>
+                <li>Instant ISBN Catalog Search</li>
+              </ul>
+              <p class="text-success fw-bold">Result: 300% growth in organic search traffic from Canada & US.</p>
+            `;
+            break;
+
+          case 'mobile-app':
+            content = `
+              <h3 style="color:#104041; font-weight:800;">Dubey Printers Portal</h3>
+              <p><strong>Project Scope:</strong> Custom Printing Order Application</p>
+              <p><strong>Key Deliverables:</strong></p>
+              <ul>
+                <li>Live Printing Quote & Paper Spec Calculator</li>
+                <li>PDF & Artwork Upload Gateway</li>
+                <li>Instant WhatsApp Order Sync</li>
+              </ul>
+              <p class="text-success fw-bold">Result: Automated 80% of manual customer inquiry processing.</p>
+            `;
+            break;
+        }
+
+        modalContent.html(content);
+        $('.simple-modal').css('display', 'flex');
+      }
+    });
+  </script>
+
 </body>
 </html>
