@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include "config/connect.php";
 include_once "util/function.php";
 
@@ -31,7 +31,7 @@ $portfolios = get_portfolio();
   <!-- Open Graph Tags -->
   <meta property="og:title" content="Professional Web Development Services Delhi | NikhilWorks">
   <meta property="og:description" content="Hire Delhi's top freelance web developer for custom websites, e-commerce solutions & responsive web design.">
-  <meta property="og:image" content="<?= $site ?>assets/img/web-development-services-delhi.jpg">
+  <meta property="og:image" content="<?= $site ?>assets/img/preview.png">
   <meta property="og:url" content="<?= $site ?>services/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="NikhilWorks">
@@ -40,7 +40,7 @@ $portfolios = get_portfolio();
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Professional Web Development Services Delhi | NikhilWorks">
   <meta name="twitter:description" content="Hire Delhi's top freelance web developer for custom websites, e-commerce solutions & responsive web design.">
-  <meta name="twitter:image" content="<?= $site ?>assets/img/web-development-services-delhi.jpg">
+  <meta name="twitter:image" content="<?= $site ?>assets/img/preview.png">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="<?= $site ?>services/">
@@ -59,7 +59,7 @@ $portfolios = get_portfolio();
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "NikhilWorks",
-      "image": "<?= $site ?>assets/img/logo.png",
+      "image": "<?= $site ?>assets/img/logo/preloader4.png",
       "@id": "<?= $site ?>",
       "url": "<?= $site ?>",
       "telephone": "+91-8368552640",
@@ -525,10 +525,10 @@ $portfolios = get_portfolio();
             <h4>Static Website</h4>
             <p>Perfect for startups & personal portfolios</p>
             <div class="price-india">
-              <h1>₹3,999 <span>One-Time</span></h1>
+              <h3 class="price-heading">₹3,999 <span>One-Time</span></h3>
             </div>
             <div class="price-international d-none">
-              <h1>$49 <span>One-Time</span></h1>
+              <h3 class="price-heading">$49 <span>One-Time</span></h3>
             </div>
             <div class="space20"></div>
             <ul>
@@ -551,10 +551,10 @@ $portfolios = get_portfolio();
             <h4>Dynamic Website</h4>
             <p>Database-driven business websites</p>
             <div class="price-india">
-              <h1>₹8,999 <span>One-Time</span></h1>
+              <h3 class="price-heading">₹8,999 <span>One-Time</span></h3>
             </div>
             <div class="price-international d-none">
-              <h1>$99 <span>One-Time</span></h1>
+              <h3 class="price-heading">$99 <span>One-Time</span></h3>
             </div>
             <div class="space20"></div>
             <ul class="text-light">
@@ -576,10 +576,10 @@ $portfolios = get_portfolio();
             <h4>WordPress Website</h4>
             <p>Easy-to-manage CMS solution</p>
             <div class="price-india">
-              <h1>₹5,999 <span>One-Time</span></h1>
+              <h3 class="price-heading">₹5,999 <span>One-Time</span></h3>
             </div>
             <div class="price-international d-none">
-              <h1>$79 <span>One-Time</span></h1>
+              <h3 class="price-heading">$79 <span>One-Time</span></h3>
             </div>
             <div class="space20"></div>
             <ul>
@@ -798,7 +798,7 @@ $portfolios = get_portfolio();
       <div class="row">
         <div class="col-lg-12 m-auto">
           <div class="cta-header-area text-center sp4 heading2">
-            <h1 class="text-anime-style-1 text-light">Contact Nikhil Gupta <br class="d-md-block d-none"> Professional Web Developer & SEO Expert</h1>
+            <h2 class="text-anime-style-1 text-light">Contact Nikhil Gupta <br class="d-md-block d-none"> Professional Web Developer & SEO Expert</h2>
             <p data-aos="fade-up" data-aos-duration="1000">Looking to create a stunning website or improve your Google rankings? <br class="d-md-block d-none">Have a project in mind? Looking for a reliable <strong>web developer</strong> or <strong>SEO expert in India</strong> to grow your business online? I’m here to help! Whether you need a responsive website, a complete <strong>SEO strategy</strong>, or <strong>digital marketing solutions</strong>, feel free to reach out. I usually respond within 24 hours.</p>
             <div class="btn-area text-center" data-aos="fade-up" data-aos-duration="1200">
               <a href="<?= $site ?>contact/" class="header-btn9"> Get A Free Consultation <i

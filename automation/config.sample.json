@@ -1,0 +1,38 @@
+{
+  "site_url": "https://nikhilworks.com",
+  "brand_name": "NikhilWorks",
+  "author": "Nikhil Gupta",
+  "devto": {
+    "api_key": "YOUR_DEVTO_API_KEY"
+  },
+  "hashnode": {
+    "api_key": "YOUR_HASHNODE_API_KEY",
+    "publication_id": "YOUR_PUBLICATION_ID"
+  },
+  "linkedin": {
+    "access_token": "YOUR_LINKEDIN_ACCESS_TOKEN",
+    "person_urn": "urn:li:person:YOUR_URN"
+  },
+  "twitter": {
+    "api_key": "YOUR_TWITTER_API_KEY",
+    "api_secret": "YOUR_TWITTER_API_SECRET",
+    "access_token": "YOUR_TWITTER_ACCESS_TOKEN",
+    "access_token_secret": "YOUR_TWITTER_ACCESS_TOKEN_SECRET"
+  },
+  "facebook": {
+    "page_id": "YOUR_FB_PAGE_ID",
+    "page_access_token": "YOUR_FB_PAGE_ACCESS_TOKEN"
+  },
+  "instagram": {
+    "account_id": "YOUR_IG_ACCOUNT_ID",
+    "access_token": "YOUR_IG_ACCESS_TOKEN"
+  },
+  "google_business": {
+    "account_id": "YOUR_GBP_ACCOUNT_ID",
+    "location_id": "YOUR_GBP_LOCATION_ID",
+    "access_token": "YOUR_GBP_ACCESS_TOKEN"
+  },
+  "indexnow": {
+    "api_key": "YOUR_INDEXNOW_KEY"
+  }
+}

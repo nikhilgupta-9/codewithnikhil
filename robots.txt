@@ -1,8 +1,20 @@
-﻿User-agent: *
+User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /config/
+Disallow: /util/
+Disallow: /data/
 
-# AI Search Bots — explicitly allowed for GEO visibility
+# Search Bots & AI Engines Explicitly Allowed for Maximum SEO & GEO Reach
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 User-agent: GPTBot
 Allow: /
 
@@ -15,10 +27,8 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: GoogleOther
+User-agent: Applebot
 Allow: /
 
-User-agent: Googlebot
-Allow: /
-
+# Master Sitemap Index
 Sitemap: https://nikhilworks.com/sitemap.xml

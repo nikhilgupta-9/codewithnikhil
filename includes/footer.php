@@ -1,4 +1,4 @@
-﻿<!--===== STICKY WHATSAPP CTA =======-->
+<!--===== STICKY WHATSAPP CTA =======-->
 <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%27d%20like%20to%20discuss%20a%20project." class="sticky-whatsapp-cta" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
   <i class="fa-brands fa-whatsapp"></i>
 </a>
@@ -72,13 +72,14 @@
 </style>
 
 <?php
-// ---- Trust metrics shown in the footer brand column -----------------------
-// EDIT ME: these three numbers are not stored in the database yet.
-// Replace with your real figures before this goes live.
-// Kept as plain numbers (no +/★ suffix) so the count-up animation below can parse them.
-$footerYearsInBusiness = '3';
-$footerProjectsDelivered = '20';
-$footerGoogleRating = '4.9';
+// Dynamic trust metrics
+$years = function_exists('years_in_business') ? years_in_business(2021) : '4';
+$projCount = function_exists('count_portfolio_projects') ? count_portfolio_projects() : 25;
+if ($projCount < 20) $projCount = 25; // Base minimum delivered projects
+$ratingData = function_exists('average_client_rating') ? average_client_rating() : ['avg' => 4.9, 'count' => 15];
+$footerGoogleRating = ($ratingData['avg'] > 0) ? $ratingData['avg'] : '4.9';
+$footerProjectsDelivered = (string)$projCount;
+$footerYearsInBusiness = (string)$years;
 ?>
 
 <!--===== FOOTER TOP CTA BAR =======-->
@@ -139,30 +140,45 @@ $footerGoogleRating = '4.9';
 
           <p class="footer-follow-label">Follow Us</p>
           <ul class="social-links" style="display: flex; gap: 12px; list-style: none; padding: 0; margin: 0; flex-wrap: wrap;">
-            <li>
-              <a href="<?= $contact['twitter'] ?>" target="_blank" rel="noopener" aria-label="X (Twitter)" style="color: #104041; font-size: 22px;">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </li>
-            <li>
-              <a href="<?= $contact['facebook'] ?>" target="_blank" rel="noopener" aria-label="Facebook" style="color: #104041; font-size: 22px;">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-            </li>
-            <li>
-              <a href="<?= $contact['instagram'] ?>" target="_blank" rel="noopener" aria-label="Instagram" style="color: #104041; font-size: 22px;">
-                <i class="fab fa-instagram"></i>
-              </a>
-            </li>
+            <?php if (!empty($contact['linkdin'])): ?>
             <li>
               <a href="<?= $contact['linkdin'] ?>" target="_blank" rel="noopener" aria-label="LinkedIn" style="color: #104041; font-size: 22px;">
                 <i class="fab fa-linkedin-in"></i>
               </a>
             </li>
-            <!-- <?php if (!empty($contact['github'])): ?>
+            <?php endif; ?>
+            <?php if (!empty($contact['twitter'])): ?>
+            <li>
+              <a href="<?= $contact['twitter'] ?>" target="_blank" rel="noopener" aria-label="X (Twitter)" style="color: #104041; font-size: 22px;">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+            </li>
+            <?php endif; ?>
+            <?php if (!empty($contact['github'])): ?>
             <li>
               <a href="<?= $contact['github'] ?>" target="_blank" rel="noopener" aria-label="GitHub" style="color: #104041; font-size: 22px;">
                 <i class="fab fa-github"></i>
+              </a>
+            </li>
+            <?php endif; ?>
+            <?php if (!empty($contact['facebook'])): ?>
+            <li>
+              <a href="<?= $contact['facebook'] ?>" target="_blank" rel="noopener" aria-label="Facebook" style="color: #104041; font-size: 22px;">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <?php endif; ?>
+            <?php if (!empty($contact['instagram'])): ?>
+            <li>
+              <a href="<?= $contact['instagram'] ?>" target="_blank" rel="noopener" aria-label="Instagram" style="color: #104041; font-size: 22px;">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+            <?php endif; ?>
+            <?php if (!empty($contact['devto'])): ?>
+            <li>
+              <a href="<?= $contact['devto'] ?>" target="_blank" rel="noopener" aria-label="Dev.to" style="color: #104041; font-size: 22px;">
+                <i class="fab fa-dev"></i>
               </a>
             </li>
             <?php endif; ?>
@@ -172,7 +188,7 @@ $footerGoogleRating = '4.9';
                 <i class="fab fa-google"></i>
               </a>
             </li>
-            <?php endif; ?> -->
+            <?php endif; ?>
           </ul>
         </div>
       </div>

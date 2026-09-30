@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once "config/connect.php";
 include_once "util/function.php";
 
@@ -1626,7 +1626,7 @@ $blogs = get_blog($limit);
           <div class="pricing-boxarea">
             <h4>Static Website</h4>
             <p>Perfect for personal portfolios or small businesses.</p>
-            <h1>₹3,999 <span>One-Time</span></h1>
+            <h3 class="price-heading">₹3,999 <span>One-Time</span></h3>
             <div class="space20"></div>
             <ul>
               <li><i class="fa-solid fa-check text-success"></i> 1-5 Pages (HTML, CSS, Bootstrap)</li>
@@ -1644,7 +1644,7 @@ $blogs = get_blog($limit);
           <div class="pricing-boxarea active">
             <h4>Dynamic Website</h4>
             <p>Great for businesses needing database-driven features.</p>
-            <h1>₹8,999 <span>One-Time</span></h1>
+            <h3 class="price-heading">₹8,999 <span>One-Time</span></h3>
             <div class="space20"></div>
             <ul class="text-light">
               <li><i class="fa-solid fa-check text-success"></i> 5-10 Pages (PHP + MySQL)</li>
@@ -1662,7 +1662,7 @@ $blogs = get_blog($limit);
           <div class="pricing-boxarea">
             <h4>WordPress Website</h4>
             <p>Easy to manage, perfect for blogs and businesses.</p>
-            <h1>₹5,999 <span>One-Time</span></h1>
+            <h3 class="price-heading">₹5,999 <span>One-Time</span></h3>
             <div class="space20"></div>
             <ul>
               <li><i class="fa-solid fa-check text-success"></i> Premium Theme Setup</li>
@@ -1976,7 +1976,7 @@ $blogs = get_blog($limit);
       <div class="row">
         <div class="col-lg-12 m-auto">
           <div class="cta-header-area text-center sp4 heading2">
-            <h1 class="text-anime-style-1 text-light">Contact Nikhil Gupta <br class="d-md-block d-none"> Professional Web Developer & SEO Expert</h1>
+            <h2 class="text-anime-style-1 text-light">Contact Nikhil Gupta <br class="d-md-block d-none"> Professional Web Developer & SEO Expert</h2>
             <p data-aos="fade-up" data-aos-duration="1000">Looking to create a stunning website or improve your Google rankings? <br class="d-md-block d-none">Have a project in mind? Looking for a reliable <strong>web developer</strong> or <strong>SEO expert in India</strong> to grow your business online? I’m here to help! Whether you need a responsive website, a complete <strong>SEO strategy</strong>, or <strong>digital marketing solutions</strong>, feel free to reach out. I usually respond within 24 hours.</p>
             <div class="btn-area text-center" data-aos="fade-up" data-aos-duration="1200">
               <a href="<?= $site ?>contact/" class="header-btn9"> Get A Free Consultation <i

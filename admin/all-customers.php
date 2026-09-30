@@ -9,7 +9,7 @@ include "db-conn.php";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Customer Management | Sales Dashboard</title>
-    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="icon" href="assets/img/logo/preloader4.png" type="image/png">
     
     <?php include "links.php"; ?>
     <style>

@@ -83,7 +83,7 @@ $yearsExperience = years_in_business(2021);
     "@type": "ProfessionalService",
     "name": "NikhilWorks",
     "url": "<?= $site ?>",
-    "image": "<?= $site ?>assets/img/logo.png",
+    "image": "<?= $site ?>assets/img/logo/preloader4.png",
     "telephone": "+91-8368552640",
     "email": "contact@nikhilworks.com",
     "description": "Professional web development services by Nikhil Gupta — PHP, Laravel, MERN Stack, WordPress — serving clients in UAE, Saudi Arabia, Qatar, Kuwait, UK, Germany, Australia, New Zealand, Canada, Brazil, Malaysia, Singapore, Nigeria, South Africa, Kenya and more.",

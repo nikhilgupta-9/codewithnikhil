@@ -26,7 +26,7 @@ include_once "config/connect.php";
   <!-- Open Graph Tags -->
   <meta property="og:title" content="About Nikhil Gupta | Web Developer & SEO Expert | NikhilWorks">
   <meta property="og:description" content="From Political Science & UPSC prep to Web Development — a different kind of developer. Web development & SEO for businesses in India, Dubai, USA & UK.">
-  <meta property="og:image" content="<?= $site ?>assets/img/logo/og-about.jpg">
+  <meta property="og:image" content="<?= $site ?>assets/img/preview.png">
   <meta property="og:url" content="<?= $site ?>about/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="NikhilWorks">
@@ -149,7 +149,7 @@ include_once "config/connect.php";
         <div class="col-lg-6">
           <div class="works-header-area heading2">
             <h5>About Me</h5>
-            <h1>Nikhil Gupta</h1>
+            <h2>Nikhil Gupta</h2>
             <h3 class="h4 text-primary mb-3">Web Developer & SEO Expert</h3>
             <p>I'm a web developer and SEO expert based in Delhi, India — working with businesses across India, Dubai, the UK, and the USA. But before I wrote a single line of code, I spent years studying Political Science, International Relations, and Economics — even preparing for India's UPSC Civil Services Examination.</p>
             <div class="space16"></div>
@@ -782,7 +782,7 @@ include_once "config/connect.php";
       <div class="row">
         <div class="col-lg-12 m-auto">
           <div class="cta-header-area text-center sp4 heading2">
-            <h1 class="text-anime-style-1 text-light">Let's Build Something Smarter Together</h1>
+            <h2 class="text-anime-style-1 text-light">Let's Build Something Smarter Together</h2>
             <p data-aos="fade-up" data-aos-duration="1000">Looking for a <strong>web developer</strong> who thinks beyond code, or an <strong>SEO expert</strong> who understands markets? Let's discuss your project and create a solution built on strategy as much as code. I serve clients across India, Dubai, USA and UK.</p>
             <div class="btn-area text-center" data-aos="fade-up" data-aos-duration="1200">
               <a href="<?= $site ?>contact/" class="header-btn9"> Get Free Consultation <i class="fa-solid fa-arrow-right"></i></a>

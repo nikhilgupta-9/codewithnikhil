@@ -163,7 +163,7 @@ $is_tag_page = !empty($_GET['tag']);
       <div class="row">
         <div class="col-lg-12 m-auto">
           <div class="cta-header-area text-center sp4 heading2">
-            <h1 class="text-anime-style-1 text-light">Contact Nikhil Gupta <br class="d-md-block d-none"> Professional Web Developer & SEO Expert</h1>
+            <h2 class="text-anime-style-1 text-light">Contact Nikhil Gupta <br class="d-md-block d-none"> Professional Web Developer & SEO Expert</h2>
             <p data-aos="fade-up" data-aos-duration="1000">Looking to create a stunning website or improve your Google rankings? <br class="d-md-block d-none">Have a project in mind? Looking for a reliable <strong>web developer</strong> or <strong>SEO expert in India</strong> to grow your business online? I’m here to help! Whether you need a responsive website, a complete <strong>SEO strategy</strong>, or <strong>digital marketing solutions</strong>, feel free to reach out. I usually respond within 24 hours.</p>
             <div class="btn-area text-center" data-aos="fade-up" data-aos-duration="1200">
               <a href="<?=$site?>contact/" class="header-btn9"> Get A Free Consultation <i

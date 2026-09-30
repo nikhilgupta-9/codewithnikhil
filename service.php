@@ -579,7 +579,7 @@ $og_image = !empty($product_details['pro_img'])
           <div class="pricing-boxarea">
             <h4>Static Website</h4>
             <p>Perfect for personal portfolios or small businesses.</p>
-            <h1>₹3,999 <span>One-Time</span></h1>
+            <h3 class="price-heading">₹3,999 <span>One-Time</span></h3>
             <div class="space20"></div>
             <ul>
               <li><i class="fa-solid fa-check text-success"></i> 1-5 Pages (HTML, CSS, Bootstrap)</li>
@@ -595,7 +595,7 @@ $og_image = !empty($product_details['pro_img'])
           <div class="pricing-boxarea active">
             <h4>Dynamic Website</h4>
             <p>Great for businesses needing database-driven features.</p>
-            <h1>₹8,999 <span>One-Time</span></h1>
+            <h3 class="price-heading">₹8,999 <span>One-Time</span></h3>
             <div class="space20"></div>
             <ul class="text-light">
               <li><i class="fa-solid fa-check text-success"></i> 5-10 Pages (PHP + MySQL)</li>
@@ -611,7 +611,7 @@ $og_image = !empty($product_details['pro_img'])
           <div class="pricing-boxarea">
             <h4>Custom Web Application</h4>
             <p>Tailor-made solutions for your unique requirements.</p>
-            <h1>Contact Us <span>For Pricing</span></h1>
+            <h3 class="price-heading">Contact Us <span>For Pricing</span></h3>
             <div class="space20"></div>
             <ul>
               <li><i class="fa-solid fa-check text-success"></i> Built on any Technology (PHP, MERN, Laravel)</li>

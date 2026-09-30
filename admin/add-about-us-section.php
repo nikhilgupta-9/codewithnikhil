@@ -158,7 +158,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>About Us Sections | Admin Panel</title>
-    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="icon" href="assets/img/logo/preloader4.png" type="image/png">
     <?php include "links.php"; ?>
     <style>
         .section-card {

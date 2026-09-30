@@ -1,18 +1,22 @@
 # ============================================
+# NikhilWorks - Production .htaccess
+# Optimized for Performance, Security & Technical SEO
+# ============================================
+
+# Disable Directory Browsing
+Options -Indexes
+
+# Custom 404 Error Page
+ErrorDocument 404 /404.php
+
+# ============================================
 # Security Headers
 # ============================================
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-
-  # Report-Only first — logs violations to the browser console without blocking anything.
-  # Known real resource origins from a codebase audit: jQuery CDN, Google Tag Manager/Analytics
-  # (script + beacon), Google Maps embed (contact page iframe), Google Fonts (Figtree in header.php),
-  # admin CKEditor/jsdelivr/cdnjs (CKEditor, Chart.js, ApexCharts, Bootstrap, Select2, flatpickr, etc.
-  # loaded across admin/*.php). img-src stays permissive since blog posts (via the admin CKEditor)
-  # may reference external image hosts.
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
   Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'unsafe-inline' https://code.jquery.com https://www.googletagmanager.com https://cdn.ckeditor.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; frame-src https://www.google.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; frame-ancestors 'self'"
 </IfModule>
 
@@ -37,130 +41,141 @@
   AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
 </IfModule>
 
-RewriteEngine On
 # ============================================
-# Force HTTPS
+# Rewrite Engine & Redirection Logic
 # ============================================
-RewriteCond %{HTTPS} off
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
 
-# ============================================
-# Fix -- .php extension URLs redirect
-# THE_REQUEST guards check the browser's original raw request line, not the
-# internal rewrite target -- without them, the clean-URL rules below (e.g.
-# ^about/?$ -> about.php [L]) trigger a mod_rewrite per-directory restart that
-# re-matches these same rules against "about.php" and causes every clean URL
-# to redirect to itself on the production domain (breaks local testing too).
-# ============================================
-RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
-RewriteRule ^index\.php$ https://nikhilworks.com/ [R=301,L]
-RewriteCond %{THE_REQUEST} \s/+about\.php[\s?] [NC]
-RewriteRule ^about\.php$ https://nikhilworks.com/about/ [R=301,L]
-RewriteCond %{THE_REQUEST} \s/+blog\.php[\s?] [NC]
-RewriteRule ^blog\.php$ https://nikhilworks.com/blogs/ [R=301,L]
-RewriteCond %{THE_REQUEST} \s/+contact\.php[\s?] [NC]
-RewriteRule ^contact\.php$ https://nikhilworks.com/contact/ [R=301,L]
-RewriteCond %{THE_REQUEST} \s/+pricing\.php[\s?] [NC]
-RewriteRule ^pricing\.php$ https://nikhilworks.com/pricing/ [R=301,L]
-RewriteCond %{THE_REQUEST} \s/+portfolio\.php[\s?] [NC]
-RewriteRule ^portfolio\.php$ https://nikhilworks.com/portfolio/ [R=301,L]
-RewriteCond %{THE_REQUEST} \s/+services\.php[\s?] [NC]
-RewriteRule ^services\.php$ https://nikhilworks.com/services/ [R=301,L]
-RewriteCond %{THE_REQUEST} \s/+privacy-policy\.php[\s?] [NC]
-RewriteRule ^privacy-policy\.php$ https://nikhilworks.com/privacy-policy/ [R=301,L]
-RewriteCond %{THE_REQUEST} \s/+terms-and-conditions\.php[\s?] [NC]
-RewriteRule ^terms-and-conditions\.php$ https://nikhilworks.com/terms-and-conditions/ [R=301,L]
+  # 1. Force HTTPS on Production
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^ https://nikhilworks.com%{REQUEST_URI} [R=301,L]
 
-# ============================================
-# Fix -- /services/{slug}/ redirect to /service/{slug}/
-# This fixes the duplicate canonical issue found by Google
-# ============================================
-RewriteRule ^services/([a-z0-9_-]+)/?$ /service/$1/ [R=301,L]
+  # 2. Redirect WWW to Non-WWW on Production
+  RewriteCond %{HTTP_HOST} ^www\.nikhilworks\.com$ [NC]
+  RewriteRule ^ https://nikhilworks.com%{REQUEST_URI} [R=301,L]
 
-# ============================================
-# URL Routing -- Clean URLs to PHP files
-# ============================================
-RewriteRule ^about/?$ about.php [L]
-RewriteRule ^services/?$ services.php [L]
-RewriteRule ^portfolio/?$ portfolio.php [L]
-RewriteRule ^pricing/?$ pricing.php [L]
-RewriteRule ^contact/?$ contact.php [L]
-RewriteRule ^blogs/?$ blog.php [L]
-RewriteRule ^testimonials/?$ testimonials.php [L]
-RewriteRule ^privacy-policy/?$ privacy-policy.php [L]
-RewriteRule ^terms-and-conditions/?$ terms-and-conditions.php [L]
+  # 3. Direct .php URL requests 301 redirect to Canonical Clean URLs (Production only)
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
+  RewriteRule ^index\.php$ https://nikhilworks.com/ [R=301,L]
 
-# Service detail pages
-RewriteRule ^service/([a-z0-9_-]+)/?$ service.php?alias=$1 [QSA,L]
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+about\.php[\s?] [NC]
+  RewriteRule ^about\.php$ https://nikhilworks.com/about/ [R=301,L]
 
-# Blog detail pages
-RewriteRule ^blog/([a-z0-9_-]+)/?$ blog-detail.php?alias=$1 [QSA,L]
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+blog\.php[\s?] [NC]
+  RewriteRule ^blog\.php$ https://nikhilworks.com/blogs/ [R=301,L]
 
-# India location pages
-RewriteRule ^(web-designer-delhi|web-developer-india|seo-services-india|freelance-web-developer-india|website-development-cost-india|web-developer-mumbai|web-developer-bangalore|web-developer-gurgaon|web-developer-noida|web-developer-hyderabad|web-developer-ahmedabad|web-developer-kolkata|web-developer-chennai|web-developer-pune|web-developer-lucknow|web-developer-kanpur|web-developer-jaipur|web-developer-chandigarh|web-developer-indore|web-developer-ludhiana|web-developer-varanasi|web-developer-bhopal|web-developer-surat|web-developer-vadodara|web-developer-nagpur|web-developer-rajkot|web-developer-coimbatore|web-developer-kochi|web-developer-visakhapatnam|web-developer-bhubaneswar|web-developer-patna)/?$ location-india.php?page=$1 [QSA,L]
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+contact\.php[\s?] [NC]
+  RewriteRule ^contact\.php$ https://nikhilworks.com/contact/ [R=301,L]
 
-# International location pages
-RewriteRule ^(web-developer-dubai|web-developer-usa|web-developer-uk|web-developer-australia|hire-freelance-web-developer|web-developer-canada|web-developer-singapore|web-developer-new-zealand|web-developer-russia|web-developer-south-africa|web-developer-saudi-arabia|web-developer-switzerland|web-developer-germany)/?$ location-international.php?page=$1 [QSA,L]
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+pricing\.php[\s?] [NC]
+  RewriteRule ^pricing\.php$ https://nikhilworks.com/pricing/ [R=301,L]
 
-# City/state location pages (data-driven -- add new cities in data/locations-cities.php, no .htaccess change needed)
-RewriteRule ^(web-developer-[a-z-]+)/?$ location-city.php?slug=$1 [QSA,L]
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+portfolio\.php[\s?] [NC]
+  RewriteRule ^portfolio\.php$ https://nikhilworks.com/portfolio/ [R=301,L]
 
-# CRM development service pages (data-driven -- add new countries in data/services-crm.php, no .htaccess change needed)
-RewriteRule ^(crm-development-[a-z-]+)/?$ service-crm.php?slug=$1 [QSA,L]
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+services\.php[\s?] [NC]
+  RewriteRule ^services\.php$ https://nikhilworks.com/services/ [R=301,L]
 
-# SEO service pages (data-driven -- add new countries in data/services-seo.php, no .htaccess change needed)
-# Note: seo-services-india is matched by the India location rule above and takes precedence.
-RewriteRule ^(seo-services-[a-z-]+)/?$ service-seo.php?slug=$1 [QSA,L]
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+testimonials\.php[\s?] [NC]
+  RewriteRule ^testimonials\.php$ https://nikhilworks.com/testimonials/ [R=301,L]
 
-# Website maintenance service pages (data-driven -- add new countries in data/services-maintenance.php, no .htaccess change needed)
-RewriteRule ^(website-maintenance-[a-z-]+)/?$ service-maintenance.php?slug=$1 [QSA,L]
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+privacy-policy\.php[\s?] [NC]
+  RewriteRule ^privacy-policy\.php$ https://nikhilworks.com/privacy-policy/ [R=301,L]
 
-# Website redesign service pages (data-driven -- add new countries in data/services-redesign.php, no .htaccess change needed)
-RewriteRule ^(website-redesign-[a-z-]+)/?$ service-redesign.php?slug=$1 [QSA,L]
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+terms-and-conditions\.php[\s?] [NC]
+  RewriteRule ^terms-and-conditions\.php$ https://nikhilworks.com/terms-and-conditions/ [R=301,L]
 
-# Website auditing service pages (data-driven -- add new countries in data/services-auditing.php, no .htaccess change needed)
-RewriteRule ^(website-auditing-[a-z-]+)/?$ service-auditing.php?slug=$1 [QSA,L]
+  # 4. Old & Duplicate URL Fixes
+  RewriteRule ^services/([a-z0-9_-]+)/?$ /service/$1/ [R=301,L]
+  RewriteRule ^service-details/website-design-services/?$ /service/website-design-development/ [R=301,L]
+  RewriteRule ^service/website-maintenance/?$ /service/website-maintenance-support/ [R=301,L]
 
-# Keyword promotion service pages (data-driven -- add new countries in data/services-keyword-promotion.php, no .htaccess change needed)
-RewriteRule ^(keyword-promotion-[a-z-]+)/?$ service-keyword-promotion.php?slug=$1 [QSA,L]
+  # 5. Trailing Slash Canonicalization (Ensures single canonical URL for search engines)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteCond %{REQUEST_URI} !\.(php|xml|txt|css|js|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot|pdf|zip)$ [NC]
+  RewriteRule ^(.*)$ /$1/ [R=301,L]
 
-# Google & Meta ads management service pages (data-driven -- add new countries in data/services-ads.php, no .htaccess change needed)
-RewriteRule ^(ads-management-[a-z-]+)/?$ service-ads.php?slug=$1 [QSA,L]
+  # 6. Sitemaps
+  RewriteRule ^sitemap\.xml$ sitemap.xml [L]
+  RewriteRule ^sitemap-main\.xml$ sitemap-main.xml [L]
+  RewriteRule ^sitemap-locations\.xml$ sitemap-locations.xml [L]
+  RewriteRule ^sitemap-blogs\.xml$ sitemap-blogs.xml [L]
 
-# API & third-party integration service pages (data-driven -- add new
-# categories/countries in data/services-api.php + services-api-content.php.
-# Each category has its own base keyword so this needs one line per category;
-# adding a country variant of an existing category needs no .htaccess change.)
-RewriteRule ^(api-integration-services-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
-RewriteRule ^(payment-gateway-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
-RewriteRule ^(whatsapp-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
-RewriteRule ^(instagram-meta-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
-RewriteRule ^(shipping-logistics-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
-RewriteRule ^(sms-communication-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
-RewriteRule ^(gst-fintech-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
-RewriteRule ^(google-maps-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
-RewriteRule ^(crm-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
+  # 7. Core Clean URL Routing
+  RewriteRule ^about/?$ about.php [L]
+  RewriteRule ^services/?$ services.php [L]
+  RewriteRule ^portfolio/?$ portfolio.php [L]
+  RewriteRule ^pricing/?$ pricing.php [L]
+  RewriteRule ^contact/?$ contact.php [L]
+  RewriteRule ^blogs/?$ blog.php [L]
+  RewriteRule ^testimonials/?$ testimonials.php [L]
+  RewriteRule ^privacy-policy/?$ privacy-policy.php [L]
+  RewriteRule ^terms-and-conditions/?$ terms-and-conditions.php [L]
 
-# Vertical/industry category pages (data-driven -- add new countries/cities in the relevant data/verticals-*.php file, no .htaccess change needed)
-RewriteRule ^(healthcare-website-design-[a-z-]+)/?$ vertical-healthcare.php?slug=$1 [QSA,L]
-RewriteRule ^(real-estate-website-design-[a-z-]+)/?$ vertical-real-estate.php?slug=$1 [QSA,L]
-RewriteRule ^(junk-car-website-design-[a-z-]+)/?$ vertical-junk-cars.php?slug=$1 [QSA,L]
-RewriteRule ^(book-website-design-[a-z-]+)/?$ vertical-books.php?slug=$1 [QSA,L]
+  # 8. Dynamic Service & Blog Detail Pages
+  RewriteRule ^service/([a-z0-9_-]+)/?$ service.php?alias=$1 [QSA,L]
+  RewriteRule ^blog/([a-z0-9_-]+)/?$ blog-detail.php?alias=$1 [QSA,L]
 
-# ============================================
-# Fix -- Trailing slash canonicalization
-# ============================================
-RewriteCond %{REQUEST_URI} !/$
-RewriteCond %{REQUEST_URI} !\.(php|xml|txt|css|js|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot|pdf|zip)$
-RewriteCond %{REQUEST_URI} !^/$
-RewriteRule ^(.+)$ /$1/ [R=301,L]
+  # 9. India Location Pages
+  RewriteRule ^(web-designer-delhi|web-developer-india|seo-services-india|freelance-web-developer-india|website-development-cost-india|web-developer-mumbai|web-developer-bangalore|web-developer-gurgaon|web-developer-noida|web-developer-hyderabad|web-developer-ahmedabad|web-developer-kolkata|web-developer-chennai|web-developer-pune|web-developer-lucknow|web-developer-kanpur|web-developer-jaipur|web-developer-chandigarh|web-developer-indore|web-developer-ludhiana|web-developer-varanasi|web-developer-bhopal|web-developer-surat|web-developer-vadodara|web-developer-nagpur|web-developer-rajkot|web-developer-coimbatore|web-developer-kochi|web-developer-visakhapatnam|web-developer-bhubaneswar|web-developer-patna)/?$ location-india.php?page=$1 [QSA,L]
 
-# ============================================
-# Fix -- Old /service-details/ URLs redirect
-# ============================================
-RewriteRule ^service-details/website-design-services/?$ /service/website-design-development/ [R=301,L]
+  # 10. International Location Pages
+  RewriteRule ^(web-developer-dubai|web-developer-usa|web-developer-uk|web-developer-australia|hire-freelance-web-developer|web-developer-canada|web-developer-singapore|web-developer-new-zealand|web-developer-russia|web-developer-south-africa|web-developer-saudi-arabia|web-developer-switzerland|web-developer-germany)/?$ location-international.php?page=$1 [QSA,L]
 
-# ============================================
-# Fix -- Sitemap service slug corrections
-# ============================================
-RewriteRule ^service/website-maintenance/?$ /service/website-maintenance-support/ [R=301,L]
+  # 11. City & State Location Pages
+  RewriteRule ^(web-developer-[a-z-]+)/?$ location-city.php?slug=$1 [QSA,L]
+
+  # 12. CRM Service Pages
+  RewriteRule ^(crm-development-[a-z-]+)/?$ service-crm.php?slug=$1 [QSA,L]
+
+  # 13. SEO Service Pages
+  RewriteRule ^(seo-services-[a-z-]+)/?$ service-seo.php?slug=$1 [QSA,L]
+
+  # 14. Website Maintenance Service Pages
+  RewriteRule ^(website-maintenance-[a-z-]+)/?$ service-maintenance.php?slug=$1 [QSA,L]
+
+  # 15. Website Redesign Service Pages
+  RewriteRule ^(website-redesign-[a-z-]+)/?$ service-redesign.php?slug=$1 [QSA,L]
+
+  # 16. Website Auditing Service Pages
+  RewriteRule ^(website-auditing-[a-z-]+)/?$ service-auditing.php?slug=$1 [QSA,L]
+
+  # 17. Keyword Promotion Service Pages
+  RewriteRule ^(keyword-promotion-[a-z-]+)/?$ service-keyword-promotion.php?slug=$1 [QSA,L]
+
+  # 18. Google & Meta Ads Management Pages
+  RewriteRule ^(ads-management-[a-z-]+)/?$ service-ads.php?slug=$1 [QSA,L]
+
+  # 19. API & Third-Party Integration Pages
+  RewriteRule ^(api-integration-services-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
+  RewriteRule ^(payment-gateway-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
+  RewriteRule ^(whatsapp-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
+  RewriteRule ^(instagram-meta-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
+  RewriteRule ^(shipping-logistics-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
+  RewriteRule ^(sms-communication-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
+  RewriteRule ^(gst-fintech-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
+  RewriteRule ^(google-maps-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
+  RewriteRule ^(crm-api-integration-[a-z-]+)/?$ service-api.php?slug=$1 [QSA,L]
+
+  # 20. Vertical & Industry Pages
+  RewriteRule ^(healthcare-website-design-[a-z-]+)/?$ vertical-healthcare.php?slug=$1 [QSA,L]
+  RewriteRule ^(real-estate-website-design-[a-z-]+)/?$ vertical-real-estate.php?slug=$1 [QSA,L]
+  RewriteRule ^(junk-car-website-design-[a-z-]+)/?$ vertical-junk-cars.php?slug=$1 [QSA,L]
+  RewriteRule ^(book-website-design-[a-z-]+)/?$ vertical-books.php?slug=$1 [QSA,L]
+
+</IfModule>

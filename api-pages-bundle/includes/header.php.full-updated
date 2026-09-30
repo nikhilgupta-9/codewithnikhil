@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once "util/function.php";
 $contact = contact_us();
 

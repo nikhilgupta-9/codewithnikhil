@@ -43,7 +43,7 @@ $heroImage = ($isPriorityHub ? hub_image_url($site, 'locations', 'india') : null
 <meta property="og:description" content="<?= htmlspecialchars($c['description']) ?>">
 <meta property="og:url" content="<?= htmlspecialchars($c['canonical']) ?>">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://nikhilworks.com/assets/img/logo/logo.png">
+<meta property="og:image" content="https://nikhilworks.com/assets/img/preview.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 <?= json_encode([
@@ -51,7 +51,7 @@ $heroImage = ($isPriorityHub ? hub_image_url($site, 'locations', 'india') : null
   '@type' => 'ProfessionalService',
   'name' => 'NikhilWorks',
   'url' => 'https://nikhilworks.com',
-  'logo' => 'https://nikhilworks.com/assets/img/logo/logo.png',
+  'logo' => 'https://nikhilworks.com/assets/img/preview.png',
   'description' => $c['description'],
   'address' => [
     '@type' => 'PostalAddress',

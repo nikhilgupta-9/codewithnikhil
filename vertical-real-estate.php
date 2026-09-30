@@ -38,7 +38,7 @@ $heroImage = hub_image_url($site, 'verticals', 'real-estate-' . hub_country_slug
 <meta property="og:description" content="<?= htmlspecialchars($c['description']) ?>">
 <meta property="og:url" content="<?= htmlspecialchars($c['canonical']) ?>">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://nikhilworks.com/assets/img/logo/logo.png">
+<meta property="og:image" content="https://nikhilworks.com/assets/img/preview.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 <?= json_encode([

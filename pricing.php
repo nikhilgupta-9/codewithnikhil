@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include "config/connect.php";
 ?>
 <!DOCTYPE html>
@@ -297,10 +297,10 @@ include "config/connect.php";
             <h4>Static Website</h4>
             <p>Perfect for startups & personal portfolios</p>
             <div class="price-india">
-              <h1>₹3,999 <span>One-Time</span></h1>
+              <h3 class="price-heading">₹3,999 <span>One-Time</span></h3>
             </div>
             <div class="price-international d-none">
-              <h1>$49 <span>One-Time</span></h1>
+              <h3 class="price-heading">$49 <span>One-Time</span></h3>
             </div>
             <div class="space20"></div>
             <ul>
@@ -323,10 +323,10 @@ include "config/connect.php";
             <h4>Dynamic Website</h4>
             <p>Database-driven business websites</p>
             <div class="price-india">
-              <h1>₹8,999 <span>One-Time</span></h1>
+              <h3 class="price-heading">₹8,999 <span>One-Time</span></h3>
             </div>
             <div class="price-international d-none">
-              <h1>$99 <span>One-Time</span></h1>
+              <h3 class="price-heading">$99 <span>One-Time</span></h3>
             </div>
             <div class="space20"></div>
             <ul class="text-light">
@@ -348,10 +348,10 @@ include "config/connect.php";
             <h4>WordPress Website</h4>
             <p>Easy-to-manage CMS solution</p>
             <div class="price-india">
-              <h1>₹5,999 <span>One-Time</span></h1>
+              <h3 class="price-heading">₹5,999 <span>One-Time</span></h3>
             </div>
             <div class="price-international d-none">
-              <h1>$79 <span>One-Time</span></h1>
+              <h3 class="price-heading">$79 <span>One-Time</span></h3>
             </div>
             <div class="space20"></div>
             <ul>
@@ -373,10 +373,10 @@ include "config/connect.php";
             <h4>MERN Stack Application</h4>
             <p>Modern full-stack web applications</p>
             <div class="price-india">
-              <h1>₹13,999 <span>One-Time</span></h1>
+              <h3 class="price-heading">₹13,999 <span>One-Time</span></h3>
             </div>
             <div class="price-international d-none">
-              <h1>$159 <span>One-Time</span></h1>
+              <h3 class="price-heading">$159 <span>One-Time</span></h3>
             </div>
             <div class="space20"></div>
             <ul>
@@ -399,10 +399,10 @@ include "config/connect.php";
             <h4>E-Commerce Store</h4>
             <p>Complete online selling solution</p>
             <div class="price-india">
-              <h1>₹16,999 <span>One-Time</span></h1>
+              <h3 class="price-heading">₹16,999 <span>One-Time</span></h3>
             </div>
             <div class="price-international d-none">
-              <h1>$209 <span>One-Time</span></h1>
+              <h3 class="price-heading">$209 <span>One-Time</span></h3>
             </div>
             <div class="space20"></div>
             <ul>
@@ -424,10 +424,10 @@ include "config/connect.php";
             <h4>Custom Enterprise Solution</h4>
             <p>Tailored solutions for unique needs</p>
             <div class="price-india">
-              <h1>Custom Pricing <span>Project Basis</span></h1>
+              <h3 class="price-heading">Custom Pricing <span>Project Basis</span></h3>
             </div>
             <div class="price-international d-none">
-              <h1>Custom Pricing <span>Project Basis</span></h1>
+              <h3 class="price-heading">Custom Pricing <span>Project Basis</span></h3>
             </div>
             <div class="space20"></div>
             <ul>
@@ -591,7 +591,7 @@ include "config/connect.php";
       <div class="row">
         <div class="col-lg-12 m-auto">
           <div class="cta-header-area text-center sp4 heading2">
-            <h1 class="text-anime-style-1 text-light">Professional Web Developer & Digital Solutions Expert</h1>
+            <h2 class="text-anime-style-1 text-light">Professional Web Developer & Digital Solutions Expert</h2>
             <p data-aos="fade-up" data-aos-duration="1000">Serving clients across <strong>India (Delhi NCR, Mumbai, Bangalore)</strong>, <strong>Middle East (UAE, Saudi Arabia)</strong>, <strong>Europe (UK, Germany)</strong>, and <strong>North America</strong>. Specialized in creating high-performance websites that drive business growth and digital transformation.</p>
             <div class="btn-area text-center" data-aos="fade-up" data-aos-duration="1200">
               <a href="<?=$site?>contact/" class="header-btn9"> Get Free Consultation <i class="fa-solid fa-arrow-right"></i></a>

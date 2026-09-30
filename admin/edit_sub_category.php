@@ -105,7 +105,7 @@ while ($row = mysqli_fetch_assoc($parentResult)) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Edit Sub-Category | Admin Panel</title>
-    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="icon" href="assets/img/logo/preloader4.png" type="image/png">
     
     <?php include "links.php"; ?>
     <style>
