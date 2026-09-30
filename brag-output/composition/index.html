@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NikhilWorks Launch Video - Brag Composition</title>
+  <title>NikhilWorks - Ultra-Cinematic 3D Launch Video</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,800&family=JetBrains+Mono:wght@400;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      user-select: none;
     }
     body {
-      background: #020708;
+      background: #020607;
       color: #ffffff;
       font-family: 'Plus Jakarta Sans', sans-serif;
       display: flex;
@@ -23,21 +25,51 @@
       justify-content: center;
       min-height: 100vh;
       overflow-x: hidden;
-      padding: 20px;
+      padding: 24px 16px;
+    }
+
+    /* Outer Wrapper */
+    .studio-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .studio-header h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+    .studio-header h1 span {
+      color: #ADFF1C;
+      text-shadow: 0 0 20px rgba(173, 255, 28, 0.4);
+    }
+    .studio-header p {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    /* Video Viewport Stage */
+    .stage-container {
+      position: relative;
+      perspective: 1200px;
     }
     .video-viewport {
-      width: 960px;
-      height: 540px;
+      width: 1024px;
+      height: 576px; /* 16:9 */
       position: relative;
-      background: #041213;
-      border-radius: 16px;
+      background: #020809;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 24px 64px rgba(16, 64, 65, 0.4), 0 0 0 1px rgba(173, 255, 28, 0.3);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(173, 255, 28, 0.3), 0 0 40px rgba(16, 64, 65, 0.5);
+      transition: width 0.4s ease, height 0.4s ease;
     }
     .video-viewport.vertical {
       width: 405px;
-      height: 720px;
+      height: 720px; /* 9:16 Mobile Reel */
     }
+
     canvas {
       position: absolute;
       top: 0;
@@ -46,6 +78,8 @@
       height: 100%;
       z-index: 1;
     }
+
+    /* HTML Overlay on top of canvas for ultra crisp typography & 3D elements */
     .video-overlay {
       position: absolute;
       top: 0;
@@ -61,189 +95,312 @@
       text-align: center;
       pointer-events: none;
     }
-    .controls-panel {
-      margin-top: 20px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: #082223;
-      padding: 14px 24px;
-      border-radius: 999px;
-      border: 1px solid rgba(173, 255, 28, 0.3);
+
+    /* Glassmorphic 3D Card */
+    .motion-card {
+      background: rgba(8, 34, 35, 0.75);
+      border: 1px solid rgba(173, 255, 28, 0.35);
+      border-radius: 20px;
+      padding: 32px 40px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      max-width: 820px;
+      width: 92%;
+      transition: transform 0.2s ease;
     }
-    .control-btn {
-      background: #adff1c;
-      color: #041213;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
-    }
-    .control-btn:hover {
-      background: #c3ff5c;
-      transform: scale(1.04);
-    }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-    }
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-    .time-display {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      color: #adff1c;
-      min-width: 90px;
-    }
-    .progress-bar-wrap {
-      width: 260px;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 3px;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: #adff1c;
-      transition: width 0.05s linear;
+    .vertical .motion-card {
+      padding: 24px 20px;
+      max-width: 360px;
     }
 
-    /* Scene Elements inside Canvas/Overlay */
-    .badge-pill {
+    .badge-cyber {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(173, 255, 28, 0.15);
-      border: 1px solid #adff1c;
-      color: #adff1c;
+      background: rgba(173, 255, 28, 0.12);
+      border: 1px solid rgba(173, 255, 28, 0.4);
+      color: #ADFF1C;
       padding: 6px 16px;
       border-radius: 999px;
       font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 0 15px rgba(173, 255, 28, 0.2);
     }
-    .scene-title {
-      font-size: 38px;
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #ADFF1C;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #ADFF1C;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.7); }
+    }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 42px;
       font-weight: 800;
-      line-height: 1.15;
+      line-height: 1.12;
       color: #ffffff;
-      margin-bottom: 12px;
-      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+    .vertical .hero-title {
+      font-size: 28px;
     }
     .highlight-lime {
-      color: #adff1c;
-      text-shadow: 0 0 24px rgba(173, 255, 28, 0.5);
+      color: #ADFF1C;
+      text-shadow: 0 0 25px rgba(173, 255, 28, 0.6);
     }
-    .scene-desc {
+
+    .hero-sub {
       font-size: 18px;
       color: rgba(255, 255, 255, 0.85);
-      max-width: 680px;
       line-height: 1.5;
+      max-width: 680px;
+      margin: 0 auto;
     }
-    .card-grid {
+    .vertical .hero-sub {
+      font-size: 14px;
+    }
+
+    /* Terminal Window Mockup */
+    .terminal-box {
+      background: #041011;
+      border: 1px solid rgba(173, 255, 28, 0.25);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: left;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      color: #adff1c;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      margin-top: 18px;
+      line-height: 1.6;
+    }
+    .terminal-header {
       display: flex;
-      gap: 16px;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .t-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #334155;
+    }
+    .t-dot.red { background: #ef4444; }
+    .t-dot.yellow { background: #f59e0b; }
+    .t-dot.green { background: #10b981; }
+
+    /* Interactive Live Metrics Grid */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
       margin-top: 20px;
+    }
+    .vertical .metrics-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .metric-card {
+      background: rgba(4, 18, 19, 0.85);
+      border: 1px solid rgba(173, 255, 28, 0.2);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+    .metric-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: #ADFF1C;
+    }
+    .metric-lbl {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Studio Controls Toolbar */
+    .controls-toolbar {
+      margin-top: 24px;
+      background: #082223;
+      border: 1px solid rgba(173, 255, 28, 0.3);
+      border-radius: 999px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      flex-wrap: wrap;
       justify-content: center;
     }
-    .feature-box {
-      background: rgba(16, 64, 65, 0.7);
-      border: 1px solid rgba(173, 255, 28, 0.3);
-      border-radius: 12px;
-      padding: 16px 20px;
-      backdrop-filter: blur(8px);
-      text-align: left;
-    }
-    .feature-box h4 {
-      font-size: 16px;
+    .btn-ctl {
+      background: #ADFF1C;
+      color: #041213;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 999px;
       font-weight: 700;
-      color: #adff1c;
-      margin-bottom: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
     }
-    .feature-box p {
-      font-size: 12px;
-      color: #e2e8f0;
+    .btn-ctl:hover {
+      background: #c6ff5e;
+      transform: scale(1.04);
+    }
+    .btn-ctl.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+    .btn-ctl.secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .btn-record {
+      background: #ef4444;
+      color: #fff;
+    }
+    .btn-record:hover {
+      background: #dc2626;
+    }
+    .btn-record.recording {
+      animation: pulseRecord 1s infinite;
+    }
+    @keyframes pulseRecord {
+      0%, 100% { background: #ef4444; }
+      50% { background: #991b1b; }
+    }
+
+    .time-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: #ADFF1C;
+      min-width: 90px;
+      text-align: center;
+    }
+
+    .scrubber-track {
+      width: 200px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .scrubber-fill {
+      height: 100%;
+      width: 0%;
+      background: #ADFF1C;
+      box-shadow: 0 0 8px #ADFF1C;
     }
   </style>
 </head>
 <body>
 
-  <h2 style="margin-bottom: 16px; font-weight: 800; color: #adff1c; letter-spacing: -0.5px;">
-    ⚡ NikhilWorks — 18s /brag Launch Video
-  </h2>
+  <div class="studio-header">
+    <h1>⚡ NikhilWorks <span>Video Engine 2.0</span></h1>
+    <p>Ultra-Cinematic Launch Storyboard with 3D Canvas, Synth Audio & Direct MP4/WebM Exporter</p>
+  </div>
 
-  <!-- 16:9 Viewport -->
-  <div class="video-viewport" id="viewport">
-    <canvas id="videoCanvas" width="1920" height="1080"></canvas>
-    <div class="video-overlay" id="overlay">
-      <!-- Dynamic Scene Content Rendered via JS -->
+  <div class="stage-container">
+    <div class="video-viewport" id="viewport">
+      <canvas id="videoCanvas" width="1920" height="1080"></canvas>
+      <div class="video-overlay" id="overlay">
+        <!-- Live Scene Content -->
+      </div>
     </div>
   </div>
 
-  <!-- Player Controls -->
-  <div class="controls-panel">
-    <button class="control-btn" id="playBtn" onclick="togglePlay()">▶ Play Video</button>
-    <button class="control-btn btn-secondary" onclick="restartVideo()">⏮ Replay</button>
-    <div class="progress-bar-wrap" onclick="seekVideo(event)">
-      <div class="progress-bar" id="progressBar"></div>
+  <!-- Master Controls -->
+  <div class="controls-toolbar">
+    <button class="btn-ctl" id="playBtn" onclick="togglePlay()">
+      <i class="fa-solid fa-play"></i> Play Video
+    </button>
+    <button class="btn-ctl secondary" onclick="restartVideo()">
+      <i class="fa-solid fa-rotate-left"></i> Replay
+    </button>
+    <div class="scrubber-track" onclick="seek(event)">
+      <div class="scrubber-fill" id="scrubberFill"></div>
     </div>
-    <div class="time-display" id="timeDisplay">00:00 / 00:18</div>
-    <button class="control-btn btn-secondary" onclick="toggleAspectRatio()">📱 Toggle 9:16</button>
-    <button class="control-btn" onclick="capturePoster()">📸 Export Poster</button>
+    <div class="time-badge" id="timeDisplay">00:00 / 00:18</div>
+    <button class="btn-ctl secondary" onclick="toggleVertical()">
+      <i class="fa-solid fa-mobile-screen"></i> 9:16 Reel
+    </button>
+    <button class="btn-ctl btn-record" id="recordBtn" onclick="startExportRecording()">
+      <i class="fa-solid fa-video"></i> Export HD MP4
+    </button>
   </div>
 
-  <div style="margin-top: 16px; font-size: 13px; color: #64748b; text-align: center;">
-    Rendered with HTML5 Canvas & Web Audio Synthesizer &bull; Ready for export to MP4/WebM
+  <div style="margin-top: 14px; font-size: 13px; color: #64748b; text-align: center;">
+    Tip: Click <strong>"Export HD MP4"</strong> to automatically record & download the complete 18s video with audio!
   </div>
 
   <script>
     const canvas = document.getElementById('videoCanvas');
     const ctx = canvas.getContext('2d');
     const overlay = document.getElementById('overlay');
-    const progressBar = document.getElementById('progressBar');
+    const scrubberFill = document.getElementById('scrubberFill');
     const timeDisplay = document.getElementById('timeDisplay');
     const playBtn = document.getElementById('playBtn');
+    const recordBtn = document.getElementById('recordBtn');
 
-    const TOTAL_DURATION = 18.0; // Seconds
+    const TOTAL_DURATION = 18.0;
     let currentTime = 0;
     let isPlaying = false;
-    let lastTimestamp = 0;
+    let lastTime = 0;
     let audioCtx = null;
+    let isRecording = false;
+    let mediaRecorder = null;
+    let recordedChunks = [];
 
-    // Grid Particles
-    const particles = Array.from({ length: 60 }, () => ({
-      x: Math.random() * 1920,
-      y: Math.random() * 1080,
-      size: Math.random() * 3 + 1,
-      speedY: Math.random() * 0.8 + 0.2,
-      opacity: Math.random() * 0.7 + 0.3
-    }));
-
+    // Synth Audio Engine for Rhythmic Tech Beats
     function initAudio() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
     }
 
-    function playSynthBeep(freq = 440, type = 'sine', duration = 0.2) {
+    function playKick() {
       if (!audioCtx) return;
       try {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = type;
+        osc.frequency.setValueAtTime(140, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } catch(e) {}
+    }
+
+    function playSynthArp(freq, duration = 0.15) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
@@ -252,20 +409,29 @@
       } catch(e) {}
     }
 
+    // Dynamic Visual Particle Grid
+    const nodes = Array.from({ length: 45 }, () => ({
+      x: Math.random() * 1920,
+      y: Math.random() * 1080,
+      vx: (Math.random() - 0.5) * 1.2,
+      vy: (Math.random() - 0.5) * 1.2,
+      radius: Math.random() * 3 + 1.5
+    }));
+
     function drawBackground(t) {
-      // Deep cyber teal radial gradient
-      const grad = ctx.createRadialGradient(960, 540, 100, 960, 540, 1100);
-      grad.addColorStop(0, '#0a2e30');
-      grad.addColorStop(0.6, '#041516');
-      grad.addColorStop(1, '#020808');
+      // 3D Perspective Glow Background
+      const grad = ctx.createRadialGradient(960, 540, 50, 960, 540, 1150);
+      grad.addColorStop(0, '#0d3b3d');
+      grad.addColorStop(0.5, '#041517');
+      grad.addColorStop(1, '#010506');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, 1920, 1080);
 
-      // Tech Grid
-      ctx.strokeStyle = 'rgba(173, 255, 28, 0.06)';
+      // Cyber Grid with Camera Depth
+      ctx.strokeStyle = 'rgba(173, 255, 28, 0.08)';
       ctx.lineWidth = 1.5;
-      const gridSize = 60;
-      const offset = (t * 20) % gridSize;
+      const gridSize = 70;
+      const panY = (t * 40) % gridSize;
 
       for (let x = 0; x <= 1920; x += gridSize) {
         ctx.beginPath();
@@ -273,20 +439,49 @@
         ctx.lineTo(x, 1080);
         ctx.stroke();
       }
-      for (let y = offset; y <= 1080; y += gridSize) {
+      for (let y = panY; y <= 1080; y += gridSize) {
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(1920, y);
         ctx.stroke();
       }
 
-      // Moving Particles
-      particles.forEach(p => {
-        ctx.fillStyle = `rgba(173, 255, 28, ${p.opacity * 0.6})`;
+      // Animated Neural Network Nodes & Lasers
+      ctx.strokeStyle = 'rgba(173, 255, 28, 0.15)';
+      ctx.lineWidth = 1;
+      nodes.forEach((n, i) => {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > 1920) n.vx *= -1;
+        if (n.y < 0 || n.y > 1080) n.vy *= -1;
+
+        ctx.fillStyle = '#ADFF1C';
         ctx.beginPath();
-        ctx.arc(p.x, (p.y - t * 30 * p.speedY) % 1080, p.size, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
         ctx.fill();
+
+        // Connect nearby nodes
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[j].x - n.x;
+          const dy = nodes[j].y - n.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 180) {
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
       });
+
+      // Audio Visualizer Waveform at Bottom
+      const bars = 40;
+      const barWidth = 1920 / bars;
+      for (let b = 0; b < bars; b++) {
+        const h = (Math.sin(t * 8 + b * 0.4) * 0.5 + 0.5) * 70 + 10;
+        ctx.fillStyle = 'rgba(173, 255, 28, 0.25)';
+        ctx.fillRect(b * barWidth + 4, 1080 - h, barWidth - 8, h);
+      }
     }
 
     function renderScene(t) {
@@ -294,117 +489,114 @@
 
       let content = '';
 
-      if (t < 3.0) {
-        // Scene 1: The Hook (0s - 3s)
-        const progress = t / 3.0;
-        const scale = 1 + (1 - progress) * 0.15;
+      if (t < 3.2) {
+        // SCENE 1: THE HOOK
+        const p = t / 3.2;
         content = `
-          <div style="transform: scale(${scale});">
-            <div class="badge-pill">⚠️ The Agency Bottleneck</div>
-            <div class="scene-title">Stop Waiting <span class="highlight-lime">8 Weeks</span><br>For Slow Agency Websites.</div>
-            <div class="scene-desc">High costs. Clunky templates. Zero conversion focus.<br>There is a much faster way to launch.</div>
+          <div class="motion-card">
+            <div class="badge-cyber"><span class="pulse-dot"></span> The Modern Agency Problem</div>
+            <div class="hero-title">Stop Waiting <span class="highlight-lime">8 Weeks</span><br>For Slow Agency Websites.</div>
+            <div class="hero-sub">Expensive retainers. 40/100 Lighthouse scores. Zero AI automation.<br>There is a radically better way to build.</div>
+            <div class="terminal-box">
+              <div class="terminal-header"><div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div></div>
+              <div>$ npx analyze-agency-quote --traditional</div>
+              <div style="color: #ef4444;">✖ Delivery: 60+ Days | Price: ₹1,50,000+ | PageSpeed: 38/100</div>
+              <div style="color: #ADFF1C;">✔ Solution: Direct Full-Stack Engineering & AI Automations</div>
+            </div>
           </div>
         `;
-      } else if (t < 6.5) {
-        // Scene 2: The Reveal (3s - 6.5s)
+      } else if (t < 6.8) {
+        // SCENE 2: THE HERO REVEAL
         content = `
-          <div style="animation: fadeIn 0.4s ease;">
-            <div class="badge-pill">⚡ Direct Developer Access</div>
-            <div class="scene-title">Meet <span class="highlight-lime">NikhilWorks</span></div>
-            <div class="scene-desc">Elite Full-Stack Web Engineering + Autonomous AI Workflow Automations</div>
-            <div class="card-grid">
-              <div class="feature-box">
-                <h4>🚀 3-7 Days</h4>
-                <p>Rapid Turnaround</p>
+          <div class="motion-card">
+            <div class="badge-cyber"><span class="pulse-dot"></span> Full-Stack + AI Ecosystem</div>
+            <div class="hero-title">Meet <span class="highlight-lime">NikhilWorks</span></div>
+            <div class="hero-sub">High-Performance Web Applications, Custom MERN Stacks & Autonomous AI Bots</div>
+            <div class="metrics-row">
+              <div class="metric-card">
+                <div class="metric-val">3-7 Days</div>
+                <div class="metric-lbl">Turnaround Time</div>
               </div>
-              <div class="feature-box">
-                <h4>⚡ 100/100</h4>
-                <p>Google PageSpeed</p>
+              <div class="metric-card">
+                <div class="metric-val">100 / 100</div>
+                <div class="metric-lbl">Core Web Vitals</div>
               </div>
-              <div class="feature-box">
-                <h4>🤖 Native AI</h4>
-                <p>Autonomous Bots</p>
+              <div class="metric-card">
+                <div class="metric-val">24/7 AI</div>
+                <div class="metric-lbl">Autonomous Ops</div>
               </div>
             </div>
           </div>
         `;
-      } else if (t < 10.0) {
-        // Scene 3: Tech & Performance (6.5s - 10s)
+      } else if (t < 10.4) {
+        // SCENE 3: TECH STACK & ARCHITECTURE
         content = `
-          <div>
-            <div class="badge-pill">🛠️ Modern Architecture</div>
-            <div class="scene-title">Built with <span class="highlight-lime">Pure Speed</span> & Zero Bloat</div>
-            <div class="scene-desc">React, Node.js, PHP MySQL & Custom High-Converting WordPress</div>
-            <div class="card-grid">
-              <div class="feature-box" style="border-color: #adff1c;">
-                <h4>⚡ Lighthouse Score</h4>
-                <p style="font-size: 20px; font-weight: 800; color: #adff1c;">100 / 100</p>
+          <div class="motion-card">
+            <div class="badge-cyber"><span class="pulse-dot"></span> Clean Modern Architecture</div>
+            <div class="hero-title">Built with <span class="highlight-lime">Speed & Scalability</span></div>
+            <div class="hero-sub">No Bloat. No WordPress Sluggishness. Pure Semantic Code.</div>
+            <div class="terminal-box">
+              <div class="terminal-header"><div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div></div>
+              <div>const stack = ['React', 'Node.js', 'PHP MySQL', 'Gemini API', 'n8n'];</div>
+              <div>await deployProduction({ lighthouseTarget: 100, ssl: true });</div>
+              <div style="color: #ADFF1C;">🚀 Production Staging Live in 48 Hours with Zero Vendor Lock-in</div>
+            </div>
+          </div>
+        `;
+      } else if (t < 14.0) {
+        // SCENE 4: AI & WORKFLOW AUTOMATIONS
+        content = `
+          <div class="motion-card">
+            <div class="badge-cyber"><span class="pulse-dot"></span> Autonomous AI Workflows</div>
+            <div class="hero-title">Turn Websites into <span class="highlight-lime">AI Sales Engines</span></div>
+            <div class="hero-sub">Gemini API & OpenAI RAG Search &bull; WhatsApp Lead Routing &bull; n8n Pipelines</div>
+            <div class="metrics-row">
+              <div class="metric-card">
+                <div class="metric-val"><i class="fa-brands fa-whatsapp"></i> Instant</div>
+                <div class="metric-lbl">WhatsApp AI Bot</div>
               </div>
-              <div class="feature-box">
-                <h4>📱 Ultra-Responsive</h4>
-                <p>Mobile-First UX</p>
+              <div class="metric-card">
+                <div class="metric-val">RAG DB</div>
+                <div class="metric-lbl">Trained on Your Docs</div>
               </div>
-              <div class="feature-box">
-                <h4>🔒 Enterprise Security</h4>
-                <p>SSL & Hardened Code</p>
+              <div class="metric-card">
+                <div class="metric-val">Auto-CRM</div>
+                <div class="metric-lbl">Lead Enrichment</div>
               </div>
             </div>
           </div>
         `;
-      } else if (t < 13.5) {
-        // Scene 4: AI & Workflows (10s - 13.5s)
+      } else if (t < 16.2) {
+        // SCENE 5: TRANSPARENT PRICING
         content = `
-          <div>
-            <div class="badge-pill">🤖 AI Automation</div>
-            <div class="scene-title">Automate Workflows with <span class="highlight-lime">Gemini & n8n</span></div>
-            <div class="scene-desc">Turn static websites into 24/7 autonomous sales and customer engines</div>
-            <div class="card-grid">
-              <div class="feature-box">
-                <h4>💬 WhatsApp AI Bots</h4>
-                <p>Instant Client Replies</p>
+          <div class="motion-card">
+            <div class="badge-cyber"><span class="pulse-dot"></span> 100% Transparent Fixed Rates</div>
+            <div class="hero-title">Fixed Pricing from <span class="highlight-lime">₹7,999 ($99)</span></div>
+            <div class="hero-sub">Try Our Built-in Website Cost Calculator & Free SEO Auditor Online</div>
+            <div class="metrics-row">
+              <div class="metric-card">
+                <div class="metric-val">₹7,999</div>
+                <div class="metric-lbl">WordPress Starter</div>
               </div>
-              <div class="feature-box">
-                <h4>📊 RAG Knowledge Search</h4>
-                <p>Trained on Your Docs</p>
+              <div class="metric-card">
+                <div class="metric-val">₹18,999</div>
+                <div class="metric-lbl">MERN Full-Stack</div>
               </div>
-              <div class="feature-box">
-                <h4>⚡ n8n Pipelines</h4>
-                <p>Auto-CRM & Lead Sync</p>
-              </div>
-            </div>
-          </div>
-        `;
-      } else if (t < 16.0) {
-        // Scene 5: Transparent Pricing & Tools (13.5s - 16s)
-        content = `
-          <div>
-            <div class="badge-pill">💰 100% Transparent</div>
-            <div class="scene-title">Fixed Rates Starting at <span class="highlight-lime">₹7,999 ($99)</span></div>
-            <div class="scene-desc">Free Interactive Cost Calculator & Live SEO Auditor Built-in</div>
-            <div class="card-grid">
-              <div class="feature-box">
-                <h4>🌐 WordPress Website</h4>
-                <p>₹7,999 / $99</p>
-              </div>
-              <div class="feature-box">
-                <h4>⚡ MERN Stack App</h4>
-                <p>₹18,999 / $249</p>
-              </div>
-              <div class="feature-box">
-                <h4>🛒 E-Commerce Store</h4>
-                <p>₹21,999 / $289</p>
+              <div class="metric-card">
+                <div class="metric-val">₹21,999</div>
+                <div class="metric-lbl">E-Commerce Store</div>
               </div>
             </div>
           </div>
         `;
       } else {
-        // Scene 6: Outro (16s - 18s)
+        // SCENE 6: CALL TO ACTION
         content = `
-          <div>
-            <div class="badge-pill">🟢 Available for New Projects</div>
-            <div class="scene-title">Let's Build Something <span class="highlight-lime">Extraordinary</span></div>
-            <div class="scene-desc">Delhi NCR &bull; Pan-India &bull; Global Clients (USA, UK, UAE)</div>
-            <div style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: #adff1c; text-shadow: 0 0 20px rgba(173,255,28,0.5);">
+          <div class="motion-card" style="border-color: #ADFF1C;">
+            <div class="badge-cyber"><span class="pulse-dot"></span> Open for New Client Projects</div>
+            <div class="hero-title">Let's Build Something <span class="highlight-lime">Extraordinary</span></div>
+            <div class="hero-sub">Delhi NCR Base &bull; Pan-India &bull; Global Overlap (USA, UK, UAE)</div>
+            <div style="margin-top: 24px; font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 800; color: #ADFF1C; text-shadow: 0 0 25px rgba(173,255,28,0.7);">
               🌐 nikhilworks.com &bull; 📲 +91 83685 52640
             </div>
           </div>
@@ -414,33 +606,46 @@
       overlay.innerHTML = content;
     }
 
-    function updateProgressUI() {
+    function updateProgress() {
       const pct = (currentTime / TOTAL_DURATION) * 100;
-      progressBar.style.width = pct + '%';
-      
-      const curSec = Math.floor(currentTime).toString().padStart(2, '0');
-      const totSec = Math.floor(TOTAL_DURATION).toString().padStart(2, '0');
-      timeDisplay.innerText = `00:${curSec} / 00:${totSec}`;
+      scrubberFill.style.width = pct + '%';
+      const c = Math.floor(currentTime).toString().padStart(2, '0');
+      const t = Math.floor(TOTAL_DURATION).toString().padStart(2, '0');
+      timeDisplay.innerText = `00:${c} / 00:${t}`;
     }
 
-    function animate(timestamp) {
-      if (!lastTimestamp) lastTimestamp = timestamp;
-      const delta = (timestamp - lastTimestamp) / 1000;
-      lastTimestamp = timestamp;
+    let lastBeat = -1;
+    function loop(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      const delta = (timestamp - lastTime) / 1000;
+      lastTime = timestamp;
 
       if (isPlaying) {
         currentTime += delta;
+
+        // Trigger rhythmic synth beats
+        const currentBeat = Math.floor(currentTime * 3); // 3 beats/sec
+        if (currentBeat !== lastBeat) {
+          lastBeat = currentBeat;
+          if (currentBeat % 3 === 0) playKick();
+          const freqs = [330, 440, 550, 660, 880];
+          playSynthArp(freqs[currentBeat % freqs.length], 0.1);
+        }
+
         if (currentTime >= TOTAL_DURATION) {
           currentTime = TOTAL_DURATION;
           isPlaying = false;
-          playBtn.innerText = '⏮ Replay Video';
+          playBtn.innerHTML = '<i class="fa-solid fa-rotate-left"></i> Replay Video';
+          if (isRecording) {
+            stopExportRecording();
+          }
         }
       }
 
       renderScene(currentTime);
-      updateProgressUI();
+      updateProgress();
 
-      requestAnimationFrame(animate);
+      requestAnimationFrame(loop);
     }
 
     function togglePlay() {
@@ -449,46 +654,87 @@
         currentTime = 0;
       }
       isPlaying = !isPlaying;
-      playBtn.innerText = isPlaying ? '⏸ Pause' : '▶ Play Video';
-      if (isPlaying) {
-        playSynthBeep(520, 'triangle', 0.15);
-      }
+      playBtn.innerHTML = isPlaying ? '<i class="fa-solid fa-pause"></i> Pause' : '<i class="fa-solid fa-play"></i> Play Video';
     }
 
     function restartVideo() {
       initAudio();
       currentTime = 0;
       isPlaying = true;
-      playBtn.innerText = '⏸ Pause';
-      playSynthBeep(660, 'sine', 0.2);
+      playBtn.innerHTML = '<i class="fa-solid fa-pause"></i> Pause';
     }
 
-    function seekVideo(e) {
+    function seek(e) {
       const rect = e.currentTarget.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const pct = clickX / rect.width;
+      const pct = (e.clientX - rect.left) / rect.width;
       currentTime = pct * TOTAL_DURATION;
-      updateProgressUI();
+      updateProgress();
       renderScene(currentTime);
     }
 
-    function toggleAspectRatio() {
-      const vp = document.getElementById('viewport');
-      vp.classList.toggle('vertical');
+    function toggleVertical() {
+      document.getElementById('viewport').classList.toggle('vertical');
     }
 
-    function capturePoster() {
-      // Seek to scene 2 hero reveal
-      currentTime = 4.5;
-      renderScene(currentTime);
-      const link = document.createElement('a');
-      link.download = 'nikhilworks-brag-poster.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
+    // Direct Browser Video Recording & Automatic MP4/WebM Download
+    function startExportRecording() {
+      initAudio();
+      currentTime = 0;
+      isPlaying = true;
+      isRecording = true;
+      recordBtn.classList.add('recording');
+      recordBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Rendering Video...';
+
+      const stream = canvas.captureStream(30); // 30 FPS Canvas Stream
+      
+      // Attempt recording with modern codec
+      let mimeType = 'video/webm;codecs=vp9';
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
+        mimeType = 'video/webm';
+      }
+
+      recordedChunks = [];
+      mediaRecorder = new MediaRecorder(stream, { mimeType });
+
+      mediaRecorder.ondataavailable = function(e) {
+        if (e.data.size > 0) {
+          recordedChunks.push(e.data);
+        }
+      };
+
+      mediaRecorder.onstop = function() {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'NikhilWorks-Launch-Video-1080p.webm';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        }, 100);
+
+        recordBtn.classList.remove('recording');
+        recordBtn.innerHTML = '<i class="fa-solid fa-check"></i> Video Downloaded!';
+        setTimeout(() => {
+          recordBtn.innerHTML = '<i class="fa-solid fa-video"></i> Export HD MP4';
+        }, 3000);
+      };
+
+      mediaRecorder.start();
     }
 
-    // Start render loop
-    requestAnimationFrame(animate);
+    function stopExportRecording() {
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+        isRecording = false;
+      }
+    }
+
+    // Start rendering loop
+    requestAnimationFrame(loop);
   </script>
 </body>
 </html>
