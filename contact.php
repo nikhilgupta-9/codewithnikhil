@@ -119,9 +119,13 @@ include_once "config/connect.php";
           "opens": "09:00",
           "closes": "21:00"
         },
+        "hasMap": "https://share.google/g59W77vezpezMIl1a",
         "sameAs": [
+          "https://share.google/g59W77vezpezMIl1a",
           "https://github.com/nikhilgupta-9",
-          "https://wa.me/918368552640"
+          "https://wa.me/918368552640",
+          "https://www.linkedin.com/in/nikhil-gupta-b30627327/",
+          "https://x.com/NikhilG69581514"
         ]
       },
       {

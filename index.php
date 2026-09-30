@@ -189,7 +189,9 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
         }
       ]
     },
+    "hasMap": "https://share.google/g59W77vezpezMIl1a",
     "sameAs": [
+      "https://share.google/g59W77vezpezMIl1a",
       "https://www.facebook.com/profile.php?id=61559869365624",
       "https://www.instagram.com/nikhil_gupta_998/",
       "https://x.com/NikhilG69581514",

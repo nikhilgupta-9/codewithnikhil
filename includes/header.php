@@ -1,6 +1,9 @@
 <?php
 include_once "util/function.php";
 $contact = contact_us();
+if (empty($contact['google_review'])) {
+    $contact['google_review'] = 'https://share.google/g59W77vezpezMIl1a';
+}
 
 $limit = 10;
 $services = get_sub_category($limit);
