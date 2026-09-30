@@ -8,6 +8,11 @@ $city = $_GET['city'] ?? 'india';
 $pages = include __DIR__ . '/data/locations-india.php';
 $content = include __DIR__ . '/data/locations-india-content.php';
 
+if ($page === 'website-development-cost-india') {
+  include __DIR__ . '/website-cost-calculator.php';
+  exit;
+}
+
 if (!isset($pages[$page]) || !isset($content[$page])) {
   include_once "404.php";
   exit;

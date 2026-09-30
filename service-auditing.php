@@ -493,8 +493,9 @@ $heroImage = ($isHub ? hub_image_url($site, 'services-type', 'auditing') : null)
 <?php include_once "includes/header.php" ?>
 
 <!--===== HERO AREA STARTS =======-->
-<section class="audit-hero">
-  <div class="container">
+<section class="audit-hero" style="position: relative; overflow: hidden;">
+  <div class="loc-grid-overlay"></div>
+  <div class="container" style="position: relative; z-index: 2;">
     <div class="row align-items-center g-5">
       
       <!-- Left Column: Copy & CTAs -->

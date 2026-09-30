@@ -312,8 +312,9 @@ $heroImage = ($isHub ? hub_image_url($site, 'services-type', 'ads') : null) ?? (
 <?php include_once "includes/header.php" ?>
 
 <!-- HERO SECTION -->
-<section class="ads-hero">
-  <div class="container">
+<section class="ads-hero" style="position: relative; overflow: hidden;">
+  <div class="loc-grid-overlay"></div>
+  <div class="container" style="position: relative; z-index: 2;">
     <div class="row align-items-center g-5">
       <div class="col-lg-7">
         <div class="ads-hero-pill">

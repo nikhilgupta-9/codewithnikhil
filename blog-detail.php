@@ -501,7 +501,8 @@ $dateModified  = date('c', strtotime(!empty($blog['updated_at']) ? $blog['update
 
   <!--===== HERO / BREADCRUMB =======-->
   <section style="position:relative;background:radial-gradient(circle at 80% 20%, rgba(173,255,28,0.12) 0%, transparent 45%), radial-gradient(circle at 15% 85%, rgba(16,64,65,0.75) 0%, transparent 50%), linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);padding:130px 0 70px;overflow:hidden;color:#fff;">
-    <div class="container">
+    <div class="loc-grid-overlay"></div>
+    <div class="container" style="position: relative; z-index: 2;">
       <div class="row">
         <div class="col-lg-9 mx-auto text-center">
           <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background:rgba(173,255,28,0.12);border:1px solid rgba(173,255,28,0.35);color:#ADFF1C;font-size:12px;font-weight:700;letter-spacing:0.4px;">

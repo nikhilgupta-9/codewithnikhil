@@ -546,7 +546,8 @@ $yearsExperience = years_in_business(2022, 8);
 
   <!--===== HERO AREA STARTS =======-->
   <section class="pricing-hero">
-    <div class="container">
+    <div class="loc-grid-overlay"></div>
+    <div class="container" style="position: relative; z-index: 2;">
       <div class="row text-center">
         <div class="col-lg-9 mx-auto">
           <div class="pricing-hero-pill">

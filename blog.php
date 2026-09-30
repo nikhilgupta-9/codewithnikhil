@@ -322,7 +322,8 @@ $is_tag_page = !empty($_GET['tag']);
 
   <!--===== HERO AREA STARTS =======-->
   <section class="blogs-hero">
-    <div class="container">
+    <div class="loc-grid-overlay"></div>
+    <div class="container" style="position: relative; z-index: 2;">
       <div class="row text-center">
         <div class="col-lg-9 mx-auto">
           <div class="blogs-hero-pill">
