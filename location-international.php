@@ -556,21 +556,136 @@ $heroImage = hub_image_url($site, 'locations', hub_country_slug($c['schema_count
         <div class="loc-why-card">
           <div class="loc-why-icon"><i class="fa-solid fa-piggy-bank"></i></div>
           <h3 class="h5 fw-bold" style="color: var(--nw-text-dark);">Save 60-70% on Costs</h3>
-          <p class="text-muted mt-2">Get Silicon Valley / London agency standard quality at highly competitive rates without agency overheads.</p>
+          <p class="text-muted mt-2">Get Silicon Valley / London agency standard quality at highly competitive rates without paying for agency office overheads or account manager salaries.</p>
         </div>
       </div>
       <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
         <div class="loc-why-card">
           <div class="loc-why-icon"><i class="fa-solid fa-comments"></i></div>
           <h3 class="h5 fw-bold" style="color: var(--nw-text-dark);">Direct Communication</h3>
-          <p class="text-muted mt-2">No account managers or middle layers. Speak directly with the developer building your product via Zoom, Google Meet &amp; Slack.</p>
+          <p class="text-muted mt-2">No account managers or bureaucratic ticket queues. Speak directly with Nikhil Gupta via WhatsApp, Google Meet, Zoom, or Slack for rapid decisions.</p>
         </div>
       </div>
       <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
         <div class="loc-why-card">
-          <div class="loc-why-icon"><i class="fa-solid fa-award"></i></div>
-          <h3 class="h5 fw-bold" style="color: var(--nw-text-dark);">Proven Global Track Record</h3>
-          <p class="text-muted mt-2">Delivered <?= $projectCount ?>+ websites across USA, UK, UAE, Australia, and Canada with an average <?= $avgRating ?>★ client rating.</p>
+          <div class="loc-why-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3 class="h5 fw-bold" style="color: var(--nw-text-dark);">Agile Sprints &amp; Fast Delivery</h3>
+          <p class="text-muted mt-2">Websites delivered in <strong>3–7 days</strong> and custom applications in <strong>2–3 weeks</strong>. Work proceeds without red tape delays.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FREELANCER VS AGENCY COMPARISON MATRIX -->
+    <div class="mt-5 pt-3" data-aos="fade-up">
+      <div class="text-center mb-4">
+        <span class="text-uppercase fw-bold text-muted" style="letter-spacing: 1.5px; font-size: 0.85rem;">Honest Comparison</span>
+        <h3 class="fw-bold mt-1" style="color: var(--nw-text-dark);">Freelance Developer (NikhilWorks) vs Traditional Agency</h3>
+      </div>
+
+      <div class="table-responsive" style="background:#ffffff;border-radius:18px;border:1px solid #e1eceb;overflow:hidden;box-shadow:0 10px 30px rgba(16,64,65,0.05);">
+        <table class="table mb-0" style="font-size:14.5px;">
+          <thead style="background:#082223;color:#ffffff;">
+            <tr>
+              <th class="py-3 px-4" style="width:30%;">Key Aspect</th>
+              <th class="py-3 px-4" style="color:#ADFF1C;width:35%;">NikhilWorks (Freelance Engineer)</th>
+              <th class="py-3 px-4" style="color:#adb5bd;width:35%;">Traditional Agency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-3 px-4"><strong>Cost &amp; Billing</strong></td>
+              <td class="py-3 px-4" style="color:#104041;font-weight:700;"><i class="fa-solid fa-check text-success me-1"></i> Fixed Milestone or $15-$45/hr (60-70% lower)</td>
+              <td class="py-3 px-4 text-muted"><i class="fa-solid fa-xmark text-danger me-1"></i> $100-$250/hr with heavy overhead markup</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4"><strong>Communication</strong></td>
+              <td class="py-3 px-4" style="color:#104041;font-weight:700;"><i class="fa-solid fa-check text-success me-1"></i> Direct 1-on-1 with Nikhil via WhatsApp / Zoom</td>
+              <td class="py-3 px-4 text-muted"><i class="fa-solid fa-xmark text-danger me-1"></i> Filtered through account managers &amp; ticket queues</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4"><strong>Speed &amp; Agility</strong></td>
+              <td class="py-3 px-4" style="color:#104041;font-weight:700;"><i class="fa-solid fa-check text-success me-1"></i> Rapid 3–14 days turnaround per sprint</td>
+              <td class="py-3 px-4 text-muted"><i class="fa-solid fa-xmark text-danger me-1"></i> 6–12 weeks average project timeline</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4"><strong>Working Flexibility</strong></td>
+              <td class="py-3 px-4" style="color:#104041;font-weight:700;"><i class="fa-solid fa-check text-success me-1"></i> Flexible hours overlapping with your timezone</td>
+              <td class="py-3 px-4 text-muted"><i class="fa-solid fa-xmark text-danger me-1"></i> Rigid 9-to-5 working boundaries</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4"><strong>Code Ownership</strong></td>
+              <td class="py-3 px-4" style="color:#104041;font-weight:700;"><i class="fa-solid fa-check text-success me-1"></i> 100% IP rights &amp; Git repository ownership</td>
+              <td class="py-3 px-4 text-muted"><i class="fa-solid fa-xmark text-danger me-1"></i> Proprietary lock-ins or recurring license fees</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!--===== FLEXIBLE ENGAGEMENT MODELS =====-->
+<section class="py-5" style="background: #ffffff;">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <span class="text-uppercase fw-bold text-muted" style="letter-spacing: 1.5px; font-size: 0.85rem;">Flexible Collaboration</span>
+      <h2 class="fw-bold mt-2" style="color: var(--nw-text-dark);">Choose Your Preferred Working Model</h2>
+      <p class="text-muted" style="max-width:650px;margin:0 auto;">Whether you have a well-defined project scope or need ongoing agile sprints, I adapt to your business needs.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" data-aos="fade-up">
+        <div class="loc-service-card">
+          <div>
+            <div class="loc-why-icon"><i class="fa-solid fa-bullseye"></i></div>
+            <h3 class="h4 fw-bold" style="color: var(--nw-text-dark);">Fixed-Price Project</h3>
+            <p class="text-muted my-3">Ideal for websites, portals, and defined web applications. Scope, milestone deliverables, and budget are locked upfront with zero surprise invoices.</p>
+            <ul class="list-unstyled mb-4" style="font-size:14px;color:#557273;line-height:1.9;">
+              <li><i class="fa-solid fa-check text-success me-2"></i> Clearly defined milestone scope</li>
+              <li><i class="fa-solid fa-check text-success me-2"></i> Guaranteed delivery deadlines</li>
+              <li><i class="fa-solid fa-check text-success me-2"></i> 30-Day post-launch warranty</li>
+            </ul>
+          </div>
+          <a href="<?= $site ?>contact/" class="loc-btn-primary justify-content-center text-center">
+            <span>Get Fixed Scope Quote</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="loc-service-card" style="border-color:#ADFF1C;box-shadow:0 12px 35px rgba(16,64,65,0.08);">
+          <div>
+            <div class="loc-why-icon" style="background:#104041;color:#ADFF1C;"><i class="fa-solid fa-clock"></i></div>
+            <h3 class="h4 fw-bold" style="color: var(--nw-text-dark);">Hourly On-Demand</h3>
+            <p class="text-muted my-3">Best for ongoing enhancements, bug fixing, API integration, and speed tuning. Transparent time-tracking with weekly or bi-weekly invoices.</p>
+            <ul class="list-unstyled mb-4" style="font-size:14px;color:#557273;line-height:1.9;">
+              <li><i class="fa-solid fa-check text-success me-2"></i> $15 – $45 / hour</li>
+              <li><i class="fa-solid fa-check text-success me-2"></i> Pay only for actual coding hours</li>
+              <li><i class="fa-solid fa-check text-success me-2"></i> Cancel or pause anytime</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20am%20interested%20in%20Hourly%20Freelance%20Development%20support." target="_blank" rel="noopener" class="loc-btn-primary justify-content-center text-center">
+            <span>Book Hourly Support</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="loc-service-card">
+          <div>
+            <div class="loc-why-icon"><i class="fa-solid fa-handshake"></i></div>
+            <h3 class="h4 fw-bold" style="color: var(--nw-text-dark);">Dedicated Monthly Retainer</h3>
+            <p class="text-muted my-3">Dedicated full-stack developer capacity (20 to 40 hrs/week) exclusively for your business. Perfect for fast-growing startups and agencies needing white-label dev.</p>
+            <ul class="list-unstyled mb-4" style="font-size:14px;color:#557273;line-height:1.9;">
+              <li><i class="fa-solid fa-check text-success me-2"></i> Guaranteed weekly availability</li>
+              <li><i class="fa-solid fa-check text-success me-2"></i> Daily standup &amp; Slack integration</li>
+              <li><i class="fa-solid fa-check text-success me-2"></i> Priority turnaround for urgent tasks</li>
+            </ul>
+          </div>
+          <a href="<?= $site ?>contact/" class="loc-btn-primary justify-content-center text-center">
+            <span>Hire Dedicated Dev</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -583,31 +698,33 @@ $servicesList = $c['services'] ?? [
   [
     'name' => 'Custom Website Design & Development',
     'desc' => 'High-performance, bespoke websites tailored for ' . htmlspecialchars($c['city_name']) . ' businesses with clean code, fast load times, and SEO foundations.',
-    'link' => $site . 'service/website-design-development/'
+    'link' => 'service/website-design-development/'
   ],
   [
     'name' => 'Full-Stack Web Applications & CRM',
     'desc' => 'Scalable custom PHP/MySQL and React platforms with automated workflows, customer dashboards, and API integrations.',
-    'link' => $site . 'service/custom-php-development-/'
+    'link' => 'service/custom-php-development-/'
   ],
   [
     'name' => 'Search Engine Optimization (SEO)',
     'desc' => 'Technical, On-Page, and conversion-focused SEO to boost organic search rankings across ' . htmlspecialchars($c['city_name']) . ' search queries.',
-    'link' => $site . 'service/search-engine-optimization/'
+    'link' => 'service/search-engine-optimization/'
   ]
 ];
 $faqsHeading = $c['faqs_heading'] ?? ('Frequently Asked Questions for ' . htmlspecialchars($c['city_name']));
 $faqsList = $c['faqs'] ?? [];
 ?>
-<section class="py-5" style="background: #FFFFFF;">
+<section class="py-5" style="background: #F8FBFB;">
   <div class="container py-4">
     <div class="text-center mb-5">
       <span class="text-uppercase fw-bold text-muted" style="letter-spacing: 1.5px; font-size: 0.85rem;">What We Offer</span>
-      <h2 class="fw-bold mt-2" style="color: var(--nw-text-dark);">Services Offered in <?= htmlspecialchars($c['city_name']) ?></h2>
+      <h2 class="fw-bold mt-2" style="color: var(--nw-text-dark);">Core Development Capabilities</h2>
     </div>
 
     <div class="row g-4">
-      <?php foreach ($servicesList as $idx => $s): ?>
+      <?php foreach ($servicesList as $idx => $s): 
+        $targetLink = str_starts_with($s['link'], 'http') ? $s['link'] : ($site . ltrim($s['link'], '/'));
+      ?>
       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?= $idx * 100 ?>">
         <div class="loc-service-card">
           <div>
@@ -615,7 +732,7 @@ $faqsList = $c['faqs'] ?? [];
             <h3 class="h4 fw-bold" style="color: var(--nw-text-dark);"><?= htmlspecialchars($s['name']) ?></h3>
             <p class="text-muted my-3"><?= htmlspecialchars($s['desc']) ?></p>
           </div>
-          <a href="<?= htmlspecialchars($s['link'] ?? ($site . 'contact/')) ?>" class="loc-btn-primary justify-content-center text-center">
+          <a href="<?= htmlspecialchars($targetLink) ?>" class="loc-btn-primary justify-content-center text-center">
             <span>Learn More</span> <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
@@ -626,7 +743,7 @@ $faqsList = $c['faqs'] ?? [];
 </section>
 
 <!--===== FAQ SECTION =====-->
-<section class="py-5" style="background: #F7FAFA;">
+<section class="py-5" style="background: #FFFFFF;">
   <div class="container py-4">
     <div class="text-center mb-5">
       <span class="text-uppercase fw-bold text-muted" style="letter-spacing: 1.5px; font-size: 0.85rem;">Got Questions?</span>
@@ -652,6 +769,30 @@ $faqsList = $c['faqs'] ?? [];
     </div>
   </div>
 </section>
+
+<!--===== CTA BANNER =====-->
+<div class="container">
+  <div style="background:radial-gradient(circle at 90% 10%, rgba(173,255,28,0.16) 0%, transparent 40%), linear-gradient(135deg, #051617 0%, #0d3536 100%);padding:85px 0;color:#ffffff;text-align:center;border-radius:24px;margin:40px 0;">
+    <div class="container px-4">
+      <div class="badge px-3 py-2 rounded-pill mb-3" style="background:rgba(173,255,28,0.15);color:#ADFF1C;font-weight:700;">START COLLABORATION TODAY</div>
+      <h2 class="text-white fw-bold mb-3" style="font-size:clamp(1.8rem, 3.5vw, 2.6rem);">Hire Nikhil Gupta as Your Dedicated Freelance Web Developer</h2>
+      <p class="text-light mb-4" style="font-size:1.15rem;max-width:680px;margin:0 auto;color:#d1e7e4 !important;">
+        Flexible hours, rapid execution, and direct communication. Get a fixed proposal within 24 hours.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+        <a href="<?= $site ?>contact/" class="loc-btn-primary">
+          <span>Get Free Proposal</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20want%20to%20hire%20you%20as%20a%20freelance%20web%20developer." 
+           class="loc-btn-secondary" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp text-success me-1"></i>
+          <span>Chat on WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--===== REGIONAL CROSSLINKS =====-->
 <?php if (function_exists('render_hub_crosslinks') && !empty($c['schema_country'])): ?>

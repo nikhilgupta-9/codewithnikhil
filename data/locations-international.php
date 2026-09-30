@@ -321,29 +321,63 @@ return [
     ],
   ],
   'hire-freelance-web-developer' => [
-    'title' => 'Hire a Freelance Web Developer | Global Remote Availability - NikhilWorks',
-    'h1' => 'Hire a Freelance Web Developer',
-    'description' => 'Hire Nikhil Gupta, a freelance web developer working remotely with businesses across 12+ countries -- PHP, WordPress, React and e-commerce, quoted in your local currency.',
-    'keywords' => 'hire freelance web developer, hire web developer, freelance web developer, hire php developer, hire wordpress developer, remote web developer',
+    'title' => 'Hire a Freelance Web Developer | Remote Full-Stack Expert - NikhilWorks',
+    'h1' => 'Hire a Top-Rated Freelance Web Developer',
+    'description' => 'Hire Nikhil Gupta, an experienced freelance full-stack web developer. Direct 1-on-1 collaboration, flexible hourly or fixed rates, zero agency markup, 100% IP ownership for clients worldwide.',
+    'keywords' => 'hire freelance web developer, hire web developer, freelance full stack developer, hire php developer, hire wordpress developer, remote web developer, flexible freelance engineer',
     'canonical' => 'https://nikhilworks.com/hire-freelance-web-developer/',
-    'hero_sub' => 'Expert freelance web developer available globally. PHP, WordPress, React and more.',
-    'city_name' => 'Global',
+    'hero_sub' => 'Skip agency overheads and lengthy hiring cycles. Work directly with Nikhil Gupta — an experienced full-stack freelance developer building high-speed websites, custom web apps, and SEO-driven platforms for clients in USA, UK, UAE, Australia, Canada, and worldwide.',
+    'city_name' => 'Worldwide',
     'currency' => 'USD',
-    'price_range' => 'USD 10/hr - USD 50/hr',
-    'flag' => 'Global',
+    'price_range' => 'USD 15/hr - USD 45/hr',
+    'flag' => '🌐',
     'schema_country' => 'IN',
-    'intro_heading' => 'One Page for Every Country Not Listed Below',
+    'intro_heading' => 'Why Hiring a Dedicated Freelance Developer is the Smartest Strategic Move',
     'layout' => 'A',
-    'gradient' => 'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)',
+    'gradient' => 'linear-gradient(135deg,#051617,#104041,#082223)',
     'intro' => [
-      "This page exists for the search that doesn't start with a country name -- \"hire a freelance web developer\" without specifying where you are, because you're evaluating options before narrowing down. If you already know which country you're in, the location-specific pages (USA, UK, Australia, UAE and the rest, linked in the footer) go into more detail on pricing in your currency and realistic call scheduling for your time zone. This page covers what stays true regardless of location: hourly and project rates, the tech stack on offer, and how the working relationship actually runs day to day.",
-      "PHP, WordPress and React cover the large majority of requests -- business sites, e-commerce stores, custom web applications -- and hourly rates typically run USD 10-50/hr depending on complexity, with most clients preferring a fixed project quote instead once scope is clear. Communication happens over video call, email and WhatsApp, scheduled around whatever time zone the client is in rather than requiring them to adjust to IST.",
+      "Hiring a full-time in-house developer means burdensome recruitment cycles, fixed payrolls, and long onboarding. Hiring a traditional agency means paying 3x to 5x higher rates to subsidize account managers and agency overhead, often resulting in slow bureaucratic progress. Working directly with a dedicated freelance web developer gives you senior-level engineering quality, rapid sprint execution, and direct 1-on-1 access at 60-70% lower costs.",
+      "At NikhilWorks, you partner directly with Nikhil Gupta. Whether you need a high-converting WordPress portal, custom PHP/Laravel database application, MERN stack SaaS, or an e-commerce platform, every project is delivered on flexible terms with zero middlemen, clear milestone billing, and complete code ownership.",
     ],
+    'services' => [
+      [
+        'name' => 'Custom PHP & Laravel Web Apps',
+        'desc' => 'Tailored backend applications, customer portals, database engines, and automated business workflows built with clean, maintainable architecture.',
+        'link' => 'service/custom-php-development-/'
+      ],
+      [
+        'name' => 'High-Performance WordPress & CMS',
+        'desc' => 'Bespoke WordPress theme development, plugin configuration, speed optimization, and secure CMS setups designed for effortless content management.',
+        'link' => 'service/wordpress-website-development/'
+      ],
+      [
+        'name' => 'MERN & React Full-Stack Solutions',
+        'desc' => 'Modern single-page applications (SPA) built with React.js frontend, Node.js/Express backend, and MongoDB database for high scalability.',
+        'link' => 'service/website-design-development/'
+      ],
+      [
+        'name' => 'E-Commerce Stores & Payment Flow',
+        'desc' => 'High-converting online stores with custom cart flows, inventory management, and multi-currency payment gateway integrations (Stripe, PayPal, Razorpay).',
+        'link' => 'service/e-commerce-website-development/'
+      ],
+      [
+        'name' => 'Technical SEO & Core Web Vitals',
+        'desc' => 'Technical search engine optimization, semantic Schema markup, speed tuning (90+ PageSpeed), and mobile UX to maximize organic keyword rankings.',
+        'link' => 'service/search-engine-optimization/'
+      ],
+      [
+        'name' => 'API Integration & CRM Automation',
+        'desc' => 'Connect third-party REST APIs, webhooks, CRM databases, ERP systems, and cloud services for frictionless business automation.',
+        'link' => 'api-integration-services-india/'
+      ],
+    ],
+    'faqs_heading' => 'Frequently Asked Questions About Hiring a Freelance Web Developer',
     'faqs' => [
-      ['q' => "I don't see my country listed elsewhere on the site -- can you still help?", 'a' => "Yes -- the location-specific pages cover the most common countries in detail, but remote web development work isn't limited to those. Get in touch with your specifics and I'll confirm fit and pricing directly."],
-      ['q' => 'Do you charge hourly or per project?', 'a' => "Both are available. Hourly runs USD 10-50/hr depending on complexity; most clients end up preferring a fixed project quote once scope is defined, since it removes the uncertainty of an open-ended hourly bill."],
-      ['q' => "What's the difference between this page and the country-specific ones?", 'a' => "The country pages (USA, UK, Australia, UAE, and others) go into local pricing currency, realistic call-scheduling windows, and industry context specific to that market. This page is the general version for anyone not sure yet which of those applies to them."],
-      ['q' => 'How do you handle communication across very different time zones?', 'a' => "Calls are scheduled around the client's time zone, not mine -- video call, email and WhatsApp cover discovery, review and launch coordination, with async updates filling the gaps between scheduled calls."],
+      ['q' => 'Why should I hire a freelance developer instead of an agency?', 'a' => "Freelancers provide direct 1-on-1 collaboration with the actual engineer writing your code. You eliminate agency overheads, account managers, and bloated markups — saving 60-70% while enjoying faster project turnaround and adaptive working hours."],
+      ['q' => 'What flexible working models do you offer?', 'a' => "NikhilWorks offers three flexible models: (1) Fixed-Price Milestone Projects with clear deliverables, (2) Hourly On-Demand ($15-$45/hr) for iterative feature builds and maintenance, and (3) Dedicated Monthly Retainers for startups needing ongoing development."],
+      ['q' => 'How do you handle communication across different timezones?', 'a' => "I maintain flexible overlapping hours with clients in the USA, UK/Europe, UAE, Australia, and Asia. Communication is seamless via WhatsApp, Zoom, Google Meet, Slack, and email, with regular sprint progress updates."],
+      ['q' => 'Do I get 100% intellectual property ownership and an NDA?', 'a' => "Yes, absolutely. A mutual Non-Disclosure Agreement (NDA) is signed before work commences. Upon project completion, all source code, git repositories, and assets are 100% transferred to you with zero vendor lock-in."],
+      ['q' => 'What is your post-launch support and warranty policy?', 'a' => "Every custom development project includes a 30-day post-launch bug-free warranty and free server deployment assistance to ensure your platform runs flawlessly from day one."],
     ],
   ],
 ];
