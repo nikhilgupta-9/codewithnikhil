@@ -71,7 +71,7 @@ $services = get_sub_category($limit);
                     <?php
                     }
                     ?>
-                    <li><a href="<?= $site ?>ai-integration-services/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-sparkles me-1"></i> AI & Workflow Automation</a></li>
+                    <li><a href="<?= $site ?>ai-integration-services/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-robot me-1"></i> AI & Workflow Automation</a></li>
                     <li><a href="<?= $site ?>api-integration-services-india/">API & Integration Services</a></li>
                   </ul>
                 </li>
@@ -162,7 +162,7 @@ $services = get_sub_category($limit);
           <?php
           }
           ?>
-            <li><a href="<?= $site ?>ai-integration-services/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-sparkles me-1"></i> AI & Workflow Automation</a></li>
+            <li><a href="<?= $site ?>ai-integration-services/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-robot me-1"></i> AI & Workflow Automation</a></li>
             <li><a href="<?= $site ?>api-integration-services-india/">API & Integration Services</a></li>
         </ul>
       </li>

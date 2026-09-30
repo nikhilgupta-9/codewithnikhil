@@ -724,7 +724,7 @@ $canonicalUrl = "https://nikhilworks.com/services/";
         <!-- 10. AI Integration & Workflow Automation -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
           <div class="service-card-modern" style="border: 2px solid #104041; background: linear-gradient(180deg, #ffffff 0%, #f4fbf9 100%);">
-            <div class="service-badge-exp" style="background:#104041; color:#ADFF1C;"><i class="fa-solid fa-sparkles me-1"></i> Next-Gen AI</div>
+            <div class="service-badge-exp" style="background:#104041; color:#ADFF1C;"><i class="fa-solid fa-robot me-1"></i> Next-Gen AI</div>
             <div class="service-card-icon" style="background:#104041; color:#ADFF1C;"><i class="fa-solid fa-brain"></i></div>
             <h3 class="service-title">AI &amp; Workflow Automation</h3>
             <div class="service-tagline">Gemini, OpenAI, RAG &amp; n8n Workflows</div>

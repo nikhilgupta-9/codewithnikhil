@@ -638,7 +638,7 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
           <!-- Supported AI Frameworks Bar -->
           <div class="ai-models-bar" data-aos="fade-up" data-aos-duration="1300">
             <span class="text-white-50 small me-2"><i class="fa-solid fa-bolt" style="color:#ADFF1C;"></i> Models & Stacks:</span>
-            <div class="ai-model-chip"><i class="fa-solid fa-sparkles"></i> Google Gemini 1.5 Pro / Flash</div>
+            <div class="ai-model-chip"><i class="fa-solid fa-wand-magic-sparkles"></i> Google Gemini 1.5 Pro / Flash</div>
             <div class="ai-model-chip"><i class="fa-solid fa-brain"></i> OpenAI GPT-4o & Embeddings</div>
             <div class="ai-model-chip"><i class="fa-solid fa-network-wired"></i> Claude 3.5 Sonnet</div>
             <div class="ai-model-chip"><i class="fa-solid fa-gears"></i> n8n & Make Automations</div>
@@ -1009,7 +1009,7 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
       </div>
 
       <div class="row g-3 justify-content-center" data-aos="fade-up">
-        <div class="col-auto"><div class="ai-tech-badge"><i class="fa-solid fa-sparkles text-warning"></i> Google Gemini SDK</div></div>
+        <div class="col-auto"><div class="ai-tech-badge"><i class="fa-solid fa-wand-magic-sparkles text-warning"></i> Google Gemini SDK</div></div>
         <div class="col-auto"><div class="ai-tech-badge"><i class="fa-solid fa-brain text-success"></i> OpenAI API (GPT-4o)</div></div>
         <div class="col-auto"><div class="ai-tech-badge"><i class="fa-solid fa-network-wired text-danger"></i> Anthropic Claude</div></div>
         <div class="col-auto"><div class="ai-tech-badge"><i class="fa-solid fa-link text-primary"></i> LangChain & LlamaIndex</div></div>

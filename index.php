@@ -713,7 +713,7 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
               <a href="<?= $site ?>web-designer-delhi/" class="badge-item">Web Developer Delhi</a>
               <a href="<?= $site ?>web-developer-gurgaon/" class="badge-item">SEO Expert Gurgaon</a>
               <a href="<?= $site ?>web-developer-noida/" class="badge-item">Noida Tech Hub</a>
-              <a href="<?= $site ?>ai-integration-services/" class="badge-item" style="border-color:#ADFF1C; color:#ADFF1C;"><i class="fa-solid fa-sparkles me-1"></i> AI &amp; Workflow Automations</a>
+              <a href="<?= $site ?>ai-integration-services/" class="badge-item" style="border-color:#ADFF1C; color:#ADFF1C;"><i class="fa-solid fa-robot me-1"></i> AI &amp; Workflow Automations</a>
             </div>
 
           </div>
@@ -1020,7 +1020,7 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
               <i class="fa-solid fa-code me-1"></i> Web &amp; App Development
             </button>
             <button class="service-tab-btn" onclick="switchServiceCategory('ai-auto', this)">
-              <i class="fa-solid fa-sparkles me-1"></i> AI &amp; Automations
+              <i class="fa-solid fa-robot me-1"></i> AI &amp; Automations
             </button>
             <button class="service-tab-btn" onclick="switchServiceCategory('digital-mktg', this)">
               <i class="fa-solid fa-chart-line me-1"></i> SEO &amp; Digital Marketing

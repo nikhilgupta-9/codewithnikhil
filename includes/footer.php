@@ -226,7 +226,7 @@ $footerYearsInBusiness = (string)$years;
             <?php foreach ($services as $serv): ?>
               <li><a href="<?= $site ?>service/<?= $serv['slug_url'] ?>/"><?= $serv['categories'] ?></a></li>
             <?php endforeach; ?>
-            <li><a href="<?= $site ?>ai-integration-services/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-sparkles me-1"></i> AI &amp; Workflow Automation</a></li>
+            <li><a href="<?= $site ?>ai-integration-services/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-robot me-1"></i> AI &amp; Workflow Automation</a></li>
             <li><a href="<?= $site ?>api-integration-services-india/">API &amp; Integration Services</a></li>
           </ul>
         </div>
@@ -302,7 +302,7 @@ $footerYearsInBusiness = (string)$years;
       <h4 class="footer-panel-title"><i class="fa-solid fa-bolt text-accent-dot me-2"></i>Popular Searches &amp; Free Utilities</h4>
       <div class="footer-tag-grid">
         <a href="<?= $site ?>pay/" class="tag-featured"><i class="fa-solid fa-qrcode me-1"></i> Pay Online</a>
-        <a href="<?= $site ?>ai-integration-services/" class="tag-featured"><i class="fa-solid fa-sparkles me-1"></i> AI Integration &amp; Automation</a>
+        <a href="<?= $site ?>ai-integration-services/" class="tag-featured"><i class="fa-solid fa-robot me-1"></i> AI Integration &amp; Automation</a>
         <a href="<?= $site ?>website-cost-calculator/" class="tag-featured"><i class="fa-solid fa-calculator me-1"></i> Website Cost Calculator</a>
         <a href="<?= $site ?>seo-auditor/" class="tag-featured"><i class="fa-solid fa-stethoscope me-1"></i> Free SEO Audit Tool</a>
         <a href="<?= $site ?>service/website-design-development/">Web Design &amp; Development</a>
