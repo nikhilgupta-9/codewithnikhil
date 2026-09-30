@@ -69,7 +69,7 @@ $heroImage = $site . 'assets/img/all-images/about-img6.png';
     '@type' => 'Question',
     'name' => $faq['q'],
     'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq['a']],
-  ], $u['faqs']),
+  ], $u['faqs'] ?? []),
 ], JSON_UNESCAPED_SLASHES) ?>
 </script>
 <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
@@ -93,49 +93,63 @@ $heroImage = $site . 'assets/img/all-images/about-img6.png';
 
   .loc-hero {
     position: relative;
-    background: radial-gradient(circle at 85% 20%, rgba(173, 255, 28, 0.12) 0%, transparent 50%),
-                linear-gradient(135deg, #071e1f 0%, #104041 55%, #051617 100%);
+    background: radial-gradient(circle at 75% 25%, rgba(173, 255, 28, 0.16) 0%, transparent 45%),
+                radial-gradient(circle at 10% 80%, rgba(16, 64, 65, 0.7) 0%, transparent 50%),
+                linear-gradient(135deg, #051617 0%, #0d3435 50%, #041213 100%);
     padding: 130px 0 90px;
     overflow: hidden;
     color: #fff;
   }
-  .loc-hero::before {
-    content: '';
+  .loc-grid-overlay {
     position: absolute;
-    top: -50%;
-    left: -20%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(173,255,28,0.08) 0%, transparent 70%);
+    inset: 0;
+    background-image: linear-gradient(rgba(173, 255, 28, 0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(173, 255, 28, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
     pointer-events: none;
+    opacity: 0.85;
   }
   .loc-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(173, 255, 28, 0.15);
-    border: 1px solid rgba(173, 255, 28, 0.35);
-    padding: 7px 18px;
+    gap: 10px;
+    background: rgba(16, 64, 65, 0.8);
+    border: 1px solid rgba(173, 255, 28, 0.45);
+    padding: 8px 20px;
     border-radius: 999px;
     color: var(--nw-accent);
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
+    box-shadow: 0 0 20px rgba(173, 255, 28, 0.15);
+  }
+  .loc-ping {
+    width: 8px;
+    height: 8px;
+    background: var(--nw-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--nw-accent);
+    animation: pingPulse 2s infinite ease-in-out;
+  }
+  @keyframes pingPulse {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    50% { transform: scale(1.35); opacity: 1; filter: drop-shadow(0 0 6px #ADFF1C); }
+    100% { transform: scale(0.9); opacity: 0.8; }
   }
   .loc-hero-title {
-    font-size: 3.1rem;
+    font-size: 3.2rem;
     font-weight: 800;
-    line-height: 1.2;
+    line-height: 1.18;
     color: #FFFFFF;
     margin-bottom: 20px;
   }
   .loc-hero-sub {
     font-size: 1.2rem;
-    line-height: 1.6;
-    color: #D3E8E8;
-    max-width: 680px;
-    margin-bottom: 30px;
+    line-height: 1.65;
+    color: #D6EBEB;
+    max-width: 650px;
+    margin-bottom: 32px;
   }
   .loc-btn-primary {
     display: inline-flex;
@@ -144,30 +158,30 @@ $heroImage = $site . 'assets/img/all-images/about-img6.png';
     background: var(--nw-accent);
     color: #072223;
     font-weight: 700;
-    padding: 14px 32px;
+    padding: 15px 34px;
     border-radius: 12px;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 24px rgba(173, 255, 28, 0.25);
+    box-shadow: 0 10px 25px rgba(173, 255, 28, 0.3);
   }
   .loc-btn-primary:hover {
     background: #c3ff4f;
     color: #072223;
     transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(173, 255, 28, 0.4);
+    box-shadow: 0 14px 35px rgba(173, 255, 28, 0.45);
   }
   .loc-btn-secondary {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     color: #FFFFFF;
     font-weight: 600;
-    padding: 14px 28px;
+    padding: 15px 30px;
     border-radius: 12px;
     text-decoration: none;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     transition: all 0.3s ease;
   }
   .loc-btn-secondary:hover {
@@ -176,64 +190,151 @@ $heroImage = $site . 'assets/img/all-images/about-img6.png';
     border-color: #FFFFFF;
     transform: translateY(-3px);
   }
-  .loc-stat-card {
-    background: rgba(16, 64, 65, 0.55);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(173, 255, 28, 0.25);
+
+  /* HIGH TECH DEVELOPER MOCKUP CARD */
+  .hero-mockup-wrapper {
+    position: relative;
     border-radius: 24px;
-    padding: 35px 25px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    background: rgba(16, 64, 65, 0.45);
+    border: 1px solid rgba(173, 255, 28, 0.3);
+    padding: 16px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
   }
-  .loc-stat-num {
-    font-size: 2.8rem;
+  .mockup-window-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 12px;
+  }
+  .window-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .window-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #FF5F56; }
+  .dot-yellow { background: #FFBD2E; }
+  .dot-green { background: #27C93F; }
+  .window-url-bar {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 3px 14px;
+    font-size: 11px;
+    color: #A3C9CA;
+    font-family: monospace;
+  }
+  .mockup-media-container {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    max-height: 250px;
+  }
+  .mockup-media-container img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .hero-mockup-wrapper:hover .mockup-media-container img {
+    transform: scale(1.04);
+  }
+
+  .float-badge-speed {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(8, 34, 35, 0.92);
+    border: 1px solid rgba(173, 255, 28, 0.45);
+    padding: 8px 14px;
+    border-radius: 12px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+  }
+  .float-badge-trust {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: rgba(8, 34, 35, 0.92);
+    border: 1px solid rgba(173, 255, 28, 0.45);
+    padding: 8px 14px;
+    border-radius: 12px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+  }
+
+  .tech-pills-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .tech-pill {
+    background: rgba(16, 64, 65, 0.6);
+    border: 1px solid rgba(173, 255, 28, 0.2);
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #D6EBEB;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .tech-pill i {
+    color: var(--nw-accent);
+  }
+
+  .hero-stats-strip {
+    background: rgba(16, 64, 65, 0.65);
+    border: 1px solid rgba(173, 255, 28, 0.2);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  .hero-stat-box strong {
+    font-size: 1.6rem;
     font-weight: 800;
     color: var(--nw-accent);
+    display: block;
     line-height: 1;
-    margin-bottom: 6px;
   }
-  .loc-stat-label {
-    font-size: 0.95rem;
-    color: #D3E8E8;
+  .hero-stat-box span {
+    font-size: 0.78rem;
+    color: #D6EBEB;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    display: block;
   }
 
   /* Intro Section */
   .loc-intro-section {
     padding: 90px 0;
     background: #F7FAFA;
-  }
-  .loc-img-wrapper {
-    position: relative;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 25px 60px rgba(16, 64, 65, 0.15);
-    border: 2px solid rgba(16, 64, 65, 0.08);
-  }
-  .loc-img-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.6s ease;
-  }
-  .loc-img-wrapper:hover img {
-    transform: scale(1.03);
-  }
-  .loc-floating-pill {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(16, 64, 65, 0.92);
-    backdrop-filter: blur(10px);
-    color: #fff;
-    padding: 12px 22px;
-    border-radius: 16px;
-    border: 1px solid rgba(173, 255, 28, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
   .loc-feature-chip {
     background: #FFFFFF;
@@ -258,7 +359,6 @@ $heroImage = $site . 'assets/img/all-images/about-img6.png';
     text-align: center;
   }
 
-  /* Services Grid */
   .loc-service-card {
     background: #FFFFFF;
     border: 1px solid #E5EFEF;
@@ -287,14 +387,12 @@ $heroImage = $site . 'assets/img/all-images/about-img6.png';
     justify-content: center;
     font-size: 26px;
     margin-bottom: 22px;
-    transition: all 0.3s ease;
   }
   .loc-service-card:hover .loc-service-icon {
     background: var(--nw-primary);
     color: var(--nw-accent);
   }
 
-  /* FAQ Accordion */
   .loc-faq-item {
     background: #FFFFFF;
     border: 1px solid #E2EDED;
@@ -331,7 +429,7 @@ $heroImage = $site . 'assets/img/all-images/about-img6.png';
     .loc-hero { padding: 90px 0 60px; text-align: center; }
     .loc-hero-title { font-size: 2.3rem; }
     .loc-hero-sub { margin-left: auto; margin-right: auto; }
-    .loc-stat-card { margin-top: 30px; }
+    .hero-mockup-wrapper { margin-top: 35px; }
   }
 </style>
 </head>
@@ -339,13 +437,17 @@ $heroImage = $site . 'assets/img/all-images/about-img6.png';
 
 <?php include_once "includes/header.php" ?>
 
-<!--===== HERO SECTION =====-->
+<!--===== HIGH-TECH HERO SECTION =====-->
 <section class="loc-hero">
-  <div class="container">
+  <div class="loc-grid-overlay"></div>
+  <div class="container position-relative" style="z-index: 2;">
     <div class="row align-items-center">
-      <div class="col-lg-8" data-aos="fade-right">
+      
+      <!-- Left Column -->
+      <div class="col-lg-7" data-aos="fade-right">
         <div class="loc-badge">
-          <span><?= htmlspecialchars($c['flag']) ?> Serving <?= htmlspecialchars($c['city_name']) ?></span>
+          <span class="loc-ping"></span>
+          <span>Serving <?= htmlspecialchars($c['city_name']) ?></span>
         </div>
         <h1 class="loc-hero-title"><?= htmlspecialchars($c['h1']) ?></h1>
         <p class="loc-hero-sub"><?= htmlspecialchars($c['hero_sub']) ?></p>
@@ -368,22 +470,59 @@ $heroImage = $site . 'assets/img/all-images/about-img6.png';
         </div>
       </div>
 
-      <div class="col-lg-4" data-aos="fade-left" data-aos-delay="150">
-        <div class="loc-stat-card text-center">
-          <div class="mb-4">
-            <div class="loc-stat-num"><span class="footer-counter"><?= $projectCount ?></span>+</div>
-            <div class="loc-stat-label">Websites &amp; Projects Delivered</div>
+      <!-- Right Column: Visual Mockup Showcase -->
+      <div class="col-lg-5" data-aos="fade-left" data-aos-delay="150">
+        <div class="hero-mockup-wrapper">
+          <div class="mockup-window-header">
+            <div class="window-dots">
+              <span class="window-dot dot-red"></span>
+              <span class="window-dot dot-yellow"></span>
+              <span class="window-dot dot-green"></span>
+            </div>
+            <div class="window-url-bar">https://nikhilworks.com/<?= htmlspecialchars($slug) ?>/</div>
           </div>
-          <div class="mb-4 pt-3 border-top border-secondary border-opacity-25">
-            <div class="loc-stat-num"><span class="footer-counter"><?= $yearsExperience ?></span>+</div>
-            <div class="loc-stat-label">Years of Development Experience</div>
+
+          <div class="mockup-media-container">
+            <img src="<?= $heroImage ?>" alt="Web development project in <?= htmlspecialchars($c['city_name']) ?>">
+            
+            <div class="float-badge-speed">
+              <i class="fa-solid fa-bolt text-warning"></i>
+              <span>99/100 PageSpeed</span>
+            </div>
+
+            <div class="float-badge-trust">
+              <i class="fa-solid fa-shield-check text-success"></i>
+              <span>100% Code Ownership</span>
+            </div>
           </div>
-          <div class="pt-3 border-top border-secondary border-opacity-25">
-            <div class="loc-stat-num"><?= $avgRating ?>★</div>
-            <div class="loc-stat-label">Verified Client Satisfaction</div>
+
+          <!-- Tech Stack Tags -->
+          <div class="tech-pills-bar">
+            <span class="tech-pill"><i class="fa-brands fa-php"></i> Custom PHP</span>
+            <span class="tech-pill"><i class="fa-brands fa-wordpress"></i> WordPress</span>
+            <span class="tech-pill"><i class="fa-brands fa-react"></i> React / JS</span>
+            <span class="tech-pill"><i class="fa-solid fa-database"></i> MySQL</span>
+            <span class="tech-pill"><i class="fa-solid fa-chart-line"></i> Local SEO</span>
+          </div>
+
+          <!-- Integrated Stats Strip -->
+          <div class="hero-stats-strip">
+            <div class="hero-stat-box">
+              <strong><?= $projectCount ?>+</strong>
+              <span>Projects</span>
+            </div>
+            <div class="hero-stat-box border-start border-end border-secondary border-opacity-25 px-3">
+              <strong><?= $yearsExperience ?>+</strong>
+              <span>Years Exp</span>
+            </div>
+            <div class="hero-stat-box">
+              <strong><?= $avgRating ?>★</strong>
+              <span>Rating</span>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -393,15 +532,8 @@ $heroImage = $site . 'assets/img/all-images/about-img6.png';
   <div class="container">
     <div class="row align-items-center g-5 mb-5">
       <div class="col-lg-6<?= $u['layout'] === 'B' ? ' order-lg-2' : '' ?>" data-aos="fade-up">
-        <div class="loc-img-wrapper">
-          <img src="<?= $heroImage ?>" alt="Web developer for <?= htmlspecialchars($c['city_name']) ?> businesses">
-          <div class="loc-floating-pill">
-            <i class="fa-solid fa-circle-check text-success" style="font-size: 1.4rem;"></i>
-            <div>
-              <strong style="font-size: 0.95rem; display:block;">Full-Service Delivery</strong>
-              <small style="color: #ADFF1C;">Design, Code, SEO &amp; Hosting</small>
-            </div>
-          </div>
+        <div style="border-radius:24px;overflow:hidden;box-shadow:0 25px 60px rgba(16,64,65,0.15); border: 2px solid rgba(16,64,65,0.08);">
+          <img src="<?= $heroImage ?>" alt="Web developer in <?= htmlspecialchars($c['city_name']) ?>" style="width:100%;display:block;">
         </div>
       </div>
 
