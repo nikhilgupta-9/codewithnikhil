@@ -158,7 +158,26 @@ include_once "config/connect.php";
   </script>
 
   <style>
-    /* Contact Page Custom Premium Polish */
+    /* Contact Hero Dark Cyber Tech Style */
+    .contact-hero-area {
+      position: relative;
+      background: radial-gradient(circle at 85% 15%, rgba(173, 255, 28, 0.18) 0%, transparent 45%),
+                  radial-gradient(circle at 10% 85%, rgba(16, 64, 65, 0.9) 0%, transparent 55%),
+                  linear-gradient(135deg, #041213 0%, #0a292a 50%, #030d0e 100%);
+      padding: 145px 0 95px;
+      overflow: hidden;
+      color: #ffffff;
+    }
+    .loc-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(173, 255, 28, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(173, 255, 28, 0.05) 1px, transparent 1px);
+      background-size: 38px 38px;
+      pointer-events: none;
+      z-index: 1;
+    }
     .contact-hero-badge {
       display: inline-flex;
       align-items: center;
@@ -422,10 +441,10 @@ include_once "config/connect.php";
   <?php include_once "includes/header.php" ?>
 
   <!--===== HERO AREA STARTS =======-->
-  <div class="about-header-area" style="position: relative; background-image: url(<?= $site ?>assets/img/bg/inner-header.png); background-repeat: no-repeat; background-size: cover; background-position: center; overflow: hidden; padding-top: 130px; padding-bottom: 90px;">
+  <div class="contact-hero-area">
     <div class="loc-grid-overlay"></div>
-    <img src="<?= $site ?>assets/img/elements/elements1.png" alt="" class="elements1 aniamtion-key-1">
-    <img src="<?= $site ?>assets/img/elements/star2.png" alt="" class="star2 keyframe5">
+    <img src="<?= $site ?>assets/img/elements/elements1.png" alt="" class="elements1 aniamtion-key-1" style="opacity: 0.15;">
+    <img src="<?= $site ?>assets/img/elements/star2.png" alt="" class="star2 keyframe5" style="opacity: 0.25;">
     
     <div class="container" style="position: relative; z-index: 2;">
       <div class="row">
