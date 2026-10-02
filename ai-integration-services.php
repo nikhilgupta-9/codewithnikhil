@@ -59,7 +59,8 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
   <meta name="twitter:title" content="AI Integration & Workflow Automation Services | NikhilWorks">
   <meta name="twitter:description" content="Custom AI solutions: Gemini API, ChatGPT, RAG Search, WhatsApp AI Bots, and n8n Automations for high-growth businesses.">
   <meta name="twitter:image" content="<?= $og_image ?>">
-  <meta name="twitter:site" content="@NikhilG69581514">
+  <meta name="twitter:site" content="@Nikhil_Works">
+  <meta name="twitter:creator" content="@Nikhil_Works">
 
   <!-- Schema: BreadcrumbList -->
   <script type="application/ld+json">

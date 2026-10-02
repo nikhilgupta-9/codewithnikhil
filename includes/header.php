@@ -4,6 +4,9 @@ $contact = contact_us();
 if (empty($contact['google_review'])) {
     $contact['google_review'] = 'https://share.google/g59W77vezpezMIl1a';
 }
+if (empty($contact['twitter'])) {
+    $contact['twitter'] = 'https://x.com/Nikhil_Works';
+}
 
 $limit = 10;
 $services = get_sub_category($limit);

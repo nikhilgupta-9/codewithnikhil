@@ -70,8 +70,8 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@NikhilG69581514">
-  <meta name="twitter:creator" content="@NikhilG69581514">
+  <meta name="twitter:site" content="@Nikhil_Works">
+  <meta name="twitter:creator" content="@Nikhil_Works">
   <meta name="twitter:title" content="NikhilWorks — Freelance Web Developer & AI Solutions Engineer">
   <meta name="twitter:description" content="Custom full-stack web applications, e-commerce platforms, AI chatbots, and technical SEO with 100% code ownership.">
   <meta name="twitter:image" content="<?= $og_image ?>">
@@ -194,7 +194,7 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
       "https://share.google/g59W77vezpezMIl1a",
       "https://www.facebook.com/profile.php?id=61559869365624",
       "https://www.instagram.com/nikhil_gupta_998/",
-      "https://x.com/NikhilG69581514",
+      "https://x.com/Nikhil_Works",
       "https://www.linkedin.com/in/nikhil-gupta-b30627327/",
       "https://github.com/nikhilgupta-9",
       "https://dev.to/nikhil_gupta_c55a17d81e36",

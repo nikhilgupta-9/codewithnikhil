@@ -121,6 +121,8 @@ $dateModified  = date('c', strtotime(!empty($blog['updated_at']) ? $blog['update
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@Nikhil_Works">
+  <meta name="twitter:creator"     content="@Nikhil_Works">
   <meta name="twitter:title"       content="<?= htmlspecialchars($metaTitle) ?>">
   <meta name="twitter:description" content="<?= htmlspecialchars($metaDesc) ?>">
   <meta name="twitter:image"       content="<?= $blogImage ?>">
@@ -594,7 +596,7 @@ $dateModified  = date('c', strtotime(!empty($blog['updated_at']) ? $blog['update
                style="background: #1877F2; border-color: #1877F2; color: #fff;">
                 <i class="fa-brands fa-facebook-f me-1"></i> Facebook
             </a>
-            <a href="https://twitter.com/intent/tweet?url=<?= urlencode($canonicalURL) ?>&text=<?= urlencode($metaTitle) ?>"
+            <a href="https://twitter.com/intent/tweet?url=<?= urlencode($canonicalURL) ?>&text=<?= urlencode($metaTitle) ?>&via=Nikhil_Works"
                target="_blank" rel="noopener noreferrer" 
                class="btn btn-sm rounded-pill px-3"
                style="background: #000000; border-color: #000000; color: #fff;">

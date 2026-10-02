@@ -56,7 +56,7 @@ def generate_social_pack(topic="Feature Update", details=None):
         f"⚡ 100/100 Google PageSpeed + AI workflow automations.\n"
         f"🛠️ Latest enhancements:\n"
         f"{details[:120]}...\n\n"
-        f"Explore live: https://nikhilworks.com/\n"
+        f"Explore live: https://nikhilworks.com/ (via @Nikhil_Works)\n"
         f"#WebDev #AI #BuildInPublic #Nextjs #Freelance"
     )
 

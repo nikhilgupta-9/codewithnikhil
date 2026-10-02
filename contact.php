@@ -125,7 +125,7 @@ include_once "config/connect.php";
           "https://github.com/nikhilgupta-9",
           "https://wa.me/918368552640",
           "https://www.linkedin.com/in/nikhil-gupta-b30627327/",
-          "https://x.com/NikhilG69581514"
+          "https://x.com/Nikhil_Works"
         ]
       },
       {

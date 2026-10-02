@@ -89,7 +89,8 @@ $og_image = !empty($product_details['pro_img'])
   <meta name="twitter:title" content="<?= htmlspecialchars($product_details['meta_title'] ?: $product_details['pro_name']) ?> | NikhilWorks">
   <meta name="twitter:description" content="<?= htmlspecialchars($product_details['meta_desc']) ?>">
   <meta name="twitter:image" content="<?= $og_image ?>">
-  <meta name="twitter:site" content="@NikhilG69581514">
+  <meta name="twitter:site" content="@Nikhil_Works">
+  <meta name="twitter:creator" content="@Nikhil_Works">
 
   <!-- Schema: BreadcrumbList -->
   <script type="application/ld+json">
@@ -142,9 +143,10 @@ $og_image = !empty($product_details['pro_img'])
         { "@type": "Country", "name": "Australia" }
       ],
       "sameAs": [
+        "https://share.google/g59W77vezpezMIl1a",
         "https://www.facebook.com/profile.php?id=61559869365624",
         "https://www.instagram.com/nikhil_gupta_998/",
-        "https://x.com/NikhilG69581514",
+        "https://x.com/Nikhil_Works",
         "https://www.linkedin.com/in/nikhil-gupta-b30627327/",
         "https://github.com/nikhilgupta-9"
       ]
