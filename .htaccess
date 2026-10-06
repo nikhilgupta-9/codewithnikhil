@@ -6,6 +6,15 @@
 # Disable Directory Browsing
 Options -Indexes
 
+# Protect Sensitive Files and Automation Core
+<FilesMatch "^\.env|^\.git|\.(sql|bak|log|lock)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Deny direct browser access to cron, migrations, logs, and lib
+RewriteRule ^(cron|logs|migrations|lib|tests)/ - [F,L,NC]
+
 # Custom 404 Error Page
 ErrorDocument 404 /404.php
 
