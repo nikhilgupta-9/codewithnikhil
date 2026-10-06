@@ -66,8 +66,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_stmt_bind_param($stmt, "sssssssss", $title, $meta_title, $meta_description, $tags, $content, $slug_url, $image_name, $author, $status);
         
         if (mysqli_stmt_execute($stmt)) {
-            $_SESSION['success'] = "Blog added successfully!";
-            header("Location: view-all-blog.php");
+            $newBlogId = mysqli_insert_id($conn);
+
+            // Automatically generate social media drafts with Gemini
+            try {
+                require_once dirname(__DIR__) . '/lib/Env.php';
+                require_once dirname(__DIR__) . '/lib/Database.php';
+                require_once dirname(__DIR__) . '/lib/Logger.php';
+                require_once dirname(__DIR__) . '/services/GeminiService.php';
+                require_once dirname(__DIR__) . '/lib/SocialDraftGenerator.php';
+
+                $generator = new \NikhilWorks\Lib\SocialDraftGenerator();
+                $generator->createDraftsForBlog((int)$newBlogId, $title, $content, $meta_description, $image_name, $slug_url);
+            } catch (\Throwable $t) {
+                // Log and gracefully continue so blog creation is not interrupted
+                error_log("Social draft generation error for Blog #{$newBlogId}: " . $t->getMessage());
+            }
+
+            $_SESSION['success'] = "Blog added successfully! Social media drafts generated in Social Queue for your review & approval.";
+            header("Location: social-queue.php?blog_id=" . $newBlogId);
             exit();
         } else {
             $_SESSION['error'] = "Database error: " . mysqli_error($conn);

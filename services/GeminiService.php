@@ -267,6 +267,126 @@ PROMPT;
         imagedestroy($img);
     }
 
+    /**
+     * Generate social media captions for client testimonials.
+     */
+    public function generateTestimonialContent(string $customerName, string $quote, string $role = '', string $company = ''): array
+    {
+        $attribution = $customerName . ($role ? " ({$role}" . ($company ? " at {$company}" : "") . ")" : "");
+
+        if (!empty($this->apiKey)) {
+            $endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{$this->textModel}:generateContent?key={$this->apiKey}";
+            $prompt = <<<PROMPT
+You are a social media manager for NikhilWorks (Full Stack Web & AI Solutions).
+A client gave this genuine testimonial:
+Client: "{$attribution}"
+Quote: "{$quote}"
+
+Generate a JSON object without markdown formatting fences:
+{
+  "linkedin_caption": "A 3-5 line inspiring client success story for LinkedIn highlighting the project impact, thanking the client, and ending with a clear CTA for web/AI consultation.",
+  "x_hook": "A short, engaging testimonial post for X under 180 characters with hashtags #buildinpublic #webdev."
+}
+PROMPT;
+
+            $payload = [
+                'contents' => [['parts' => [['text' => $prompt]]]],
+                'generationConfig' => ['temperature' => 0.4, 'responseMimeType' => 'application/json']
+            ];
+
+            $ch = curl_init($endpoint);
+            curl_setopt_array($ch, [
+                CURLOPT_POST           => true,
+                CURLOPT_POSTFIELDS     => json_encode($payload),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_TIMEOUT        => 25,
+                CURLOPT_SSL_VERIFYPEER => true,
+                CURLOPT_HTTPHEADER     => ["Content-Type: application/json"]
+            ]);
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            if ($response) {
+                $data = json_decode((string)$response, true);
+                $cleanJson = trim($data['candidates'][0]['content']['parts'][0]['text'] ?? '');
+                $cleanJson = trim(preg_replace('/^```(?:json)?\s*|\s*```$/m', '', $cleanJson));
+                $parsed = json_decode($cleanJson, true);
+                if (is_array($parsed) && !empty($parsed['linkedin_caption'])) {
+                    return [
+                        'linkedin_caption' => (string)$parsed['linkedin_caption'],
+                        'x_hook'           => (string)($parsed['x_hook'] ?? '')
+                    ];
+                }
+            }
+        }
+
+        // High-converting fallback
+        return [
+            'linkedin_caption' => "🌟 Client Success Story!\n\n\"{$quote}\"\n\n— {$attribution}\n\nDelivering high-performance web and software engineering that drives real business growth. Need help bringing your next web project or SEO strategy to life? Let's connect! 🚀\n\n👉 https://nikhilworks.com",
+            'x_hook'           => "💬 \"{$quote}\" — {$customerName}\n\nAlways grateful to build impactful web & software solutions! 🚀 #webdev #freelance"
+        ];
+    }
+
+    /**
+     * Generate a branded 1200x630 quote card image.
+     */
+    public function generateTestimonialQuoteCard(string $customerName, string $quote, string $role = '', string $company = ''): string
+    {
+        $uploadsDir = dirname(__DIR__) . '/uploads/testimonials/';
+        if (!is_dir($uploadsDir)) {
+            mkdir($uploadsDir, 0755, true);
+        }
+
+        $cleanName = substr(preg_replace('/[^a-zA-Z0-9]/', '_', $customerName), 0, 30);
+        $filename = 'quote_card_' . $cleanName . '_' . time() . '.png';
+        $targetPath = $uploadsDir . $filename;
+        $siteUrl = rtrim((string)Env::get('SITE_URL', 'https://nikhilworks.com'), '/');
+        $publicUrl = "{$siteUrl}/uploads/testimonials/{$filename}";
+
+        if (extension_loaded('gd')) {
+            $w = 1200;
+            $h = 630;
+            $img = imagecreatetruecolor($w, $h);
+
+            $darkBg = imagecolorallocate($img, 10, 15, 29);
+            $primaryCyan = imagecolorallocate($img, 56, 189, 248);
+            $white = imagecolorallocate($img, 255, 255, 255);
+            $gray = imagecolorallocate($img, 148, 163, 184);
+
+            imagefill($img, 0, 0, $darkBg);
+
+            // Border
+            imagerectangle($img, 30, 30, $w - 30, $h - 30, $primaryCyan);
+
+            // Large Quote Header
+            imagestring($img, 5, 80, 70, "CLIENT TESTIMONIAL // NIKHILWORKS", $primaryCyan);
+
+            // Large quotation marks & quote text
+            $cleanQuote = '"' . substr($quote, 0, 220) . (strlen($quote) > 220 ? '..."' : '"');
+            $wrapped = wordwrap($cleanQuote, 42, "\n");
+            $lines = explode("\n", $wrapped);
+            $yOffset = 180;
+            foreach (array_slice($lines, 0, 4) as $line) {
+                imagestring($img, 5, 80, $yOffset, $line, $white);
+                $yOffset += 45;
+            }
+
+            // Customer Attribution
+            $attr = "— " . $customerName;
+            if ($role || $company) {
+                $attr .= " (" . trim($role . ($company ? ", " . $company : "")) . ")";
+            }
+            imagestring($img, 5, 80, $yOffset + 30, $attr, $primaryCyan);
+
+            imagestring($img, 5, 80, 540, "Verified Client Review • https://nikhilworks.com", $gray);
+
+            imagepng($img, $targetPath);
+            imagedestroy($img);
+        }
+
+        return $publicUrl;
+    }
+
     private function validateAndOptimizeImage(string $filePath): void
     {
         if (!file_exists($filePath)) return;

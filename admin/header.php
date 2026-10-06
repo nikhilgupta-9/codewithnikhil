@@ -67,6 +67,14 @@ if (!isset($_SESSION['admin_logged_in'])) {
                 <li><a href="view-all-blog.php">View Blogs</a></li>
             </ul>
         </li>
+
+        <li>
+            <a class="has-arrow" href="#"><i class="fas fa-share-alt" style="color: #3b82f6;"></i> <span>Social Automation</span></a>
+            <ul>
+                <li><a href="social-queue.php">Approval Queue</a></li>
+                <li><a href="social-oauth.php">OAuth & Tokens</a></li>
+            </ul>
+        </li>
         
         <!-- <li>
             <a class="has-arrow" href="#"><i class="fas fa-award" style="color: #1abc9c;"></i> <span>Certificates</span></a>
@@ -99,6 +107,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
             <ul>
                 <li><a href="add-testimonial.php">Add Testimonials</a></li>
                 <li><a href="view-testimonials.php">View Testimonials</a></li>
+                <li><a href="testimonials-social.php">Social & Video Automation</a></li>
             </ul>
         </li>
         
