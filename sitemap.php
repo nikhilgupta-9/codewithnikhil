@@ -83,11 +83,20 @@ if (file_exists($cityFile)) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
+  <!-- CSS Plugins -->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/magnific-popup.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/sidebar.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/slick-slider.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/nice-select.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
+
+  <!-- jQuery in Head -->
+  <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
 
   <style>
     :root {
@@ -103,10 +112,23 @@ if (file_exists($cityFile)) {
       --nw-radius: 16px;
     }
 
-    body {
+    body.homepage4-body {
       background-color: var(--nw-bg);
       font-family: 'Inter', sans-serif;
       color: var(--nw-text);
+      overflow-x: hidden;
+    }
+
+    /* Ensure desktop navbar visibility and clean alignment */
+    .header-area.homepage4 {
+      background: rgba(8, 34, 35, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .header-area.homepage4.sticky {
+      background: rgba(5, 22, 23, 0.98) !important;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+      border-bottom: 1px solid rgba(173, 255, 28, 0.2);
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -119,7 +141,7 @@ if (file_exists($cityFile)) {
       background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.16) 0%, transparent 45%),
                   radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.85) 0%, transparent 50%),
                   linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
-      padding: 140px 0 70px;
+      padding: 160px 0 70px;
       color: #fff;
       overflow: hidden;
     }
@@ -281,12 +303,18 @@ if (file_exists($cityFile)) {
     /* Navigation Filter Tabs */
     .sitemap-filter-nav {
       position: sticky;
-      top: 0;
+      top: 75px;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--nw-border);
       padding: 12px 0;
+      transition: top 0.3s ease;
+    }
+    @media (max-width: 991px) {
+      .sitemap-filter-nav {
+        top: 0;
+      }
     }
 
     .filter-pills-wrap {
@@ -549,7 +577,7 @@ if (file_exists($cityFile)) {
   </style>
 </head>
 
-<body>
+<body class="homepage4-body">
 
   <?php include "includes/header.php"; ?>
 
