@@ -115,6 +115,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
             if ($stmt->execute()) {
                 $success = "Blog article updated successfully!";
                 
+                // Automatically regenerate all sitemaps in real-time
+                try {
+                    require_once dirname(__DIR__) . '/util/sitemap_generator.php';
+                    generate_all_sitemaps($conn, true);
+                } catch (\Throwable $t) {
+                    error_log("Sitemap generation error on Blog #{$id}: " . $t->getMessage());
+                }
+
                 // Refresh local blog array
                 $refresh = $conn->prepare("SELECT * FROM blogs WHERE id = ?");
                 $refresh->bind_param("i", $id);

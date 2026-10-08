@@ -10,6 +10,10 @@ if (isset($_GET['id'])) {
     $delete = mysqli_query($conn, $sql);
 
     if ($delete) {
+        try {
+            require_once dirname(__DIR__) . '/util/sitemap_generator.php';
+            generate_all_sitemaps($conn, true);
+        } catch (\Throwable $t) {}
         echo "<script>alert('Sub Category deleted successfully'); window.location.href='view-sub-categories.php';</script>";
     } else {
         echo "<script>alert('Error deleting category'); window.location.href='view-sub-categories.php';</script>";

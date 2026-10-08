@@ -5,6 +5,17 @@ ini_set('display_errors', 1);
 
 include "db-conn.php";
 
+if (!function_exists('auto_sync_sitemaps')) {
+    function auto_sync_sitemaps($conn) {
+        try {
+            require_once dirname(__DIR__) . '/util/sitemap_generator.php';
+            generate_all_sitemaps($conn, true);
+        } catch (\Throwable $t) {
+            error_log("Sitemap generation error: " . $t->getMessage());
+        }
+    }
+}
+
 if (isset($_POST["add-categories"])) {
     // Initialize variables
     $errors = [];
@@ -65,6 +76,7 @@ if (isset($_POST["add-categories"])) {
         $stmt->bind_param("issssssi", $cate_id, $cate_name, $meta_title, $meta_desc, $meta_key, $image_name, $slug_url, $status);
 
         if ($stmt->execute()) {
+            auto_sync_sitemaps($conn);
             $_SESSION['success'] = "Category added successfully!";
             header("Location: view-categories.php");
             exit();
@@ -156,6 +168,7 @@ if (isset($_POST["add-sub-categories"])) {
 
     $check = mysqli_query($conn, $sql);
     if ($check) {
+        auto_sync_sitemaps($conn);
 ?>
         <script type="text/javascript">
             alert('Add sub category Successfully!');

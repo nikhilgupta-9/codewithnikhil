@@ -187,6 +187,15 @@ try {
     }
 
     // 6. Check LinkedIn token expiration (< 7 days remaining)
+    // Synchronize and update all XML sitemaps
+    try {
+        require_once dirname(__DIR__) . '/util/sitemap_generator.php';
+        generate_all_sitemaps(null, true);
+        $logger->info("XML Sitemaps automatically verified & synchronized.");
+    } catch (\Throwable $e) {
+        $logger->error("Sitemap cron sync error: " . $e->getMessage());
+    }
+
     checkTokenExpirations($pdo, $logger);
 
 } catch (\Throwable $e) {

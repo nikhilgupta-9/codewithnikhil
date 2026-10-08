@@ -109,7 +109,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     error_log("Social draft generation error for Blog #{$newBlogId}: " . $t->getMessage());
                 }
 
-                $_SESSION['success'] = "Article created successfully! AI has generated ready-to-review social media drafts in your queue.";
+                // Automatically regenerate all sitemaps in real-time
+                try {
+                    require_once dirname(__DIR__) . '/util/sitemap_generator.php';
+                    generate_all_sitemaps($conn, true);
+                } catch (\Throwable $t) {
+                    error_log("Sitemap generation error on Blog #{$newBlogId}: " . $t->getMessage());
+                }
+
+                $_SESSION['success'] = "Article created successfully! AI has generated ready-to-review social media drafts in your queue, and sitemaps (sitemap.xml, sitemap-blogs.xml) have been automatically updated.";
                 header("Location: view-all-blog.php");
                 exit();
             } else {

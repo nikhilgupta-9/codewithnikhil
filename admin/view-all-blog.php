@@ -23,9 +23,17 @@ if (isset($_POST['delete_id']) && is_numeric($_POST['delete_id'])) {
     $stmtDel = $conn->prepare("DELETE FROM blogs WHERE id = ?");
     $stmtDel->bind_param("i", $delId);
     if ($stmtDel->execute()) {
+        // Automatically regenerate all sitemaps in real-time
+        try {
+            require_once dirname(__DIR__) . '/util/sitemap_generator.php';
+            generate_all_sitemaps($conn, true);
+        } catch (\Throwable $t) {
+            error_log("Sitemap generation error on Blog deletion #{$delId}: " . $t->getMessage());
+        }
+
         $_SESSION['delete_message'] = [
             'type' => 'success',
-            'text' => "Article #$delId deleted successfully."
+            'text' => "Article #$delId deleted successfully and sitemap updated."
         ];
     } else {
         $_SESSION['delete_message'] = [

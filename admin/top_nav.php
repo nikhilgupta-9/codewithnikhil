@@ -75,7 +75,11 @@ $notifCount = count($notifications);
     </div>
 
     <!-- Right: Notification Bell & Admin Profile Dropdown -->
-    <div class="d-flex align-items-center gap-3">
+        <!-- Sitemap Quick Sync -->
+        <button type="button" class="btn btn-sm btn-outline-secondary d-none d-md-inline-flex align-items-center gap-1 rounded-pill px-3" onclick="syncSitemapNow(this)" title="Regenerate all XML Sitemaps">
+            <i class="fas fa-sitemap fa-xs text-info"></i> Sync Sitemap
+        </button>
+
         <!-- Live Quick View Site Link -->
         <a href="../" target="_blank" class="btn btn-sm btn-outline-primary d-none d-sm-inline-flex align-items-center gap-1 rounded-pill px-3">
             <i class="fas fa-external-link-alt fa-xs"></i> View Website
@@ -146,3 +150,19 @@ $notifCount = count($notifications);
         </div>
     </div>
 </div>
+
+<script>
+function syncSitemapNow(btn) {
+    const $b = $(btn);
+    const orig = $b.html();
+    $b.prop('disabled', true).html('<i class="fas fa-spinner fa-spin fa-xs"></i> Syncing...');
+    $.getJSON('../util/sitemap_generator.php?run=1', function(res) {
+        $b.prop('disabled', false).html('<i class="fas fa-check text-success fa-xs"></i> Synced!');
+        alert('✅ Sitemaps Synchronized Successfully!\n\nTotal Indexed URLs: ' + (res.counts ? res.counts.total : '668') + '\n- Main & Tools: ' + (res.counts ? res.counts.main : '') + '\n- Published Blogs: ' + (res.counts ? res.counts.blogs : '') + '\n- Cities & Hubs: ' + (res.counts ? res.counts.locations : ''));
+        setTimeout(function() { $b.html(orig); }, 2500);
+    }).fail(function() {
+        $b.prop('disabled', false).html(orig);
+        alert('Error updating sitemap. Please check server logs.');
+    });
+}
+</script>
