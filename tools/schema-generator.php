@@ -2,10 +2,11 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free Schema Markup Generator — JSON-LD Code | NikhilWorks";
-$metaDesc = "Generate JSON-LD schema markup for Local Business, FAQ, Article, Product and more. Copy-paste ready code for Google rich results. Free tool 2026.";
+$pageTitle = "Free Schema JSON-LD Generator — Structured Data Markup Studio | NikhilWorks";
+$metaDesc = "Generate valid Schema.org JSON-LD structured data for LocalBusiness, FAQ, Person, Article & Product. Earn Google rich snippets & star ratings. 100% free.";
 $canonical = $site . "tools/schema-generator/";
-$metaKeywords = "schema markup generator, json-ld generator free, local business schema generator, faq schema generator, structured data generator online";
+$metaKeywords = "schema generator json ld, structured data generator free, localbusiness schema generator, faq schema maker, google rich snippets generator india";
+$currentTool = 'schema-generator';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,9 +16,10 @@ $metaKeywords = "schema markup generator, json-ld generator free, local business
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="site-url" content="<?= $site ?>">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
-  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -27,405 +29,237 @@ $metaKeywords = "schema markup generator, json-ld generator free, local business
   <meta property="og:type" content="website">
   <meta property="og:image" content="<?= $site ?>assets/img/logo/og-tools.jpg">
 
-  <!-- Schema: SoftwareApplication -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Schema JSON-LD Markup Generator",
-    "applicationCategory": "SEOApplication",
-    "operatingSystem": "Web Browser",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
-    "provider": {
-      "@type": "Person",
-      "name": "Nikhil Gupta",
-      "url": "https://nikhilworks.com"
-    }
-  }
-  </script>
-
-  <!-- Schema: BreadcrumbList -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?= $site ?>" },
-      { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "<?= $site ?>free-tools/" },
-      { "@type": "ListItem", "position": 3, "name": "Schema JSON-LD Generator" }
-    ]
-  }
-  </script>
-
-  <!-- Schema: FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is Schema JSON-LD structured data?",
-        "acceptedAnswer": { "@type": "Answer", "text": "JSON-LD (JavaScript Object Notation for Linked Data) is Google's recommended format for adding structured data to webpages to help crawlers understand your content context and trigger rich snippets." }
-      },
-      {
-        "@type": "Question",
-        "name": "Where do I paste the generated Schema code?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Paste the generated <script type='application/ld+json'>...</script> block inside the <head> or <body> section of your HTML webpage." }
-      }
-    ]
-  }
-  </script>
-
-  <!--=====FAB ICON=======-->
+  <!-- Favicon -->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 
-  <!--===== CSS LINK =======-->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/magnific-popup.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/sidebar.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/slick-slider.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/nice-select.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
+  <link rel="stylesheet" href="<?= $site ?>tools/assets/tool-app.css">
+
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
 
   <style>
-    :root {
-      --brand-teal: #104041;
-      --brand-lime: #ADFF1C;
-    }
-    .tool-hero {
-      background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.14) 0%, transparent 45%),
-                  radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
-                  linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
-      padding: 140px 0 65px;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-    @media (max-width: 991px) {
-      .tool-hero {
-        padding: 110px 0 50px;
-      }
-    }
-    .site-breadcrumb {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 30px;
-      padding: 6px 18px;
-      margin-bottom: 20px;
-      font-size: 13.5px;
-      backdrop-filter: blur(8px);
-    }
-    .site-breadcrumb a {
-      color: #cbe3e1;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .site-breadcrumb a:hover {
-      color: var(--brand-lime);
-    }
-    .site-breadcrumb .bc-sep {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 10px;
-    }
-    .site-breadcrumb .bc-current {
-      color: var(--brand-lime);
-      font-weight: 700;
-    }
-    .tool-card-box {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    }
-    .content-section h2 {
-      font-size: 22px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-top: 35px;
-      margin-bottom: 15px;
-    }
-    .content-section p, .content-section li {
-      color: #475569;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-    .faq-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      background: #fff;
-    }
-    .faq-card summary {
-      padding: 15px 20px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #0f172a;
-    }
-    .faq-card p {
-      padding: 0 20px 15px;
-      color: #64748b;
-      margin: 0;
+    .schema-code-box {
+      background: #040c0d;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      font-family: var(--code-font);
+      font-size: 13px;
+      color: #38bdf8;
+      padding: 16px;
+      resize: vertical;
+      min-height: 300px;
     }
   </style>
 </head>
-<body class="homepage4-body">
 
-  <?php include_once dirname(__DIR__) . "/includes/header.php" ?>
+<body class="tools-app-body">
 
-  <!-- HERO -->
-  <div class="tool-hero text-center">
-    <div class="hero-grid-overlay"></div>
-    <div class="container" style="position: relative; z-index: 2;">
-      <nav aria-label="breadcrumb">
-        <div class="site-breadcrumb">
-          <a href="<?= $site ?>"><i class="fa-solid fa-house fa-xs"></i> Home</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <a href="<?= $site ?>free-tools/">Free Tools</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <span class="bc-current">Schema JSON-LD Generator</span>
-        </div>
-      </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free Schema Markup Generator — JSON-LD for SEO (2026)</h1>
-      <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
-        Generate 100% valid JSON-LD schemas for Local Business, Organization, Person, Article, FAQ, and Product.
-      </p>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-header.php"; ?>
 
-  <div class="container my-5">
-    <div class="row g-4">
+  <div class="app-wrapper">
+    
+    <?php include_once __DIR__ . "/includes/tool-sidebar.php"; ?>
+
+    <main class="app-main-content">
       
-      <!-- Inputs Column -->
-      <div class="col-lg-6">
-        <div class="tool-card-box">
-          
-          <div class="mb-3">
-            <label class="form-label fw-bold">Select Schema.org Type</label>
-            <select id="schemaType" class="form-select form-select-lg">
-              <option value="LocalBusiness" selected>📍 Local Business (Shop, Agency, Office)</option>
-              <option value="Organization">🏢 Organization / Company</option>
-              <option value="Person">👤 Person / Freelancer / Consultant</option>
-              <option value="Article">📰 Article / Blog Post</option>
-              <option value="FAQPage">❓ FAQ Page (Q&amp;A)</option>
-              <option value="Product">🛍️ Product / E-commerce Item</option>
-            </select>
+      <!-- Workspace Card -->
+      <div class="tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div class="tool-header-left">
+            <div class="tool-header-icon icon-cyan">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <div>
+              <h1 class="tool-header-title">Schema JSON-LD Generator</h1>
+              <p class="tool-header-desc">Generate valid Schema.org structured data for LocalBusiness, FAQ, Person, Article &amp; Product to earn Google Rich Snippets.</p>
+            </div>
           </div>
-
-          <!-- Dynamic Form Containers -->
-          <div id="schemaFormContainer">
-            
-            <!-- LocalBusiness / Organization -->
-            <div id="sec-business" class="schema-sec">
-              <div class="mb-3">
-                <label class="form-label fw-bold">Business Name <span class="text-danger">*</span></label>
-                <input type="text" id="bName" class="form-control" value="NikhilWorks Web & SEO Agency">
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-bold">Website URL <span class="text-danger">*</span></label>
-                <input type="url" id="bUrl" class="form-control" value="https://nikhilworks.com">
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-bold">Logo Image URL</label>
-                <input type="url" id="bLogo" class="form-control" value="https://nikhilworks.com/assets/img/logo/logo4.png">
-              </div>
-              <div class="row g-2 mb-3">
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">Phone Number</label>
-                  <input type="tel" id="bPhone" class="form-control" value="+918368552640">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">Price Range</label>
-                  <input type="text" id="bPrice" class="form-control" value="₹₹">
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-bold">Street Address &amp; City</label>
-                <input type="text" id="bStreet" class="form-control" value="Karampura, New Delhi, India">
-              </div>
-            </div>
-
-            <!-- Person -->
-            <div id="sec-person" class="schema-sec d-none">
-              <div class="mb-3">
-                <label class="form-label fw-bold">Person Name</label>
-                <input type="text" id="pName" class="form-control" value="Nikhil Gupta">
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-bold">Job Title</label>
-                <input type="text" id="pJob" class="form-control" value="Web Developer & Technical SEO Expert">
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-bold">Website / Portfolio URL</label>
-                <input type="url" id="pUrl" class="form-control" value="https://nikhilworks.com">
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-bold">LinkedIn Profile URL</label>
-                <input type="url" id="pSocial" class="form-control" value="https://www.linkedin.com/in/iamnikhilgupta/">
-              </div>
-            </div>
-
-            <!-- Article -->
-            <div id="sec-article" class="schema-sec d-none">
-              <div class="mb-3">
-                <label class="form-label fw-bold">Article Headline</label>
-                <input type="text" id="artHeadline" class="form-control" value="Building High-Performance Websites with Modern PHP">
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-bold">Article Image URL</label>
-                <input type="url" id="artImage" class="form-control" value="https://nikhilworks.com/assets/img/preview.png">
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-bold">Author Name</label>
-                <input type="text" id="artAuthor" class="form-control" value="Nikhil Gupta">
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-bold">Publisher Name</label>
-                <input type="text" id="artPub" class="form-control" value="NikhilWorks">
-              </div>
-            </div>
-
-            <!-- FAQPage -->
-            <div id="sec-faq" class="schema-sec d-none">
-              <div class="mb-3">
-                <label class="form-label fw-bold">Question 1</label>
-                <input type="text" id="faqQ1" class="form-control" value="How much does a custom website cost?">
-                <label class="form-label fw-bold mt-2">Answer 1</label>
-                <textarea id="faqA1" class="form-control" rows="2">Custom business websites at NikhilWorks start from ₹7,999 with complete SEO optimization.</textarea>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-bold">Question 2</label>
-                <input type="text" id="faqQ2" class="form-control" value="How long does it take to build a website?">
-                <label class="form-label fw-bold mt-2">Answer 2</label>
-                <textarea id="faqA2" class="form-control" rows="2">Standard business websites are delivered in 5 to 7 working days.</textarea>
-              </div>
-            </div>
-
-            <!-- Product -->
-            <div id="sec-product" class="schema-sec d-none">
-              <div class="mb-3">
-                <label class="form-label fw-bold">Product Name</label>
-                <input type="text" id="prodName" class="form-control" value="E-Commerce Website Package">
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-bold">Product Image URL</label>
-                <input type="url" id="prodImg" class="form-control" value="https://nikhilworks.com/assets/img/preview.png">
-              </div>
-              <div class="row g-2 mb-3">
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">Price (e.g. 14999)</label>
-                  <input type="number" id="prodPrice" class="form-control" value="14999">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">Currency</label>
-                  <input type="text" id="prodCur" class="form-control" value="INR">
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- JSON-LD Output Column -->
-      <div class="col-lg-6">
-        <div class="tool-card-box h-100 d-flex flex-column justify-content-between">
-          <div>
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-code text-success me-2"></i> Generated JSON-LD Code</h5>
-              <span class="badge bg-success text-white">Valid Schema.org</span>
-            </div>
-
-            <textarea id="schemaCodeArea" class="form-control font-monospace bg-light" style="font-size: 13px; height: 360px;" readonly></textarea>
-          </div>
-
-          <div class="d-flex gap-2 mt-4">
-            <button type="button" class="btn btn-dark fw-bold flex-grow-1 py-2" onclick="copySchemaJson()" id="btnCopySchema">
-              <i class="fa-regular fa-copy me-1"></i> Copy JSON-LD Script
+          <div class="tool-workspace-actions">
+            <button type="button" class="topbar-btn topbar-btn-ghost" onclick="ToolsApp.openHistoryDrawer('schema-generator')">
+              <i class="fa-solid fa-clock-rotate-left text-warning"></i> Schema History
             </button>
-            <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener" class="btn btn-outline-primary fw-bold py-2">
-              <i class="fa-solid fa-vial-circle-check me-1"></i> Test on Google
-            </a>
           </div>
         </div>
+
+        <div class="row g-4">
+          <!-- Inputs Column -->
+          <div class="col-lg-6">
+            <h6 class="fw-bold text-white mb-3"><i class="fa-solid fa-sliders text-cyan me-2"></i> Structured Data Parameters</h6>
+
+            <div class="mb-3">
+              <label class="form-label">Schema Type</label>
+              <select id="schemaType" class="form-select">
+                <option value="LocalBusiness" selected>LocalBusiness (Store, Clinic, Agency)</option>
+                <option value="Organization">Organization (Company, Enterprise)</option>
+                <option value="Person">Person (Developer, Founder, Creator)</option>
+                <option value="Article">Article / Blog Post</option>
+                <option value="FAQPage">FAQPage (Accordion Q&amp;A)</option>
+                <option value="Product">Product / E-Commerce Offer</option>
+              </select>
+            </div>
+
+            <!-- Dynamic Schema Fields -->
+            <div id="sec-business">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Business Name</label>
+                  <input type="text" id="bName" class="form-control" placeholder="NikhilWorks" value="NikhilWorks">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Website URL</label>
+                  <input type="url" id="bUrl" class="form-control" placeholder="https://nikhilworks.com" value="https://nikhilworks.com">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Logo URL</label>
+                  <input type="url" id="bLogo" class="form-control" placeholder="https://nikhilworks.com/logo.png" value="https://nikhilworks.com/assets/img/logo/fav-logo5.png">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Telephone</label>
+                  <input type="tel" id="bPhone" class="form-control" placeholder="+918368552640" value="+918368552640">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Price Range</label>
+                  <input type="text" id="bPrice" class="form-control" placeholder="₹₹" value="₹₹">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Street Address / City</label>
+                  <input type="text" id="bStreet" class="form-control" placeholder="Delhi NCR, India" value="Delhi NCR, India">
+                </div>
+              </div>
+            </div>
+
+            <div id="sec-person" class="d-none">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Full Name</label>
+                  <input type="text" id="pName" class="form-control" placeholder="Nikhil Gupta" value="Nikhil Gupta">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Job Title / Role</label>
+                  <input type="text" id="pJob" class="form-control" placeholder="Full-Stack Web Developer" value="Full-Stack Web Developer">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Portfolio URL</label>
+                  <input type="url" id="pUrl" class="form-control" placeholder="https://nikhilworks.com" value="https://nikhilworks.com">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Social Profile (LinkedIn/GitHub)</label>
+                  <input type="url" id="pSocial" class="form-control" placeholder="https://linkedin.com/in/..." value="https://linkedin.com/in/">
+                </div>
+              </div>
+            </div>
+
+            <div id="sec-article" class="d-none">
+              <div class="row g-3">
+                <div class="col-12">
+                  <label class="form-label">Article Headline</label>
+                  <input type="text" id="artHeadline" class="form-control" placeholder="10 Web Design Trends for 2026">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Featured Image URL</label>
+                  <input type="url" id="artImage" class="form-control" placeholder="https://example.com/banner.jpg">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Author Name</label>
+                  <input type="text" id="artAuthor" class="form-control" placeholder="Nikhil Gupta" value="Nikhil Gupta">
+                </div>
+                <div class="col-md-12">
+                  <label class="form-label">Publisher Name</label>
+                  <input type="text" id="artPub" class="form-control" placeholder="NikhilWorks" value="NikhilWorks">
+                </div>
+              </div>
+            </div>
+
+            <div id="sec-faq" class="d-none">
+              <div class="mb-2">
+                <label class="form-label">FAQ Question 1</label>
+                <input type="text" id="faqQ1" class="form-control" placeholder="How much does a website cost?" value="How much does custom website development cost?">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">FAQ Answer 1</label>
+                <textarea id="faqA1" class="form-control" rows="2" placeholder="Website costs vary based on scope...">Pricing starts from ₹15,000 depending on features, design complexity, and integrations.</textarea>
+              </div>
+              <div class="mb-2">
+                <label class="form-label">FAQ Question 2</label>
+                <input type="text" id="faqQ2" class="form-control" placeholder="Do you provide SEO optimization?" value="Do you provide on-page and technical SEO?">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">FAQ Answer 2</label>
+                <textarea id="faqA2" class="form-control" rows="2" placeholder="Yes, all sites include schema...">Yes, all custom websites engineered by NikhilWorks include structured schema, Core Web Vitals optimization, and meta tags.</textarea>
+              </div>
+            </div>
+
+            <div id="sec-product" class="d-none">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Product Name</label>
+                  <input type="text" id="prodName" class="form-control" placeholder="E-commerce Web Package">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Image URL</label>
+                  <input type="url" id="prodImg" class="form-control" placeholder="https://example.com/item.jpg">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Price</label>
+                  <input type="number" id="prodPrice" class="form-control" placeholder="25000" value="25000">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Currency</label>
+                  <input type="text" id="prodCur" class="form-control" placeholder="INR" value="INR">
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <button type="button" class="topbar-btn topbar-btn-primary w-100 py-3 justify-content-center" onclick="saveSchemaToHistory()">
+                <i class="fa-solid fa-floppy-disk me-1"></i> Save Schema to History
+              </button>
+            </div>
+          </div>
+
+          <!-- Output Code Column -->
+          <div class="col-lg-6">
+            <div class="tool-output-panel align-items-stretch text-start">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="text-white fw-bold mb-0"><i class="fa-solid fa-code text-cyan me-2"></i> Valid JSON-LD Output</h6>
+                <button type="button" class="topbar-btn topbar-btn-primary" onclick="copySchemaJson()" id="btnCopySchema">
+                  <i class="fa-regular fa-copy me-1"></i> Copy Code
+                </button>
+              </div>
+
+              <textarea id="schemaCodeArea" class="form-control schema-code-box" readonly></textarea>
+              
+              <div class="text-muted small mt-2">
+                <i class="fa-solid fa-circle-info me-1 text-info"></i> Paste inside the <code>&lt;head&gt;</code> section of your HTML page.
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-    </div>
+      <?php include_once __DIR__ . "/includes/tool-footer.php"; ?>
 
-    <!-- CONTENT SECTION -->
-    <div class="content-section mt-5">
-      <h2>Why Schema Markup is Essential for Modern SEO</h2>
-      <p>
-        Structured data using the <strong>Schema.org vocabulary</strong> enables search engine robots to understand the exact semantic context of your business, author, pricing, and FAQ items.
-        It directly powers <strong>Google Rich Snippets</strong>, including star ratings, review badges, breadcrumbs, and instant answer carousels.
-      </p>
-
-      <h2>Frequently Asked Questions</h2>
-      <details class="faq-card" open>
-        <summary>Will adding Schema JSON-LD guarantee rich snippets on Google?</summary>
-        <p>While structured data is a prerequisite, Google's algorithms dynamically decide when to display rich snippets based on search intent, content quality, and site authority.</p>
-      </details>
-      <details class="faq-card">
-        <summary>Can I have multiple Schema types on a single webpage?</summary>
-        <p>Yes! It is common and recommended to have an <code>Organization</code> schema alongside <code>BreadcrumbList</code>, <code>Article</code>, and <code>FAQPage</code> schemas on the same page.</p>
-      </details>
-
-      <h2>Related Free Tools</h2>
-      <div class="row g-3 mt-1">
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>tools/meta-preview/" class="text-decoration-none text-dark"><i class="fa-solid fa-tags text-primary me-1"></i> Meta Tags Preview</a></h6>
-            <small class="text-muted">Simulate Google SERP &amp; Social cards.</small>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>tools/pagespeed/" class="text-decoration-none text-dark"><i class="fa-solid fa-gauge-high text-danger me-1"></i> PageSpeed Checker</a></h6>
-            <small class="text-muted">Audit Core Web Vitals and Lighthouse scores.</small>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>seo-auditor/" class="text-decoration-none text-dark"><i class="fa-solid fa-stethoscope text-success me-1"></i> Free SEO Auditor</a></h6>
-            <small class="text-muted">Comprehensive 50-point technical SEO scan.</small>
-          </div>
-        </div>
-      </div>
-    </div>
+    </main>
   </div>
 
-  <!-- CTA BANNER -->
-  <div class="cta4-section-area sp1" style="background: linear-gradient(135deg, #104041 0%, #0d2e2f 100%);">
-    <div class="container text-center">
-      <h2 class="text-light fw-bold mb-2">Need Advanced Programmatic SEO &amp; Schema Architecture?</h2>
-      <p class="text-light opacity-75 mb-4" style="max-width: 600px; margin: 0 auto;">
-        NikhilWorks engineers scalable schema architectures for eCommerce stores, directories, and multi-location businesses.
-      </p>
-      <a href="<?= $site ?>contact/" class="header-btn9">Contact NikhilWorks <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-auth-modal.php"; ?>
+  <?php include_once __DIR__ . "/includes/tool-history-drawer.php"; ?>
 
-  <?php include_once dirname(__DIR__) . "/includes/footer.php" ?>
+  <script src="<?= $site ?>assets/js/plugins/bootstrap.min.js"></script>
+  <script src="<?= $site ?>tools/assets/tool-app.js"></script>
 
   <script>
     $('#schemaType').on('change', function() {
       const type = $(this).val();
-      $('.schema-sec').addClass('d-none');
+      $('#sec-business, #sec-person, #sec-article, #sec-faq, #sec-product').addClass('d-none');
       if (type === 'LocalBusiness' || type === 'Organization') $('#sec-business').removeClass('d-none');
       if (type === 'Person') $('#sec-person').removeClass('d-none');
       if (type === 'Article') $('#sec-article').removeClass('d-none');
@@ -528,15 +362,63 @@ $metaKeywords = "schema markup generator, json-ld generator free, local business
       $('#schemaCodeArea').val(scriptFormatted);
     }
 
+    function saveSchemaToHistory() {
+      const type = $('#schemaType').val();
+      const code = $('#schemaCodeArea').val();
+      const title = `Schema: ${type} (${$('#bName').val() || $('#pName').val() || $('#artHeadline').val() || type})`;
+      const summary = `Type: ${type} JSON-LD Structured Data`;
+      
+      const payload = {
+        type: type,
+        bName: $('#bName').val(),
+        bUrl: $('#bUrl').val(),
+        bLogo: $('#bLogo').val(),
+        bPhone: $('#bPhone').val(),
+        bPrice: $('#bPrice').val(),
+        bStreet: $('#bStreet').val(),
+        pName: $('#pName').val(),
+        pJob: $('#pJob').val(),
+        pUrl: $('#pUrl').val(),
+        pSocial: $('#pSocial').val(),
+        artHeadline: $('#artHeadline').val(),
+        artAuthor: $('#artAuthor').val(),
+        faqQ1: $('#faqQ1').val(),
+        faqA1: $('#faqA1').val(),
+        prodName: $('#prodName').val(),
+        prodPrice: $('#prodPrice').val()
+      };
+
+      ToolsApp.saveHistory('schema-generator', title, summary, payload);
+    }
+
     function copySchemaJson() {
       const code = $('#schemaCodeArea').val();
-      navigator.clipboard.writeText(code);
-      const btn = $('#btnCopySchema');
-      btn.html('<i class="fa-solid fa-check me-1"></i> Copied to Clipboard!');
-      setTimeout(() => {
-        btn.html('<i class="fa-regular fa-copy me-1"></i> Copy JSON-LD Script');
-      }, 2000);
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(code).then(() => ToolsApp.showToast('JSON-LD Schema copied! 📋'));
+      } else {
+        $('#schemaCodeArea').select();
+        document.execCommand('copy');
+        ToolsApp.showToast('JSON-LD Schema copied! 📋');
+      }
     }
+
+    // 1-Click Restore Data from History Drawer
+    $(document).on('tools:restore-payload', function(e, toolType, payload) {
+      if (toolType === 'schema-generator' && payload) {
+        if (payload.type) $('#schemaType').val(payload.type).trigger('change');
+        if (payload.bName) $('#bName').val(payload.bName);
+        if (payload.bUrl) $('#bUrl').val(payload.bUrl);
+        if (payload.bPhone) $('#bPhone').val(payload.bPhone);
+        if (payload.pName) $('#pName').val(payload.pName);
+        if (payload.pJob) $('#pJob').val(payload.pJob);
+        if (payload.artHeadline) $('#artHeadline').val(payload.artHeadline);
+        if (payload.faqQ1) $('#faqQ1').val(payload.faqQ1);
+        if (payload.faqA1) $('#faqA1').val(payload.faqA1);
+        if (payload.prodName) $('#prodName').val(payload.prodName);
+        if (payload.prodPrice) $('#prodPrice').val(payload.prodPrice);
+        generateSchema();
+      }
+    });
 
     $(document).ready(generateSchema);
   </script>

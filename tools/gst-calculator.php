@@ -2,10 +2,11 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free GST Calculator India 2026 — CGST SGST IGST | NikhilWorks";
-$metaDesc = "Calculate GST instantly — 5%, 12%, 18%, 28% with CGST & SGST breakdown. Add or remove GST from any amount. Free online GST calculator for India.";
+$pageTitle = "Free GST Calculator India — Inclusive & Exclusive Tax Breakup | NikhilWorks";
+$metaDesc = "Calculate Indian GST online free. Supports 5%, 12%, 18%, 28% and custom tax slabs with CGST, SGST, IGST breakup. Instant reverse tax calculation.";
 $canonical = $site . "tools/gst-calculator/";
-$metaKeywords = "gst calculator india, gst calculator online free, cgst sgst calculator, 18% gst calculator, gst inclusive exclusive calculator india";
+$metaKeywords = "gst calculator india, online gst calculator free, reverse gst calculator, cgst sgst calculator, gst tax calculation formula, free accounting tools india";
+$currentTool = 'gst-calculator';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,9 +16,10 @@ $metaKeywords = "gst calculator india, gst calculator online free, cgst sgst cal
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="site-url" content="<?= $site ?>">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
-  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -27,411 +29,229 @@ $metaKeywords = "gst calculator india, gst calculator online free, cgst sgst cal
   <meta property="og:type" content="website">
   <meta property="og:image" content="<?= $site ?>assets/img/logo/og-tools.jpg">
 
-  <!-- Schema: SoftwareApplication -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Indian GST Calculator Online",
-    "applicationCategory": "FinancialApplication",
-    "operatingSystem": "Web Browser",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
-    "provider": {
-      "@type": "Person",
-      "name": "Nikhil Gupta",
-      "url": "https://nikhilworks.com"
-    }
-  }
-  </script>
-
-  <!-- Schema: BreadcrumbList -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?= $site ?>" },
-      { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "<?= $site ?>free-tools/" },
-      { "@type": "ListItem", "position": 3, "name": "GST Calculator" }
-    ]
-  }
-  </script>
-
-  <!-- Schema: FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How to calculate GST Exclusive amount?",
-        "acceptedAnswer": { "@type": "Answer", "text": "GST Amount = (Original Cost * GST Rate) / 100. Total Price = Original Cost + GST Amount." }
-      },
-      {
-        "@type": "Question",
-        "name": "How to calculate GST Inclusive (Reverse GST) amount?",
-        "acceptedAnswer": { "@type": "Answer", "text": "GST Amount = Original Price - [Original Price * {100 / (100 + GST Rate)}]." }
-      }
-    ]
-  }
-  </script>
-
-  <!--=====FAB ICON=======-->
+  <!-- Favicon -->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 
-  <!--===== CSS LINK =======-->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/magnific-popup.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/sidebar.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/slick-slider.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/nice-select.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
+  <link rel="stylesheet" href="<?= $site ?>tools/assets/tool-app.css">
+
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
 
   <style>
-    :root {
-      --brand-teal: #104041;
-      --brand-lime: #ADFF1C;
-    }
-    .tool-hero {
-      background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.14) 0%, transparent 45%),
-                  radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
-                  linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
-      padding: 140px 0 65px;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-    @media (max-width: 991px) {
-      .tool-hero {
-        padding: 110px 0 50px;
-      }
-    }
-    .site-breadcrumb {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 30px;
-      padding: 6px 18px;
-      margin-bottom: 20px;
-      font-size: 13.5px;
-      backdrop-filter: blur(8px);
-    }
-    .site-breadcrumb a {
-      color: #cbe3e1;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .site-breadcrumb a:hover {
-      color: var(--brand-lime);
-    }
-    .site-breadcrumb .bc-sep {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 10px;
-    }
-    .site-breadcrumb .bc-current {
-      color: var(--brand-lime);
-      font-weight: 700;
-    }
-    .tool-card-box {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    }
     .btn-slab-toggle {
-      border: 1px solid #cbd5e1;
-      background: #f8fafc;
-      color: #334155;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
       font-weight: 700;
-      padding: 10px;
-      border-radius: 8px;
-      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 10px;
       transition: all 0.2s;
-      flex: 1;
-      text-align: center;
+      cursor: pointer;
     }
     .btn-slab-toggle.active, .btn-slab-toggle:hover {
       background: var(--brand-teal);
-      color: #fff;
-      border-color: var(--brand-teal);
+      border-color: var(--brand-lime);
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(173, 255, 28, 0.15);
     }
-    .result-metric-card {
-      background: #f8fafc;
+    .res-card-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
       border-radius: 12px;
-      padding: 18px;
-      border: 1px solid #e2e8f0;
+      padding: 16px 20px;
       margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .result-metric-title {
-      font-size: 13px;
-      color: #64748b;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .result-metric-value {
-      font-size: 24px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-top: 4px;
-    }
-    .content-section h2 {
+    .res-val-highlight {
       font-size: 22px;
       font-weight: 800;
-      color: #0f172a;
-      margin-top: 35px;
-      margin-bottom: 15px;
-    }
-    .content-section p, .content-section li {
-      color: #475569;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-    .faq-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      background: #fff;
-    }
-    .faq-card summary {
-      padding: 15px 20px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #0f172a;
-    }
-    .faq-card p {
-      padding: 0 20px 15px;
-      color: #64748b;
-      margin: 0;
+      color: var(--brand-lime);
+      font-family: var(--code-font);
     }
   </style>
 </head>
-<body class="homepage4-body">
 
-  <?php include_once dirname(__DIR__) . "/includes/header.php" ?>
+<body class="tools-app-body">
 
-  <!-- HERO -->
-  <div class="tool-hero text-center">
-    <div class="hero-grid-overlay"></div>
-    <div class="container" style="position: relative; z-index: 2;">
-      <nav aria-label="breadcrumb">
-        <div class="site-breadcrumb">
-          <a href="<?= $site ?>"><i class="fa-solid fa-house fa-xs"></i> Home</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <a href="<?= $site ?>free-tools/">Free Tools</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <span class="bc-current">GST Calculator</span>
-        </div>
-      </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free GST Calculator India — CGST, SGST &amp; IGST Breakdown</h1>
-      <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
-        Instant Goods &amp; Services Tax calculation with automatic CGST, SGST &amp; IGST breakdown.
-      </p>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-header.php"; ?>
 
-  <div class="container my-5">
-    <div class="row g-4">
+  <div class="app-wrapper">
+    
+    <?php include_once __DIR__ . "/includes/tool-sidebar.php"; ?>
+
+    <main class="app-main-content">
       
-      <!-- Calculator Inputs Column -->
-      <div class="col-lg-6">
-        <div class="tool-card-box">
-          <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-calculator text-primary me-2"></i> Tax Input Parameters</h5>
-          
-          <!-- Type Toggle -->
-          <div class="mb-4">
-            <label class="form-label fw-bold">Calculation Mode</label>
-            <div class="btn-group w-100" role="group">
-              <input type="radio" class="btn-check" name="gstType" id="typeExcl" value="exclusive" checked>
-              <label class="btn btn-outline-primary py-2 fw-bold" for="typeExcl">GST Exclusive (Add GST)</label>
-
-              <input type="radio" class="btn-check" name="gstType" id="typeIncl" value="inclusive">
-              <label class="btn btn-outline-primary py-2 fw-bold" for="typeIncl">GST Inclusive (Remove GST)</label>
+      <!-- Workspace Card -->
+      <div class="tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div class="tool-header-left">
+            <div class="tool-header-icon icon-amber">
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+            <div>
+              <h1 class="tool-header-title">GST Calculator India</h1>
+              <p class="tool-header-desc">Instant Goods &amp; Services Tax calculation with Inclusive/Exclusive mode, CGST, SGST &amp; IGST tax slab breakdowns.</p>
             </div>
           </div>
-
-          <!-- Amount Input -->
-          <div class="mb-4">
-            <label class="form-label fw-bold" id="amountLabel">Base Amount (₹)</label>
-            <div class="input-group">
-              <span class="input-group-text bg-light fw-bold">₹</span>
-              <input type="number" id="baseAmount" class="form-control form-control-lg fw-bold" placeholder="e.g. 10000" value="10000" min="0" step="0.01">
-            </div>
-          </div>
-
-          <!-- GST Rate Slabs -->
-          <div class="mb-4">
-            <label class="form-label fw-bold">Select GST Rate Slab (%)</label>
-            <div class="d-flex gap-2 flex-wrap mb-2">
-              <div class="btn-slab-toggle" data-rate="5">5%</div>
-              <div class="btn-slab-toggle" data-rate="12">12%</div>
-              <div class="btn-slab-toggle active" data-rate="18">18% (IT/Web)</div>
-              <div class="btn-slab-toggle" data-rate="28">28%</div>
-              <div class="btn-slab-toggle" data-rate="custom">Custom</div>
-            </div>
-            <div class="input-group d-none" id="customRateGroup">
-              <input type="number" id="customRateInput" class="form-control" placeholder="Enter custom GST %" min="0" max="100" step="0.1">
-              <span class="input-group-text">%</span>
-            </div>
-          </div>
-
-          <!-- Intra vs Inter-State Supply -->
-          <div class="mb-3">
-            <label class="form-label fw-bold">Transaction Type</label>
-            <select id="supplyType" class="form-select">
-              <option value="intra" selected>Intra-State Supply (CGST + SGST)</option>
-              <option value="inter">Inter-State Supply (IGST)</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Results Column -->
-      <div class="col-lg-6">
-        <div class="tool-card-box h-100 d-flex flex-column justify-content-between">
-          <div>
-            <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-receipt text-success me-2"></i> Calculation Breakdown</h5>
-            
-            <div class="result-metric-card">
-              <div class="result-metric-title">Actual Net Price (Pre-Tax)</div>
-              <div class="result-metric-value text-secondary" id="resNetPrice">₹10,000.00</div>
-            </div>
-
-            <div class="result-metric-card" style="background: rgba(16, 64, 65, 0.04); border-color: rgba(16, 64, 65, 0.2);">
-              <div class="result-metric-title text-primary">Total GST Amount (<span id="resGstPercent">18%</span>)</div>
-              <div class="result-metric-value text-primary" id="resGstAmount">₹1,800.00</div>
-            </div>
-
-            <!-- Tax Components (CGST/SGST vs IGST) -->
-            <div class="row g-2 mb-3" id="intraTaxRow">
-              <div class="col-6">
-                <div class="p-3 bg-light rounded-3 border">
-                  <small class="text-muted fw-bold d-block">CGST (<span id="resCgstPercent">9%</span>)</small>
-                  <strong class="text-dark fs-6" id="resCgst">₹900.00</strong>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="p-3 bg-light rounded-3 border">
-                  <small class="text-muted fw-bold d-block">SGST (<span id="resSgstPercent">9%</span>)</small>
-                  <strong class="text-dark fs-6" id="resSgst">₹900.00</strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="p-3 bg-light rounded-3 border mb-3 d-none" id="interTaxRow">
-              <small class="text-muted fw-bold d-block">Integrated Tax (IGST <span id="resIgstPercent">18%</span>)</small>
-              <strong class="text-dark fs-6" id="resIgst">₹1,800.00</strong>
-            </div>
-
-            <div class="result-metric-card bg-dark text-white">
-              <div class="result-metric-title text-white-50">Final Gross Total (Post-Tax)</div>
-              <div class="result-metric-value text-success" id="resTotalPrice">₹11,800.00</div>
-            </div>
-          </div>
-
-          <div class="mt-3">
-            <button type="button" class="btn btn-outline-dark w-100" onclick="copyGstSummary()">
-              <i class="fa-regular fa-copy me-1"></i> Copy Breakdown Summary
+          <div class="tool-workspace-actions">
+            <button type="button" class="topbar-btn topbar-btn-ghost" onclick="ToolsApp.openHistoryDrawer('gst-calculator')">
+              <i class="fa-solid fa-clock-rotate-left text-warning"></i> Calculation History
             </button>
           </div>
         </div>
+
+        <div class="row g-4">
+          <!-- Input Controls Column -->
+          <div class="col-lg-6">
+            <h6 class="fw-bold text-white mb-3"><i class="fa-solid fa-sliders text-warning me-2"></i> Tax Input Parameters</h6>
+
+            <!-- GST Calculation Mode -->
+            <div class="mb-3">
+              <label class="form-label">Calculation Mode</label>
+              <div class="d-flex gap-2">
+                <div class="form-check flex-fill p-2 px-3 rounded" style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);">
+                  <input class="form-check-input ms-0 me-2" type="radio" name="gstType" id="typeExcl" value="exclusive" checked>
+                  <label class="form-check-label text-light fw-bold" for="typeExcl">GST Exclusive (Add Tax)</label>
+                </div>
+                <div class="form-check flex-fill p-2 px-3 rounded" style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);">
+                  <input class="form-check-input ms-0 me-2" type="radio" name="gstType" id="typeIncl" value="inclusive">
+                  <label class="form-check-label text-light fw-bold" for="typeIncl">GST Inclusive (Reverse)</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Base Amount -->
+            <div class="mb-3">
+              <label class="form-label" id="amountLabel">Base Amount (₹) <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <span class="input-group-text fw-bold">₹</span>
+                <input type="number" id="baseAmount" class="form-control fw-bold" placeholder="50000" value="50000" min="0" step="any">
+              </div>
+            </div>
+
+            <!-- Tax Rate Slabs -->
+            <div class="mb-3">
+              <label class="form-label">GST Tax Rate Slab</label>
+              <div class="d-flex flex-wrap gap-2">
+                <button type="button" class="btn-slab-toggle" data-rate="5">5%</button>
+                <button type="button" class="btn-slab-toggle" data-rate="12">12%</button>
+                <button type="button" class="btn-slab-toggle active" data-rate="18">18% (Standard)</button>
+                <button type="button" class="btn-slab-toggle" data-rate="28">28%</button>
+                <button type="button" class="btn-slab-toggle" data-rate="custom">Custom %</button>
+              </div>
+
+              <div id="customRateGroup" class="mt-2 d-none">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">Custom Tax Rate</span>
+                  <input type="number" id="customRateInput" class="form-control" placeholder="e.g. 7.5" value="18" min="0" max="100" step="0.1">
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- State / Supply Type -->
+            <div class="mb-3">
+              <label class="form-label">Supply Destination</label>
+              <select id="supplyType" class="form-select">
+                <option value="intra" selected>Intra-State (Same State — CGST + SGST)</option>
+                <option value="inter">Inter-State (Outside State — IGST)</option>
+              </select>
+            </div>
+
+            <div class="mt-4">
+              <button type="button" class="topbar-btn topbar-btn-primary w-100 py-3 justify-content-center" onclick="saveGstToHistory()">
+                <i class="fa-solid fa-floppy-disk me-1"></i> Save Calculation to History
+              </button>
+            </div>
+          </div>
+
+          <!-- Output Column -->
+          <div class="col-lg-6">
+            <div class="tool-output-panel align-items-stretch text-start">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="text-white fw-bold mb-0"><i class="fa-solid fa-receipt text-warning me-2"></i> Tax Breakdown Summary</h6>
+                <button type="button" class="btn btn-sm btn-outline-secondary text-white border-0" onclick="copyGstSummary()">
+                  <i class="fa-regular fa-copy me-1"></i> Copy
+                </button>
+              </div>
+
+              <!-- Net Base Price -->
+              <div class="res-card-box">
+                <div>
+                  <div class="text-muted small">Net Base Amount</div>
+                  <div class="fw-bold text-white fs-6">Pre-tax Price</div>
+                </div>
+                <div class="res-val-highlight" id="resNetPrice">₹50,000.00</div>
+              </div>
+
+              <!-- GST Tax Total -->
+              <div class="res-card-box" style="border-color: rgba(251, 191, 36, 0.3);">
+                <div>
+                  <div class="text-muted small">GST Tax Amount (<span id="resGstPercent">18%</span>)</div>
+                  <div class="fw-bold text-warning fs-6">Total Tax Surcharge</div>
+                </div>
+                <div class="res-val-highlight text-warning" id="resGstAmount">₹9,000.00</div>
+              </div>
+
+              <!-- CGST / SGST Split -->
+              <div id="intraTaxRow">
+                <div class="row g-2 mb-2">
+                  <div class="col-6">
+                    <div class="p-2 rounded text-center" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle);">
+                      <small class="text-muted d-block">CGST (<span id="resCgstPercent">9%</span>)</small>
+                      <strong class="text-white" id="resCgst">₹4,500.00</strong>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="p-2 rounded text-center" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle);">
+                      <small class="text-muted d-block">SGST (<span id="resSgstPercent">9%</span>)</small>
+                      <strong class="text-white" id="resSgst">₹4,500.00</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- IGST Split -->
+              <div id="interTaxRow" class="d-none mb-2">
+                <div class="p-2 rounded text-center" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle);">
+                  <small class="text-muted d-block">Integrated Tax IGST (<span id="resIgstPercent">18%</span>)</small>
+                  <strong class="text-white" id="resIgst">₹9,000.00</strong>
+                </div>
+              </div>
+
+              <!-- Total Final Invoice Price -->
+              <div class="res-card-box" style="background: rgba(173, 255, 28, 0.1); border-color: var(--brand-lime);">
+                <div>
+                  <div class="text-muted small">Total Gross Payable</div>
+                  <div class="fw-bold text-white fs-6">Final Invoice Amount</div>
+                </div>
+                <div class="res-val-highlight" id="resTotalPrice">₹59,000.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-    </div>
+      <?php include_once __DIR__ . "/includes/tool-footer.php"; ?>
 
-    <!-- HOW TO USE & FORMULA SECTION -->
-    <div class="content-section mt-5">
-      <h2>How GST Calculation Works in India</h2>
-      <p>
-        The Goods and Services Tax (GST) is a destination-based unified tax levied on the manufacturing, sale, and consumption of goods and services throughout India.
-      </p>
-
-      <div class="row g-3">
-        <div class="col-md-6">
-          <div class="p-4 bg-light rounded-3 border">
-            <h5 class="fw-bold text-dark">GST Exclusive Formula:</h5>
-            <code>GST Amount = (Amount &times; GST%) / 100</code><br>
-            <code>Total = Amount + GST Amount</code>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="p-4 bg-light rounded-3 border">
-            <h5 class="fw-bold text-dark">GST Inclusive (Reverse GST) Formula:</h5>
-            <code>Net Price = (Total Amount &times; 100) / (100 + GST%)</code><br>
-            <code>GST Amount = Total Amount - Net Price</code>
-          </div>
-        </div>
-      </div>
-
-      <h2>Standard Indian GST Tax Slabs (2026)</h2>
-      <ul>
-        <li><strong>5% Slab:</strong> Essential household items, packaged spices, economy flight tickets.</li>
-        <li><strong>12% Slab:</strong> Business class air tickets, work contracts, computers &amp; hardware.</li>
-        <li><strong>18% Slab:</strong> IT services, website development, software engineering, SaaS, telecom, banking, and professional consulting.</li>
-        <li><strong>28% Slab:</strong> Luxury cars, aerated drinks, high-end consumer electronics.</li>
-      </ul>
-
-      <h2>Frequently Asked Questions</h2>
-      <details class="faq-card" open>
-        <summary>What is the difference between CGST, SGST, and IGST?</summary>
-        <p><strong>CGST &amp; SGST:</strong> Levied on intra-state supplies (when seller and buyer are within the same Indian state). The tax rate is split 50-50 between Central and State governments.<br><strong>IGST:</strong> Levied on inter-state transactions (seller in one state, buyer in another) and collected entirely by the Central Government.</p>
-      </details>
-      <details class="faq-card">
-        <summary>What GST rate applies to Website Design and Software Development?</summary>
-        <p>In India, website design, software engineering, cloud hosting, and IT consulting services fall under the <strong>18% GST slab</strong> (SAC Code: 998314).</p>
-      </details>
-
-      <h2>Related Free Tools</h2>
-      <div class="row g-3 mt-1">
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>tools/invoice/" class="text-decoration-none text-dark"><i class="fa-solid fa-file-invoice-dollar text-success me-1"></i> Free Invoice Generator</a></h6>
-            <small class="text-muted">Create GST-compliant PDF client invoices.</small>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>tools/profit-calculator/" class="text-decoration-none text-dark"><i class="fa-solid fa-chart-line text-primary me-1"></i> Profit Margin Calculator</a></h6>
-            <small class="text-muted">Calculate markup &amp; profit margins easily.</small>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>website-cost-calculator/" class="text-decoration-none text-dark"><i class="fa-solid fa-calculator text-warning me-1"></i> Website Cost Calculator</a></h6>
-            <small class="text-muted">Estimate website development cost in 60s.</small>
-          </div>
-        </div>
-      </div>
-    </div>
+    </main>
   </div>
 
-  <!-- CTA BANNER -->
-  <div class="cta4-section-area sp1" style="background: linear-gradient(135deg, #104041 0%, #0d2e2f 100%);">
-    <div class="container text-center">
-      <h2 class="text-light fw-bold mb-2">Need Custom Web Development &amp; E-commerce GST Billing Integration?</h2>
-      <p class="text-light opacity-75 mb-4" style="max-width: 600px; margin: 0 auto;">
-        NikhilWorks builds full-stack e-commerce stores, custom invoice generators, and GST automated payment gateway checkouts.
-      </p>
-      <a href="<?= $site ?>contact/" class="header-btn9">Get Free Consultation <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-auth-modal.php"; ?>
+  <?php include_once __DIR__ . "/includes/tool-history-drawer.php"; ?>
 
-  <?php include_once dirname(__DIR__) . "/includes/footer.php" ?>
+  <script src="<?= $site ?>assets/js/plugins/bootstrap.min.js"></script>
+  <script src="<?= $site ?>tools/assets/tool-app.js"></script>
 
   <script>
     let currentRate = 18;
@@ -478,12 +298,10 @@ $metaKeywords = "gst calculator india, gst calculator online free, cgst sgst cal
       let totalPrice = 0;
 
       if (isInclusive) {
-        // Reverse GST
         netPrice = (amount * 100) / (100 + currentRate);
         gstAmount = amount - netPrice;
         totalPrice = amount;
       } else {
-        // Standard Exclusive GST
         netPrice = amount;
         gstAmount = (amount * currentRate) / 100;
         totalPrice = netPrice + gstAmount;
@@ -511,16 +329,61 @@ $metaKeywords = "gst calculator india, gst calculator online free, cgst sgst cal
       }
     }
 
+    function saveGstToHistory() {
+      const amount = $('#baseAmount').val() || 0;
+      const mode = $('input[name="gstType"]:checked').val();
+      const total = $('#resTotalPrice').text();
+      const tax = $('#resGstAmount').text();
+      const supply = $('#supplyType').val();
+
+      const title = `GST ${currentRate}% on ₹${Number(amount).toLocaleString('en-IN')} (${mode})`;
+      const summary = `Tax: ${tax} | Total: ${total} | Supply: ${supply}`;
+      const payload = {
+        amount: amount,
+        rate: currentRate,
+        mode: mode,
+        supply: supply
+      };
+
+      ToolsApp.saveHistory('gst-calculator', title, summary, payload);
+    }
+
     function copyGstSummary() {
       const net = $('#resNetPrice').text();
       const gst = $('#resGstAmount').text();
       const total = $('#resTotalPrice').text();
       const rate = currentRate + '%';
 
-      const summary = `GST Calculation Summary:\nNet Price: ${net}\nGST (${rate}): ${gst}\nTotal Amount: ${total}\nCalculated via NikhilWorks GST Calculator`;
-      navigator.clipboard.writeText(summary);
-      alert('GST summary copied to clipboard!');
+      const summary = `GST Calculation Summary:\nNet Price: ${net}\nGST (${rate}): ${gst}\nTotal Amount: ${total}\nCalculated via NikhilWorks GST Studio`;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(summary).then(() => ToolsApp.showToast('GST summary copied! 📋'));
+      } else {
+        ToolsApp.showToast('Summary: ' + total);
+      }
     }
+
+    // 1-Click Restore Data from History Drawer
+    $(document).on('tools:restore-payload', function(e, toolType, payload) {
+      if (toolType === 'gst-calculator' && payload) {
+        if (payload.amount) $('#baseAmount').val(payload.amount);
+        if (payload.mode === 'inclusive') {
+          $('#typeIncl').prop('checked', true);
+        } else {
+          $('#typeExcl').prop('checked', true);
+        }
+        if (payload.supply) $('#supplyType').val(payload.supply);
+        if (payload.rate) {
+          const matchedBtn = $(`.btn-slab-toggle[data-rate="${payload.rate}"]`);
+          if (matchedBtn.length) {
+            matchedBtn.click();
+          } else {
+            $('.btn-slab-toggle[data-rate="custom"]').click();
+            $('#customRateInput').val(payload.rate).trigger('input');
+          }
+        }
+        calculateGst();
+      }
+    });
 
     $(document).ready(calculateGst);
   </script>

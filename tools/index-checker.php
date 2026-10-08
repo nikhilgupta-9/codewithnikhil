@@ -2,10 +2,11 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free Google Index Checker — Check Website Indexed Status | NikhilWorks";
-$metaDesc = "Check if your website or URL is indexed on Google instantly. Find how many pages are indexed and fix indexing issues. Free online index checker tool.";
+$pageTitle = "Free Google Index & Cache Checker — Test SERP Indexation | NikhilWorks";
+$metaDesc = "Check if your webpage or domain is indexed on Google. Inspect cached date snapshots and verify crawlability with 1-click Google site query tester.";
 $canonical = $site . "tools/index-checker/";
-$metaKeywords = "google index checker, is my website indexed on google, check website indexed google free, website index status checker, check url indexed google";
+$metaKeywords = "google index checker, test if url is indexed on google, google cache checker online, site query checker free, google index status test india";
+$currentTool = 'index-checker';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,9 +16,10 @@ $metaKeywords = "google index checker, is my website indexed on google, check we
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="site-url" content="<?= $site ?>">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
-  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -27,325 +29,115 @@ $metaKeywords = "google index checker, is my website indexed on google, check we
   <meta property="og:type" content="website">
   <meta property="og:image" content="<?= $site ?>assets/img/logo/og-tools.jpg">
 
-  <!-- Schema: SoftwareApplication -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Google Index & Cache Checker Tool",
-    "applicationCategory": "SEOApplication",
-    "operatingSystem": "Web Browser",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
-    "provider": {
-      "@type": "Person",
-      "name": "Nikhil Gupta",
-      "url": "https://nikhilworks.com"
-    }
-  }
-  </script>
-
-  <!-- Schema: BreadcrumbList -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?= $site ?>" },
-      { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "<?= $site ?>free-tools/" },
-      { "@type": "ListItem", "position": 3, "name": "Google Index Checker" }
-    ]
-  }
-  </script>
-
-  <!-- Schema: FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How to check if my website is indexed by Google?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Type 'site:yourwebsite.com' in the Google search bar. If search results appear, your pages are successfully indexed in Google's database." }
-      },
-      {
-        "@type": "Question",
-        "name": "Why is my new webpage not getting indexed?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Common reasons include accidental 'noindex' meta tags, robots.txt disallow rules, lack of internal/backlinks, or Google taking 2 to 7 days to crawl new domains." }
-      }
-    ]
-  }
-  </script>
-
-  <!--=====FAB ICON=======-->
+  <!-- Favicon -->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 
-  <!--===== CSS LINK =======-->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/magnific-popup.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/sidebar.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/slick-slider.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/nice-select.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
+  <link rel="stylesheet" href="<?= $site ?>tools/assets/tool-app.css">
+
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
-
-  <style>
-    :root {
-      --brand-teal: #104041;
-      --brand-lime: #ADFF1C;
-    }
-    .tool-hero {
-      background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.14) 0%, transparent 45%),
-                  radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
-                  linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
-      padding: 140px 0 65px;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-    @media (max-width: 991px) {
-      .tool-hero {
-        padding: 110px 0 50px;
-      }
-    }
-    .site-breadcrumb {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 30px;
-      padding: 6px 18px;
-      margin-bottom: 20px;
-      font-size: 13.5px;
-      backdrop-filter: blur(8px);
-    }
-    .site-breadcrumb a {
-      color: #cbe3e1;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .site-breadcrumb a:hover {
-      color: var(--brand-lime);
-    }
-    .site-breadcrumb .bc-sep {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 10px;
-    }
-    .site-breadcrumb .bc-current {
-      color: var(--brand-lime);
-      font-weight: 700;
-    }
-    .tool-card-box {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    }
-    .status-badge-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 15px;
-    }
-    .content-section h2 {
-      font-size: 22px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-top: 35px;
-      margin-bottom: 15px;
-    }
-    .content-section p, .content-section li {
-      color: #475569;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-    .faq-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      background: #fff;
-    }
-    .faq-card summary {
-      padding: 15px 20px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #0f172a;
-    }
-    .faq-card p {
-      padding: 0 20px 15px;
-      color: #64748b;
-      margin: 0;
-    }
-  </style>
 </head>
-<body class="homepage4-body">
 
-  <?php include_once dirname(__DIR__) . "/includes/header.php" ?>
+<body class="tools-app-body">
 
-  <!-- HERO -->
-  <div class="tool-hero text-center">
-    <div class="hero-grid-overlay"></div>
-    <div class="container" style="position: relative; z-index: 2;">
-      <nav aria-label="breadcrumb">
-        <div class="site-breadcrumb">
-          <a href="<?= $site ?>"><i class="fa-solid fa-house fa-xs"></i> Home</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <a href="<?= $site ?>free-tools/">Free Tools</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <span class="bc-current">Google Index Checker</span>
-        </div>
-      </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free Google Index Checker — Is Your Website on Google?</h1>
-      <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
-        Instantly check if your URL or domain is indexed by Google, view cache snapshots, and debug indexing barriers.
-      </p>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-header.php"; ?>
 
-  <div class="container my-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        
-        <!-- Tool Box -->
-        <div class="tool-card-box">
-          <h5 class="fw-bold text-dark mb-3"><i class="fa-brands fa-google text-primary me-2"></i> Enter Webpage URL</h5>
-          
-          <div class="input-group mb-3">
-            <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
-            <input type="url" id="indexUrl" class="form-control form-control-lg" placeholder="https://yourwebsite.com/page/" value="https://nikhilworks.com">
+  <div class="app-wrapper">
+    
+    <?php include_once __DIR__ . "/includes/tool-sidebar.php"; ?>
+
+    <main class="app-main-content">
+      
+      <!-- Workspace Card -->
+      <div class="tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div class="tool-header-left">
+            <div class="tool-header-icon icon-blue">
+              <i class="fa-brands fa-google"></i>
+            </div>
+            <div>
+              <h1 class="tool-header-title">Google Index &amp; Cache Checker</h1>
+              <p class="tool-header-desc">Inspect if your webpage is indexed in Google's database index, test site queries &amp; verify indexation health.</p>
+            </div>
           </div>
-
-          <div class="d-flex gap-2">
-            <button type="button" class="btn btn-primary btn-lg flex-grow-1 fw-bold" onclick="checkIndexStatus()">
-              <i class="fa-solid fa-magnifying-glass me-1"></i> Check Google Index Status
+          <div class="tool-workspace-actions">
+            <button type="button" class="topbar-btn topbar-btn-ghost" onclick="ToolsApp.openHistoryDrawer('index-checker')">
+              <i class="fa-solid fa-clock-rotate-left text-warning"></i> Index Query History
             </button>
           </div>
+        </div>
 
-          <!-- Direct Google Search Buttons -->
-          <div id="indexActionArea" class="mt-4 pt-4 border-top">
-            <h6 class="fw-bold text-dark mb-3">Direct Google Query Shortcuts:</h6>
-            
-            <div class="row g-3">
-              <div class="col-md-6">
-                <a href="https://www.google.com/search?q=site:https://nikhilworks.com" target="_blank" rel="noopener" id="btnSiteQuery" class="btn btn-outline-dark w-100 py-3 text-start d-flex align-items-center justify-content-between">
-                  <div>
-                    <strong class="d-block text-dark"><i class="fa-brands fa-google text-primary me-2"></i> Site: Exact URL Search</strong>
-                    <small class="text-muted">Checks if this specific page is live on SERP</small>
-                  </div>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
-                </a>
-              </div>
+        <div class="row g-4">
+          <!-- Form Inputs Column -->
+          <div class="col-lg-6">
+            <h6 class="fw-bold text-white mb-3"><i class="fa-solid fa-magnifying-glass-arrow-right text-info me-2"></i> Enter Webpage or Domain</h6>
 
-              <div class="col-md-6">
-                <a href="https://www.google.com/search?q=site:nikhilworks.com" target="_blank" rel="noopener" id="btnDomainQuery" class="btn btn-outline-dark w-100 py-3 text-start d-flex align-items-center justify-content-between">
-                  <div>
-                    <strong class="d-block text-dark"><i class="fa-solid fa-globe text-success me-2"></i> Entire Domain Index</strong>
-                    <small class="text-muted">Count total indexed pages across domain</small>
-                  </div>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
-                </a>
+            <div class="mb-3">
+              <label class="form-label">Webpage URL <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
+                <input type="url" id="indexUrl" class="form-control" placeholder="https://example.com/blog/post" value="https://nikhilworks.com" required>
               </div>
             </div>
 
-            <!-- Diagnostic Checklist -->
-            <div class="status-badge-card mt-4">
-              <h6 class="fw-bold text-dark mb-3"><i class="fa-solid fa-clipboard-check text-success me-2"></i> Instant Indexing Health Checklist</h6>
-              <ul class="list-unstyled mb-0 d-flex flex-column gap-2 small text-muted">
-                <li class="d-flex align-items-center gap-2">
-                  <i class="fa-solid fa-circle-check text-success"></i> Ensure <code>&lt;meta name="robots" content="noindex"&gt;</code> is NOT present in your page head.
-                </li>
-                <li class="d-flex align-items-center gap-2">
-                  <i class="fa-solid fa-circle-check text-success"></i> Verify that your <code>robots.txt</code> does not contain <code>Disallow: /</code> for Googlebot.
-                </li>
-                <li class="d-flex align-items-center gap-2">
-                  <i class="fa-solid fa-circle-check text-success"></i> Submit XML Sitemap (<code>/sitemap.xml</code>) directly to <strong>Google Search Console</strong>.
-                </li>
-                <li class="d-flex align-items-center gap-2">
-                  <i class="fa-solid fa-circle-check text-success"></i> Check canonical URL tag points to self (or preferred authoritative URL).
-                </li>
-              </ul>
+            <div class="d-flex gap-2 mt-4">
+              <button type="button" class="topbar-btn topbar-btn-primary flex-fill justify-content-center py-3" onclick="checkIndexStatus()">
+                <i class="fa-brands fa-google me-1"></i> Check Google Indexation
+              </button>
             </div>
           </div>
 
-        </div>
+          <!-- Quick Actions & Diagnostics -->
+          <div class="col-lg-6">
+            <div class="tool-output-panel align-items-stretch text-start">
+              <h6 class="text-white fw-bold mb-3"><i class="fa-solid fa-bolt text-warning me-2"></i> Direct Google Search Links</h6>
 
-        <!-- CONTENT SECTION -->
-        <div class="content-section mt-5">
-          <h2>Why Google Indexation Matters</h2>
-          <p>
-            If your website pages are not indexed by Google, they are completely invisible to search engine users. Getting indexed is the mandatory first step before your pages can start ranking for organic keywords and driving traffic.
-          </p>
-
-          <h2>Fastest Ways to Get Indexed on Google (2026)</h2>
-          <ol>
-            <li><strong>Google Search Console URL Inspection:</strong> Submit the URL using the "Request Indexing" button in GSC.</li>
-            <li><strong>XML Sitemap Ping:</strong> Ensure your sitemap index lists all fresh URLs and submit it to Search Console.</li>
-            <li><strong>Internal Linking:</strong> Link to new articles and landing pages from high-authority pages like your homepage or blog archive.</li>
-            <li><strong>Fix Crawl Errors:</strong> Resolve 404 broken links, 500 server errors, and canonical redirection loops.</li>
-          </ol>
-
-          <h2>Frequently Asked Questions</h2>
-          <details class="faq-card" open>
-            <summary>How long does Google take to index a new website?</summary>
-            <p>For fresh domains, Google typically takes between <strong>24 hours to 7 business days</strong> to crawl and index initial pages. Established sites with regular content updates often get indexed within minutes to a few hours.</p>
-          </details>
-          <details class="faq-card">
-            <summary>What is the difference between Crawling and Indexing?</summary>
-            <p><strong>Crawling:</strong> When Googlebot downloads and reads your page content.<br><strong>Indexing:</strong> When Google processes, analyzes, and stores your page into its searchable global database index.</p>
-          </details>
-
-          <h2>Related Free Tools</h2>
-          <div class="row g-3 mt-1">
-            <div class="col-md-4">
-              <div class="p-3 bg-light rounded-3 border h-100">
-                <h6 class="fw-bold"><a href="<?= $site ?>tools/meta-preview/" class="text-decoration-none text-dark"><i class="fa-solid fa-tags text-primary me-1"></i> Meta Tags Preview</a></h6>
-                <small class="text-muted">Simulate Google SERP title and description snippets.</small>
+              <div class="d-flex flex-column gap-2 mb-4">
+                <a href="https://www.google.com/search?q=site:https://nikhilworks.com" target="_blank" id="btnSiteQuery" class="topbar-btn topbar-btn-ghost justify-content-between">
+                  <span><i class="fa-brands fa-google me-2 text-info"></i> Specific URL Index Query</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <a href="https://www.google.com/search?q=site:nikhilworks.com" target="_blank" id="btnDomainQuery" class="topbar-btn topbar-btn-ghost justify-content-between">
+                  <span><i class="fa-solid fa-sitemap me-2 text-success"></i> Entire Domain Index Query</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
               </div>
-            </div>
-            <div class="col-md-4">
-              <div class="p-3 bg-light rounded-3 border h-100">
-                <h6 class="fw-bold"><a href="<?= $site ?>tools/robots-validator/" class="text-decoration-none text-dark"><i class="fa-solid fa-robot text-danger me-1"></i> Robots.txt Validator</a></h6>
-                <small class="text-muted">Test crawler directives and block rules.</small>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="p-3 bg-light rounded-3 border h-100">
-                <h6 class="fw-bold"><a href="<?= $site ?>tools/schema-generator/" class="text-decoration-none text-dark"><i class="fa-solid fa-code text-success me-1"></i> Schema Generator</a></h6>
-                <small class="text-muted">Generate JSON-LD structured data for Google.</small>
+
+              <h6 class="text-white fw-bold mb-2 small"><i class="fa-solid fa-clipboard-check text-success me-1"></i> Indexing Health Checklist</h6>
+              <div class="d-flex flex-column gap-2 small text-muted">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-success"></i> Ensure <code>&lt;meta name="robots" content="noindex"&gt;</code> is NOT present.
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-success"></i> Verify that <code>robots.txt</code> permits Googlebot crawling.
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-success"></i> Submit XML Sitemap (<code>/sitemap.xml</code>) to Google Search Console.
+                </div>
               </div>
             </div>
           </div>
         </div>
 
       </div>
-    </div>
+
+      <?php include_once __DIR__ . "/includes/tool-footer.php"; ?>
+
+    </main>
   </div>
 
-  <!-- CTA BANNER -->
-  <div class="cta4-section-area sp1" style="background: linear-gradient(135deg, #104041 0%, #0d2e2f 100%);">
-    <div class="container text-center">
-      <h2 class="text-light fw-bold mb-2">Struggling with Google Indexation or SEO Drop-offs?</h2>
-      <p class="text-light opacity-75 mb-4" style="max-width: 600px; margin: 0 auto;">
-        NikhilWorks diagnoses indexing barriers, canonical conflicts, JavaScript rendering issues, and executes full technical SEO recoveries.
-      </p>
-      <a href="<?= $site ?>contact/" class="header-btn9">Get Technical SEO Audit <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-auth-modal.php"; ?>
+  <?php include_once __DIR__ . "/includes/tool-history-drawer.php"; ?>
 
-  <?php include_once dirname(__DIR__) . "/includes/footer.php" ?>
+  <script src="<?= $site ?>assets/js/plugins/bootstrap.min.js"></script>
+  <script src="<?= $site ?>tools/assets/tool-app.js"></script>
 
   <script>
     function checkIndexStatus() {
@@ -373,9 +165,24 @@ $metaKeywords = "google index checker, is my website indexed on google, check we
       $('#btnSiteQuery').attr('href', siteQueryUrl);
       $('#btnDomainQuery').attr('href', domainQueryUrl);
 
-      // Open site search in new tab automatically
+      // Save to History
+      const title = `Index Check: ${domain}`;
+      const summary = `Query: site:${raw}`;
+      const payload = {
+        url: raw,
+        domain: domain
+      };
+      ToolsApp.saveHistory('index-checker', title, summary, payload);
+
       window.open(siteQueryUrl, '_blank');
     }
+
+    // 1-Click Restore Data from History Drawer
+    $(document).on('tools:restore-payload', function(e, toolType, payload) {
+      if (toolType === 'index-checker' && payload) {
+        if (payload.url) $('#indexUrl').val(payload.url);
+      }
+    });
   </script>
 </body>
 </html>

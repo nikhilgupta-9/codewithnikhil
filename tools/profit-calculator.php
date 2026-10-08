@@ -2,10 +2,11 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free Profit Margin Calculator — Markup & Selling Price | NikhilWorks";
-$metaDesc = "Calculate profit margin, markup and selling price instantly. Enter cost price and desired profit % to get exact selling price. Free online tool.";
+$pageTitle = "Free Profit Margin Calculator — Markup, Revenue & Selling Price | NikhilWorks";
+$metaDesc = "Calculate gross profit margin, markup percentage, cost of goods and revenue online free. Perfect for ecommerce stores, agencies and retail businesses.";
 $canonical = $site . "tools/profit-calculator/";
-$metaKeywords = "profit margin calculator, profit margin calculator online free india, markup calculator online, selling price calculator, gross profit calculator";
+$metaKeywords = "profit margin calculator, markup calculator online free, gross margin calculator, selling price calculator, profit percentage calculator india, ecommerce pricing calculator";
+$currentTool = 'profit-calculator';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,9 +16,10 @@ $metaKeywords = "profit margin calculator, profit margin calculator online free 
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="site-url" content="<?= $site ?>">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
-  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -27,385 +29,206 @@ $metaKeywords = "profit margin calculator, profit margin calculator online free 
   <meta property="og:type" content="website">
   <meta property="og:image" content="<?= $site ?>assets/img/logo/og-tools.jpg">
 
-  <!-- Schema: SoftwareApplication -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Profit Margin and Markup Calculator",
-    "applicationCategory": "FinancialApplication",
-    "operatingSystem": "Web Browser",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
-    "provider": {
-      "@type": "Person",
-      "name": "Nikhil Gupta",
-      "url": "https://nikhilworks.com"
-    }
-  }
-  </script>
-
-  <!-- Schema: BreadcrumbList -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?= $site ?>" },
-      { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "<?= $site ?>free-tools/" },
-      { "@type": "ListItem", "position": 3, "name": "Profit Margin Calculator" }
-    ]
-  }
-  </script>
-
-  <!-- Schema: FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is the difference between Margin and Markup?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Margin is profit expressed as a percentage of selling price, whereas Markup is profit expressed as a percentage of cost price." }
-      },
-      {
-        "@type": "Question",
-        "name": "How to calculate Gross Profit Margin?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Gross Margin (%) = [(Revenue - Cost) / Revenue] * 100." }
-      }
-    ]
-  }
-  </script>
-
-  <!--=====FAB ICON=======-->
+  <!-- Favicon -->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 
-  <!--===== CSS LINK =======-->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/magnific-popup.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/sidebar.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/slick-slider.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/nice-select.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
+  <link rel="stylesheet" href="<?= $site ?>tools/assets/tool-app.css">
+
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
 
   <style>
-    :root {
-      --brand-teal: #104041;
-      --brand-lime: #ADFF1C;
-    }
-    .tool-hero {
-      background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.14) 0%, transparent 45%),
-                  radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
-                  linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
-      padding: 140px 0 65px;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-    @media (max-width: 991px) {
-      .tool-hero {
-        padding: 110px 0 50px;
-      }
-    }
-    .site-breadcrumb {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 30px;
-      padding: 6px 18px;
-      margin-bottom: 20px;
-      font-size: 13.5px;
-      backdrop-filter: blur(8px);
-    }
-    .site-breadcrumb a {
-      color: #cbe3e1;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .site-breadcrumb a:hover {
-      color: var(--brand-lime);
-    }
-    .site-breadcrumb .bc-sep {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 10px;
-    }
-    .site-breadcrumb .bc-current {
-      color: var(--brand-lime);
-      font-weight: 700;
-    }
-    .tool-card-box {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    }
     .result-metric-card {
-      background: #f8fafc;
+      background: rgba(255, 255, 255, 0.04);
       border-radius: 12px;
-      padding: 18px;
-      border: 1px solid #e2e8f0;
-      margin-bottom: 12px;
+      padding: 16px;
+      border: 1px solid var(--border-subtle);
     }
-    .result-metric-title {
-      font-size: 13px;
-      color: #64748b;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .result-metric-value {
+    .metric-value {
       font-size: 24px;
       font-weight: 800;
-      color: #0f172a;
-      margin-top: 4px;
-    }
-    .content-section h2 {
-      font-size: 22px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-top: 35px;
-      margin-bottom: 15px;
-    }
-    .content-section p, .content-section li {
-      color: #475569;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-    .faq-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      background: #fff;
-    }
-    .faq-card summary {
-      padding: 15px 20px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #0f172a;
-    }
-    .faq-card p {
-      padding: 0 20px 15px;
-      color: #64748b;
-      margin: 0;
+      color: var(--brand-lime);
+      font-family: var(--code-font);
     }
   </style>
 </head>
-<body class="homepage4-body">
 
-  <?php include_once dirname(__DIR__) . "/includes/header.php" ?>
+<body class="tools-app-body">
 
-  <!-- HERO -->
-  <div class="tool-hero text-center">
-    <div class="hero-grid-overlay"></div>
-    <div class="container" style="position: relative; z-index: 2;">
-      <nav aria-label="breadcrumb">
-        <div class="site-breadcrumb">
-          <a href="<?= $site ?>"><i class="fa-solid fa-house fa-xs"></i> Home</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <a href="<?= $site ?>free-tools/">Free Tools</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <span class="bc-current">Profit Margin Calculator</span>
-        </div>
-      </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free Profit Margin &amp; Markup Calculator Online</h1>
-      <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
-        Calculate Gross Margin %, Markup %, Revenue and Profit effortlessly across multi-currencies.
-      </p>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-header.php"; ?>
 
-  <div class="container my-5">
-    <div class="row g-4">
+  <div class="app-wrapper">
+    
+    <?php include_once __DIR__ . "/includes/tool-sidebar.php"; ?>
+
+    <main class="app-main-content">
       
-      <!-- Inputs Column -->
-      <div class="col-lg-6">
-        <div class="tool-card-box">
-          <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-calculator text-primary me-2"></i> Price Parameters</h5>
-          
-          <!-- Currency -->
-          <div class="mb-3">
-            <label class="form-label fw-bold">Select Currency</label>
-            <select id="currSymbol" class="form-select">
-              <option value="₹" selected>INR (₹) - Indian Rupee</option>
-              <option value="$">USD ($) - US Dollar</option>
-              <option value="€">EUR (€) - Euro</option>
-              <option value="£">GBP (£) - British Pound</option>
-              <option value="AED ">AED - UAE Dirham</option>
-            </select>
-          </div>
-
-          <!-- Cost Price -->
-          <div class="mb-3">
-            <label class="form-label fw-bold">Cost Price (COGS) <span class="text-danger">*</span></label>
-            <div class="input-group">
-              <span class="input-group-text curr-badge">₹</span>
-              <input type="number" id="costPrice" class="form-control form-control-lg fw-bold" placeholder="1000" value="1000" min="0" step="0.01">
+      <!-- Workspace Card -->
+      <div class="tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div class="tool-header-left">
+            <div class="tool-header-icon icon-indigo">
+              <i class="fa-solid fa-chart-line"></i>
             </div>
-            <small class="text-muted">Total cost to produce or purchase the product/service.</small>
-          </div>
-
-          <!-- Mode of calculation -->
-          <div class="mb-3">
-            <label class="form-label fw-bold">Calculate By</label>
-            <select id="calcMode" class="form-select">
-              <option value="revenue" selected>Selling Price (Revenue)</option>
-              <option value="margin">Target Margin %</option>
-              <option value="markup">Target Markup %</option>
-            </select>
-          </div>
-
-          <!-- Dynamic Input field -->
-          <div class="mb-3" id="fieldRevenue">
-            <label class="form-label fw-bold">Selling Price (Revenue) <span class="text-danger">*</span></label>
-            <div class="input-group">
-              <span class="input-group-text curr-badge">₹</span>
-              <input type="number" id="revenuePrice" class="form-control form-control-lg fw-bold" placeholder="1500" value="1500" min="0" step="0.01">
+            <div>
+              <h1 class="tool-header-title">Profit Margin &amp; Markup Studio</h1>
+              <p class="tool-header-desc">Calculate Gross Profit Margin, Markup Multiplier, Selling Price, and Projected Volume Revenue.</p>
             </div>
           </div>
-
-          <div class="mb-3 d-none" id="fieldMargin">
-            <label class="form-label fw-bold">Target Margin (%) <span class="text-danger">*</span></label>
-            <div class="input-group">
-              <input type="number" id="targetMargin" class="form-control form-control-lg fw-bold" placeholder="33.33" value="33.33" min="0" max="99.9" step="0.1">
-              <span class="input-group-text">%</span>
-            </div>
-          </div>
-
-          <div class="mb-3 d-none" id="fieldMarkup">
-            <label class="form-label fw-bold">Target Markup (%) <span class="text-danger">*</span></label>
-            <div class="input-group">
-              <input type="number" id="targetMarkup" class="form-control form-control-lg fw-bold" placeholder="50" value="50" min="0" step="0.1">
-              <span class="input-group-text">%</span>
-            </div>
-          </div>
-
-          <!-- Quantity Units -->
-          <div class="mb-3">
-            <label class="form-label fw-bold">Number of Units (Optional)</label>
-            <input type="number" id="unitCount" class="form-control" placeholder="1" value="1" min="1" step="1">
-          </div>
-        </div>
-      </div>
-
-      <!-- Results Column -->
-      <div class="col-lg-6">
-        <div class="tool-card-box h-100 d-flex flex-column justify-content-between">
-          <div>
-            <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-chart-pie text-success me-2"></i> Margin Analysis</h5>
-            
-            <div class="row g-2 mb-2">
-              <div class="col-6">
-                <div class="result-metric-card" style="background: rgba(16, 64, 65, 0.04); border-color: rgba(16, 64, 65, 0.2);">
-                  <div class="result-metric-title text-primary">Gross Margin</div>
-                  <div class="result-metric-value text-primary" id="resMargin">33.33%</div>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="result-metric-card" style="background: rgba(2, 132, 199, 0.04); border-color: rgba(2, 132, 199, 0.2);">
-                  <div class="result-metric-title text-info">Markup</div>
-                  <div class="result-metric-value text-info" id="resMarkup">50.00%</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="result-metric-card">
-              <div class="result-metric-title">Profit Per Unit</div>
-              <div class="result-metric-value text-success" id="resProfit">₹500.00</div>
-            </div>
-
-            <div class="result-metric-card">
-              <div class="result-metric-title">Optimal Selling Price</div>
-              <div class="result-metric-value text-dark" id="resSelling">₹1,500.00</div>
-            </div>
-
-            <div class="result-metric-card bg-dark text-white">
-              <div class="result-metric-title text-white-50">Total Projected Revenue (<span id="resUnits">1</span> units)</div>
-              <div class="result-metric-value text-success" id="resTotalRevenue">₹1,500.00</div>
-              <small class="text-white-50">Total Net Profit: <strong class="text-white" id="resTotalProfit">₹500.00</strong></small>
-            </div>
-          </div>
-
-          <div class="mt-3">
-            <button type="button" class="btn btn-outline-dark w-100" onclick="copyProfitSummary()">
-              <i class="fa-regular fa-copy me-1"></i> Copy Analysis Summary
+          <div class="tool-workspace-actions">
+            <button type="button" class="topbar-btn topbar-btn-ghost" onclick="ToolsApp.openHistoryDrawer('profit-calculator')">
+              <i class="fa-solid fa-clock-rotate-left text-warning"></i> Calculation History
             </button>
           </div>
         </div>
+
+        <div class="row g-4">
+          <!-- Input Controls Column -->
+          <div class="col-lg-6">
+            <h6 class="fw-bold text-white mb-3"><i class="fa-solid fa-sliders text-info me-2"></i> Pricing &amp; Cost Inputs</h6>
+
+            <div class="row g-3">
+              <!-- Currency -->
+              <div class="col-md-5">
+                <label class="form-label">Currency Symbol</label>
+                <select id="currSymbol" class="form-select">
+                  <option value="₹" selected>INR (₹)</option>
+                  <option value="$">USD ($)</option>
+                  <option value="€">EUR (€)</option>
+                  <option value="£">GBP (£)</option>
+                  <option value="AED ">AED (د.إ)</option>
+                </select>
+              </div>
+
+              <!-- Calculation Mode -->
+              <div class="col-md-7">
+                <label class="form-label">Calculation Mode</label>
+                <select id="calcMode" class="form-select">
+                  <option value="revenue" selected>Cost + Selling Price &rarr; Margin</option>
+                  <option value="margin">Cost + Target Margin % &rarr; Selling Price</option>
+                  <option value="markup">Cost + Target Markup % &rarr; Selling Price</option>
+                </select>
+              </div>
+
+              <!-- Cost Price -->
+              <div class="col-12">
+                <label class="form-label">Cost of Goods / Item (COGS) <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <span class="input-group-text curr-badge fw-bold">₹</span>
+                  <input type="number" id="costPrice" class="form-control fw-bold" placeholder="500" value="500" min="0" step="any">
+                </div>
+              </div>
+
+              <!-- Mode Dependent Fields -->
+              <div class="col-12" id="fieldRevenue">
+                <label class="form-label">Selling Price (Revenue per unit) <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <span class="input-group-text curr-badge fw-bold">₹</span>
+                  <input type="number" id="revenuePrice" class="form-control fw-bold" placeholder="1000" value="1000" min="0" step="any">
+                </div>
+              </div>
+
+              <div class="col-12 d-none" id="fieldMargin">
+                <label class="form-label">Target Gross Margin %</label>
+                <div class="input-group">
+                  <input type="number" id="targetMargin" class="form-control fw-bold" placeholder="50" value="50" min="0" max="99.9" step="0.1">
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+
+              <div class="col-12 d-none" id="fieldMarkup">
+                <label class="form-label">Target Markup %</label>
+                <div class="input-group">
+                  <input type="number" id="targetMarkup" class="form-control fw-bold" placeholder="100" value="100" min="0" step="0.1">
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+
+              <!-- Units for Volume Projection -->
+              <div class="col-12">
+                <label class="form-label">Sales Volume Projection (Units / Month)</label>
+                <input type="number" id="unitCount" class="form-control" placeholder="100" value="100" min="1">
+              </div>
+
+              <div class="col-12 mt-4">
+                <button type="button" class="topbar-btn topbar-btn-primary w-100 py-3 justify-content-center" onclick="saveProfitToHistory()">
+                  <i class="fa-solid fa-floppy-disk me-1"></i> Save Analysis to History
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Output Column -->
+          <div class="col-lg-6">
+            <div class="tool-output-panel align-items-stretch text-start">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="text-white fw-bold mb-0"><i class="fa-solid fa-chart-pie text-success me-2"></i> Profit &amp; Margin Breakdown</h6>
+                <button type="button" class="btn btn-sm btn-outline-secondary text-white border-0" onclick="copyProfitSummary()">
+                  <i class="fa-regular fa-copy me-1"></i> Copy
+                </button>
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-6">
+                  <div class="result-metric-card">
+                    <small class="text-muted d-block">Gross Margin</small>
+                    <div class="metric-value" id="resMargin">50.00%</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="result-metric-card">
+                    <small class="text-muted d-block">Markup Percentage</small>
+                    <div class="metric-value text-info" id="resMarkup">100.00%</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="result-metric-card">
+                    <small class="text-muted d-block">Profit per Unit</small>
+                    <div class="metric-value text-warning" id="resProfit">₹500.00</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="result-metric-card">
+                    <small class="text-muted d-block">Selling Price / Unit</small>
+                    <div class="metric-value text-white" id="resSelling">₹1,000.00</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Volume Projections -->
+              <div class="p-3 rounded mb-2" style="background: rgba(173, 255, 28, 0.08); border: 1px solid rgba(173, 255, 28, 0.3);">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="text-white fw-bold small">Projected Monthly Revenue (<span id="resUnits">100</span> units)</span>
+                  <strong class="text-white fs-6" id="resTotalRevenue">₹100,000.00</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="text-muted small">Projected Net Profit</span>
+                  <strong class="text-success fs-6" id="resTotalProfit">₹50,000.00</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-    </div>
+      <?php include_once __DIR__ . "/includes/tool-footer.php"; ?>
 
-    <!-- 3. HOW TO USE & FORMULA -->
-    <div class="content-section mt-5">
-      <h2>Margin vs Markup: The Key Difference</h2>
-      <p>
-        Many business owners confuse <strong>Profit Margin</strong> with <strong>Markup</strong>. While both express profitability, they use different baselines:
-      </p>
-      <ul>
-        <li><strong>Gross Profit Margin:</strong> The percentage of revenue that is actual profit after covering production costs. <br><code>Margin (%) = [(Selling Price - Cost Price) / Selling Price] &times; 100</code></li>
-        <li><strong>Markup:</strong> The percentage added onto the cost price to determine the final selling price.<br><code>Markup (%) = [(Selling Price - Cost Price) / Cost Price] &times; 100</code></li>
-      </ul>
-
-      <h2>Frequently Asked Questions</h2>
-      <details class="faq-card" open>
-        <summary>What is a healthy profit margin for eCommerce &amp; Services?</summary>
-        <p>In general, a 20% margin is considered average, a 10% margin is low, and a 30% to 50%+ margin is considered high and healthy. High-end software, consulting, and SaaS models typically operate on 60-80% gross margins.</p>
-      </details>
-      <details class="faq-card">
-        <summary>Can I calculate selling price based on my desired profit margin?</summary>
-        <p>Yes! Switch the "Calculate By" dropdown to <strong>Target Margin %</strong>, enter your cost and desired percentage, and our calculator will instantly solve for the required selling price.</p>
-      </details>
-
-      <h2>Related Free Tools</h2>
-      <div class="row g-3 mt-1">
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>tools/gst-calculator/" class="text-decoration-none text-dark"><i class="fa-solid fa-calculator text-warning me-1"></i> GST Calculator</a></h6>
-            <small class="text-muted">Calculate GST Inclusive &amp; Exclusive tax.</small>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>tools/invoice/" class="text-decoration-none text-dark"><i class="fa-solid fa-file-invoice text-success me-1"></i> Free Invoice Generator</a></h6>
-            <small class="text-muted">Generate PDF invoices with tax breakdown.</small>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>website-cost-calculator/" class="text-decoration-none text-dark"><i class="fa-solid fa-chart-line text-primary me-1"></i> Website Cost Estimator</a></h6>
-            <small class="text-muted">Interactive web development pricing calculator.</small>
-          </div>
-        </div>
-      </div>
-    </div>
+    </main>
   </div>
 
-  <!-- CTA BANNER -->
-  <div class="cta4-section-area sp1" style="background: linear-gradient(135deg, #104041 0%, #0d2e2f 100%);">
-    <div class="container text-center">
-      <h2 class="text-light fw-bold mb-2">Want to Build Custom Web Calculators or SaaS Apps?</h2>
-      <p class="text-light opacity-75 mb-4" style="max-width: 600px; margin: 0 auto;">
-        NikhilWorks builds fast, interactive web applications and custom calculators that generate leads for your business.
-      </p>
-      <a href="<?= $site ?>contact/" class="header-btn9">Get Free Quote <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-auth-modal.php"; ?>
+  <?php include_once __DIR__ . "/includes/tool-history-drawer.php"; ?>
 
-  <?php include_once dirname(__DIR__) . "/includes/footer.php" ?>
+  <script src="<?= $site ?>assets/js/plugins/bootstrap.min.js"></script>
+  <script src="<?= $site ?>tools/assets/tool-app.js"></script>
 
   <script>
     $('#currSymbol').on('change', function() {
@@ -469,17 +292,57 @@ $metaKeywords = "profit margin calculator, profit margin calculator online free 
       $('#resTotalProfit').text(formatCurrency(profit * units));
     }
 
-    function copyProfitSummary() {
+    function saveProfitToHistory() {
+      const cost = $('#costPrice').val() || 0;
+      const margin = $('#resMargin').text();
+      const markup = $('#resMarkup').text();
+      const selling = $('#resSelling').text();
+      const profit = $('#resProfit').text();
+      const mode = $('#calcMode').val();
       const cur = $('#currSymbol').val();
+
+      const title = `Margin ${margin} on ${cur}${cost} (Selling: ${selling})`;
+      const summary = `Profit: ${profit}/unit | Markup: ${markup} | Mode: ${mode}`;
+      const payload = {
+        cur: cur,
+        mode: mode,
+        cost: cost,
+        revenue: $('#revenuePrice').val(),
+        targetMargin: $('#targetMargin').val(),
+        targetMarkup: $('#targetMarkup').val(),
+        units: $('#unitCount').val()
+      };
+
+      ToolsApp.saveHistory('profit-calculator', title, summary, payload);
+    }
+
+    function copyProfitSummary() {
       const margin = $('#resMargin').text();
       const markup = $('#resMarkup').text();
       const profit = $('#resProfit').text();
       const selling = $('#resSelling').text();
 
       const summary = `Profit Margin Analysis:\nSelling Price: ${selling}\nProfit Per Unit: ${profit}\nGross Margin: ${margin}\nMarkup: ${markup}\nCalculated via NikhilWorks Tools`;
-      navigator.clipboard.writeText(summary);
-      alert('Analysis summary copied to clipboard!');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(summary).then(() => ToolsApp.showToast('Analysis summary copied! 📋'));
+      } else {
+        ToolsApp.showToast('Margin: ' + margin);
+      }
     }
+
+    // 1-Click Restore Data from History Drawer
+    $(document).on('tools:restore-payload', function(e, toolType, payload) {
+      if (toolType === 'profit-calculator' && payload) {
+        if (payload.cur) $('#currSymbol').val(payload.cur).trigger('change');
+        if (payload.mode) $('#calcMode').val(payload.mode).trigger('change');
+        if (payload.cost) $('#costPrice').val(payload.cost);
+        if (payload.revenue) $('#revenuePrice').val(payload.revenue);
+        if (payload.targetMargin) $('#targetMargin').val(payload.targetMargin);
+        if (payload.targetMarkup) $('#targetMarkup').val(payload.targetMarkup);
+        if (payload.units) $('#unitCount').val(payload.units);
+        calculateProfit();
+      }
+    });
 
     $(document).ready(calculateProfit);
   </script>

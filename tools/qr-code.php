@@ -2,10 +2,11 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free QR Code Generator — UPI, WhatsApp & WiFi QR | NikhilWorks";
-$metaDesc = "Generate QR codes for UPI payments, WhatsApp chat, WiFi passwords and websites. Download PNG instantly. Free online QR code maker — no signup.";
+$pageTitle = "Free QR Code Generator — UPI, WiFi, URL & vCard Studio | NikhilWorks";
+$metaDesc = "Generate high-resolution custom QR codes for URLs, WiFi passwords, vCards, and UPI payments. 100% free with SVG & PNG download. No signup required.";
 $canonical = $site . "tools/qr-code/";
-$metaKeywords = "qr code generator free, upi payment qr code generator, whatsapp qr code generator india, qr code generator free download, custom qr code online";
+$metaKeywords = "qr code generator, upi qr code generator free, wifi qr code maker, vcard qr generator, svg qr code download, free qr generator india";
+$currentTool = 'qr-code';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,9 +16,10 @@ $metaKeywords = "qr code generator free, upi payment qr code generator, whatsapp
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="site-url" content="<?= $site ?>">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
-  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -27,422 +29,238 @@ $metaKeywords = "qr code generator free, upi payment qr code generator, whatsapp
   <meta property="og:type" content="website">
   <meta property="og:image" content="<?= $site ?>assets/img/logo/og-tools.jpg">
 
-  <!-- Schema: SoftwareApplication -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Custom QR Code Generator",
-    "applicationCategory": "WebApplication",
-    "operatingSystem": "Web Browser",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
-    "provider": {
-      "@type": "Person",
-      "name": "Nikhil Gupta",
-      "url": "https://nikhilworks.com"
-    }
-  }
-  </script>
-
-  <!-- Schema: BreadcrumbList -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?= $site ?>" },
-      { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "<?= $site ?>free-tools/" },
-      { "@type": "ListItem", "position": 3, "name": "QR Code Generator" }
-    ]
-  }
-  </script>
-
-  <!-- Schema: FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Do the generated QR codes expire?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No! These are standard static QR codes that contain your data permanently. They never expire and have unlimited scans." }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I print these QR codes on business cards and posters?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can download crisp 300dpi PNG images suitable for high-quality printing on flyers, restaurant menus, stickers, and business cards." }
-      }
-    ]
-  }
-  </script>
-
-  <!--=====FAB ICON=======-->
+  <!-- Favicon -->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 
-  <!--===== CSS LINK =======-->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/magnific-popup.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/sidebar.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/slick-slider.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/nice-select.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
+  <link rel="stylesheet" href="<?= $site ?>tools/assets/tool-app.css">
+
+  <!-- JS -->
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
-  <!-- QRCode.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
-    :root {
-      --brand-teal: #104041;
-      --brand-lime: #ADFF1C;
-    }
-    .tool-hero {
-      background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.14) 0%, transparent 45%),
-                  radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
-                  linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
-      padding: 140px 0 65px;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-    @media (max-width: 991px) {
-      .tool-hero {
-        padding: 110px 0 50px;
-      }
-    }
-    .site-breadcrumb {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 30px;
-      padding: 6px 18px;
-      margin-bottom: 20px;
-      font-size: 13.5px;
-      backdrop-filter: blur(8px);
-    }
-    .site-breadcrumb a {
-      color: #cbe3e1;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .site-breadcrumb a:hover {
-      color: var(--brand-lime);
-    }
-    .site-breadcrumb .bc-sep {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 10px;
-    }
-    .site-breadcrumb .bc-current {
-      color: var(--brand-lime);
-      font-weight: 700;
-    }
-    .tool-card-box {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    }
     .qr-type-btn {
-      border: 1px solid #cbd5e1;
-      background: #f8fafc;
-      color: #334155;
-      padding: 8px 16px;
-      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 10px;
       font-weight: 600;
-      font-size: 13.5px;
+      font-size: 13px;
       cursor: pointer;
       transition: all 0.2s;
     }
     .qr-type-btn.active, .qr-type-btn:hover {
       background: var(--brand-teal);
       color: #fff;
-      border-color: var(--brand-teal);
+      border-color: var(--brand-lime);
+      box-shadow: 0 0 10px rgba(173, 255, 28, 0.15);
+    }
+    .qr-type-btn.active i {
+      color: var(--brand-lime);
     }
     .qr-render-frame {
-      background: #f8fafc;
-      border: 2px dashed #cbd5e1;
-      border-radius: 12px;
-      padding: 25px;
+      background: #ffffff;
+      border: 2px dashed rgba(173, 255, 28, 0.4);
+      border-radius: 16px;
+      padding: 24px;
       text-align: center;
-      min-height: 280px;
+      min-height: 260px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
     }
-    .content-section h2 {
-      font-size: 22px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-top: 35px;
-      margin-bottom: 15px;
-    }
-    .content-section p, .content-section li {
-      color: #475569;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-    .faq-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      background: #fff;
-    }
-    .faq-card summary {
-      padding: 15px 20px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #0f172a;
-    }
-    .faq-card p {
-      padding: 0 20px 15px;
-      color: #64748b;
-      margin: 0;
-    }
   </style>
 </head>
-<body class="homepage4-body">
 
-  <?php include_once dirname(__DIR__) . "/includes/header.php" ?>
+<body class="tools-app-body">
 
-  <!-- 1. HERO / BREADCRUMB -->
-  <div class="tool-hero text-center">
-    <div class="hero-grid-overlay"></div>
-    <div class="container" style="position: relative; z-index: 2;">
-      <nav aria-label="breadcrumb">
-        <div class="site-breadcrumb">
-          <a href="<?= $site ?>"><i class="fa-solid fa-house fa-xs"></i> Home</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <a href="<?= $site ?>free-tools/">Free Tools</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <span class="bc-current">QR Code Generator</span>
-        </div>
-      </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free QR Code Generator — UPI, WhatsApp, WiFi &amp; Website</h1>
-      <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
-        Generate customized, high-resolution QR codes for websites, WiFi networks, vCard contacts, and text.
-      </p>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-header.php"; ?>
 
-  <div class="container my-5">
-    <div class="row g-4">
+  <div class="app-wrapper">
+    
+    <?php include_once __DIR__ . "/includes/tool-sidebar.php"; ?>
+
+    <main class="app-main-content">
       
-      <!-- Input Controls Column -->
-      <div class="col-lg-7">
-        <div class="tool-card-box">
-          <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-sliders text-primary me-2"></i> Select QR Code Type</h5>
-          
-          <div class="d-flex flex-wrap gap-2 mb-4">
-            <button type="button" class="qr-type-btn active" data-type="url"><i class="fa-solid fa-link me-1"></i> Website URL</button>
-            <button type="button" class="qr-type-btn" data-type="text"><i class="fa-solid fa-align-left me-1"></i> Plain Text</button>
-            <button type="button" class="qr-type-btn" data-type="wifi"><i class="fa-solid fa-wifi me-1"></i> WiFi Login</button>
-            <button type="button" class="qr-type-btn" data-type="vcard"><i class="fa-solid fa-address-card me-1"></i> Contact (vCard)</button>
-            <button type="button" class="qr-type-btn" data-type="upi"><i class="fa-solid fa-indian-rupee-sign me-1"></i> UPI Payment</button>
-          </div>
-
-          <!-- Dynamic Form Inputs -->
-          <div id="typeInputs">
-            <!-- URL Input (Default) -->
-            <div class="form-group-section" id="sec-url">
-              <label class="form-label fw-bold">Website URL <span class="text-danger">*</span></label>
-              <input type="url" id="qrUrl" class="form-control" placeholder="https://example.com" value="https://nikhilworks.com">
+      <!-- Workspace Card -->
+      <div class="tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div class="tool-header-left">
+            <div class="tool-header-icon icon-teal">
+              <i class="fa-solid fa-qrcode"></i>
             </div>
-
-            <!-- Text Input -->
-            <div class="form-group-section d-none" id="sec-text">
-              <label class="form-label fw-bold">Enter Text or Message</label>
-              <textarea id="qrText" class="form-control" rows="3" placeholder="Type any text, promo code, or message..."></textarea>
-            </div>
-
-            <!-- WiFi Input -->
-            <div class="form-group-section d-none" id="sec-wifi">
-              <div class="row g-2">
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">Network Name (SSID)</label>
-                  <input type="text" id="wifiSsid" class="form-control" placeholder="Home_WiFi">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">Password</label>
-                  <input type="text" id="wifiPass" class="form-control" placeholder="WiFi Password">
-                </div>
-                <div class="col-12 mt-2">
-                  <label class="form-label fw-bold">Encryption Type</label>
-                  <select id="wifiType" class="form-select">
-                    <option value="WPA">WPA / WPA2 / WPA3 (Standard)</option>
-                    <option value="WEP">WEP</option>
-                    <option value="nopass">None (Open Network)</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <!-- vCard Input -->
-            <div class="form-group-section d-none" id="sec-vcard">
-              <div class="row g-2">
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">Full Name</label>
-                  <input type="text" id="vName" class="form-control" placeholder="Nikhil Gupta">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">Phone Number</label>
-                  <input type="tel" id="vPhone" class="form-control" placeholder="+91 8368552640">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">Email</label>
-                  <input type="email" id="vEmail" class="form-control" placeholder="contact@nikhilworks.com">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">Company / Title</label>
-                  <input type="text" id="vOrg" class="form-control" placeholder="Founder, NikhilWorks">
-                </div>
-              </div>
-            </div>
-
-            <!-- UPI Payment Input -->
-            <div class="form-group-section d-none" id="sec-upi">
-              <div class="row g-2">
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">UPI ID (VPA) <span class="text-danger">*</span></label>
-                  <input type="text" id="upiVpa" class="form-control" placeholder="username@upi">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-bold">Payee Name</label>
-                  <input type="text" id="upiName" class="form-control" placeholder="Nikhil Gupta">
-                </div>
-                <div class="col-md-12">
-                  <label class="form-label fw-bold">Amount in INR (Optional)</label>
-                  <input type="number" id="upiAmount" class="form-control" placeholder="Leave empty for customer-entered amount">
-                </div>
-              </div>
+            <div>
+              <h1 class="tool-header-title">QR Code Studio Pro</h1>
+              <p class="tool-header-desc">Generate customized, high-resolution QR codes for websites, WiFi networks, vCards &amp; UPI payments.</p>
             </div>
           </div>
-
-          <!-- Color Customization -->
-          <div class="row g-3 mt-3 pt-3 border-top">
-            <div class="col-md-6">
-              <label class="form-label fw-bold">QR Code Color</label>
-              <div class="d-flex align-items-center gap-2">
-                <input type="color" id="qrDarkColor" class="form-control form-control-color" value="#104041">
-                <span class="small text-muted" id="hexDarkText">#104041</span>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-bold">Background Color</label>
-              <div class="d-flex align-items-center gap-2">
-                <input type="color" id="qrLightColor" class="form-control form-control-color" value="#ffffff">
-                <span class="small text-muted" id="hexLightText">#ffffff</span>
-              </div>
-            </div>
-          </div>
-
-          <button type="button" class="btn btn-primary w-100 py-3 mt-4 fw-bold" onclick="renderQr()">
-            <i class="fa-solid fa-arrows-rotate me-2"></i> Update &amp; Generate QR Code
-          </button>
-        </div>
-      </div>
-
-      <!-- QR Preview & Download Column -->
-      <div class="col-lg-5">
-        <div class="tool-card-box text-center h-100 d-flex flex-column justify-content-between">
-          <div>
-            <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-qrcode text-success me-2"></i> Live QR Preview</h5>
-            <div class="qr-render-frame" id="qrContainer">
-              <div id="qrcodeBox"></div>
-            </div>
-            <p class="small text-muted mt-2">Resolution: 300x300px (Vector Scalable)</p>
-          </div>
-
-          <div class="d-flex flex-column gap-2 mt-4">
-            <button type="button" class="btn btn-dark fw-bold py-2" onclick="downloadQr('png')">
-              <i class="fa-solid fa-download me-1"></i> Download PNG Image
-            </button>
-            <button type="button" class="btn btn-outline-secondary fw-bold py-2" onclick="printQr()">
-              <i class="fa-solid fa-print me-1"></i> Print QR Standee
+          <div class="tool-workspace-actions">
+            <button type="button" class="topbar-btn topbar-btn-ghost" id="openHistoryBtn2" onclick="ToolsApp.openHistoryDrawer('qr-code')">
+              <i class="fa-solid fa-clock-rotate-left text-warning"></i> Recent QR History
             </button>
           </div>
         </div>
+
+        <div class="row g-4">
+          <!-- Input Controls Column -->
+          <div class="col-lg-7">
+            <h6 class="fw-bold text-white mb-3"><i class="fa-solid fa-sliders text-info me-2"></i> Select QR Code Type</h6>
+            
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <button type="button" class="qr-type-btn active" data-type="url"><i class="fa-solid fa-link me-1"></i> Website URL</button>
+              <button type="button" class="qr-type-btn" data-type="text"><i class="fa-solid fa-align-left me-1"></i> Plain Text</button>
+              <button type="button" class="qr-type-btn" data-type="wifi"><i class="fa-solid fa-wifi me-1"></i> WiFi Login</button>
+              <button type="button" class="qr-type-btn" data-type="vcard"><i class="fa-solid fa-address-card me-1"></i> Contact (vCard)</button>
+              <button type="button" class="qr-type-btn" data-type="upi"><i class="fa-solid fa-indian-rupee-sign me-1"></i> UPI Payment</button>
+            </div>
+
+            <!-- Dynamic Form Inputs -->
+            <div id="typeInputs">
+              <!-- URL Input -->
+              <div class="form-group-section" id="sec-url">
+                <label class="form-label">Website URL <span class="text-danger">*</span></label>
+                <input type="url" id="qrUrl" class="form-control" placeholder="https://example.com" value="https://nikhilworks.com">
+              </div>
+
+              <!-- Text Input -->
+              <div class="form-group-section d-none" id="sec-text">
+                <label class="form-label">Enter Text or Message</label>
+                <textarea id="qrText" class="form-control" rows="3" placeholder="Type any text, promo code, or message..."></textarea>
+              </div>
+
+              <!-- WiFi Input -->
+              <div class="form-group-section d-none" id="sec-wifi">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Network Name (SSID)</label>
+                    <input type="text" id="wifiSsid" class="form-control" placeholder="Office_WiFi_5G">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">WiFi Password</label>
+                    <input type="text" id="wifiPass" class="form-control" placeholder="WiFi Password">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Encryption Type</label>
+                    <select id="wifiType" class="form-select">
+                      <option value="WPA">WPA / WPA2 / WPA3 (Standard)</option>
+                      <option value="WEP">WEP</option>
+                      <option value="nopass">None (Open Network)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- vCard Input -->
+              <div class="form-group-section d-none" id="sec-vcard">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="vName" class="form-control" placeholder="Nikhil Gupta">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" id="vPhone" class="form-control" placeholder="+91 8368552640">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="vEmail" class="form-control" placeholder="contact@nikhilworks.com">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Company / Organization</label>
+                    <input type="text" id="vOrg" class="form-control" placeholder="NikhilWorks">
+                  </div>
+                </div>
+              </div>
+
+              <!-- UPI Input -->
+              <div class="form-group-section d-none" id="sec-upi">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">UPI ID / VPA <span class="text-danger">*</span></label>
+                    <input type="text" id="upiVpa" class="form-control" placeholder="username@okhdfcbank">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Payee Name</label>
+                    <input type="text" id="upiName" class="form-control" placeholder="Nikhil Gupta">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Preset Amount (INR) — Optional</label>
+                    <input type="number" id="upiAmount" class="form-control" placeholder="e.g. 500">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Styling Accordion -->
+            <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
+              <label class="form-label mb-2"><i class="fa-solid fa-palette text-warning me-1"></i> QR Code Colors</label>
+              <div class="d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center gap-2">
+                  <input type="color" id="qrDarkColor" value="#071314" class="form-control form-control-color p-1" style="width: 44px; height: 38px; border-radius: 8px;">
+                  <span class="small text-muted">Dark Code</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <input type="color" id="qrLightColor" value="#ffffff" class="form-control form-control-color p-1" style="width: 44px; height: 38px; border-radius: 8px;">
+                  <span class="small text-muted">Background</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <button type="button" class="topbar-btn topbar-btn-primary w-100 py-2 justify-content-center" id="saveQrHistoryBtn">
+                <i class="fa-solid fa-floppy-disk me-1"></i> Save to My QR History
+              </button>
+            </div>
+          </div>
+
+          <!-- Live Output Preview Column -->
+          <div class="col-lg-5">
+            <div class="tool-output-panel">
+              <h6 class="text-white fw-bold mb-3"><i class="fa-solid fa-eye text-success me-2"></i> Live QR Code Preview</h6>
+              
+              <div class="qr-render-frame mb-3" id="qrcodeBox">
+                <!-- QRCode.js renders here -->
+              </div>
+
+              <p class="text-muted small mb-3">Scan with any mobile camera, Google Lens, or UPI App.</p>
+
+              <div class="d-flex flex-wrap gap-2 justify-content-center w-100">
+                <button type="button" class="topbar-btn topbar-btn-primary flex-fill justify-content-center" onclick="downloadQr('png')">
+                  <i class="fa-solid fa-download"></i> PNG
+                </button>
+                <button type="button" class="topbar-btn topbar-btn-ghost flex-fill justify-content-center" onclick="downloadQr('svg')">
+                  <i class="fa-solid fa-file-code"></i> SVG
+                </button>
+                <button type="button" class="topbar-btn topbar-btn-ghost flex-fill justify-content-center" onclick="printQr()">
+                  <i class="fa-solid fa-print"></i> Print
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-    </div>
+      <?php include_once __DIR__ . "/includes/tool-footer.php"; ?>
 
-    <!-- 3. HOW TO USE & CONTENT -->
-    <div class="content-section mt-5">
-      <h2>How to Create a Custom QR Code for Free</h2>
-      <ol>
-        <li><strong>Choose QR Type:</strong> Select from Website URL, Plain Text, WiFi Network Auto-Connect, Business vCard, or Indian UPI Payment.</li>
-        <li><strong>Enter Data:</strong> Input your target link or credentials.</li>
-        <li><strong>Customize Colors:</strong> Match your brand aesthetic by choosing custom foreground and background colors.</li>
-        <li><strong>Download &amp; Print:</strong> Export high-resolution PNG for instant printing on menus, packaging, and digital posts.</li>
-      </ol>
-
-      <h2>Where to Use Static QR Codes</h2>
-      <ul>
-        <li><strong>Restaurant Menus &amp; Table Standees:</strong> Contactless menu browsing and review collection.</li>
-        <li><strong>Product Packaging &amp; Labels:</strong> Link directly to user manuals, warranty registrations, or Instagram pages.</li>
-        <li><strong>WiFi Sharing:</strong> Allow guests and cafe customers to connect instantly without typing complex passwords.</li>
-        <li><strong>UPI &amp; Payments:</strong> Accept direct UPI payments without third-party commission charges.</li>
-      </ul>
-
-      <h2>Frequently Asked Questions</h2>
-      <details class="faq-card" open>
-        <summary>Do these QR codes ever expire or have scan limits?</summary>
-        <p>No! Our QR codes are static and permanent. The encoded information is stored directly inside the visual matrix pattern, so they will work forever with unlimited scans.</p>
-      </details>
-      <details class="faq-card">
-        <summary>Can I customize the color of the QR code?</summary>
-        <p>Yes, you can choose any color for both the dark matrix points and the background. Ensure there is sufficient contrast (e.g. dark colors on light backgrounds) for reliable scanning.</p>
-      </details>
-
-      <h2>Related Free Tools</h2>
-      <div class="row g-3 mt-1">
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>tools/whatsapp-link/" class="text-decoration-none text-dark"><i class="fa-brands fa-whatsapp text-success me-1"></i> WhatsApp Link Generator</a></h6>
-            <small class="text-muted">Create click-to-chat links for social bio and ads.</small>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>tools/invoice/" class="text-decoration-none text-dark"><i class="fa-solid fa-file-invoice-dollar text-primary me-1"></i> Free Invoice Generator</a></h6>
-            <small class="text-muted">Generate PDF invoices with GST calculations.</small>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>tools/schema-generator/" class="text-decoration-none text-dark"><i class="fa-solid fa-code text-warning me-1"></i> Schema JSON-LD Generator</a></h6>
-            <small class="text-muted">Boost Google search rankings with structured data.</small>
-          </div>
-        </div>
-      </div>
-    </div>
+    </main>
   </div>
 
-  <!-- 4. CTA BANNER -->
-  <div class="cta4-section-area sp1" style="background: linear-gradient(135deg, #104041 0%, #0d2e2f 100%);">
-    <div class="container text-center">
-      <h2 class="text-light fw-bold mb-2">Need Custom Web Development or QR Portal Systems?</h2>
-      <p class="text-light opacity-75 mb-4" style="max-width: 600px; margin: 0 auto;">
-        From dynamic trackable QR management platforms to full-stack e-commerce stores, NikhilWorks builds bespoke web architectures.
-      </p>
-      <a href="<?= $site ?>contact/" class="header-btn9">Get Free Consultation <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-auth-modal.php"; ?>
+  <?php include_once __DIR__ . "/includes/tool-history-drawer.php"; ?>
 
-  <?php include_once dirname(__DIR__) . "/includes/footer.php" ?>
+  <script src="<?= $site ?>assets/js/plugins/bootstrap.min.js"></script>
+  <script src="<?= $site ?>tools/assets/tool-app.js"></script>
 
   <script>
     let activeType = 'url';
@@ -458,15 +276,8 @@ $metaKeywords = "qr code generator free, upi payment qr code generator, whatsapp
       renderQr();
     });
 
-    $('#qrDarkColor').on('input', function() {
-      $('#hexDarkText').text($(this).val());
-      renderQr();
-    });
-
-    $('#qrLightColor').on('input', function() {
-      $('#hexLightText').text($(this).val());
-      renderQr();
-    });
+    $('#qrDarkColor, #qrLightColor').on('input', renderQr);
+    $('#qrUrl, #qrText, #wifiSsid, #wifiPass, #wifiType, #vName, #vPhone, #vEmail, #vOrg, #upiVpa, #upiName, #upiAmount').on('input change', renderQr);
 
     function getQrPayload() {
       switch (activeType) {
@@ -475,7 +286,7 @@ $metaKeywords = "qr code generator free, upi payment qr code generator, whatsapp
         case 'text':
           return $('#qrText').val().trim() || 'Welcome to NikhilWorks';
         case 'wifi':
-          const ssid = $('#wifiSsid').val().trim();
+          const ssid = $('#wifiSsid').val().trim() || 'WiFi-Network';
           const pass = $('#wifiPass').val().trim();
           const type = $('#wifiType').val();
           return `WIFI:T:${type};S:${ssid};P:${pass};;`;
@@ -506,8 +317,8 @@ $metaKeywords = "qr code generator free, upi payment qr code generator, whatsapp
       $('#qrcodeBox').html('');
       qrcodeInstance = new QRCode(document.getElementById("qrcodeBox"), {
         text: payload,
-        width: 200,
-        height: 200,
+        width: 190,
+        height: 190,
         colorDark: dark,
         colorLight: light,
         correctLevel: QRCode.CorrectLevel.H
@@ -516,23 +327,19 @@ $metaKeywords = "qr code generator free, upi payment qr code generator, whatsapp
 
     function downloadQr(format) {
       const img = document.querySelector('#qrcodeBox img');
-      if (img && img.src) {
+      const canvas = document.querySelector('#qrcodeBox canvas');
+      const src = img ? img.src : (canvas ? canvas.toDataURL("image/png") : '');
+
+      if (src) {
         const a = document.createElement('a');
-        a.href = img.src;
-        a.download = `qrcode-nikhilworks.${format}`;
+        a.href = src;
+        a.download = `qrcode-${activeType}-nikhilworks.${format === 'svg' ? 'png' : format}`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-      } else {
-        const canvas = document.querySelector('#qrcodeBox canvas');
-        if (canvas) {
-          const a = document.createElement('a');
-          a.href = canvas.toDataURL("image/png");
-          a.download = `qrcode-nikhilworks.${format}`;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-        }
+
+        // Auto save to history
+        triggerSaveHistory();
       }
     }
 
@@ -549,16 +356,73 @@ $metaKeywords = "qr code generator free, upi payment qr code generator, whatsapp
           <head><title>Print QR Code - NikhilWorks</title></head>
           <body style="text-align:center; padding: 40px; font-family: Arial, sans-serif;">
             <h2>Scan to Connect</h2>
-            <img src="${src}" style="width: 280px; height: 280px; margin: 20px auto; display: block;" />
-            <p style="color: #64748b; font-size: 14px;">Powered by NikhilWorks.com Free Tools</p>
+            <img src="${src}" style="width: 260px; height: 260px; margin: 20px auto; display: block;" />
+            <p style="color: #64748b; font-size: 14px;">Powered by NikhilWorks Tools Studio</p>
             <script>window.onload = function() { window.print(); window.close(); };<\/script>
           </body>
         </html>
       `);
       printWin.document.close();
+      triggerSaveHistory();
     }
 
-    // Initial render
+    function triggerSaveHistory() {
+      const payload = getQrPayload();
+      let title = `QR Code: ${activeType.toUpperCase()}`;
+      let summary = payload.substring(0, 80);
+
+      if (activeType === 'url') { title = `URL QR: ${$('#qrUrl').val() || 'nikhilworks.com'}`; }
+      else if (activeType === 'wifi') { title = `WiFi QR: ${$('#wifiSsid').val() || 'Network'}`; }
+      else if (activeType === 'vcard') { title = `Contact Card: ${$('#vName').val() || 'vCard'}`; }
+      else if (activeType === 'upi') { title = `UPI QR: ${$('#upiVpa').val() || 'UPI'}`; }
+
+      const payloadObj = {
+        type: activeType,
+        url: $('#qrUrl').val(),
+        text: $('#qrText').val(),
+        wifiSsid: $('#wifiSsid').val(),
+        wifiPass: $('#wifiPass').val(),
+        wifiType: $('#wifiType').val(),
+        vName: $('#vName').val(),
+        vPhone: $('#vPhone').val(),
+        vEmail: $('#vEmail').val(),
+        vOrg: $('#vOrg').val(),
+        upiVpa: $('#upiVpa').val(),
+        upiName: $('#upiName').val(),
+        upiAmount: $('#upiAmount').val(),
+        darkColor: $('#qrDarkColor').val(),
+        lightColor: $('#qrLightColor').val()
+      };
+
+      ToolsApp.saveHistory('qr-code', title, summary, payloadObj);
+    }
+
+    $('#saveQrHistoryBtn').on('click', triggerSaveHistory);
+
+    // 1-Click Restore Data from History Drawer
+    $(document).on('tools:restore-payload', function(e, toolType, payload) {
+      if (toolType === 'qr-code' && payload) {
+        if (payload.type) {
+          $(`.qr-type-btn[data-type="${payload.type}"]`).click();
+        }
+        if (payload.url) $('#qrUrl').val(payload.url);
+        if (payload.text) $('#qrText').val(payload.text);
+        if (payload.wifiSsid) $('#wifiSsid').val(payload.wifiSsid);
+        if (payload.wifiPass) $('#wifiPass').val(payload.wifiPass);
+        if (payload.wifiType) $('#wifiType').val(payload.wifiType);
+        if (payload.vName) $('#vName').val(payload.vName);
+        if (payload.vPhone) $('#vPhone').val(payload.vPhone);
+        if (payload.vEmail) $('#vEmail').val(payload.vEmail);
+        if (payload.vOrg) $('#vOrg').val(payload.vOrg);
+        if (payload.upiVpa) $('#upiVpa').val(payload.upiVpa);
+        if (payload.upiName) $('#upiName').val(payload.upiName);
+        if (payload.upiAmount) $('#upiAmount').val(payload.upiAmount);
+        if (payload.darkColor) $('#qrDarkColor').val(payload.darkColor);
+        if (payload.lightColor) $('#qrLightColor').val(payload.lightColor);
+        renderQr();
+      }
+    });
+
     $(document).ready(function() {
       renderQr();
     });

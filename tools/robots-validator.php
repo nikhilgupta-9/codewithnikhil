@@ -39,6 +39,8 @@ if (isset($_POST['action']) && $_POST['action'] === 'fetch_robots') {
 $pageTitle = "Free Robots.txt Validator & Tester — Audit Crawler Directives | NikhilWorks";
 $metaDesc = "Test and validate your robots.txt file online. Verify User-agent syntax, check Disallow / Allow crawl directives, locate Sitemaps, and test URL blocking.";
 $canonical = $site . "tools/robots-validator/";
+$metaKeywords = "robots txt validator, robots txt tester free, googlebot simulator, test disallow rules, crawl directives validator india";
+$currentTool = 'robots-validator';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +50,10 @@ $canonical = $site . "tools/robots-validator/";
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="site-url" content="<?= $site ?>">
   <title><?= htmlspecialchars($pageTitle) ?></title>
   <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -59,364 +63,184 @@ $canonical = $site . "tools/robots-validator/";
   <meta property="og:type" content="website">
   <meta property="og:image" content="<?= $site ?>assets/img/logo/og-tools.jpg">
 
-  <!-- Schema: SoftwareApplication -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Robots.txt Validator and Tester Tool",
-    "applicationCategory": "SEOApplication",
-    "operatingSystem": "Web Browser",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
-    "provider": {
-      "@type": "Person",
-      "name": "Nikhil Gupta",
-      "url": "https://nikhilworks.com"
-    }
-  }
-  </script>
-
-  <!-- Schema: BreadcrumbList -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?= $site ?>" },
-      { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "<?= $site ?>free-tools/" },
-      { "@type": "ListItem", "position": 3, "name": "Robots.txt Validator" }
-    ]
-  }
-  </script>
-
-  <!-- Schema: FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is the primary purpose of a robots.txt file?",
-        "acceptedAnswer": { "@type": "Answer", "text": "A robots.txt file instructs search engine crawlers (Googlebot, Bingbot) which URLs and directories they are permitted or forbidden to crawl on your website." }
-      },
-      {
-        "@type": "Question",
-        "name": "Does robots.txt prevent a page from appearing in Google search?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Not necessarily. If external backlinks point to a disallowed URL, Google may still index the URL. To guarantee exclusion, use a 'noindex' meta tag instead." }
-      }
-    ]
-  }
-  </script>
-
-  <!--=====FAB ICON=======-->
+  <!-- Favicon -->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 
-  <!--===== CSS LINK =======-->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/magnific-popup.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/sidebar.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/slick-slider.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/nice-select.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
+  <link rel="stylesheet" href="<?= $site ?>tools/assets/tool-app.css">
+
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
 
   <style>
-    :root {
-      --brand-teal: #104041;
-      --brand-lime: #ADFF1C;
-    }
-    .tool-hero {
-      background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.14) 0%, transparent 45%),
-                  radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
-                  linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
-      padding: 140px 0 65px;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-    @media (max-width: 991px) {
-      .tool-hero {
-        padding: 110px 0 50px;
-      }
-    }
-    .site-breadcrumb {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 30px;
-      padding: 6px 18px;
-      margin-bottom: 20px;
-      font-size: 13.5px;
-      backdrop-filter: blur(8px);
-    }
-    .site-breadcrumb a {
-      color: #cbe3e1;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .site-breadcrumb a:hover {
-      color: var(--brand-lime);
-    }
-    .site-breadcrumb .bc-sep {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 10px;
-    }
-    .site-breadcrumb .bc-current {
-      color: var(--brand-lime);
-      font-weight: 700;
-    }
-    .tool-card-box {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    .robots-editor {
+      font-family: var(--code-font);
+      font-size: 13px;
+      line-height: 1.6;
+      background: #040c0d;
+      color: #38bdf8;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      min-height: 320px;
     }
     .status-pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
-      border-radius: 20px;
+      padding: 6px 14px;
+      border-radius: 30px;
       font-size: 13px;
       font-weight: 700;
     }
-    .status-allowed { background: #dcfce7; color: #16a34a; }
-    .status-blocked { background: #fee2e2; color: #dc2626; }
-
-    .content-section h2 {
-      font-size: 22px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-top: 35px;
-      margin-bottom: 15px;
-    }
-    .content-section p, .content-section li {
-      color: #475569;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-    .faq-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      background: #fff;
-    }
-    .faq-card summary {
-      padding: 15px 20px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #0f172a;
-    }
-    .faq-card p {
-      padding: 0 20px 15px;
-      color: #64748b;
-      margin: 0;
-    }
+    .status-allowed { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid #22c55e; }
+    .status-blocked { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid #ef4444; }
   </style>
 </head>
-<body class="homepage4-body">
 
-  <?php include_once dirname(__DIR__) . "/includes/header.php" ?>
+<body class="tools-app-body">
 
-  <!-- HERO -->
-  <div class="tool-hero text-center">
-    <div class="hero-grid-overlay"></div>
-    <div class="container" style="position: relative; z-index: 2;">
-      <nav aria-label="breadcrumb">
-        <div class="site-breadcrumb">
-          <a href="<?= $site ?>"><i class="fa-solid fa-house fa-xs"></i> Home</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <a href="<?= $site ?>free-tools/">Free Tools</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <span class="bc-current">Robots.txt Validator</span>
-        </div>
-      </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free Robots.txt Validator &amp; Directive Tester</h1>
-      <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
-        Validate robots.txt syntax, inspect User-agent directives, verify XML Sitemaps, and test URL crawl permissions.
-      </p>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-header.php"; ?>
 
-  <div class="container my-5">
-    <div class="row g-4">
+  <div class="app-wrapper">
+    
+    <?php include_once __DIR__ . "/includes/tool-sidebar.php"; ?>
+
+    <main class="app-main-content">
       
-      <!-- Editor Column -->
-      <div class="col-lg-6">
-        <div class="tool-card-box">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-code text-primary me-2"></i> Robots.txt Editor</h5>
-            <button type="button" class="btn btn-outline-primary btn-sm" onclick="fetchLiveRobots()">
-              <i class="fa-solid fa-download me-1"></i> Fetch Live URL
+      <!-- Workspace Card -->
+      <div class="tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div class="tool-header-left">
+            <div class="tool-header-icon icon-orange">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <div>
+              <h1 class="tool-header-title">Robots.txt Validator &amp; Crawl Tester</h1>
+              <p class="tool-header-desc">Test robots.txt syntax errors, verify Googlebot crawler rules, check sitemap directives, and simulate URL blocking.</p>
+            </div>
+          </div>
+          <div class="tool-workspace-actions">
+            <button type="button" class="topbar-btn topbar-btn-ghost" onclick="ToolsApp.openHistoryDrawer('robots-validator')">
+              <i class="fa-solid fa-clock-rotate-left text-warning"></i> Robots History
             </button>
           </div>
+        </div>
 
-          <!-- Quick URL Fetcher -->
-          <div class="input-group mb-3 mt-2">
-            <input type="text" id="fetchDomain" class="form-control form-control-sm" placeholder="e.g. nikhilworks.com" value="nikhilworks.com">
-            <button class="btn btn-dark btn-sm" type="button" onclick="fetchLiveRobots()">Fetch</button>
+        <!-- Live Domain Fetcher Bar -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-9">
+            <label class="form-label">Fetch Live Robots.txt from Website</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
+              <input type="text" id="fetchDomain" class="form-control" placeholder="nikhilworks.com" value="nikhilworks.com">
+            </div>
           </div>
+          <div class="col-md-3 d-flex align-items-end">
+            <button type="button" class="topbar-btn topbar-btn-primary w-100 py-2 justify-content-center" onclick="fetchLiveRobots()">
+              <i class="fa-solid fa-cloud-arrow-down me-1"></i> Fetch Live File
+            </button>
+          </div>
+        </div>
 
-          <textarea id="robotsInput" class="form-control font-monospace small bg-light" rows="12" placeholder="User-agent: *&#10;Disallow: /admin/&#10;Disallow: /private/&#10;Allow: /&#10;&#10;Sitemap: https://example.com/sitemap.xml">User-agent: *
+        <div class="row g-4">
+          <!-- Editor Column -->
+          <div class="col-lg-7">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <label class="form-label mb-0"><i class="fa-solid fa-code text-cyan me-1"></i> Robots.txt Content</label>
+              <button type="button" class="btn btn-sm btn-outline-secondary text-white border-0" onclick="copyRobotsText()">
+                <i class="fa-regular fa-copy me-1"></i> Copy
+              </button>
+            </div>
+
+            <textarea id="robotsInput" class="form-control robots-editor">User-agent: *
 Disallow: /admin/
+Disallow: /config/
 Disallow: /cron/
-Disallow: /logs/
-Disallow: /migrations/
-Disallow: /lib/
+Disallow: /tmp/
 Allow: /
 
 Sitemap: https://nikhilworks.com/sitemap.xml
-Sitemap: https://nikhilworks.com/sitemap-main.xml
 Sitemap: https://nikhilworks.com/sitemap-blogs.xml</textarea>
 
-          <button type="button" class="btn btn-primary w-100 fw-bold py-2 mt-3" onclick="analyzeRobots()">
-            <i class="fa-solid fa-vial-circle-check me-1"></i> Validate Directives &amp; Syntax
-          </button>
-        </div>
-      </div>
+            <div class="mt-3">
+              <button type="button" class="topbar-btn topbar-btn-primary w-100 py-2 justify-content-center" onclick="saveRobotsToHistory()">
+                <i class="fa-solid fa-floppy-disk me-1"></i> Save Robots.txt to History
+              </button>
+            </div>
+          </div>
 
-      <!-- Test & Audit Results Column -->
-      <div class="col-lg-6">
-        <div class="tool-card-box h-100 d-flex flex-column justify-content-between">
-          <div>
-            <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-square-poll-vertical text-success me-2"></i> Live URL Crawl Simulator</h5>
-            
-            <!-- URL Tester Input -->
-            <div class="mb-4">
-              <label class="form-label fw-bold">Test Specific URL Path:</label>
-              <div class="input-group">
-                <input type="text" id="testPath" class="form-control" placeholder="/admin/dashboard.php" value="/admin/login.php">
-                <button class="btn btn-dark fw-bold" type="button" onclick="testUrlBlocking()">Test Crawl</button>
+          <!-- URL Blocking Simulation Column -->
+          <div class="col-lg-5">
+            <div class="tool-output-panel align-items-stretch text-start">
+              <h6 class="text-white fw-bold mb-3"><i class="fa-solid fa-vial text-warning me-2"></i> URL Block Simulation Tester</h6>
+              
+              <div class="mb-3">
+                <label class="form-label">Test URL Path (e.g. /admin/login.php or /blog/)</label>
+                <input type="text" id="testPath" class="form-control" placeholder="/admin/dashboard" value="/admin/dashboard">
+              </div>
+
+              <!-- Test Verdict -->
+              <div class="p-3 rounded mb-3 text-center" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle);">
+                <small class="text-muted d-block mb-1">Googlebot Crawl Verdict:</small>
+                <div id="crawlStatusBadge" class="status-pill status-blocked">
+                  <i class="fa-solid fa-ban me-1"></i> Blocked by Disallow: /admin/
+                </div>
+              </div>
+
+              <h6 class="text-white fw-bold mb-2 small"><i class="fa-solid fa-list-check text-info me-1"></i> Detected Directives</h6>
+              <div class="d-flex flex-column gap-2">
+                <div class="p-2 rounded d-flex justify-content-between small" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle);">
+                  <span class="text-muted">Target User-Agents:</span>
+                  <strong class="text-white" id="detUserAgent">* (All Crawlers)</strong>
+                </div>
+                <div class="p-2 rounded d-flex justify-content-between small" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle);">
+                  <span class="text-muted">Disallow Rules:</span>
+                  <strong class="text-warning" id="detDisallowCount">4 paths blocked</strong>
+                </div>
+                <div class="p-2 rounded d-flex justify-content-between small" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle);">
+                  <span class="text-muted">Sitemaps Declared:</span>
+                  <strong class="text-success" id="detSitemapCount">2 sitemaps found</strong>
+                </div>
               </div>
             </div>
-
-            <!-- Crawl Status Result Box -->
-            <div class="p-3 bg-light rounded-3 border mb-4 text-center" id="crawlResultBox">
-              <span class="text-muted fw-bold d-block mb-1">Googlebot Crawl Status:</span>
-              <div id="crawlStatusBadge" class="status-pill status-blocked">
-                <i class="fa-solid fa-ban me-1"></i> Blocked by Disallow: /admin/
-              </div>
-            </div>
-
-            <!-- Detected Directives Summary -->
-            <h6 class="fw-bold text-dark mb-2">Detected Directives:</h6>
-            <ul class="list-group list-group-flush border rounded-3 small" id="directivesList">
-              <li class="list-group-item d-flex justify-content-between">
-                <span>User-agent</span>
-                <strong class="text-primary" id="detUserAgent">* (All Crawlers)</strong>
-              </li>
-              <li class="list-group-item d-flex justify-content-between">
-                <span>Disallow Rules</span>
-                <strong class="text-danger" id="detDisallowCount">5 paths blocked</strong>
-              </li>
-              <li class="list-group-item d-flex justify-content-between">
-                <span>Sitemaps Declared</span>
-                <strong class="text-success" id="detSitemapCount">3 sitemaps found</strong>
-              </li>
-            </ul>
-          </div>
-
-          <div class="mt-4">
-            <button type="button" class="btn btn-outline-dark w-100" onclick="copyRobotsText()">
-              <i class="fa-regular fa-copy me-1"></i> Copy Robots.txt Content
-            </button>
           </div>
         </div>
+
       </div>
 
-    </div>
+      <?php include_once __DIR__ . "/includes/tool-footer.php"; ?>
 
-    <!-- CONTENT SECTION -->
-    <div class="content-section mt-5">
-      <h2>How Robots.txt Directives Work</h2>
-      <p>
-        The <code>robots.txt</code> file is the first asset accessed by search engines like Googlebot and Bingbot before indexing your site.
-        It specifies access rules using directives such as:
-      </p>
-      <ul>
-        <li><code>User-agent: *</code> — Applies following rules to all web crawlers.</li>
-        <li><code>Disallow: /admin/</code> — Instructs robots not to crawl any URL starting with <code>/admin/</code>.</li>
-        <li><code>Allow: /</code> — Explicitly permits crawling of the main directory.</li>
-        <li><code>Sitemap: https://...</code> — Declares the location of your XML sitemap.</li>
-      </ul>
-
-      <h2>Frequently Asked Questions</h2>
-      <details class="faq-card" open>
-        <summary>Where should the robots.txt file be located?</summary>
-        <p>It must be placed at the absolute root of your domain (e.g. <code>https://yourdomain.com/robots.txt</code>). It will not work inside subdirectories.</p>
-      </details>
-      <details class="faq-card">
-        <summary>Does robots.txt hide private passwords or admin panels?</summary>
-        <p>No. Robots.txt is publicly visible to anyone on the internet. Never store secret URLs in robots.txt. Use robust password authentication and IP whitelisting instead.</p>
-      </details>
-
-      <h2>Related Free Tools</h2>
-      <div class="row g-3 mt-1">
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>tools/index-checker/" class="text-decoration-none text-dark"><i class="fa-brands fa-google text-primary me-1"></i> Google Index Checker</a></h6>
-            <small class="text-muted">Check live Google indexing status.</small>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>tools/meta-preview/" class="text-decoration-none text-dark"><i class="fa-solid fa-tags text-success me-1"></i> Meta Tags Preview</a></h6>
-            <small class="text-muted">Preview Google SERP and Social snippets.</small>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="p-3 bg-light rounded-3 border h-100">
-            <h6 class="fw-bold"><a href="<?= $site ?>seo-auditor/" class="text-decoration-none text-dark"><i class="fa-solid fa-stethoscope text-danger me-1"></i> Free SEO Auditor</a></h6>
-            <small class="text-muted">Full 50-point technical SEO health scan.</small>
-          </div>
-        </div>
-      </div>
-    </div>
+    </main>
   </div>
 
-  <!-- CTA BANNER -->
-  <div class="cta4-section-area sp1" style="background: linear-gradient(135deg, #104041 0%, #0d2e2f 100%);">
-    <div class="container text-center">
-      <h2 class="text-light fw-bold mb-2">Need Technical SEO Audit &amp; Crawl Budget Optimization?</h2>
-      <p class="text-light opacity-75 mb-4" style="max-width: 600px; margin: 0 auto;">
-        NikhilWorks resolves crawl budget waste, server indexing errors, and canonical conflicts for fast SEO growth.
-      </p>
-      <a href="<?= $site ?>contact/" class="header-btn9">Get Technical SEO Proposal <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-auth-modal.php"; ?>
+  <?php include_once __DIR__ . "/includes/tool-history-drawer.php"; ?>
 
-  <?php include_once dirname(__DIR__) . "/includes/footer.php" ?>
+  <script src="<?= $site ?>assets/js/plugins/bootstrap.min.js"></script>
+  <script src="<?= $site ?>tools/assets/tool-app.js"></script>
 
   <script>
     function analyzeRobots() {
       const content = $('#robotsInput').val();
       const lines = content.split('\n');
 
+      let userAgent = '*';
       let disallowCount = 0;
       let sitemapCount = 0;
-      let userAgent = '*';
 
       lines.forEach(line => {
         const trimmed = line.trim();
         if (trimmed.toLowerCase().startsWith('user-agent:')) {
-          userAgent = trimmed.split(':')[1].trim();
+          userAgent = trimmed.split(':')[1].trim() || '*';
         }
         if (trimmed.toLowerCase().startsWith('disallow:')) {
-          disallowCount++;
+          const rule = trimmed.split(':')[1].trim();
+          if (rule) disallowCount++;
         }
         if (trimmed.toLowerCase().startsWith('sitemap:')) {
           sitemapCount++;
@@ -478,6 +302,7 @@ Sitemap: https://nikhilworks.com/sitemap-blogs.xml</textarea>
           if (res.success && res.content) {
             $('#robotsInput').val(res.content);
             analyzeRobots();
+            ToolsApp.showToast('Fetched live robots.txt! 🚀');
           } else {
             alert(res.message || 'Could not fetch live robots.txt');
           }
@@ -490,9 +315,38 @@ Sitemap: https://nikhilworks.com/sitemap-blogs.xml</textarea>
 
     function copyRobotsText() {
       const text = $('#robotsInput').val();
-      navigator.clipboard.writeText(text);
-      alert('Robots.txt content copied to clipboard!');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => ToolsApp.showToast('Robots.txt copied! 📋'));
+      } else {
+        $('#robotsInput').select();
+        document.execCommand('copy');
+        ToolsApp.showToast('Robots.txt copied! 📋');
+      }
     }
+
+    function saveRobotsToHistory() {
+      const domain = $('#fetchDomain').val() || 'Custom';
+      const path = $('#testPath').val() || '/';
+      const title = `Robots.txt: ${domain}`;
+      const summary = `Disallow Rules: ${$('#detDisallowCount').text()} | Tested: ${path}`;
+      const payload = {
+        domain: domain,
+        content: $('#robotsInput').val(),
+        testPath: path
+      };
+
+      ToolsApp.saveHistory('robots-validator', title, summary, payload);
+    }
+
+    // 1-Click Restore Data from History Drawer
+    $(document).on('tools:restore-payload', function(e, toolType, payload) {
+      if (toolType === 'robots-validator' && payload) {
+        if (payload.domain) $('#fetchDomain').val(payload.domain);
+        if (payload.content) $('#robotsInput').val(payload.content);
+        if (payload.testPath) $('#testPath').val(payload.testPath);
+        analyzeRobots();
+      }
+    });
 
     $('#testPath, #robotsInput').on('input', analyzeRobots);
     $(document).ready(analyzeRobots);

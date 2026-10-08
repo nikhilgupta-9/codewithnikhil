@@ -73,10 +73,11 @@ if (isset($_POST['action']) && $_POST['action'] === 'check_ssl') {
     exit;
 }
 
-$pageTitle = "Free SSL Certificate & Domain Expiry Checker | NikhilWorks";
-$metaDesc = "Check SSL certificate validity and domain expiry date instantly. Get alerts before your SSL or domain expires. Free online security checker tool.";
+$pageTitle = "Free SSL Certificate & Domain Security Inspector | NikhilWorks";
+$metaDesc = "Check SSL certificate validity, expiration countdown, TLS protocol grade & CA issuer authority. 100% free security checker tool.";
 $canonical = $site . "tools/ssl-checker/";
 $metaKeywords = "ssl certificate checker free, domain expiry checker online, ssl expiry checker, check ssl certificate validity, domain renewal date checker";
+$currentTool = 'ssl-checker';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,9 +87,10 @@ $metaKeywords = "ssl certificate checker free, domain expiry checker online, ssl
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="site-url" content="<?= $site ?>">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
-  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -98,319 +100,143 @@ $metaKeywords = "ssl certificate checker free, domain expiry checker online, ssl
   <meta property="og:type" content="website">
   <meta property="og:image" content="<?= $site ?>assets/img/logo/og-tools.jpg">
 
-  <!-- Schema: SoftwareApplication -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "SSL Certificate & Domain Security Checker",
-    "applicationCategory": "SecurityApplication",
-    "operatingSystem": "Web Browser",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
-    "provider": {
-      "@type": "Person",
-      "name": "Nikhil Gupta",
-      "url": "https://nikhilworks.com"
-    }
-  }
-  </script>
-
-  <!-- Schema: BreadcrumbList -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?= $site ?>" },
-      { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "<?= $site ?>free-tools/" },
-      { "@type": "ListItem", "position": 3, "name": "SSL Checker" }
-    ]
-  }
-  </script>
-
-  <!-- Schema: FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Why is an SSL certificate essential for my website?",
-        "acceptedAnswer": { "@type": "Answer", "text": "SSL encrypts sensitive user data (passwords, credit cards) and prevents 'Not Secure' browser warnings, while serving as a mandatory Google ranking factor." }
-      },
-      {
-        "@type": "Question",
-        "name": "What happens when an SSL certificate expires?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Browsers will block visitors with a severe security warning ('Your connection is not private'), causing immediate traffic and conversion loss." }
-      }
-    ]
-  }
-  </script>
-
-  <!--=====FAB ICON=======-->
+  <!-- Favicon -->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 
-  <!--===== CSS LINK =======-->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/magnific-popup.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/sidebar.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/slick-slider.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/nice-select.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
+  <link rel="stylesheet" href="<?= $site ?>tools/assets/tool-app.css">
+
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
 
   <style>
-    :root {
-      --brand-teal: #104041;
-      --brand-lime: #ADFF1C;
-    }
-    .tool-hero {
-      background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.14) 0%, transparent 45%),
-                  radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
-                  linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
-      padding: 140px 0 65px;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-    @media (max-width: 991px) {
-      .tool-hero {
-        padding: 110px 0 50px;
-      }
-    }
-    .site-breadcrumb {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 30px;
-      padding: 6px 18px;
-      margin-bottom: 20px;
-      font-size: 13.5px;
-      backdrop-filter: blur(8px);
-    }
-    .site-breadcrumb a {
-      color: #cbe3e1;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .site-breadcrumb a:hover {
-      color: var(--brand-lime);
-    }
-    .site-breadcrumb .bc-sep {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 10px;
-    }
-    .site-breadcrumb .bc-current {
-      color: var(--brand-lime);
-      font-weight: 700;
-    }
-    .tool-card-box {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    }
     .ssl-status-badge {
-      font-size: 28px;
-      width: 70px;
-      height: 70px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 15px;
+      font-size: 28px;
+      margin: 0 auto 12px;
     }
-    .ssl-good { background: rgba(22, 163, 74, 0.12); color: #16a34a; }
-    .ssl-bad { background: rgba(220, 38, 38, 0.12); color: #dc2626; }
-    .content-section h2 {
-      font-size: 22px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-top: 35px;
-      margin-bottom: 15px;
-    }
-    .content-section p, .content-section li {
-      color: #475569;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-    .faq-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      background: #fff;
-    }
-    .faq-card summary {
-      padding: 15px 20px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #0f172a;
-    }
-    .faq-card p {
-      padding: 0 20px 15px;
-      color: #64748b;
-      margin: 0;
-    }
+    .ssl-good { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 3px solid #22c55e; }
+    .ssl-bad { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 3px solid #ef4444; }
   </style>
 </head>
-<body class="homepage4-body">
 
-  <?php include_once dirname(__DIR__) . "/includes/header.php" ?>
+<body class="tools-app-body">
 
-  <!-- HERO -->
-  <div class="tool-hero text-center">
-    <div class="hero-grid-overlay"></div>
-    <div class="container" style="position: relative; z-index: 2;">
-      <nav aria-label="breadcrumb">
-        <div class="site-breadcrumb">
-          <a href="<?= $site ?>"><i class="fa-solid fa-house fa-xs"></i> Home</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <a href="<?= $site ?>free-tools/">Free Tools</a>
-          <i class="fa-solid fa-angle-right bc-sep"></i>
-          <span class="bc-current">SSL Checker</span>
-        </div>
-      </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free SSL Certificate &amp; Domain Expiry Checker</h1>
-      <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
-        Test HTTPS certificate validity, expiration days countdown, certificate authority, and encryption health.
-      </p>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-header.php"; ?>
 
-  <div class="container my-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        
-        <!-- Form -->
-        <div class="tool-card-box">
-          <form id="sslForm" onsubmit="return false;">
-            <label class="form-label fw-bold text-dark">Enter Domain Name (or URL)</label>
-            <div class="input-group mb-3">
-              <span class="input-group-text bg-light"><i class="fa-solid fa-lock text-muted"></i></span>
-              <input type="text" id="sslDomain" class="form-control form-control-lg" placeholder="example.com" value="nikhilworks.com" required>
-              <button type="button" class="btn btn-primary btn-lg fw-bold px-4" onclick="runSslCheck()" id="btnSsl">
-                <i class="fa-solid fa-shield-halved me-1"></i> Check SSL
-              </button>
+  <div class="app-wrapper">
+    
+    <?php include_once __DIR__ . "/includes/tool-sidebar.php"; ?>
+
+    <main class="app-main-content">
+      
+      <!-- Workspace Card -->
+      <div class="tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div class="tool-header-left">
+            <div class="tool-header-icon icon-indigo">
+              <i class="fa-solid fa-shield-halved"></i>
             </div>
-          </form>
-
-          <div id="sslLoader" class="text-center py-4 d-none">
-            <div class="spinner-border text-primary" role="status"></div>
-            <p class="text-muted small mt-2">Connecting to TLS port 443 and parsing X.509 certificate...</p>
+            <div>
+              <h1 class="tool-header-title">SSL &amp; Domain Security Inspector</h1>
+              <p class="tool-header-desc">Inspect SSL certificate validity, issuer authority, expiration date countdown, TLS protocol versions, and HTTPS configuration grade.</p>
+            </div>
           </div>
-
-          <div id="sslError" class="alert alert-danger d-none rounded-3 mt-3"></div>
-
-          <!-- Result Area -->
-          <div id="sslResultArea" class="d-none mt-4 pt-4 border-top">
-            
-            <div class="text-center mb-4">
-              <div class="ssl-status-badge ssl-good" id="sslBadgeIcon">
-                <i class="fa-solid fa-shield-check"></i>
-              </div>
-              <h4 class="fw-extrabold text-dark mb-1" id="sslStatusText">SSL Certificate is Valid &amp; Active</h4>
-              <span class="badge bg-success" id="sslDaysBadge">320 Days Remaining</span>
-            </div>
-
-            <!-- Details Table -->
-            <div class="table-responsive">
-              <table class="table table-bordered align-middle bg-white mb-0">
-                <tbody>
-                  <tr>
-                    <td style="width: 35%;" class="fw-bold text-muted">Common Name (Domain)</td>
-                    <td class="fw-bold text-dark" id="resSubject">nikhilworks.com</td>
-                  </tr>
-                  <tr>
-                    <td class="fw-bold text-muted">Issuing Authority (CA)</td>
-                    <td class="fw-bold text-primary" id="resIssuer">Let's Encrypt Authority</td>
-                  </tr>
-                  <tr>
-                    <td class="fw-bold text-muted">Valid From</td>
-                    <td id="resValidFrom">2026-01-01</td>
-                  </tr>
-                  <tr>
-                    <td class="fw-bold text-muted">Expiry Date</td>
-                    <td class="fw-bold text-danger" id="resValidTo">2026-12-31</td>
-                  </tr>
-                  <tr>
-                    <td class="fw-bold text-muted">Signature Algorithm</td>
-                    <td id="resSig">SHA256withRSA</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
+          <div class="tool-workspace-actions">
+            <button type="button" class="topbar-btn topbar-btn-ghost" onclick="ToolsApp.openHistoryDrawer('ssl-checker')">
+              <i class="fa-solid fa-clock-rotate-left text-warning"></i> Security History
+            </button>
           </div>
-
         </div>
 
-        <!-- CONTENT SECTION -->
-        <div class="content-section mt-5">
-          <h2>Why SSL Certificate Expiry Monitoring is Critical</h2>
-          <p>
-            An expired SSL certificate results in catastrophic browser security blocks (e.g. <em>NET::ERR_CERT_DATE_INVALID</em> in Google Chrome).
-            Regular checks prevent unexpected downtime and ensure customer trust.
-          </p>
+        <!-- Domain Input Form -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-9">
+            <label class="form-label">Domain Name / Hostname <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-lock text-success"></i></span>
+              <input type="text" id="sslDomain" class="form-control" placeholder="nikhilworks.com or google.com" value="nikhilworks.com" required>
+            </div>
+          </div>
+          <div class="col-md-3 d-flex align-items-end">
+            <button type="button" class="topbar-btn topbar-btn-primary w-100 py-2 justify-content-center" id="btnSsl" onclick="runSslCheck()">
+              <i class="fa-solid fa-shield-virus me-1"></i> Inspect SSL
+            </button>
+          </div>
+        </div>
 
-          <h2>Frequently Asked Questions</h2>
-          <details class="faq-card" open>
-            <summary>How often should SSL certificates be renewed?</summary>
-            <p>Most modern SSL authorities (like Let's Encrypt and Cloudflare) issue certificates valid for 90 days with automated renewal. Standard commercial certificates are typically renewed annually (365 days).</p>
-          </details>
+        <!-- Loader -->
+        <div id="sslLoader" class="text-center py-5 d-none">
+          <i class="fa-solid fa-spinner fa-spin fa-3x text-info mb-3"></i>
+          <h5 class="text-white fw-bold">Connecting to SSL port 443...</h5>
+          <p class="text-muted small">Parsing TLS handshake certificate chain</p>
+        </div>
 
-          <h2>Related Free Tools</h2>
-          <div class="row g-3 mt-1">
-            <div class="col-md-4">
-              <div class="p-3 bg-light rounded-3 border h-100">
-                <h6 class="fw-bold"><a href="<?= $site ?>tools/pagespeed/" class="text-decoration-none text-dark"><i class="fa-solid fa-gauge-high text-primary me-1"></i> PageSpeed Checker</a></h6>
-                <small class="text-muted">Test Core Web Vitals &amp; performance.</small>
+        <!-- Error -->
+        <div id="sslError" class="alert alert-danger d-none py-3" role="alert"></div>
+
+        <!-- Result Area -->
+        <div id="sslResultArea" class="d-none">
+          <div class="p-4 rounded text-center mb-4" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle);">
+            <div id="sslBadgeIcon" class="ssl-status-badge ssl-good">
+              <i class="fa-solid fa-shield-check"></i>
+            </div>
+            <h4 id="sslStatusText" class="fw-extrabold text-white mb-1">SSL Certificate is Active &amp; Valid</h4>
+            <span id="sslDaysBadge" class="badge bg-success px-3 py-2 fs-6">300 Days Remaining</span>
+          </div>
+
+          <h6 class="text-white fw-bold mb-3"><i class="fa-solid fa-file-shield text-info me-2"></i> Certificate Authority &amp; Signature Details</h6>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="p-3 rounded" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle);">
+                <small class="text-muted d-block">Issued To (Common Name)</small>
+                <strong class="text-white fs-6" id="resSubject">nikhilworks.com</strong>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="p-3 bg-light rounded-3 border h-100">
-                <h6 class="fw-bold"><a href="<?= $site ?>tools/index-checker/" class="text-decoration-none text-dark"><i class="fa-brands fa-google text-success me-1"></i> Google Index Checker</a></h6>
-                <small class="text-muted">Test SERP indexation status.</small>
+            <div class="col-md-6">
+              <div class="p-3 rounded" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle);">
+                <small class="text-muted d-block">Issuer Authority</small>
+                <strong class="text-info fs-6" id="resIssuer">Let's Encrypt / Cloudflare</strong>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="p-3 bg-light rounded-3 border h-100">
-                <h6 class="fw-bold"><a href="<?= $site ?>seo-auditor/" class="text-decoration-none text-dark"><i class="fa-solid fa-stethoscope text-danger me-1"></i> Free SEO Auditor</a></h6>
-                <small class="text-muted">Full 50-point technical SEO scan.</small>
+            <div class="col-md-6">
+              <div class="p-3 rounded" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle);">
+                <small class="text-muted d-block">Valid From</small>
+                <span class="text-light" id="resValidFrom">--</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 rounded" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle);">
+                <small class="text-muted d-block">Expiration Date</small>
+                <span class="text-warning fw-bold" id="resValidTo">--</span>
               </div>
             </div>
           </div>
         </div>
 
       </div>
-    </div>
+
+      <?php include_once __DIR__ . "/includes/tool-footer.php"; ?>
+
+    </main>
   </div>
 
-  <!-- CTA BANNER -->
-  <div class="cta4-section-area sp1" style="background: linear-gradient(135deg, #104041 0%, #0d2e2f 100%);">
-    <div class="container text-center">
-      <h2 class="text-light fw-bold mb-2">Need Enterprise Website Security &amp; Server Hardening?</h2>
-      <p class="text-light opacity-75 mb-4" style="max-width: 600px; margin: 0 auto;">
-        NikhilWorks configures automatic SSL renewals, Cloudflare WAF firewalls, and DDoS mitigation for mission-critical web applications.
-      </p>
-      <a href="<?= $site ?>contact/" class="header-btn9">Get Security Consultation <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </div>
+  <?php include_once __DIR__ . "/includes/tool-auth-modal.php"; ?>
+  <?php include_once __DIR__ . "/includes/tool-history-drawer.php"; ?>
 
-  <?php include_once dirname(__DIR__) . "/includes/footer.php" ?>
+  <script src="<?= $site ?>assets/js/plugins/bootstrap.min.js"></script>
+  <script src="<?= $site ?>tools/assets/tool-app.js"></script>
 
   <script>
     function runSslCheck() {
@@ -447,7 +273,6 @@ $metaKeywords = "ssl certificate checker free, domain expiry checker online, ssl
             $('#resIssuer').text(res.issuer);
             $('#resValidFrom').text(res.validFrom);
             $('#resValidTo').text(res.validTo);
-            $('#resSig').text(res.signatureType);
 
             if (res.isExpired) {
               $('#sslBadgeIcon').attr('class', 'ssl-status-badge ssl-bad').html('<i class="fa-solid fa-triangle-exclamation"></i>');
@@ -455,11 +280,22 @@ $metaKeywords = "ssl certificate checker free, domain expiry checker online, ssl
               $('#sslDaysBadge').text('Expired ' + Math.abs(res.daysRemaining) + ' days ago').attr('class', 'badge bg-danger');
             } else {
               $('#sslBadgeIcon').attr('class', 'ssl-status-badge ssl-good').html('<i class="fa-solid fa-shield-check"></i>');
-              $('#sslStatusText').text('SSL Certificate is Active & Valid').attr('class', 'fw-extrabold text-dark mb-1');
+              $('#sslStatusText').text('SSL Certificate is Active & Valid').attr('class', 'fw-extrabold text-white mb-1');
               $('#sslDaysBadge').text(res.daysRemaining + ' Days Remaining').attr('class', 'badge bg-success');
             }
 
             resArea.removeClass('d-none');
+
+            // Save to History
+            const title = `SSL Check: ${domain}`;
+            const summary = `Status: ${res.isExpired ? 'Expired' : 'Valid'} (${res.daysRemaining} days left) | Issuer: ${res.issuer}`;
+            const payload = {
+              domain: domain,
+              daysRemaining: res.daysRemaining,
+              issuer: res.issuer,
+              validTo: res.validTo
+            };
+            ToolsApp.saveHistory('ssl-checker', title, summary, payload);
           } else {
             errBox.text(res.message || 'SSL check failed.').removeClass('d-none');
           }
@@ -471,6 +307,14 @@ $metaKeywords = "ssl certificate checker free, domain expiry checker online, ssl
         }
       });
     }
+
+    // 1-Click Restore Data from History Drawer
+    $(document).on('tools:restore-payload', function(e, toolType, payload) {
+      if (toolType === 'ssl-checker' && payload) {
+        if (payload.domain) $('#sslDomain').val(payload.domain);
+        runSslCheck();
+      }
+    });
   </script>
 </body>
 </html>
