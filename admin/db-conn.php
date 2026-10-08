@@ -26,7 +26,8 @@ if ($local) {
 global $site;
 
 // Create Database Connection
-$conn = new mysqli($host, $username, $password, $dbName);
+$socket = file_exists('/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock') ? '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock' : null;
+$conn = $socket ? new mysqli($host, $username, $password, $dbName, 3306, $socket) : new mysqli($host, $username, $password, $dbName);
 
 // Check Connection
 if ($conn->connect_error) {

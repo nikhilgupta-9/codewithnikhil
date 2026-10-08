@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $lockExpiresIn = ceil((strtotime($admin['locked_until']) - $now) / 60);
                     $error = "Account temporarily locked due to consecutive failed attempts. Try again in {$lockExpiresIn} minute(s).";
 
-                    $stmtLog = $conn->prepare("INSERT INTO admin_login_logs (admin_id, username_attempted, ip_address, user_agent, status) VALUES (?, ?, ?, 'locked_out')");
+                    $stmtLog = $conn->prepare("INSERT INTO admin_login_logs (admin_id, username_attempted, ip_address, user_agent, status) VALUES (?, ?, ?, ?, 'locked_out')");
                     $stmtLog->bind_param('isss', $adminId, $username, $userIp, $userAgent);
                     $stmtLog->execute();
                     $stmtLog->close();
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $upStmt->close();
 
                         // Log success
-                        $stmtLog = $conn->prepare("INSERT INTO admin_login_logs (admin_id, username_attempted, ip_address, user_agent, status) VALUES (?, ?, ?, 'success')");
+                        $stmtLog = $conn->prepare("INSERT INTO admin_login_logs (admin_id, username_attempted, ip_address, user_agent, status) VALUES (?, ?, ?, ?, 'success')");
                         $stmtLog->bind_param('isss', $adminId, $username, $userIp, $userAgent);
                         $stmtLog->execute();
                         $stmtLog->close();
@@ -144,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $upStmt->close();
 
                         // Log failed attempt
-                        $stmtLog = $conn->prepare("INSERT INTO admin_login_logs (admin_id, username_attempted, ip_address, user_agent, status) VALUES (?, ?, ?, 'failed')");
+                        $stmtLog = $conn->prepare("INSERT INTO admin_login_logs (admin_id, username_attempted, ip_address, user_agent, status) VALUES (?, ?, ?, ?, 'failed')");
                         $stmtLog->bind_param('isss', $adminId, $username, $userIp, $userAgent);
                         $stmtLog->execute();
                         $stmtLog->close();
