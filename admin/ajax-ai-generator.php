@@ -39,25 +39,30 @@ try {
 
         case 'save_api_key':
             $newKey = trim($_POST['api_key'] ?? '');
+            $provider = trim($_POST['provider'] ?? 'gemini'); // gemini or claude
+
             if (empty($newKey)) {
                 echo json_encode(['success' => false, 'message' => 'API key cannot be empty.']);
                 exit;
             }
 
+            $envVarName = ($provider === 'claude') ? 'ANTHROPIC_API_KEY' : 'GEMINI_API_KEY';
             $envPath = dirname(__DIR__) . '/.env';
+
             if (!file_exists($envPath)) {
-                file_put_contents($envPath, "ANTHROPIC_API_KEY={$newKey}\n");
+                file_put_contents($envPath, "{$envVarName}={$newKey}\n");
             } else {
                 $content = file_get_contents($envPath);
-                if (preg_match('/^ANTHROPIC_API_KEY=.*/m', $content)) {
-                    $content = preg_replace('/^ANTHROPIC_API_KEY=.*/m', "ANTHROPIC_API_KEY={$newKey}", $content);
+                if (preg_match("/^{$envVarName}=.*/m", $content)) {
+                    $content = preg_replace("/^{$envVarName}=.*/m", "{$envVarName}={$newKey}", $content);
                 } else {
-                    $content .= "\nANTHROPIC_API_KEY={$newKey}\n";
+                    $content .= "\n{$envVarName}={$newKey}\n";
                 }
                 file_put_contents($envPath, $content);
             }
 
-            echo json_encode(['success' => true, 'message' => 'Claude API key saved successfully!']);
+            $providerName = ($provider === 'claude') ? 'Claude' : 'Google AI Studio (Gemini)';
+            echo json_encode(['success' => true, 'message' => "{$providerName} API key saved successfully!"]);
             break;
 
         case 'suggest_topics':

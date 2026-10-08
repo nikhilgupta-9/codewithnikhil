@@ -344,40 +344,79 @@ PROMPT;
 
     private function queryGeminiForArticle(string $topic, string $niche, string $tone): array
     {
-        $endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={$this->geminiApiKey}";
+        $models = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
+        $lastError = '';
+
         $prompt = <<<PROMPT
-Write a comprehensive, publication-ready 1000+ words SEO blog post for NikhilWorks on: "{$topic}" in category: {$niche}.
-Tone: {$tone}.
-Return strictly a valid JSON object with keys: title, slug_url, meta_title, meta_description, tags, image_prompt, content.
-The "content" key must be clean HTML with <h2>, <h3>, <p>, <ul>, <li>, <code>, Pro Tips, and FAQs.
+You are Nikhil Gupta, a master full-stack engineer, AI developer, and founder of NikhilWorks.
+Write a comprehensive, publication-ready, deeply technical yet highly engaging blog post for the topic: "{$topic}".
+Category: {$niche}
+Tone: {$tone}, authoritative, actionable, and SEO-optimized.
+
+Requirements:
+1. Title: Compelling, click-worthy, SEO-optimized title (under 70 chars).
+2. Meta Title: Exactly 50-60 chars ending with " | NikhilWorks".
+3. Meta Description: 140-160 chars with a compelling value hook for search results.
+4. Tags: 5-6 comma-separated relevant tags.
+5. Image Prompt: A 1-2 sentence visual description for a featured banner graphic.
+6. Content: A comprehensive, 1000+ words article in semantic HTML (DO NOT wrap inside <html> or <body> tags, only provide inner content elements like <h2>, <h3>, <p>, <ul>, <li>, <blockquote>, <pre><code class="language-...">, <table>, <div class="alert alert-info"> for Pro Tips, and an FAQ section).
+Include actionable steps, real code snippets/examples where relevant, real-world case studies/tips, and a friendly concluding CTA encouraging readers to connect with NikhilWorks for web development & AI consulting.
+
+Return strictly a valid JSON object without markdown code fences:
+{
+  "title": "...",
+  "slug_url": "url-slug-here",
+  "meta_title": "... | NikhilWorks",
+  "meta_description": "...",
+  "tags": "...",
+  "image_prompt": "...",
+  "content": "<h2>...</h2><p>...</p>..."
+}
 PROMPT;
 
-        $payload = [
-            'contents' => [
-                ['parts' => [['text' => $prompt]]]
-            ]
-        ];
+        foreach ($models as $m) {
+            $endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{$m}:generateContent?key={$this->geminiApiKey}";
+            $payload = [
+                'contents' => [
+                    ['parts' => [['text' => $prompt]]]
+                ],
+                'generationConfig' => [
+                    'temperature' => 0.7,
+                    'maxOutputTokens' => 8192,
+                    'responseMimeType' => 'application/json'
+                ]
+            ];
 
-        $ch = curl_init($endpoint);
-        curl_setopt_array($ch, [
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => json_encode($payload),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
-            CURLOPT_TIMEOUT => 45,
-            CURLOPT_SSL_VERIFYPEER => false
-        ]);
+            $ch = curl_init($endpoint);
+            curl_setopt_array($ch, [
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => json_encode($payload),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+                CURLOPT_TIMEOUT => 60,
+                CURLOPT_SSL_VERIFYPEER => false
+            ]);
 
-        $res = curl_exec($ch);
-        curl_close($ch);
+            $res = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
 
-        $decoded = json_decode((string)$res, true);
-        $text = $decoded['candidates'][0]['content']['parts'][0]['text'] ?? '';
-        $data = $this->extractJson($text);
-        if (!$data || empty($data['title'])) {
-            throw new RuntimeException("Could not generate valid article format from Gemini.");
+            $decoded = json_decode((string)$res, true);
+            if ($httpCode === 200 && isset($decoded['candidates'][0]['content']['parts'][0]['text'])) {
+                $text = $decoded['candidates'][0]['content']['parts'][0]['text'];
+                $data = $this->extractJson($text);
+                if ($data && !empty($data['title']) && !empty($data['content'])) {
+                    if (empty($data['slug_url'])) {
+                        $data['slug_url'] = strtolower(trim(preg_replace('/[^a-zA-Z0-9]+/', '-', $data['title']), '-'));
+                    }
+                    return $data;
+                }
+            } else {
+                $lastError = $decoded['error']['message'] ?? "HTTP {$httpCode}";
+            }
         }
-        return $data;
+
+        throw new RuntimeException("Google Gemini API error: " . ($lastError ?: "Could not generate valid article format."));
     }
 
     /**

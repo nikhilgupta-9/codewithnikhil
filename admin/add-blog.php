@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Write New Article with Claude AI | NikhilWorks Admin</title>
+    <title>Write New Article with AI Studio | NikhilWorks Admin</title>
     <link rel="icon" href="assets/img/logo/preloader4.png" type="image/png">
     
     <?php include "links.php"; ?>
@@ -540,7 +540,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="d-flex gap-2 mt-2 mt-md-0">
                         <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#apiKeyModal">
-                            <i class="fas fa-key me-1"></i> Claude API Key
+                            <i class="fas fa-key me-1"></i> AI API Keys
                         </button>
                         <a href="view-all-blog.php" class="btn btn-outline-secondary px-3">
                             <i class="fas fa-arrow-left me-1"></i> All Articles
@@ -553,13 +553,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="row align-items-center">
                         <div class="col-lg-8">
                             <div class="ai-badge-glow mb-2">
-                                <i class="fas fa-sparkles"></i> Claude AI &amp; Multi-Platform Trend Studio
+                                <i class="fas fa-sparkles"></i> Google Gemini &amp; Claude AI Content Studio
                             </div>
                             <h3 class="fw-extrabold text-white mb-2">
                                 Auto-Generate Viral Tech Articles in Seconds
                             </h3>
                             <p class="text-light opacity-75 mb-3 mb-lg-0 small" style="max-width: 650px;">
-                                Discover trending topics inspired by <strong>Dev.to, LinkedIn &amp; Instagram</strong>. Claude AI writes comprehensive 1000+ words SEO-optimized articles and generates high-res cover graphics automatically.
+                                Discover trending topics inspired by <strong>Dev.to, LinkedIn &amp; Instagram</strong>. AI writes comprehensive 1000+ words SEO-optimized articles and generates high-res cover graphics automatically.
                             </p>
                         </div>
                         <div class="col-lg-4 text-lg-end">
@@ -726,7 +726,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <div class="d-flex align-items-center gap-2 mb-1 text-dark fw-bold">
                                                 <i class="fas fa-robot text-primary"></i> AI Social Automation Active
                                             </div>
-                                            <span>Upon publishing, Gemini AI will automatically generate 4 optimized drafts (LinkedIn, X/Twitter, Facebook, Instagram) in your Social Queue.</span>
+                                            <span>Upon publishing, AI will automatically generate 4 optimized drafts (LinkedIn, X/Twitter, Facebook, Instagram) in your Social Queue.</span>
                                         </div>
 
                                         <!-- Action CTA -->
@@ -802,14 +802,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <!-- ==========================================
-             CLAUDE AI TOPIC & ARTICLE GENERATOR MODAL
+             AI TOPIC & ARTICLE GENERATOR MODAL
              ========================================== -->
         <div class="modal fade" id="aiStudioModal" tabindex="-1" aria-labelledby="aiStudioModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
                 <div class="modal-content border-0 shadow-lg">
                     <div class="modal-header bg-dark text-white border-0 py-3">
                         <div class="d-flex align-items-center gap-2">
-                            <span class="badge bg-success text-dark fw-bold">Claude AI Studio</span>
+                            <span class="badge bg-success text-dark fw-bold">AI Content Studio</span>
                             <h5 class="modal-title fw-bold text-white mb-0" id="aiStudioModalLabel">
                                 <i class="fas fa-sparkles text-warning me-1"></i> Multi-Platform Viral Topic &amp; Article Generator
                             </h5>
@@ -902,7 +902,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </label>
                                 </div>
 
-                                <button type="button" class="btn btn-success fw-bold px-4 py-2 mt-2 mt-md-0" id="btnGenerateFullArticle" onclick="generateFullArticleWithClaude()">
+                                <button type="button" class="btn btn-success fw-bold px-4 py-2 mt-2 mt-md-0" id="btnGenerateFullArticle" onclick="generateFullArticleWithAI()">
                                     <i class="fas fa-bolt me-1"></i> ⚡ Generate Full Article &amp; Populate Form
                                 </button>
                             </div>
@@ -911,7 +911,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <!-- Step 3: Live Progress Tracker -->
                         <div id="aiProgressSection" class="card border-0 shadow-sm rounded-3 p-4 mt-4 bg-white text-center" style="display: none;">
                             <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>
-                            <h5 class="fw-bold text-dark" id="aiProgressStatus">Claude AI is Architecting Your Article...</h5>
+                            <h5 class="fw-bold text-dark" id="aiProgressStatus">AI is Architecting Your Article...</h5>
                             <p class="text-muted small mb-0" id="aiProgressDetail">Crafting 1000+ words SEO content, meta tags, and high-res cover graphic...</p>
                         </div>
                     </div>
@@ -920,31 +920,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <!-- ==========================================
-             CLAUDE API KEY CONFIGURATION MODAL
+             AI API KEY CONFIGURATION MODAL
              ========================================== -->
         <div class="modal fade" id="apiKeyModal" tabindex="-1" aria-labelledby="apiKeyModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content border-0 shadow">
                     <div class="modal-header bg-dark text-white border-0 py-3">
                         <h5 class="modal-title fw-bold text-white" id="apiKeyModalLabel">
-                            <i class="fas fa-key text-warning me-2"></i> Claude AI API Configuration
+                            <i class="fas fa-key text-warning me-2"></i> AI API Configuration
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-4">
                         <p class="small text-muted mb-3">
-                            Enter your <strong>Anthropic Claude API Key</strong> (`sk-ant-...`) to unlock unlimited trending topic discovery, full 1000+ words SEO articles, and instant content generation.
+                            Configure your <strong>Google AI Studio (Gemini)</strong> or <strong>Anthropic Claude</strong> API Key to unlock unlimited trending topic discovery, full 1000+ words SEO articles, and instant content generation.
                         </p>
+                        
                         <div class="mb-3">
-                            <label class="form-label small fw-bold">Anthropic API Key</label>
-                            <input type="password" id="claudeApiKeyInput" class="form-control" placeholder="sk-ant-api03-...">
-                            <small class="text-muted">Stored securely in your local <code>.env</code> file.</small>
+                            <label class="form-label small fw-bold">Select AI Provider</label>
+                            <select id="apiProviderSelect" class="form-select form-select-sm" onchange="toggleApiKeyPlaceholder()">
+                                <option value="gemini">🌟 Google AI Studio (Gemini) - Recommended</option>
+                                <option value="claude">🟣 Anthropic Claude API</option>
+                            </select>
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold" id="apiKeyLabel">Google Gemini API Key (AI Studio)</label>
+                            <input type="password" id="aiApiKeyInput" class="form-control" placeholder="AIzaSy...">
+                            <small class="text-muted d-block mt-1">Get free key at: <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-primary text-decoration-none">Google AI Studio <i class="fas fa-external-link-alt fa-xs"></i></a></small>
+                        </div>
+
                         <div id="apiKeySaveMsg" class="small"></div>
                     </div>
                     <div class="modal-footer border-0 bg-light py-2">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="saveClaudeApiKey()">Save API Key</button>
+                        <button type="button" class="btn btn-primary" onclick="saveAiApiKey()">Save API Key</button>
                     </div>
                 </div>
             </div>
@@ -1140,12 +1150,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
 
             // ==========================================
-            // CLAUDE AI STUDIO FRONTEND CONTROLLERS
+            // AI STUDIO FRONTEND CONTROLLERS
             // ==========================================
             function openAiStudioModal() {
                 const modal = new bootstrap.Modal(document.getElementById('aiStudioModal'));
                 modal.show();
-                // Auto load initial trending topics if empty
                 if (document.getElementById('topicsListRow').children.length === 0) {
                     fetchAiTrendingTopics();
                 }
@@ -1159,7 +1168,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 btn.disabled = true;
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Discovering Trends...';
-                row.innerHTML = '<div class="col-12 text-center py-4 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div> Fetching viral topics from Dev.to, LinkedIn &amp; Claude AI...</div>';
+                row.innerHTML = '<div class="col-12 text-center py-4 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div> Fetching viral topics from Dev.to, LinkedIn &amp; AI...</div>';
 
                 $.ajax({
                     url: 'ajax-ai-generator.php',
@@ -1229,7 +1238,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 document.getElementById('selectedTopicInput').value = title;
             }
 
-            function generateFullArticleWithClaude() {
+            function generateFullArticleWithAI() {
                 const topic = document.getElementById('selectedTopicInput').value.trim();
                 const niche = document.getElementById('aiNicheSelect').value;
                 const source = document.getElementById('aiSourceSelect').value;
@@ -1249,10 +1258,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 btnGen.disabled = true;
                 progressSection.style.display = 'block';
-                progressStatus.textContent = 'Claude AI is Architecting Your Article...';
+                progressStatus.textContent = 'AI is Architecting Your Article...';
                 progressDetail.textContent = 'Writing in-depth 1000+ words SEO content, meta tags, and structured headings...';
 
-                // 1. Generate Article Content with Claude
+                // 1. Generate Article Content with AI
                 $.ajax({
                     url: 'ajax-ai-generator.php',
                     type: 'POST',
@@ -1311,7 +1320,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             document.getElementById('aiImageFilenameInput').value = imgRes.filename;
                                         }
 
-                                        // Close modal and focus on form
                                         bootstrap.Modal.getInstance(document.getElementById('aiStudioModal')).hide();
                                         window.scrollTo({ top: 300, behavior: 'smooth' });
                                     },
@@ -1379,21 +1387,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 });
             }
 
-            function saveClaudeApiKey() {
-                const key = document.getElementById('claudeApiKeyInput').value.trim();
+            function toggleApiKeyPlaceholder() {
+                const provider = document.getElementById('apiProviderSelect').value;
+                const label = document.getElementById('apiKeyLabel');
+                const input = document.getElementById('aiApiKeyInput');
+
+                if (provider === 'claude') {
+                    label.textContent = 'Anthropic Claude API Key';
+                    input.placeholder = 'sk-ant-api03-...';
+                } else {
+                    label.textContent = 'Google Gemini API Key (AI Studio)';
+                    input.placeholder = 'AIzaSy...';
+                }
+            }
+
+            function saveAiApiKey() {
+                const provider = document.getElementById('apiProviderSelect').value;
+                const key = document.getElementById('aiApiKeyInput').value.trim();
                 const msg = document.getElementById('apiKeySaveMsg');
+
                 if (!key) {
                     msg.innerHTML = '<span class="text-danger">Please enter a valid API key.</span>';
                     return;
                 }
 
-                msg.innerHTML = '<span class="text-muted">Saving...</span>';
+                msg.innerHTML = '<span class="text-muted">Saving key securely...</span>';
 
                 $.ajax({
                     url: 'ajax-ai-generator.php',
                     type: 'POST',
                     data: {
                         action: 'save_api_key',
+                        provider: provider,
                         api_key: key
                     },
                     dataType: 'json',
@@ -1403,6 +1428,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             setTimeout(() => {
                                 bootstrap.Modal.getInstance(document.getElementById('apiKeyModal')).hide();
                                 msg.innerHTML = '';
+                                document.getElementById('aiApiKeyInput').value = '';
                             }, 1500);
                         } else {
                             msg.innerHTML = '<span class="text-danger">' + res.message + '</span>';
