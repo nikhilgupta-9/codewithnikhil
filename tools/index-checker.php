@@ -75,9 +75,19 @@ $canonical = $site . "tools/index-checker/";
   }
   </script>
 
-  <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo1.png" type="image/x-icon">
+  <!--=====FAB ICON=======-->
+  <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
+
+  <!--===== CSS LINK =======-->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/magnific-popup.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/sidebar.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/slick-slider.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/nice-select.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
   <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
 
