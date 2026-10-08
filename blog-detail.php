@@ -626,7 +626,7 @@ $dateModified  = date('c', strtotime(!empty($blog['updated_at']) ? $blog['update
               <strong style="font-size:13px;">Tags:</strong>
               <?php foreach (array_map('trim', preg_split('/[,;\|]+/', $blog['tags'])) as $tag): ?>
                 <?php if ($tag !== ''): ?>
-                <a href="<?= $site ?>blogs/?tag=<?= urlencode($tag) ?>"
+                <a href="<?= $site ?>blogs/?tag=<?= urlencode($tag) ?>" rel="tag"
                    style="background:#f0f0f0;color:#333;padding:4px 12px;border-radius:20px;font-size:12px;text-decoration:none;">
                   #<?= htmlspecialchars($tag) ?>
                 </a>

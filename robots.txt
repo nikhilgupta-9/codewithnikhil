@@ -1,19 +1,18 @@
 User-agent: *
 Allow: /
+Allow: /free-tools/
+Allow: /tools/
 Disallow: /admin/
 Disallow: /config/
+Disallow: /tools/api/
 Disallow: /util/
 Disallow: /data/
 
-# Search Bots & AI Engines Explicitly Allowed for Maximum SEO & GEO Reach
 User-agent: Googlebot
 Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Bingbot
-Allow: /
+Allow: /free-tools/
+Allow: /tools/
+Disallow: /tools/api/
 
 User-agent: GPTBot
 Allow: /
@@ -24,7 +23,10 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: OAI-SearchBot
+User-agent: Bingbot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 User-agent: Applebot
