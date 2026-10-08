@@ -37,11 +37,16 @@ if (isset($_GET['deleteId'])) {
     $stmt->close();
     
     $_SESSION['message'] = "Testimonial deleted successfully!";
-    header("Location: view-testimonials.php");
+    
+    // Preserve current query params on delete redirect
+    $redirect_params = $_GET;
+    unset($redirect_params['deleteId']);
+    $qs = !empty($redirect_params) ? '?' . http_build_query($redirect_params) : '';
+    header("Location: view-testimonials.php" . $qs);
     exit();
 }
 
-// Counts for quick stats
+// Global Counts for quick stats
 $total_count_res = $conn->query("SELECT COUNT(*) AS c FROM testimonials");
 $total_count = $total_count_res->fetch_assoc()['c'] ?? 0;
 
@@ -54,8 +59,63 @@ $video_count = $video_count_res->fetch_assoc()['c'] ?? 0;
 $avg_rating_res = $conn->query("SELECT AVG(rating) AS a FROM testimonials WHERE rating IS NOT NULL");
 $avg_rating = round($avg_rating_res->fetch_assoc()['a'] ?? 5, 1);
 
-// Fetch all testimonials
-$result = $conn->query("SELECT * FROM testimonials ORDER BY featured DESC, display_order ASC, created_at DESC");
+// ── Pagination & Filter Settings ──
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$limit = isset($_GET['limit']) ? max(5, intval($_GET['limit'])) : 10;
+$source_filter = isset($_GET['source']) ? trim($_GET['source']) : 'all';
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+// Build WHERE clause
+$where_clauses = ["1=1"];
+$params = [];
+$types = "";
+
+if ($source_filter === 'google') {
+    $where_clauses[] = "(review_source = 'google' OR (review_source IS NULL AND (video_url IS NULL OR video_url = '')))";
+} elseif ($source_filter === 'video') {
+    $where_clauses[] = "(review_source = 'video' OR (video_url IS NOT NULL AND video_url != ''))";
+} elseif ($source_filter === 'direct') {
+    $where_clauses[] = "(review_source = 'direct')";
+}
+
+if (!empty($search)) {
+    $where_clauses[] = "(client_name LIKE ? OR client_company LIKE ? OR testimonial_text LIKE ? OR project_name LIKE ?)";
+    $search_param = "%" . $search . "%";
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $types .= "ssss";
+}
+
+$where_sql = implode(" AND ", $where_clauses);
+
+// Count total matching records for pagination
+$count_query = "SELECT COUNT(*) AS total FROM testimonials WHERE $where_sql";
+if (!empty($params)) {
+    $stmt_count = $conn->prepare($count_query);
+    $stmt_count->bind_param($types, ...$params);
+    $stmt_count->execute();
+    $total_filtered = $stmt_count->get_result()->fetch_assoc()['total'] ?? 0;
+    $stmt_count->close();
+} else {
+    $count_res = $conn->query($count_query);
+    $total_filtered = $count_res->fetch_assoc()['total'] ?? 0;
+}
+
+$total_pages = max(1, ceil($total_filtered / $limit));
+if ($page > $total_pages) $page = $total_pages;
+$offset = ($page - 1) * $limit;
+
+// Fetch paginated records
+$data_query = "SELECT * FROM testimonials WHERE $where_sql ORDER BY featured DESC, display_order ASC, id DESC LIMIT ?, ?";
+$types_with_limit = $types . "ii";
+$params_with_limit = array_merge($params, [$offset, $limit]);
+
+$stmt_data = $conn->prepare($data_query);
+$stmt_data->bind_param($types_with_limit, ...$params_with_limit);
+$stmt_data->execute();
+$result = $stmt_data->get_result();
 
 // Helper to extract embed url
 function get_video_embed($url) {
@@ -70,6 +130,13 @@ function get_video_embed($url) {
         return "https://player.vimeo.com/video/" . $matches[1] . "?autoplay=1";
     }
     return $url;
+}
+
+// Helper function to build page link
+function build_page_url($p) {
+    $params = $_GET;
+    $params['page'] = $p;
+    return '?' . http_build_query($params);
 }
 ?>
 
@@ -117,11 +184,12 @@ function get_video_embed($url) {
         }
         
         .testimonial-img {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             object-fit: cover;
             border-radius: 50%;
             border: 2px solid #e2e8f0;
+            flex-shrink: 0;
         }
         
         .rating-stars {
@@ -172,10 +240,13 @@ function get_video_embed($url) {
             background: #fff;
             color: #475569;
             transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
         }
         .filter-btn.active, .filter-btn:hover {
             background: #104041;
-            color: #fff;
+            color: #fff !important;
             border-color: #104041;
         }
 
@@ -183,6 +254,33 @@ function get_video_embed($url) {
             padding: 0.35rem 0.6rem;
             font-size: 0.85rem;
             border-radius: 6px;
+        }
+
+        /* Custom Pagination Styling */
+        .admin-pagination .page-item .page-link {
+            color: #104041;
+            border-radius: 8px;
+            margin: 0 3px;
+            border: 1px solid #e2e8f0;
+            font-weight: 600;
+            font-size: 13.5px;
+            padding: 6px 14px;
+            transition: all 0.2s;
+        }
+        .admin-pagination .page-item.active .page-link {
+            background-color: #104041;
+            border-color: #104041;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(16, 64, 65, 0.25);
+        }
+        .admin-pagination .page-item.disabled .page-link {
+            color: #94a3b8;
+            background-color: #f8fafc;
+            border-color: #e2e8f0;
+        }
+        .admin-pagination .page-item .page-link:hover:not(.active) {
+            background-color: #f1f5f9;
+            color: #104041;
         }
     </style>
 </head>
@@ -258,7 +356,7 @@ function get_video_embed($url) {
                                 <div class="box_header m-0 d-flex justify-content-between align-items-center flex-wrap gap-2">
                                     <div>
                                         <h2 class="m-0 fw-bold">Testimonials & Reviews</h2>
-                                        <small class="text-muted">Control all Google Profile reviews and Video Testimonials shown on website</small>
+                                        <small class="text-muted">Manage all <?= $total_count ?> client reviews, Google profile feedback, and video stories</small>
                                     </div>
                                     <div class="d-flex align-items-center gap-2">
                                         <a href="add-testimonial.php" class="btn btn-primary" style="background: #104041; border-color: #104041;">
@@ -277,15 +375,67 @@ function get_video_embed($url) {
                                     <?php unset($_SESSION['message']); ?>
                                 <?php endif; ?>
 
-                                <!-- Filter Buttons -->
-                                <div class="d-flex gap-2 mb-3 flex-wrap align-items-center">
-                                    <span class="fw-bold text-muted me-1" style="font-size: 13px;">Filter By:</span>
-                                    <button class="filter-btn active" onclick="filterTable('all', this)">All (<?= $total_count ?>)</button>
-                                    <button class="filter-btn" onclick="filterTable('google', this)"><i class="fab fa-google text-primary me-1"></i> Google (<?= $google_count ?>)</button>
-                                    <button class="filter-btn" onclick="filterTable('video', this)"><i class="fab fa-youtube text-danger me-1"></i> Video (<?= $video_count ?>)</button>
-                                    <button class="filter-btn" onclick="filterTable('direct', this)"><i class="fas fa-user-check text-success me-1"></i> Direct</button>
+                                <!-- Controls & Search Row -->
+                                <div class="row g-3 mb-3 align-items-center justify-content-between">
+                                    
+                                    <!-- Filter Buttons -->
+                                    <div class="col-lg-7 col-md-12">
+                                        <div class="d-flex gap-2 flex-wrap align-items-center">
+                                            <span class="fw-bold text-muted me-1" style="font-size: 13px;">Filter:</span>
+                                            
+                                            <?php
+                                            function filter_link($src) {
+                                                $p = $_GET;
+                                                $p['source'] = $src;
+                                                $p['page'] = 1;
+                                                return '?' . http_build_query($p);
+                                            }
+                                            ?>
+                                            <a href="<?= filter_link('all') ?>" class="filter-btn <?= $source_filter === 'all' ? 'active' : '' ?>">
+                                                All (<?= $total_count ?>)
+                                            </a>
+                                            <a href="<?= filter_link('google') ?>" class="filter-btn <?= $source_filter === 'google' ? 'active' : '' ?>">
+                                                <i class="fab fa-google text-primary me-1"></i> Google (<?= $google_count ?>)
+                                            </a>
+                                            <a href="<?= filter_link('video') ?>" class="filter-btn <?= $source_filter === 'video' ? 'active' : '' ?>">
+                                                <i class="fab fa-youtube text-danger me-1"></i> Video (<?= $video_count ?>)
+                                            </a>
+                                            <a href="<?= filter_link('direct') ?>" class="filter-btn <?= $source_filter === 'direct' ? 'active' : '' ?>">
+                                                <i class="fas fa-user-check text-success me-1"></i> Direct
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Search & Per-Page Controls -->
+                                    <div class="col-lg-5 col-md-12">
+                                        <form method="GET" action="view-testimonials.php" class="d-flex gap-2 justify-content-lg-end">
+                                            <input type="hidden" name="source" value="<?= htmlspecialchars($source_filter) ?>">
+                                            
+                                            <div class="input-group" style="max-width: 260px;">
+                                                <input type="text" name="search" class="form-control form-control-sm" 
+                                                       placeholder="Search reviewer, project..." 
+                                                       value="<?= htmlspecialchars($search) ?>">
+                                                <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                                <?php if (!empty($search)): ?>
+                                                    <a href="?source=<?= htmlspecialchars($source_filter) ?>" class="btn btn-sm btn-outline-danger" title="Clear Search">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </div>
+
+                                            <select name="limit" class="form-select form-select-sm" style="width: 100px;" onchange="this.form.submit()">
+                                                <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10 / page</option>
+                                                <option value="20" <?= $limit == 20 ? 'selected' : '' ?>>20 / page</option>
+                                                <option value="32" <?= $limit == 32 ? 'selected' : '' ?>>32 (All)</option>
+                                                <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50 / page</option>
+                                            </select>
+                                        </form>
+                                    </div>
                                 </div>
                                 
+                                <!-- Testimonials Table -->
                                 <div class="table-responsive">
                                     <table class="table table-hover align-middle" id="testimonialsTable">
                                         <thead class="table-light">
@@ -307,7 +457,7 @@ function get_video_embed($url) {
                                                     $has_video = !empty($t['video_url']);
                                                     $embed_url = get_video_embed($t['video_url'] ?? '');
                                             ?>
-                                                <tr data-source="<?= htmlspecialchars($source) ?>">
+                                                <tr>
                                                     <td><span class="text-muted fw-bold">#<?= htmlspecialchars($t['id']); ?></span></td>
                                                     <td>
                                                         <div class="d-flex align-items-center">
@@ -316,7 +466,7 @@ function get_video_embed($url) {
                                                                      alt="<?= htmlspecialchars($t['client_name']); ?>" 
                                                                      class="testimonial-img me-3">
                                                             <?php else: ?>
-                                                                <div class="testimonial-img bg-light d-flex align-items-center justify-content-center me-3 text-primary fw-bold" style="font-size: 16px;">
+                                                                <div class="testimonial-img bg-light d-flex align-items-center justify-content-center me-3 text-primary fw-bold" style="font-size: 15px;">
                                                                     <?= strtoupper(substr($t['client_name'], 0, 1)) ?>
                                                                 </div>
                                                             <?php endif; ?>
@@ -341,7 +491,7 @@ function get_video_embed($url) {
                                                             <?php endif; ?>
                                                         <?php elseif ($source == 'video' || $has_video): ?>
                                                             <span class="source-pill video">
-                                                                <i class="fab fa-youtube"></i> Video Testimonial
+                                                                <i class="fab fa-youtube"></i> Video Story
                                                             </span>
                                                             <?php if (!empty($embed_url)): ?>
                                                                 <button type="button" class="btn btn-sm btn-outline-danger d-block mt-1 py-0 px-2" style="font-size: 11px;" 
@@ -434,13 +584,84 @@ function get_video_embed($url) {
                                                 <tr>
                                                     <td colspan="7" class="text-center py-4 text-muted">
                                                         <i class="fas fa-inbox fa-3x mb-2 text-muted opacity-50 d-block"></i>
-                                                        No testimonials found. Click "Add Testimonial" to create your first review.
+                                                        No testimonials found matching your filter criteria.
                                                     </td>
                                                 </tr>
                                             <?php endif; ?>
                                         </tbody>
                                     </table>
                                 </div>
+
+                                <!-- Pagination & Summary Bar -->
+                                <?php if ($total_filtered > 0): 
+                                    $from_item = $offset + 1;
+                                    $to_item = min($offset + $limit, $total_filtered);
+                                ?>
+                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4 pt-3 border-top">
+                                    <div class="text-muted" style="font-size: 13.5px;">
+                                        Showing <strong class="text-dark"><?= $from_item ?></strong> to <strong class="text-dark"><?= $to_item ?></strong> of <strong class="text-dark"><?= $total_filtered ?></strong> reviews
+                                    </div>
+
+                                    <?php if ($total_pages > 1): ?>
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination pagination-sm mb-0 admin-pagination">
+                                            <!-- First Page -->
+                                            <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+                                                <a class="page-link" href="<?= build_page_url(1) ?>" title="First Page">
+                                                    <i class="fas fa-angle-double-left"></i>
+                                                </a>
+                                            </li>
+
+                                            <!-- Previous Page -->
+                                            <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+                                                <a class="page-link" href="<?= build_page_url($page - 1) ?>">
+                                                    <i class="fas fa-chevron-left me-1"></i> Prev
+                                                </a>
+                                            </li>
+
+                                            <!-- Numbered Page Links -->
+                                            <?php
+                                            $start_p = max(1, $page - 2);
+                                            $end_p = min($total_pages, $page + 2);
+
+                                            if ($start_p > 1) {
+                                                echo '<li class="page-item"><a class="page-link" href="' . build_page_url(1) . '">1</a></li>';
+                                                if ($start_p > 2) echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                            }
+
+                                            for ($i = $start_p; $i <= $end_p; $i++):
+                                            ?>
+                                                <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                                                    <a class="page-link" href="<?= build_page_url($i) ?>"><?= $i ?></a>
+                                                </li>
+                                            <?php 
+                                            endfor; 
+
+                                            if ($end_p < $total_pages) {
+                                                if ($end_p < $total_pages - 1) echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                                echo '<li class="page-item"><a class="page-link" href="' . build_page_url($total_pages) . '">' . $total_pages . '</a></li>';
+                                            }
+                                            ?>
+
+                                            <!-- Next Page -->
+                                            <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : '' ?>">
+                                                <a class="page-link" href="<?= build_page_url($page + 1) ?>">
+                                                    Next <i class="fas fa-chevron-right ms-1"></i>
+                                                </a>
+                                            </li>
+
+                                            <!-- Last Page -->
+                                            <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : '' ?>">
+                                                <a class="page-link" href="<?= build_page_url($total_pages) ?>" title="Last Page">
+                                                    <i class="fas fa-angle-double-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <?php endif; ?>
+                                </div>
+                                <?php endif; ?>
+
                             </div>
                         </div>
                     </div>
@@ -483,25 +704,6 @@ function get_video_embed($url) {
         document.getElementById('adminVideoModal').addEventListener('hidden.bs.modal', function () {
             stopVideoModal();
         });
-
-        function filterTable(type, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const rows = document.querySelectorAll('#testimonialsTable tbody tr');
-            rows.forEach(row => {
-                if (type === 'all') {
-                    row.style.display = '';
-                } else {
-                    const rowSource = row.getAttribute('data-source');
-                    if (rowSource === type) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                }
-            });
-        }
     </script>
 </body>
 </html>
