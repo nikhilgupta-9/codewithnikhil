@@ -97,9 +97,52 @@ $canonical = $site . "tools/privacy-policy/";
       --brand-lime: #ADFF1C;
     }
     .tool-hero {
-      background: linear-gradient(135deg, #072223 0%, #104041 60%, #854d0e 100%);
-      padding: 55px 0 45px;
+      background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.14) 0%, transparent 45%),
+                  radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
+                  linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
+      padding: 140px 0 65px;
       color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 991px) {
+      .tool-hero {
+        padding: 110px 0 50px;
+      }
+    }
+    .site-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+      padding: 6px 18px;
+      margin-bottom: 20px;
+      font-size: 13.5px;
+      backdrop-filter: blur(8px);
+    }
+    .site-breadcrumb a {
+      color: #cbe3e1;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .site-breadcrumb a:hover {
+      color: var(--brand-lime);
+    }
+    .site-breadcrumb .bc-sep {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 10px;
+    }
+    .site-breadcrumb .bc-current {
+      color: var(--brand-lime);
+      font-weight: 700;
     }
     .tool-card-box {
       background: #ffffff;
@@ -146,10 +189,14 @@ $canonical = $site . "tools/privacy-policy/";
   <!-- HERO -->
   <div class="tool-hero text-center">
     <div class="container">
-      <nav class="small mb-3" aria-label="breadcrumb">
-        <a href="<?= $site ?>" class="text-white-50 text-decoration-none">Home</a> &rsaquo;
-        <a href="<?= $site ?>free-tools/" class="text-white-50 text-decoration-none">Free Tools</a> &rsaquo;
-        <span class="text-white fw-bold">Privacy Policy Generator</span>
+      <nav aria-label="breadcrumb">
+        <div class="site-breadcrumb">
+          <a href="<?= $site ?>"><i class="fa-solid fa-house fa-xs"></i> Home</a>
+          <i class="fa-solid fa-angle-right bc-sep"></i>
+          <a href="<?= $site ?>free-tools/">Free Tools</a>
+          <i class="fa-solid fa-angle-right bc-sep"></i>
+          <span class="bc-current">Privacy Policy Generator</span>
+        </div>
       </nav>
       <h1 class="fw-extrabold text-white mb-2">Free Privacy Policy Generator</h1>
       <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">

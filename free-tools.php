@@ -140,11 +140,18 @@ $canonicalUrl = $site . "free-tools/";
     }
 
     .tools-hub-hero {
-      background: linear-gradient(135deg, #072223 0%, #104041 55%, #0f172a 100%);
-      padding: 70px 0 60px;
+      background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.14) 0%, transparent 45%),
+                  radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
+                  linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
+      padding: 140px 0 70px;
       color: #ffffff;
       position: relative;
       overflow: hidden;
+    }
+    @media (max-width: 991px) {
+      .tools-hub-hero {
+        padding: 110px 0 55px;
+      }
     }
     .tools-hub-hero::before {
       content: "";
@@ -172,13 +179,40 @@ $canonicalUrl = $site . "free-tools/";
       letter-spacing: 0.5px;
       margin-bottom: 16px;
     }
-    .tools-breadcrumb a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      transition: color 0.2s;
+    /* Site Breadcrumb standard */
+    .site-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+      padding: 6px 18px;
+      margin-bottom: 22px;
+      font-size: 13.5px;
+      backdrop-filter: blur(8px);
     }
-    .tools-breadcrumb a:hover {
+    .site-breadcrumb a {
+      color: #cbe3e1;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .site-breadcrumb a:hover {
       color: var(--brand-lime);
+    }
+    .site-breadcrumb .bc-sep {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 10px;
+    }
+    .site-breadcrumb .bc-current {
+      color: var(--brand-lime);
+      font-weight: 700;
     }
 
     .tools-search-box {
@@ -383,10 +417,20 @@ $canonicalUrl = $site . "free-tools/";
   <!-- HERO SECTION -->
   <section class="tools-hub-hero">
     <div class="container text-center">
+      
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb">
+        <div class="site-breadcrumb">
+          <a href="<?= $site ?>"><i class="fa-solid fa-house fa-xs"></i> Home</a>
+          <i class="fa-solid fa-angle-right bc-sep"></i>
+          <span class="bc-current">Free Tools</span>
+        </div>
+      </nav>
+
       <div class="tools-badge">
         <i class="fa-solid fa-wand-magic-sparkles"></i> 100% Free Developer &amp; Business Utilities
       </div>
-      <h1 class="display-5 fw-extrabold mb-3">
+      <h1 class="display-5 fw-extrabold mb-3 text-white">
         Free Web, SEO &amp; Business Tools Hub
       </h1>
       <p class="lead opacity-90 mx-auto" style="max-width: 720px; font-size: 17px;">
@@ -399,12 +443,6 @@ $canonicalUrl = $site . "free-tools/";
         <i class="fa-solid fa-magnifying-glass tools-search-icon"></i>
         <input type="text" id="toolSearchInput" placeholder="Search by tool name, keyword (e.g. WhatsApp, GST, SEO, Schema)..." autocomplete="off">
       </div>
-
-      <!-- Breadcrumb -->
-      <nav class="tools-breadcrumb mt-4 small" aria-label="breadcrumb">
-        <a href="<?= $site ?>">Home</a> &rsaquo; 
-        <span class="text-white fw-bold">Free Tools</span>
-      </nav>
     </div>
   </section>
 
