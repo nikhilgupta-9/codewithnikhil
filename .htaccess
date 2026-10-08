@@ -142,6 +142,8 @@ ErrorDocument 404 /404.php
   RewriteRule ^ai-services/?$ ai-integration-services.php [L]
   RewriteRule ^privacy-policy/?$ privacy-policy.php [L]
   RewriteRule ^terms-and-conditions/?$ terms-and-conditions.php [L]
+  RewriteRule ^free-tools/?$ free-tools.php [L]
+  RewriteRule ^tools/([a-z0-9_-]+)/?$ tools/$1.php [QSA,L]
 
   # 8. Dynamic Service & Blog Detail Pages
   RewriteRule ^service/([a-z0-9_-]+)/?$ service.php?alias=$1 [QSA,L]

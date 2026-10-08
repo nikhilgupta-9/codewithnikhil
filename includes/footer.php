@@ -240,13 +240,14 @@ $footerYearsInBusiness = (string)$years;
             <i class="fa-solid fa-chevron-down"></i>
           </h3>
           <ul class="footer-nav-links">
-            <li><a href="<?= $site ?>pay/" class="link-highlight-pay"><i class="fa-solid fa-qrcode text-accent-dot me-1"></i> Pay Online (UPI / QR)</a></li>
-            <li><a href="<?= $site ?>website-cost-calculator/"><i class="fa-solid fa-calculator text-accent-dot me-1"></i> Cost Calculator</a></li>
+            <li><a href="<?= $site ?>free-tools/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-wrench me-1"></i> Free Web & SEO Tools</a></li>
+            <li><a href="<?= $site ?>tools/whatsapp-link/"><i class="fa-brands fa-whatsapp text-accent-dot me-1"></i> WhatsApp Link Generator</a></li>
+            <li><a href="<?= $site ?>tools/qr-code/"><i class="fa-solid fa-qrcode text-accent-dot me-1"></i> QR Code Generator</a></li>
+            <li><a href="<?= $site ?>tools/gst-calculator/"><i class="fa-solid fa-calculator text-accent-dot me-1"></i> GST Calculator</a></li>
+            <li><a href="<?= $site ?>tools/schema-generator/"><i class="fa-solid fa-code text-accent-dot me-1"></i> Schema Generator</a></li>
+            <li><a href="<?= $site ?>website-cost-calculator/"><i class="fa-solid fa-file-invoice-dollar text-accent-dot me-1"></i> Cost Calculator</a></li>
             <li><a href="<?= $site ?>seo-auditor/"><i class="fa-solid fa-stethoscope text-accent-dot me-1"></i> Free SEO Auditor</a></li>
-            <li><a href="<?= $site ?>crm-development-india/">CRM Development</a></li>
-            <li><a href="<?= $site ?>service/website-maintenance-support/">Website Maintenance</a></li>
-            <li><a href="<?= $site ?>service/website-redesign/">Website Redesign</a></li>
-            <li><a href="<?= $site ?>ads-management-india/">Google &amp; Meta Ads</a></li>
+            <li><a href="<?= $site ?>pay/" class="link-highlight-pay"><i class="fa-solid fa-qrcode text-accent-dot me-1"></i> Pay Online (UPI / QR)</a></li>
           </ul>
         </div>
       </div>
