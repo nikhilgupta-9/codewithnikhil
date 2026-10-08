@@ -450,18 +450,21 @@ function get_blog_comments($slug)
 {
     global $conn;
 
-    $slug = mysqli_real_escape_string($conn, $slug);
-    $sql  = "SELECT * FROM `blog_comments`
-             WHERE `blog_slug` = '$slug' AND `status` = 1
-             ORDER BY `created_at` ASC";
-    $res  = mysqli_query($conn, $sql);
+    $stmt = $conn->prepare("SELECT * FROM `blog_comments` WHERE `blog_slug` = ? AND `status` = 'approved' ORDER BY `created_at` ASC");
+    if (!$stmt) {
+        return [];
+    }
+    $stmt->bind_param('s', $slug);
+    $stmt->execute();
+    $res = $stmt->get_result();
 
     $comments = [];
     if ($res) {
-        while ($row = mysqli_fetch_assoc($res)) {
+        while ($row = $res->fetch_assoc()) {
             $comments[] = $row;
         }
     }
+    $stmt->close();
     return $comments;
 }
 

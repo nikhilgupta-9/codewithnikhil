@@ -1,20 +1,10 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include 'config/connect.php';
 include 'util/function.php';
-
-// ── Auto-create blog_comments table if it doesn't exist ───────────────────
-$conn->query("CREATE TABLE IF NOT EXISTS `blog_comments` (
-  `id`         INT AUTO_INCREMENT PRIMARY KEY,
-  `blog_slug`  VARCHAR(255) NOT NULL,
-  `name`       VARCHAR(100) NOT NULL,
-  `email`      VARCHAR(150) NOT NULL,
-  `website`    VARCHAR(200) DEFAULT NULL,
-  `comment`    TEXT NOT NULL,
-  `status`     TINYINT(1) DEFAULT 0 COMMENT '0=pending, 1=approved',
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  INDEX `idx_slug`   (`blog_slug`),
-  INDEX `idx_status` (`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
 
 // ── Validate slug ──────────────────────────────────────────────────────────
 $slug = trim($_GET['alias'] ?? '');
@@ -26,32 +16,101 @@ if (empty($slug)) {
 $blog    = fetch_blog_detail($slug);   // redirects to 404 internally if not found
 $contact = contact_us();
 
-// ── Handle comment submission ──────────────────────────────────────────────
+// ── Anti-Spam Math Security Setup ───────────────────────────────────────────
+if (!isset($_SESSION['math_num1']) || !isset($_SESSION['math_num2'])) {
+    $_SESSION['math_num1'] = rand(2, 9);
+    $_SESSION['math_num2'] = rand(1, 8);
+}
+$expectedMathSum = $_SESSION['math_num1'] + $_SESSION['math_num2'];
+
+// ── Handle secure comment submission ───────────────────────────────────────
 $commentSuccess = false;
 $commentError   = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_comment'])) {
+    $now       = time();
+    $userIp    = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+    $userAgent = substr($_SERVER['HTTP_USER_AGENT'] ?? 'Unknown', 0, 250);
+
+    // 1. Rate Limiting Check (Max 4 attempts per 10 minutes per IP/Session)
+    if (!isset($_SESSION['comment_rate_count']) || ($_SESSION['comment_rate_time'] ?? 0) < ($now - 600)) {
+        $_SESSION['comment_rate_count'] = 1;
+        $_SESSION['comment_rate_time']  = $now;
+    } else {
+        $_SESSION['comment_rate_count']++;
+    }
+
+    if ($_SESSION['comment_rate_count'] > 4) {
+        $commentError = 'Rate limit exceeded. Please wait a few minutes before posting another comment.';
+    }
+
+    // 2. Honeypot Bot Trap Check
+    $honeypot = trim($_POST['website_url_hp'] ?? '');
+    if (!empty($honeypot)) {
+        // Silent block: bot caught in trap
+        $commentSuccess = true;
+    }
+
+    // 3. Timing Check (Bots submit instantly in < 2 seconds)
+    $formLoadTime = (int)($_POST['form_time_stamp'] ?? 0);
+    if (empty($commentError) && empty($honeypot) && ($formLoadTime <= 0 || ($now - $formLoadTime) < 2)) {
+        $commentError = 'Submission received too quickly. Please take your time to write your comment.';
+    }
+
+    // 4. Human Verification Math Challenge Check
+    $userMathAnswer = isset($_POST['math_answer']) ? (int)trim($_POST['math_answer']) : -999;
+    if (empty($commentError) && empty($honeypot) && $userMathAnswer !== $expectedMathSum) {
+        $commentError = 'Incorrect security math answer. Please solve the calculation to verify you are human.';
+    }
+
+    // 5. Input Sanitization & Bounds Checking
     $c_name    = trim(strip_tags($_POST['c_name']    ?? ''));
     $c_email   = trim(strip_tags($_POST['c_email']   ?? ''));
     $c_website = trim(strip_tags($_POST['c_website'] ?? ''));
     $c_comment = trim(strip_tags($_POST['c_comment'] ?? ''));
 
-    if (empty($c_name) || empty($c_email) || empty($c_comment)) {
-        $commentError = 'Please fill in your name, email address, and comment.';
-    } elseif (!filter_var($c_email, FILTER_VALIDATE_EMAIL)) {
-        $commentError = 'Please enter a valid email address.';
-    } else {
-        $stmt = $conn->prepare(
-            "INSERT INTO `blog_comments` (`blog_slug`, `name`, `email`, `website`, `comment`, `status`)
-             VALUES (?, ?, ?, ?, ?, 0)"
-        );
-        $stmt->bind_param('sssss', $slug, $c_name, $c_email, $c_website, $c_comment);
-        if ($stmt->execute()) {
-            $commentSuccess = true;
+    if (empty($commentError) && empty($honeypot)) {
+        if (empty($c_name) || empty($c_email) || empty($c_comment)) {
+            $commentError = 'Please fill in your name, email address, and comment.';
+        } elseif (mb_strlen($c_name) < 2 || mb_strlen($c_name) > 80) {
+            $commentError = 'Name must be between 2 and 80 characters.';
+        } elseif (!filter_var($c_email, FILTER_VALIDATE_EMAIL) || mb_strlen($c_email) > 120) {
+            $commentError = 'Please enter a valid email address.';
+        } elseif (!empty($c_website) && !filter_var($c_website, FILTER_VALIDATE_URL)) {
+            $commentError = 'Website must be a valid URL (including https://).';
+        } elseif (mb_strlen($c_comment) < 5 || mb_strlen($c_comment) > 2000) {
+            $commentError = 'Comment must be between 5 and 2000 characters.';
         } else {
-            $commentError = 'Something went wrong. Please try again later.';
+            // 6. Link flood and spam keyword filter
+            $linkCount = preg_match_all('/https?:\/\/[^\s]+/i', $c_comment);
+            $isSpam = ($linkCount > 1);
+
+            $spamPatterns = ['/\[url=/i', '/kasyna/i', '/avtoservis/i', '/viagra/i', '/crypto/i', '/pbn/i', '/porn/i'];
+            foreach ($spamPatterns as $pat) {
+                if (preg_match($pat, $c_comment) || preg_match($pat, $c_name)) {
+                    $isSpam = true;
+                    break;
+                }
+            }
+
+            $commentStatus = $isSpam ? 'spam' : 'pending';
+
+            $stmt = $conn->prepare(
+                "INSERT INTO `blog_comments` (`blog_slug`, `name`, `email`, `website`, `comment`, `ip_address`, `user_agent`, `status`)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+            );
+            $stmt->bind_param('ssssssss', $slug, $c_name, $c_email, $c_website, $c_comment, $userIp, $userAgent, $commentStatus);
+            if ($stmt->execute()) {
+                $commentSuccess = true;
+                // Generate new math numbers for next comment
+                $_SESSION['math_num1'] = rand(2, 9);
+                $_SESSION['math_num2'] = rand(1, 8);
+                $expectedMathSum = $_SESSION['math_num1'] + $_SESSION['math_num2'];
+            } else {
+                $commentError = 'Something went wrong while saving your comment. Please try again later.';
+            }
+            $stmt->close();
         }
-        $stmt->close();
     }
 }
 
@@ -826,6 +885,9 @@ $dateModified  = date('c', strtotime(!empty($blog['updated_at']) ? $blog['update
               <?php if (!$commentSuccess): ?>
               <form action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" method="POST" id="commentForm">
                 <input type="hidden" name="submit_comment" value="1">
+                <input type="hidden" name="form_time_stamp" value="<?= time() ?>">
+                <!-- Anti-bot honeypot field (hidden from humans) -->
+                <input type="text" name="website_url_hp" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" tabindex="-1" autocomplete="off">
                 <div class="row">
                   <div class="col-lg-6 mb-3">
                     <div class="input-area">
@@ -841,13 +903,27 @@ $dateModified  = date('c', strtotime(!empty($blog['updated_at']) ? $blog['update
                   </div>
                   <div class="col-lg-12 mb-3">
                     <div class="input-area">
-                      <input type="url" name="c_website" placeholder="Website (optional)"
+                      <input type="url" name="c_website" placeholder="Website (optional, e.g. https://yourwebsite.com)"
                              value="<?= htmlspecialchars($_POST['c_website'] ?? '') ?>">
                     </div>
                   </div>
                   <div class="col-lg-12 mb-3">
                     <div class="input-area">
                       <textarea name="c_comment" placeholder="Write your comment here..." rows="5" required><?= htmlspecialchars($_POST['c_comment'] ?? '') ?></textarea>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 mb-3">
+                    <div class="p-3 rounded" style="background:#f0f7f7;border:1px solid #cce3e3;">
+                      <label class="d-flex align-items-center gap-2 mb-1 fw-bold" style="color:#104041;font-size:14px;">
+                        <i class="fa-solid fa-shield-halved"></i> Anti-Spam Human Verification:
+                      </label>
+                      <div class="d-flex align-items-center gap-3 flex-wrap mt-2">
+                        <span style="font-weight:700;font-size:15px;color:#104041;">
+                          What is <?= $_SESSION['math_num1'] ?> + <?= $_SESSION['math_num2'] ?> ? *
+                        </span>
+                        <input type="number" name="math_answer" placeholder="Enter sum" required
+                               style="max-width:140px;margin-bottom:0;padding:8px 12px;border:1.5px solid #a3cfcf;border-radius:6px;background:#fff;">
+                      </div>
                     </div>
                   </div>
                   <div class="col-lg-12">

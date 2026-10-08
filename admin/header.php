@@ -65,6 +65,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
             <ul>
                 <li><a href="add-blog.php">Add Blog</a></li>
                 <li><a href="view-all-blog.php">View Blogs</a></li>
+                <li><a href="blog-comments.php">Blog Comments</a></li>
             </ul>
         </li>
 
