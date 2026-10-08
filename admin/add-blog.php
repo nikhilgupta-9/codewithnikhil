@@ -11,13 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $meta_title = trim($_POST['meta_title'] ?? '');
     $meta_description = trim($_POST['meta_description'] ?? '');
     $tags = trim($_POST['tags'] ?? '');
-    $content = $_POST['content'] ?? '';
+    $content = trim($_POST['content'] ?? '');
     $author = trim($_POST['author'] ?? 'Nikhil Gupta');
     $status = in_array($_POST['status'] ?? '', ['draft', 'published', 'archived'], true) ? $_POST['status'] : 'published';
     
     if (empty($title)) {
         $error = "Article Title is required.";
-    } elseif (empty($content)) {
+    } elseif (empty($content) || $content === '<p><br></p>') {
         $error = "Article Content cannot be empty.";
     } else {
         // Generate or clean slug
@@ -123,8 +123,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     <?php include "links.php"; ?>
     
-    <!-- CKEditor 4 CDN -->
-    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+    <!-- Summernote Lite CSS & JS -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     
     <style>
         :root {
@@ -195,6 +195,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-color: var(--brand-teal);
             box-shadow: 0 0 0 3px rgba(16, 64, 65, 0.12);
             outline: none;
+        }
+
+        /* Summernote Custom Polish */
+        .note-editor.note-frame {
+            border: 1.5px solid #cbd5e1 !important;
+            border-radius: 10px !important;
+            box-shadow: none !important;
+            overflow: hidden;
+        }
+        .note-editor.note-frame .note-toolbar {
+            background: #f8fafc !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+            padding: 8px 10px !important;
+        }
+        .note-btn {
+            border: 1px solid #cbd5e1 !important;
+            background: #ffffff !important;
+            color: #334155 !important;
+            border-radius: 6px !important;
+            padding: 5px 9px !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+        }
+        .note-btn:hover {
+            background: #f1f5f9 !important;
+            color: var(--brand-teal) !important;
+        }
+        .note-editor .note-editable {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-size: 15px !important;
+            line-height: 1.75 !important;
+            color: #1e293b !important;
+            padding: 20px !important;
+            min-height: 380px !important;
+            background: #ffffff;
         }
 
         /* Slug bar */
@@ -475,12 +510,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </div>
                                     </div>
 
-                                    <!-- Content WYSIWYG Editor -->
+                                    <!-- Rich Text Editor (Summernote) -->
                                     <div class="mb-2">
                                         <label class="form-label-custom mb-2">
                                             <span>Full Article Content <span class="text-danger">*</span></span>
+                                            <span class="text-muted small"><i class="fas fa-magic me-1"></i>Rich Formatting Enabled</span>
                                         </label>
-                                        <textarea name="content" id="editor" rows="18" required><?= isset($_POST['content']) ? htmlspecialchars($_POST['content']) : '' ?></textarea>
+                                        <textarea name="content" id="editor" required><?= isset($_POST['content']) ? htmlspecialchars($_POST['content']) : '' ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -642,189 +678,190 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <?php include "footer.php"; ?>
 
+        <!-- Summernote Lite JS -->
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
         <script>
-            // Initialize CKEditor 4 with modern custom configuration
-            CKEDITOR.replace('editor', {
-                height: 480,
-                removeButtons: 'About,Save,NewPage,Preview,Print,Templates',
-                toolbarGroups: [
-                    { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
-                    { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-                    { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ] },
-                    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-                    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-                    { name: 'links' },
-                    { name: 'insert' },
-                    { name: 'styles' },
-                    { name: 'colors' },
-                    { name: 'tools' }
-                ],
-                extraPlugins: 'uploadimage,justify,colorbutton',
-                contentsCss: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap',
-                bodyClass: 'ckeditor-article-body'
-            });
+            $(document).ready(function() {
+                // Initialize Summernote Rich Text Editor
+                $('#editor').summernote({
+                    placeholder: 'Write your comprehensive, engaging article here...',
+                    tabsize: 2,
+                    height: 420,
+                    toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'italic', 'underline', 'clear']],
+                        ['fontname', ['fontname']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['table', ['table']],
+                        ['insert', ['link', 'picture', 'video', 'hr']],
+                        ['view', ['fullscreen', 'codeview', 'help']]
+                    ]
+                });
 
-            // Helper to generate clean slug
-            function createSlug(str) {
-                return str
-                    .toLowerCase()
-                    .trim()
-                    .replace(/[^\w\s-]/g, '')
-                    .replace(/[\s_-]+/g, '-')
-                    .replace(/^-+|-+$/g, '');
-            }
-
-            // Real-time Title & Slug & SEO Updates
-            const blogTitle = document.getElementById('blogTitle');
-            const slugPreviewText = document.getElementById('slugPreviewText');
-            const slugInput = document.getElementById('slugInput');
-            const titleCounter = document.getElementById('titleCounter');
-            const serpTitlePreview = document.getElementById('serpTitlePreview');
-            const serpSlugPreview = document.getElementById('serpSlugPreview');
-            const serpDescPreview = document.getElementById('serpDescPreview');
-            const metaTitleInput = document.getElementById('metaTitleInput');
-            const metaDescInput = document.getElementById('metaDescInput');
-            const metaTitleCounter = document.getElementById('metaTitleCounter');
-            const metaDescCounter = document.getElementById('metaDescCounter');
-
-            let isCustomSlugManuallyEdited = false;
-
-            function updateTitleAndSlug() {
-                const titleVal = blogTitle.value.trim();
-                titleCounter.textContent = `${titleVal.length} chars`;
-
-                // Update slug if not manually altered
-                if (!isCustomSlugManuallyEdited) {
-                    const generatedSlug = createSlug(titleVal) || 'your-article-slug';
-                    slugPreviewText.textContent = generatedSlug;
-                    serpSlugPreview.textContent = generatedSlug;
-                    slugInput.value = generatedSlug;
+                // Helper to generate clean slug
+                function createSlug(str) {
+                    return str
+                        .toLowerCase()
+                        .trim()
+                        .replace(/[^\w\s-]/g, '')
+                        .replace(/[\s_-]+/g, '-')
+                        .replace(/^-+|-+$/g, '');
                 }
 
-                // Update SERP Title
-                if (metaTitleInput.value.trim() === '') {
-                    serpTitlePreview.textContent = (titleVal || 'Article Title Will Appear Here') + ' | NikhilWorks';
-                }
-            }
+                // Real-time Title & Slug & SEO Updates
+                const blogTitle = document.getElementById('blogTitle');
+                const slugPreviewText = document.getElementById('slugPreviewText');
+                const slugInput = document.getElementById('slugInput');
+                const titleCounter = document.getElementById('titleCounter');
+                const serpTitlePreview = document.getElementById('serpTitlePreview');
+                const serpSlugPreview = document.getElementById('serpSlugPreview');
+                const serpDescPreview = document.getElementById('serpDescPreview');
+                const metaTitleInput = document.getElementById('metaTitleInput');
+                const metaDescInput = document.getElementById('metaDescInput');
+                const metaTitleCounter = document.getElementById('metaTitleCounter');
+                const metaDescCounter = document.getElementById('metaDescCounter');
 
-            blogTitle.addEventListener('input', updateTitleAndSlug);
+                let isCustomSlugManuallyEdited = false;
 
-            slugInput.addEventListener('input', function() {
-                isCustomSlugManuallyEdited = true;
-                const clean = createSlug(this.value);
-                slugPreviewText.textContent = clean || 'your-article-slug';
-                serpSlugPreview.textContent = clean || 'your-article-slug';
-            });
+                function updateTitleAndSlug() {
+                    const titleVal = blogTitle.value.trim();
+                    titleCounter.textContent = `${titleVal.length} chars`;
 
-            document.getElementById('toggleSlugEdit').addEventListener('click', function() {
-                const field = document.getElementById('customSlugField');
-                if (field.style.display === 'none') {
-                    field.style.display = 'block';
-                    slugInput.focus();
-                } else {
-                    field.style.display = 'none';
-                }
-            });
-
-            // Meta Title & Counter
-            metaTitleInput.addEventListener('input', function() {
-                const len = this.value.length;
-                metaTitleCounter.textContent = `${len} / 60`;
-                metaTitleCounter.className = 'char-counter ' + (len > 0 && len <= 60 ? 'good' : (len > 60 ? 'warn' : ''));
-                serpTitlePreview.textContent = (this.value.trim() || blogTitle.value.trim() || 'Article Title Will Appear Here') + ' | NikhilWorks';
-            });
-
-            // Meta Description & Counter
-            metaDescInput.addEventListener('input', function() {
-                const len = this.value.length;
-                metaDescCounter.textContent = `${len} / 160`;
-                metaDescCounter.className = 'char-counter ' + (len > 0 && len <= 160 ? 'good' : (len > 160 ? 'warn' : ''));
-                serpDescPreview.textContent = this.value.trim() || 'Provide a meta description to see how your article snippet will be presented on Google and other major search engines...';
-            });
-
-            // Image Upload & Live Preview
-            const imageFileInput = document.getElementById('imageFileInput');
-            const dropzoneArea = document.getElementById('dropzoneArea');
-            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-            const imagePreviewElem = document.getElementById('imagePreviewElem');
-            const removeImageBtn = document.getElementById('removeImageBtn');
-
-            imageFileInput.addEventListener('change', function() {
-                handleImageSelect(this.files);
-            });
-
-            function handleImageSelect(files) {
-                if (files && files[0]) {
-                    const file = files[0];
-                    if (!file.type.match('image.*')) {
-                        alert('Please select an image file (JPG, PNG, WEBP, GIF).');
-                        return;
-                    }
-                    if (file.size > 5242880) {
-                        alert('Image file size exceeds 5MB limit.');
-                        return;
+                    // Update slug if not manually altered
+                    if (!isCustomSlugManuallyEdited) {
+                        const generatedSlug = createSlug(titleVal) || 'your-article-slug';
+                        slugPreviewText.textContent = generatedSlug;
+                        serpSlugPreview.textContent = generatedSlug;
+                        slugInput.value = generatedSlug;
                     }
 
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        imagePreviewElem.src = e.target.result;
-                        imagePreviewContainer.style.display = 'block';
-                        dropzoneArea.style.display = 'none';
+                    // Update SERP Title
+                    if (metaTitleInput.value.trim() === '') {
+                        serpTitlePreview.textContent = (titleVal || 'Article Title Will Appear Here') + ' | NikhilWorks';
                     }
-                    reader.readAsDataURL(file);
                 }
-            }
 
-            removeImageBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                imageFileInput.value = '';
-                imagePreviewElem.src = '#';
-                imagePreviewContainer.style.display = 'none';
-                dropzoneArea.style.display = 'block';
-            });
+                blogTitle.addEventListener('input', updateTitleAndSlug);
 
-            // Drag and drop events
-            ['dragenter', 'dragover'].forEach(eventName => {
-                dropzoneArea.addEventListener(eventName, (e) => {
-                    e.preventDefault();
+                slugInput.addEventListener('input', function() {
+                    isCustomSlugManuallyEdited = true;
+                    const clean = createSlug(this.value);
+                    slugPreviewText.textContent = clean || 'your-article-slug';
+                    serpSlugPreview.textContent = clean || 'your-article-slug';
+                });
+
+                document.getElementById('toggleSlugEdit').addEventListener('click', function() {
+                    const field = document.getElementById('customSlugField');
+                    if (field.style.display === 'none') {
+                        field.style.display = 'block';
+                        slugInput.focus();
+                    } else {
+                        field.style.display = 'none';
+                    }
+                });
+
+                // Meta Title & Counter
+                metaTitleInput.addEventListener('input', function() {
+                    const len = this.value.length;
+                    metaTitleCounter.textContent = `${len} / 60`;
+                    metaTitleCounter.className = 'char-counter ' + (len > 0 && len <= 60 ? 'good' : (len > 60 ? 'warn' : ''));
+                    serpTitlePreview.textContent = (this.value.trim() || blogTitle.value.trim() || 'Article Title Will Appear Here') + ' | NikhilWorks';
+                });
+
+                // Meta Description & Counter
+                metaDescInput.addEventListener('input', function() {
+                    const len = this.value.length;
+                    metaDescCounter.textContent = `${len} / 160`;
+                    metaDescCounter.className = 'char-counter ' + (len > 0 && len <= 160 ? 'good' : (len > 160 ? 'warn' : ''));
+                    serpDescPreview.textContent = this.value.trim() || 'Provide a meta description to see how your article snippet will be presented on Google and other major search engines...';
+                });
+
+                // Image Upload & Live Preview
+                const imageFileInput = document.getElementById('imageFileInput');
+                const dropzoneArea = document.getElementById('dropzoneArea');
+                const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+                const imagePreviewElem = document.getElementById('imagePreviewElem');
+                const removeImageBtn = document.getElementById('removeImageBtn');
+
+                imageFileInput.addEventListener('change', function() {
+                    handleImageSelect(this.files);
+                });
+
+                function handleImageSelect(files) {
+                    if (files && files[0]) {
+                        const file = files[0];
+                        if (!file.type.match('image.*')) {
+                            alert('Please select an image file (JPG, PNG, WEBP, GIF).');
+                            return;
+                        }
+                        if (file.size > 5242880) {
+                            alert('Image file size exceeds 5MB limit.');
+                            return;
+                        }
+
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            imagePreviewElem.src = e.target.result;
+                            imagePreviewContainer.style.display = 'block';
+                            dropzoneArea.style.display = 'none';
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                }
+
+                removeImageBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    dropzoneArea.classList.add('dragover');
-                }, false);
-            });
+                    imageFileInput.value = '';
+                    imagePreviewElem.src = '#';
+                    imagePreviewContainer.style.display = 'none';
+                    dropzoneArea.style.display = 'block';
+                });
 
-            ['dragleave', 'drop'].forEach(eventName => {
-                dropzoneArea.addEventListener(eventName, (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    dropzoneArea.classList.remove('dragover');
-                }, false);
-            });
+                // Drag and drop events
+                ['dragenter', 'dragover'].forEach(eventName => {
+                    dropzoneArea.addEventListener(eventName, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        dropzoneArea.classList.add('dragover');
+                    }, false);
+                });
 
-            dropzoneArea.addEventListener('drop', (e) => {
-                const dt = e.dataTransfer;
-                const files = dt.files;
-                if (files && files.length > 0) {
-                    imageFileInput.files = files;
-                    handleImageSelect(files);
-                }
-            });
+                ['dragleave', 'drop'].forEach(eventName => {
+                    dropzoneArea.addEventListener(eventName, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        dropzoneArea.classList.remove('dragover');
+                    }, false);
+                });
 
-            // Suggested tags quick adder
-            window.addSuggestedTag = function(tag) {
-                const tagsInput = document.getElementById('tagsInput');
-                let currentTags = tagsInput.value.split(',').map(t => t.trim()).filter(t => t.length > 0);
-                if (!currentTags.includes(tag)) {
-                    currentTags.push(tag);
-                    tagsInput.value = currentTags.join(', ');
-                }
-                tagsInput.focus();
-            };
+                dropzoneArea.addEventListener('drop', (e) => {
+                    const dt = e.dataTransfer;
+                    const files = dt.files;
+                    if (files && files.length > 0) {
+                        imageFileInput.files = files;
+                        handleImageSelect(files);
+                    }
+                });
 
-            // Loading state on form submit
-            document.getElementById('blogForm').addEventListener('submit', function() {
-                const btn = document.getElementById('submitBtn');
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing &amp; Generating Social Drafts...';
+                // Suggested tags quick adder
+                window.addSuggestedTag = function(tag) {
+                    const tagsInput = document.getElementById('tagsInput');
+                    let currentTags = tagsInput.value.split(',').map(t => t.trim()).filter(t => t.length > 0);
+                    if (!currentTags.includes(tag)) {
+                        currentTags.push(tag);
+                        tagsInput.value = currentTags.join(', ');
+                    }
+                    tagsInput.focus();
+                };
+
+                // Loading state on form submit
+                document.getElementById('blogForm').addEventListener('submit', function() {
+                    const btn = document.getElementById('submitBtn');
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing &amp; Generating Social Drafts...';
+                });
             });
         </script>
 </body>

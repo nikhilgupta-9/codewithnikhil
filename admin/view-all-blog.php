@@ -185,7 +185,7 @@ if ($result) {
         .table-custom th {
             background: #f8fafc;
             color: #475569;
-            font-size: 12.5px;
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -202,6 +202,17 @@ if ($result) {
         }
         .table-custom tr:hover td {
             background-color: #f8fafc;
+        }
+
+        .content-snippet-box {
+            max-width: 320px;
+            color: #64748b;
+            font-size: 12.5px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         /* Status badges */
@@ -423,7 +434,7 @@ if ($result) {
                         <div style="min-width: 260px; max-width: 360px;" class="w-100 w-sm-auto">
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text bg-white border-end-0 text-muted"><i class="fas fa-search"></i></span>
-                                <input type="text" id="tableSearchInput" class="form-control border-start-0" placeholder="Search by title, author, or tag...">
+                                <input type="text" id="tableSearchInput" class="form-control border-start-0" placeholder="Search by title, content, author...">
                             </div>
                         </div>
                     </div>
@@ -433,20 +444,21 @@ if ($result) {
                         <table class="table table-custom mb-0 align-middle" id="blogsTable">
                             <thead>
                                 <tr>
-                                    <th style="width: 50px;">#</th>
-                                    <th style="width: 80px;">Cover</th>
-                                    <th>Article Details</th>
-                                    <th style="width: 130px;">Author</th>
-                                    <th style="width: 120px;">Status</th>
-                                    <th style="width: 130px;">Social Queue</th>
-                                    <th style="width: 140px;">Date</th>
-                                    <th style="width: 120px;" class="text-end">Actions</th>
+                                    <th style="width: 40px;">#</th>
+                                    <th style="width: 75px;">Cover</th>
+                                    <th style="min-width: 200px;">Title &amp; Slug</th>
+                                    <th style="min-width: 220px;">Content Excerpt</th>
+                                    <th style="width: 120px;">Author</th>
+                                    <th style="width: 110px;">Status</th>
+                                    <th style="width: 120px;">Social Queue</th>
+                                    <th style="width: 120px;">Date</th>
+                                    <th style="width: 130px;" class="text-end">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if (empty($blogs)): ?>
                                     <tr>
-                                        <td colspan="8" class="text-center py-5">
+                                        <td colspan="9" class="text-center py-5">
                                             <div class="text-muted">
                                                 <i class="fas fa-newspaper fa-3x mb-3 text-secondary opacity-50"></i>
                                                 <h5 class="fw-bold text-dark">No Articles Found</h5>
@@ -461,8 +473,12 @@ if ($result) {
                                     <?php $index = 1; foreach ($blogs as $b): 
                                         $hasImage = !empty($b['image']) && file_exists('uploads/blogs/' . $b['image']);
                                         $imgUrl = $hasImage ? 'uploads/blogs/' . htmlspecialchars($b['image']) : 'assets/img/icon/empty-box.png';
+                                        $cleanExcerpt = trim(strip_tags($b['content'] ?? ''));
+                                        if (mb_strlen($cleanExcerpt) > 130) {
+                                            $cleanExcerpt = mb_substr($cleanExcerpt, 0, 130) . '...';
+                                        }
                                     ?>
-                                        <tr class="blog-row" data-search="<?= htmlspecialchars(strtolower($b['title'] . ' ' . $b['author'] . ' ' . $b['tags'] . ' ' . $b['slug_url'])) ?>">
+                                        <tr class="blog-row" data-search="<?= htmlspecialchars(strtolower($b['title'] . ' ' . $cleanExcerpt . ' ' . $b['author'] . ' ' . $b['tags'] . ' ' . $b['slug_url'])) ?>">
                                             <td class="text-muted fw-bold"><?= $index++ ?></td>
                                             <td>
                                                 <a href="edit-blog.php?id=<?= $b['id'] ?>">
@@ -479,9 +495,22 @@ if ($result) {
                                                     <span><i class="fas fa-link fa-xs me-1"></i> /blog/<?= htmlspecialchars($b['slug_url']) ?>/</span>
                                                     <?php if ($b['comment_count'] > 0): ?>
                                                         <a href="blog-comments.php" class="badge bg-light text-primary border text-decoration-none">
-                                                            <i class="fas fa-comment me-1"></i> <?= $b['comment_count'] ?> comments
+                                                            <i class="fas fa-comment me-1"></i> <?= $b['comment_count'] ?>
                                                         </a>
                                                     <?php endif; ?>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="content-snippet-box" title="<?= htmlspecialchars($cleanExcerpt) ?>">
+                                                    <?= htmlspecialchars($cleanExcerpt ?: '(No content written yet)') ?>
+                                                </div>
+                                                <button type="button" class="btn btn-link btn-sm p-0 text-primary text-decoration-none" style="font-size: 11.5px;" 
+                                                        onclick="openContentModal(<?= $b['id'] ?>, '<?= addslashes(htmlspecialchars($b['title'])) ?>')">
+                                                    <i class="fas fa-eye me-1"></i> Quick View Content
+                                                </button>
+                                                <!-- Hidden Raw Content Container -->
+                                                <div id="rawContent_<?= $b['id'] ?>" class="d-none">
+                                                    <?= $b['content'] ?>
                                                 </div>
                                             </td>
                                             <td>
@@ -525,7 +554,7 @@ if ($result) {
                                                     <a href="../blog-detail.php?alias=<?= urlencode($b['slug_url']) ?>" target="_blank" class="btn btn-action btn-outline-info" title="View live on website">
                                                         <i class="fas fa-external-link-alt"></i>
                                                     </a>
-                                                    <a href="edit-blog.php?id=<?= $b['id'] ?>" class="btn btn-action btn-outline-primary" title="Edit Article">
+                                                    <a href="edit-blog.php?id=<?= $b['id'] ?>" class="btn btn-action btn-outline-primary" title="Edit Article with Rich Text Editor">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" class="btn btn-action btn-outline-danger" 
@@ -543,6 +572,29 @@ if ($result) {
                     </div>
                 </div>
 
+            </div>
+        </div>
+
+        <!-- Quick View Content Modal -->
+        <div class="modal fade" id="contentViewModal" tabindex="-1" aria-labelledby="contentViewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-header border-bottom py-3">
+                        <h5 class="modal-title fw-bold text-dark" id="contentViewModalLabel">
+                            <i class="fas fa-file-alt text-primary me-2"></i> <span id="contentModalTitle">Article Content</span>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div id="contentModalBody" class="article-formatted-preview" style="font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.7; color: #1e293b;"></div>
+                    </div>
+                    <div class="modal-footer border-top bg-light py-2">
+                        <a href="#" id="contentModalEditBtn" class="btn btn-primary px-3">
+                            <i class="fas fa-edit me-1"></i> Edit in Rich Text Editor
+                        </a>
+                        <button type="button" class="btn btn-secondary px-3" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -596,6 +648,19 @@ if ($result) {
                     }
                 });
             });
+
+            // Quick View Content Modal Trigger
+            function openContentModal(id, title) {
+                const rawContentElem = document.getElementById('rawContent_' + id);
+                const contentHtml = rawContentElem ? rawContentElem.innerHTML : '<p class="text-muted">No content available.</p>';
+                
+                document.getElementById('contentModalTitle').textContent = title;
+                document.getElementById('contentModalBody').innerHTML = contentHtml;
+                document.getElementById('contentModalEditBtn').href = 'edit-blog.php?id=' + id;
+                
+                const viewModal = new bootstrap.Modal(document.getElementById('contentViewModal'));
+                viewModal.show();
+            }
 
             // Delete Modal Trigger
             function openDeleteModal(id, title) {
