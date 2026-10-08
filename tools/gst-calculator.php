@@ -227,7 +227,8 @@ $metaKeywords = "gst calculator india, gst calculator online free, cgst sgst cal
 
   <!-- HERO -->
   <div class="tool-hero text-center">
-    <div class="container">
+    <div class="hero-grid-overlay"></div>
+    <div class="container" style="position: relative; z-index: 2;">
       <nav aria-label="breadcrumb">
         <div class="site-breadcrumb">
           <a href="<?= $site ?>"><i class="fa-solid fa-house fa-xs"></i> Home</a>

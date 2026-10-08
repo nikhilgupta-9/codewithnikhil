@@ -416,7 +416,8 @@ $canonicalUrl = $site . "free-tools/";
 
   <!-- HERO SECTION -->
   <section class="tools-hub-hero">
-    <div class="container text-center">
+    <div class="hero-grid-overlay"></div>
+    <div class="container text-center" style="position: relative; z-index: 2;">
       
       <!-- Breadcrumb -->
       <nav aria-label="breadcrumb">

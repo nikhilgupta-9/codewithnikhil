@@ -145,6 +145,17 @@ $googleMapLink    = !empty($contact['map']) ? $contact['map'] : 'https://maps.ap
       }
     }
 
+    .hero-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(173, 255, 28, 0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(173, 255, 28, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      opacity: 0.9;
+      z-index: 1;
+    }
+
     .site-breadcrumb {
       display: inline-flex;
       align-items: center;
@@ -549,6 +560,7 @@ $googleMapLink    = !empty($contact['map']) ? $contact['map'] : 'https://maps.ap
 
   <!--===== HERO AREA STARTS =======-->
   <section class="page-modern-hero">
+    <div class="hero-grid-overlay"></div>
     <div class="container" style="position: relative; z-index: 2;">
       <div class="row align-items-center text-center">
         <div class="col-lg-9 mx-auto">

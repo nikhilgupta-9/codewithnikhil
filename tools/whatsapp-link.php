@@ -232,7 +232,8 @@ $metaKeywords = "whatsapp link generator, wa.me link generator, whatsapp click t
 
   <!-- 1. HERO / BREADCRUMB -->
   <div class="tool-hero text-center">
-    <div class="container">
+    <div class="hero-grid-overlay"></div>
+    <div class="container" style="position: relative; z-index: 2;">
       <nav aria-label="breadcrumb">
         <div class="site-breadcrumb">
           <a href="<?= $site ?>"><i class="fa-solid fa-house fa-xs"></i> Home</a>
