@@ -787,6 +787,76 @@ $googleMapLink    = !empty($contact['map']) ? $contact['map'] : 'https://maps.ap
   </section>
   <!--===== TESTIMONIALS SECTION ENDS =======-->
 
+  <!--===== GOOGLE BUSINESS PROFILE & MAP EMBED SECTION =======-->
+  <section class="google-embed-section py-5 bg-light">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <!-- Left: Google Trust Card -->
+        <div class="col-lg-5" data-aos="fade-right" data-aos-duration="800">
+          <div class="p-4 p-md-5 bg-white rounded-4 shadow-sm border position-relative overflow-hidden">
+            <div style="position: absolute; top:0; left:0; right:0; height: 4px; background: linear-gradient(90deg, #4285F4 0%, #EA4335 25%, #FBBC05 50%, #34A853 100%);"></div>
+            
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="<?= $site ?>assets/img/icons/google.svg" alt="Google" width="40" height="40">
+              <div>
+                <h4 class="mb-0 fw-bold" style="color: #104041;">NikhilWorks</h4>
+                <small class="text-muted">Verified Google Business Profile</small>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <span class="fs-1 fw-extrabold" style="color: #104041; line-height: 1; font-weight: 800;">5.0</span>
+              <div>
+                <div class="text-warning fs-5" style="color: #FFBA00 !important;">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <small class="text-muted fw-semibold">100% Recommended on Google</small>
+              </div>
+            </div>
+
+            <p class="text-secondary mb-4" style="font-size: 14.5px; line-height: 1.6;">
+              Rated 5.0 out of 5 stars by business owners and founders worldwide for high-performance web development, custom applications, and technical SEO rankings.
+            </p>
+
+            <div class="d-flex flex-column gap-2">
+              <a href="<?= htmlspecialchars($googleReviewLink) ?>" target="_blank" rel="noopener noreferrer" 
+                 class="btn btn-primary py-2 px-4 fw-bold text-center" 
+                 style="background: #104041; border-color: #104041; border-radius: 50px;">
+                <i class="fa-brands fa-google me-2"></i> Review Us on Google
+              </a>
+              <a href="<?= htmlspecialchars($googleMapLink) ?>" target="_blank" rel="noopener noreferrer" 
+                 class="btn btn-outline-dark py-2 px-4 fw-semibold text-center" 
+                 style="border-radius: 50px; font-size: 13.5px;">
+                <i class="fa-solid fa-location-dot text-danger me-2"></i> Open in Google Maps
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Google Map Embed -->
+        <div class="col-lg-7" data-aos="fade-left" data-aos-duration="800">
+          <div class="rounded-4 overflow-hidden shadow-sm border bg-white p-2">
+            <iframe 
+              src="https://maps.google.com/maps?q=Karampura,%20New%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="360" 
+              style="border:0; border-radius: 12px; display: block;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="NikhilWorks Google Maps Location & Reviews">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--===== GOOGLE BUSINESS PROFILE & MAP EMBED SECTION ENDS =======-->
+
   <!-- Video Lightbox Player Modal -->
   <div class="modal fade video-modal" id="videoPlayerModal" tabindex="-1" aria-labelledby="videoPlayerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">

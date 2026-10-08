@@ -1579,10 +1579,31 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
   <div class="testimonial4-section-area sp1">
     <div class="container">
       <div class="row">
-        <div class="col-lg-5 m-auto">
+        <div class="col-lg-7 m-auto">
           <div class="testimonia4-header text-center heading8">
-            <h5 data-aos="fade-up" data-aos-duration="1000"><img src="<?= $site ?>assets/img/icons/logo-icons6.svg" alt="">Client Testimonials</h5>
-            <h2 class="text-anime-style-1">“What Our <span>Clients Say” <img src="<?= $site ?>assets/img/elements/line-img2.png" alt=""></span> </h2>
+            <h5 data-aos="fade-up" data-aos-duration="1000">
+              <img src="<?= $site ?>assets/img/icons/google.svg" alt="" width="18" height="18" class="me-1"> Verified Google Reviews
+            </h5>
+            <h2 class="text-anime-style-1">What Our <span>Clients Say <img src="<?= $site ?>assets/img/elements/line-img2.png" alt=""></span> </h2>
+            
+            <!-- Google Trust Bar -->
+            <div class="d-inline-flex align-items-center gap-3 bg-white px-4 py-2 rounded-pill shadow-sm border mt-3 mb-4 flex-wrap justify-content-center" data-aos="fade-up" data-aos-duration="1100">
+              <div class="d-flex align-items-center gap-2">
+                <img src="<?= $site ?>assets/img/icons/google.svg" alt="Google" width="22" height="22">
+                <span class="fw-bold text-dark" style="font-size: 15px;">Rating 5.0</span>
+              </div>
+              <div class="text-warning" style="color: #FFBA00 !important; font-size: 13px;">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <span class="text-muted" style="font-size: 13px;">• 100% Client Satisfaction</span>
+              <a href="<?= !empty($contact['google_review']) ? $contact['google_review'] : 'https://g.page/r/CQmElvl8iZYIEAE/review' ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary py-1 px-3 rounded-pill" style="font-size: 12px; font-weight: 600;">
+                <i class="fa-brands fa-google me-1"></i> Review on Google
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -1592,30 +1613,37 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
             <?php
             $tests = testimonial();
             foreach ($tests as $test) {
+              $rating = (int)($test['rating'] ?? 5);
+              $is_video = ($test['review_source'] ?? '') === 'video' || !empty($test['video_url']);
             ?>
               <div class="testimonial-boxarea">
                 <div class="space14"></div>
                 <div class="auhtor-logo">
                   <div class="text">
                     <span class="first-letter"><?= strtoupper(substr($test['client_name'], 0, 1)) ?></span>
-                    <a href="javascript:void(0)"><?= $test['client_name'] ?></a><br>
-                    <?php if ($test['client_title']) { ?>
-                      <span style="margin-left: 50px; font-size:13px"><?= $test['client_title'] ?></span>
+                    <a href="<?= $site ?>testimonials/"><?= htmlspecialchars($test['client_name']) ?></a><br>
+                    <?php if (!empty($test['client_title'])) { ?>
+                      <span style="margin-left: 50px; font-size:13px"><?= htmlspecialchars($test['client_title']) ?><?= (!empty($test['client_company'])) ? ' • ' . htmlspecialchars($test['client_company']) : '' ?></span>
                     <?php } ?>
                     <ul style="margin-left: 50px; font-size:12px">
-                      <?php
-                      $rating = (int)($test['rating'] ?? 0);
-                      for ($i = 1; $i <= 5; $i++):
-                      ?>
+                      <?php for ($i = 1; $i <= 5; $i++): ?>
                         <li><i class="<?= $i <= $rating ? 'fa-solid' : 'fa-regular' ?> fa-star"></i></li>
                       <?php endfor; ?>
                     </ul>
                   </div>
                   <div class="logo">
-                    <img src="<?= $site ?>assets/img/icons/google1.svg" alt="Google Review" style="max-width: 80%;">
+                    <?php if ($is_video): ?>
+                      <span class="badge bg-danger text-white rounded-pill px-2 py-1" style="font-size: 11px;"><i class="fa-brands fa-youtube me-1"></i> Video</span>
+                    <?php else: ?>
+                      <img src="<?= $site ?>assets/img/icons/google1.svg" alt="Google Review" style="max-width: 80px;">
+                    <?php endif; ?>
                   </div>
                 </div>
-                <p><?= $test['testimonial_text'] ?></p>
+                <p>"<?= htmlspecialchars($test['testimonial_text']) ?>"</p>
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
+                  <small class="text-muted"><i class="fa-solid fa-circle-check text-primary me-1"></i> Verified Review</small>
+                  <a href="<?= $site ?>testimonials/" class="text-primary fw-semibold" style="font-size: 12px;">See All Reviews <i class="fa-solid fa-arrow-right ms-1"></i></a>
+                </div>
               </div>
             <?php } ?>
           </div>
