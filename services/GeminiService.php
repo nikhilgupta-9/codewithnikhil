@@ -18,7 +18,7 @@ class GeminiService
     {
         $this->logger = $logger;
         $this->apiKey = (string)Env::get('GEMINI_API_KEY', '');
-        $this->textModel = (string)Env::get('GEMINI_TEXT_MODEL', 'gemini-2.5-flash');
+        $this->textModel = (string)Env::get('GEMINI_TEXT_MODEL', 'gemini-3.8-flash');
         $this->imageModel = (string)Env::get('GEMINI_IMAGE_MODEL', 'imagen-3.0-generate-002');
     }
 

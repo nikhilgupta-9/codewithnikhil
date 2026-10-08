@@ -323,7 +323,7 @@ PROMPT;
      */
     private function queryGeminiForTopics(string $source, string $niche): array
     {
-        $models = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+        $models = ['gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-3.7-flash', 'gemini-flash-latest'];
         $prompt = <<<PROMPT
 You are a senior Computer Science Engineer, AI Researcher, and Robotics Architect writing for NikhilWorks.
 Generate 6 ultra-specific, high-value, highly engaging topic ideas tailored for DAILY LEARNERS, COMPUTER SCIENCE STUDENTS, and SOFTWARE ENGINEERS in the sector: "{$niche}" (Source inspiration: {$source}).
@@ -383,7 +383,7 @@ PROMPT;
      */
     private function queryGeminiForArticle(string $topic, string $niche, string $tone): array
     {
-        $models = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
+        $models = ['gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-3.7-flash', 'gemini-flash-latest'];
         $lastError = '';
 
         $prompt = <<<PROMPT
