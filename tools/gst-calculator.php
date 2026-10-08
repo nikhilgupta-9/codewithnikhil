@@ -2,9 +2,10 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free GST Calculator India — Inclusive & Exclusive Tax Calculator | NikhilWorks";
-$metaDesc = "Calculate GST online instantly for India. Supports 5%, 12%, 18%, 28% slabs with CGST, SGST & IGST breakdown for both GST Inclusive and Exclusive amounts.";
+$pageTitle = "Free GST Calculator India 2026 — CGST SGST IGST | NikhilWorks";
+$metaDesc = "Calculate GST instantly — 5%, 12%, 18%, 28% with CGST & SGST breakdown. Add or remove GST from any amount. Free online GST calculator for India.";
 $canonical = $site . "tools/gst-calculator/";
+$metaKeywords = "gst calculator india, gst calculator online free, cgst sgst calculator, 18% gst calculator, gst inclusive exclusive calculator india";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,8 @@ $canonical = $site . "tools/gst-calculator/";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -235,7 +237,7 @@ $canonical = $site . "tools/gst-calculator/";
           <span class="bc-current">GST Calculator</span>
         </div>
       </nav>
-      <h1 class="fw-extrabold text-white mb-2">Indian GST Calculator (Inclusive &amp; Exclusive)</h1>
+      <h1 class="fw-extrabold text-white mb-2">Free GST Calculator India — CGST, SGST &amp; IGST Breakdown</h1>
       <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
         Instant Goods &amp; Services Tax calculation with automatic CGST, SGST &amp; IGST breakdown.
       </p>

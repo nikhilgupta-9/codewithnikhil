@@ -2,9 +2,10 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Canva-Style Free Invoice Studio — Custom Branding, PDF, Multi-Currency & History | NikhilWorks";
-$metaDesc = "Create customized, professional business & client invoices with Canva-like left-right tools studio: custom logo, brand colors, templates, typography, QR payments, and client history. 100% free.";
+$pageTitle = "Free Invoice Generator India — PDF with GST | NikhilWorks";
+$metaDesc = "Create professional GST invoices online free. Add logo, items, tax and download PDF instantly. Perfect for freelancers & small businesses India.";
 $canonical = $site . "tools/invoice/";
+$metaKeywords = "invoice generator free india, gst invoice generator online, pdf invoice creator free, freelance invoice generator india, online bill maker free download";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,8 @@ $canonical = $site . "tools/invoice/";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -596,7 +598,7 @@ $canonical = $site . "tools/invoice/";
           <span class="bc-current">Invoice Studio</span>
         </div>
       </nav>
-      <h1 class="fw-extrabold text-white mb-2">Canva-Style Free Invoice &amp; Billing Studio</h1>
+      <h1 class="fw-extrabold text-white mb-2">Free Invoice Generator India — PDF Download with GST</h1>
       <p class="lead opacity-90 mx-auto mb-0" style="max-width: 720px; font-size: 16px;">
         Interactive dual-dock workspace with drag-and-drop templates, custom corporate branding, live QR generation, and browser history storage.
       </p>

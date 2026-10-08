@@ -2,9 +2,10 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free Profit Margin & Markup Calculator — Gross Margin Estimator | NikhilWorks";
-$metaDesc = "Calculate Gross Profit Margin, Markup Percentage, and optimal Selling Price effortlessly. Multi-currency calculator for eCommerce founders, retail, and freelancers.";
+$pageTitle = "Free Profit Margin Calculator — Markup & Selling Price | NikhilWorks";
+$metaDesc = "Calculate profit margin, markup and selling price instantly. Enter cost price and desired profit % to get exact selling price. Free online tool.";
 $canonical = $site . "tools/profit-calculator/";
+$metaKeywords = "profit margin calculator, profit margin calculator online free india, markup calculator online, selling price calculator, gross profit calculator";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,8 @@ $canonical = $site . "tools/profit-calculator/";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -218,7 +220,7 @@ $canonical = $site . "tools/profit-calculator/";
           <span class="bc-current">Profit Margin Calculator</span>
         </div>
       </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free Profit Margin &amp; Markup Calculator</h1>
+      <h1 class="fw-extrabold text-white mb-2">Free Profit Margin &amp; Markup Calculator Online</h1>
       <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
         Calculate Gross Margin %, Markup %, Revenue and Profit effortlessly across multi-currencies.
       </p>

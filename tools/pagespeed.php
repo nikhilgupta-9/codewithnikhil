@@ -2,9 +2,10 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free Google PageSpeed & Core Web Vitals Checker | NikhilWorks";
-$metaDesc = "Test live website performance, mobile speed, Core Web Vitals (LCP, INP, CLS) and SEO health using Google Lighthouse API. Get actionable speed optimization tips.";
+$pageTitle = "Free Website Speed Test — Core Web Vitals Checker | NikhilWorks";
+$metaDesc = "Test your website speed on mobile and desktop using Google PageSpeed API. Get Core Web Vitals score, LCP, CLS and INP instantly. 100% free tool.";
 $canonical = $site . "tools/pagespeed/";
+$metaKeywords = "website speed test, google pagespeed checker free, core web vitals checker, website loading speed test india, page speed insights checker online";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,8 @@ $canonical = $site . "tools/pagespeed/";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -223,7 +225,7 @@ $canonical = $site . "tools/pagespeed/";
           <span class="bc-current">PageSpeed Checker</span>
         </div>
       </nav>
-      <h1 class="fw-extrabold text-white mb-2">Google PageSpeed &amp; Core Web Vitals Checker</h1>
+      <h1 class="fw-extrabold text-white mb-2">Free Website Speed Test — Google PageSpeed &amp; Core Web Vitals</h1>
       <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
         Test live mobile and desktop speed scores, CWV metrics, and get actionable performance insights.
       </p>

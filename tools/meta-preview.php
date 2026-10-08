@@ -2,9 +2,10 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free Meta Tags & SERP Preview Tool — Social Share Simulator | NikhilWorks";
-$metaDesc = "Preview how your webpage appears on Google Search, Facebook Open Graph, Twitter (X) Cards, and LinkedIn. Test character counts and generate copy-paste HTML meta tags.";
+$pageTitle = "Free Meta Tags Generator — Google & Social Media Preview | NikhilWorks";
+$metaDesc = "Preview how your page looks on Google search and social media. Generate perfect title tags and meta descriptions. Free SEO tool — no signup.";
 $canonical = $site . "tools/meta-preview/";
+$metaKeywords = "meta tag generator free, google serp preview tool, meta description generator, og tags generator, seo meta tags generator online";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,8 @@ $canonical = $site . "tools/meta-preview/";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -295,7 +297,7 @@ $canonical = $site . "tools/meta-preview/";
           <span class="bc-current">Meta Tags &amp; SERP Preview</span>
         </div>
       </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free Meta Tags &amp; Social Share Preview Simulator</h1>
+      <h1 class="fw-extrabold text-white mb-2">Free Meta Tags Generator &amp; Google SERP Preview Tool</h1>
       <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
         Preview and optimize how your title, meta description, and banner look on Google, Facebook, X (Twitter), and LinkedIn.
       </p>
@@ -511,7 +513,8 @@ $canonical = $site . "tools/meta-preview/";
       const url = $('#inUrl').val().trim();
       const img = $('#inImage').val().trim();
 
-      const code = `<!-- Primary Meta Tags -->\n<title>${title}</title>\n<meta name="title" content="${title}">\n<meta name="description" content="${desc}">\n<link rel="canonical" href="${url}">\n\n<!-- Open Graph / Facebook / LinkedIn -->\n<meta property="og:type" content="website">\n<meta property="og:url" content="${url}">\n<meta property="og:title" content="${title}">\n<meta property="og:description" content="${desc}">\n<meta property="og:image" content="${img}">\n\n<!-- Twitter / X -->\n<meta property="twitter:card" content="summary_large_image">\n<meta property="twitter:url" content="${url}">\n<meta property="twitter:title" content="${title}">\n<meta property="twitter:description" content="${desc}">\n<meta property="twitter:image" content="${img}">`;
+      const code = `<!-- Primary Meta Tags -->\n<title>${title}</title>\n<meta name="title" content="${title}">\n<meta name="description" content="${desc}">
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">\n<link rel="canonical" href="${url}">\n\n<!-- Open Graph / Facebook / LinkedIn -->\n<meta property="og:type" content="website">\n<meta property="og:url" content="${url}">\n<meta property="og:title" content="${title}">\n<meta property="og:description" content="${desc}">\n<meta property="og:image" content="${img}">\n\n<!-- Twitter / X -->\n<meta property="twitter:card" content="summary_large_image">\n<meta property="twitter:url" content="${url}">\n<meta property="twitter:title" content="${title}">\n<meta property="twitter:description" content="${desc}">\n<meta property="twitter:image" content="${img}">`;
 
       $('#rawMetaCode').val(code);
       $('#codeOutputBox').removeClass('d-none');

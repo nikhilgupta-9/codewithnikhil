@@ -2,9 +2,10 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free WhatsApp Link Generator — wa.me Click-to-Chat Creator | NikhilWorks";
-$metaDesc = "Generate custom WhatsApp click-to-chat links instantly with pre-filled messages and QR codes. No number saving needed. 100% free for Instagram bio and ads.";
+$pageTitle = "Free WhatsApp Link Generator — wa.me Link Creator | NikhilWorks";
+$metaDesc = "Generate WhatsApp click-to-chat links instantly. No number saving needed. Perfect for Instagram bio, Facebook ads & business cards. 100% free tool.";
 $canonical = $site . "tools/whatsapp-link/";
+$metaKeywords = "whatsapp link generator, wa.me link generator, whatsapp click to chat link free, create whatsapp link without saving number, whatsapp business link creator india";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,8 @@ $canonical = $site . "tools/whatsapp-link/";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->

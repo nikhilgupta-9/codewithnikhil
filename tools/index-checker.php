@@ -2,9 +2,10 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free Google Index & Cache Checker — Test Page Indexation | NikhilWorks";
-$metaDesc = "Check if your webpage or domain is indexed on Google. Verify Google cache snapshot, inspect robots indexability status, and diagnose crawl issues for free.";
+$pageTitle = "Free Google Index Checker — Check Website Indexed Status | NikhilWorks";
+$metaDesc = "Check if your website or URL is indexed on Google instantly. Find how many pages are indexed and fix indexing issues. Free online index checker tool.";
 $canonical = $site . "tools/index-checker/";
+$metaKeywords = "google index checker, is my website indexed on google, check website indexed google free, website index status checker, check url indexed google";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,8 @@ $canonical = $site . "tools/index-checker/";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -205,7 +207,7 @@ $canonical = $site . "tools/index-checker/";
           <span class="bc-current">Google Index Checker</span>
         </div>
       </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free Google Index &amp; Cache Checker</h1>
+      <h1 class="fw-extrabold text-white mb-2">Free Google Index Checker — Is Your Website on Google?</h1>
       <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
         Instantly check if your URL or domain is indexed by Google, view cache snapshots, and debug indexing barriers.
       </p>

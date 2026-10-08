@@ -3,9 +3,9 @@ include_once "config/connect.php";
 include_once "util/function.php";
 
 $contact = contact_us();
-$pageTitle = "100% Free Online Web, SEO & Business Tools | NikhilWorks";
-$pageDesc = "Explore 12+ free online developer, SEO, and business productivity tools by NikhilWorks. Generate WhatsApp links, QR codes, GST calculations, Schema JSON-LD, Invoices & more.";
-$pageKeywords = "free online tools, whatsapp link generator, qr code generator, gst calculator online, schema markup generator, invoice generator free, pagespeed checker, meta tag preview, robots txt validator, nikhilworks tools";
+$pageTitle = "Free Online Tools — SEO, QR Code, GST, Invoice & More | NikhilWorks";
+$pageDesc = "10+ free online tools for Indian businesses and developers. SEO auditor, QR code generator, GST calculator, invoice maker & more. No signup needed.";
+$pageKeywords = "free online tools india, free seo tools india, free business tools online india, online tools for small business india, free digital marketing tools 2026";
 $canonicalUrl = $site . "free-tools/";
 ?>
 <!DOCTYPE html>
@@ -431,7 +431,7 @@ $canonicalUrl = $site . "free-tools/";
         <i class="fa-solid fa-wand-magic-sparkles"></i> 100% Free Developer &amp; Business Utilities
       </div>
       <h1 class="display-5 fw-extrabold mb-3 text-white">
-        Free Web, SEO &amp; Business Tools Hub
+        Free Online Tools for Businesses, Developers &amp; Freelancers
       </h1>
       <p class="lead opacity-90 mx-auto" style="max-width: 720px; font-size: 17px;">
         High-utility, client-side tools designed for businesses, developers, marketers, and daily webmasters. 

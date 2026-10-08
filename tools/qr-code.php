@@ -2,9 +2,10 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free QR Code Generator — URL, WiFi, vCard, Text | NikhilWorks";
-$metaDesc = "Create custom high-resolution QR codes for free. Supports URLs, WiFi passwords, contact vCards, phone numbers, and text. Download in PNG & SVG with custom colors.";
+$pageTitle = "Free QR Code Generator — UPI, WhatsApp & WiFi QR | NikhilWorks";
+$metaDesc = "Generate QR codes for UPI payments, WhatsApp chat, WiFi passwords and websites. Download PNG instantly. Free online QR code maker — no signup.";
 $canonical = $site . "tools/qr-code/";
+$metaKeywords = "qr code generator free, upi payment qr code generator, whatsapp qr code generator india, qr code generator free download, custom qr code online";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,8 @@ $canonical = $site . "tools/qr-code/";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -228,7 +230,7 @@ $canonical = $site . "tools/qr-code/";
           <span class="bc-current">QR Code Generator</span>
         </div>
       </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free Custom QR Code Generator</h1>
+      <h1 class="fw-extrabold text-white mb-2">Free QR Code Generator — UPI, WhatsApp, WiFi &amp; Website</h1>
       <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
         Generate customized, high-resolution QR codes for websites, WiFi networks, vCard contacts, and text.
       </p>

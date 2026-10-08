@@ -2,9 +2,10 @@
 require_once dirname(__DIR__) . '/config/connect.php';
 require_once dirname(__DIR__) . '/util/function.php';
 
-$pageTitle = "Free Schema JSON-LD Generator — Structured Data Creator | NikhilWorks";
-$metaDesc = "Generate valid Schema.org JSON-LD structured data for LocalBusiness, Organization, Person, FAQ, Product, and Article. Boost Google Rich Snippets & rankings.";
+$pageTitle = "Free Schema Markup Generator — JSON-LD Code | NikhilWorks";
+$metaDesc = "Generate JSON-LD schema markup for Local Business, FAQ, Article, Product and more. Copy-paste ready code for Google rich results. Free tool 2026.";
 $canonical = $site . "tools/schema-generator/";
+$metaKeywords = "schema markup generator, json-ld generator free, local business schema generator, faq schema generator, structured data generator online";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,8 @@ $canonical = $site . "tools/schema-generator/";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -198,7 +200,7 @@ $canonical = $site . "tools/schema-generator/";
           <span class="bc-current">Schema JSON-LD Generator</span>
         </div>
       </nav>
-      <h1 class="fw-extrabold text-white mb-2">Schema.org JSON-LD Structured Data Generator</h1>
+      <h1 class="fw-extrabold text-white mb-2">Free Schema Markup Generator — JSON-LD for SEO (2026)</h1>
       <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
         Generate 100% valid JSON-LD schemas for Local Business, Organization, Person, Article, FAQ, and Product.
       </p>

@@ -73,9 +73,10 @@ if (isset($_POST['action']) && $_POST['action'] === 'check_ssl') {
     exit;
 }
 
-$pageTitle = "Free SSL & Domain Security Checker — Certificate Expiry Test | NikhilWorks";
-$metaDesc = "Test any website SSL certificate validity, expiration date countdown, issuing authority (Let's Encrypt, Cloudflare, DigiCert), and HTTPS encryption strength.";
+$pageTitle = "Free SSL Certificate & Domain Expiry Checker | NikhilWorks";
+$metaDesc = "Check SSL certificate validity and domain expiry date instantly. Get alerts before your SSL or domain expires. Free online security checker tool.";
 $canonical = $site . "tools/ssl-checker/";
+$metaKeywords = "ssl certificate checker free, domain expiry checker online, ssl expiry checker, check ssl certificate validity, domain renewal date checker";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +87,8 @@ $canonical = $site . "tools/ssl-checker/";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
+  <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>
+  <meta name="keywords" content="<?= htmlspecialchars($metaKeywords) ?>">">
   <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 
   <!-- Open Graph -->
@@ -281,7 +283,7 @@ $canonical = $site . "tools/ssl-checker/";
           <span class="bc-current">SSL Checker</span>
         </div>
       </nav>
-      <h1 class="fw-extrabold text-white mb-2">Free SSL Certificate &amp; Domain Security Checker</h1>
+      <h1 class="fw-extrabold text-white mb-2">Free SSL Certificate &amp; Domain Expiry Checker</h1>
       <p class="lead opacity-90 mx-auto mb-0" style="max-width: 680px; font-size: 16px;">
         Test HTTPS certificate validity, expiration days countdown, certificate authority, and encryption health.
       </p>
