@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content = trim($_POST['content'] ?? '');
     $author = trim($_POST['author'] ?? 'Nikhil Gupta');
     $status = in_array($_POST['status'] ?? '', ['draft', 'published', 'archived'], true) ? $_POST['status'] : 'published';
+    $ai_image_filename = trim($_POST['ai_image_filename'] ?? '');
     
     if (empty($title)) {
         $error = "Article Title is required.";
@@ -43,6 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // File upload handling
         $upload_success = false;
         $image_name = '';
+
+        // If an AI generated image was already saved and chosen
+        if (!empty($ai_image_filename) && file_exists('uploads/blogs/' . $ai_image_filename)) {
+            $image_name = $ai_image_filename;
+            $upload_success = true;
+        }
         
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = "uploads/blogs/";
@@ -118,12 +125,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Write New Article | NikhilWorks Admin</title>
+    <title>Write New Article with Claude AI | NikhilWorks Admin</title>
     <link rel="icon" href="assets/img/logo/preloader4.png" type="image/png">
     
     <?php include "links.php"; ?>
     
-    <!-- Summernote Lite CSS & JS -->
+    <!-- Summernote Lite CSS -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     
     <style>
@@ -131,10 +138,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             --brand-teal: #104041;
             --brand-lime: #ADFF1C;
             --brand-accent: #0284c7;
+            --brand-purple: #8b5cf6;
             --bg-card: #ffffff;
             --border-color: #e2e8f0;
             --text-dark: #0f172a;
             --text-muted: #64748b;
+        }
+
+        /* AI Studio Hero Banner */
+        .ai-studio-banner {
+            background: linear-gradient(135deg, #104041 0%, #0d2e2f 60%, #1e1b4b 100%);
+            border-radius: 16px;
+            padding: 22px 26px;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(16, 64, 65, 0.2);
+            margin-bottom: 26px;
+            border: 1px solid rgba(173, 255, 28, 0.2);
+        }
+        .ai-studio-banner::before {
+            content: "";
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(173, 255, 28, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .ai-badge-glow {
+            background: rgba(173, 255, 28, 0.15);
+            color: var(--brand-lime);
+            border: 1px solid rgba(173, 255, 28, 0.3);
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-ai-sparkle {
+            background: var(--brand-lime);
+            color: #0f172a;
+            font-weight: 700;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 16px rgba(173, 255, 28, 0.35);
+        }
+        .btn-ai-sparkle:hover {
+            background: #c3ff47;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(173, 255, 28, 0.5);
+            color: #000;
         }
 
         .editor-container-card {
@@ -375,6 +441,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: var(--brand-teal);
         }
 
+        /* AI Topic Card in Modal */
+        .ai-topic-card {
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
+            background: #ffffff;
+            cursor: pointer;
+            position: relative;
+        }
+        .ai-topic-card:hover {
+            border-color: var(--brand-teal);
+            box-shadow: 0 4px 14px rgba(16, 64, 65, 0.08);
+            transform: translateY(-1px);
+        }
+        .ai-topic-card.selected {
+            border-color: var(--brand-teal);
+            background: rgba(16, 64, 65, 0.03);
+            box-shadow: 0 0 0 2px var(--brand-teal);
+        }
+
+        .source-pill-devto { background: #000000; color: #ffffff; font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+        .source-pill-linkedin { background: #0a66c2; color: #ffffff; font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+        .source-pill-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #ffffff; font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+        .source-pill-seo { background: #16a34a; color: #ffffff; font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+
         /* Sticky action sidebar */
         @media (min-width: 992px) {
             .sticky-action-sidebar {
@@ -432,7 +525,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="container-fluid p-0 sm_padding_15px">
 
                 <!-- Page Header Breadcrumb -->
-                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
                     <div>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-1 text-muted small">
@@ -442,13 +535,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </ol>
                         </nav>
                         <h2 class="mb-0 fw-extrabold text-dark d-flex align-items-center gap-2">
-                            <i class="fas fa-feather-alt text-primary"></i> Create New Blog Article
+                            <i class="fas fa-feather-alt text-primary"></i> Create Blog Article
                         </h2>
                     </div>
                     <div class="d-flex gap-2 mt-2 mt-md-0">
+                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#apiKeyModal">
+                            <i class="fas fa-key me-1"></i> Claude API Key
+                        </button>
                         <a href="view-all-blog.php" class="btn btn-outline-secondary px-3">
                             <i class="fas fa-arrow-left me-1"></i> All Articles
                         </a>
+                    </div>
+                </div>
+
+                <!-- AI Content Studio Hero Banner -->
+                <div class="ai-studio-banner">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <div class="ai-badge-glow mb-2">
+                                <i class="fas fa-sparkles"></i> Claude AI &amp; Multi-Platform Trend Studio
+                            </div>
+                            <h3 class="fw-extrabold text-white mb-2">
+                                Auto-Generate Viral Tech Articles in Seconds
+                            </h3>
+                            <p class="text-light opacity-75 mb-3 mb-lg-0 small" style="max-width: 650px;">
+                                Discover trending topics inspired by <strong>Dev.to, LinkedIn &amp; Instagram</strong>. Claude AI writes comprehensive 1000+ words SEO-optimized articles and generates high-res cover graphics automatically.
+                            </p>
+                        </div>
+                        <div class="col-lg-4 text-lg-end">
+                            <button type="button" class="btn-ai-sparkle" onclick="openAiStudioModal()">
+                                <i class="fas fa-robot"></i> ✨ Launch AI Content Studio
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -469,6 +587,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <!-- Form -->
                 <form method="POST" enctype="multipart/form-data" id="blogForm">
+                    <input type="hidden" name="ai_image_filename" id="aiImageFilenameInput" value="">
+
                     <div class="row">
                         <!-- Main Content Column (Left - 8 cols) -->
                         <div class="col-lg-8">
@@ -477,7 +597,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="editor-container-card">
                                 <div class="card-header-styled">
                                     <h5><i class="fas fa-edit text-primary"></i> Article Content</h5>
-                                    <span class="badge bg-light text-dark border">Main Body</span>
+                                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="openAiStudioModal()">
+                                        <i class="fas fa-magic me-1"></i> AI Suggestions
+                                    </button>
                                 </div>
                                 <div class="card-body-styled">
                                     <!-- Title -->
@@ -487,7 +609,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <span class="char-counter" id="titleCounter">0 chars</span>
                                         </label>
                                         <input type="text" id="blogTitle" name="title" class="form-control form-control-custom form-control-lg fw-bold" 
-                                               placeholder="e.g. 10 Proven Web Design Strategies to 10x Conversions" required 
+                                               placeholder="e.g. 10 Proven Web Design Strategies to 10x Conversions in 2026" required 
                                                value="<?= isset($_POST['title']) ? htmlspecialchars($_POST['title']) : '' ?>">
                                     </div>
 
@@ -618,13 +740,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <div class="editor-container-card">
                                     <div class="card-header-styled">
                                         <h5><i class="fas fa-image text-primary"></i> Featured Cover Image</h5>
+                                        <button type="button" class="btn btn-sm btn-link p-0 text-decoration-none" id="aiImageGenQuickBtn" onclick="quickGenAiImage()">
+                                            <i class="fas fa-magic me-1"></i>AI Image
+                                        </button>
                                     </div>
                                     <div class="card-body-styled">
                                         <div class="image-dropzone-area" id="dropzoneArea" onclick="document.getElementById('imageFileInput').click();">
                                             <i class="fas fa-cloud-upload-alt fa-2x text-muted mb-2"></i>
                                             <div class="fw-bold text-dark mb-1">Click to browse or drag image</div>
                                             <div class="small text-muted">Recommended: 1200 &times; 630px (Max 5MB)</div>
-                                            <div class="small text-muted mt-1">Supports JPG, PNG, WEBP, GIF</div>
+                                            <div class="small text-muted mt-1">Supports JPG, PNG, WEBP, GIF or AI Generated</div>
                                         </div>
                                         
                                         <input type="file" id="imageFileInput" name="image" class="d-none" accept="image/jpeg,image/png,image/webp,image/gif">
@@ -673,6 +798,155 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </form>
 
+            </div>
+        </div>
+
+        <!-- ==========================================
+             CLAUDE AI TOPIC & ARTICLE GENERATOR MODAL
+             ========================================== -->
+        <div class="modal fade" id="aiStudioModal" tabindex="-1" aria-labelledby="aiStudioModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+                <div class="modal-content border-0 shadow-lg">
+                    <div class="modal-header bg-dark text-white border-0 py-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-success text-dark fw-bold">Claude AI Studio</span>
+                            <h5 class="modal-title fw-bold text-white mb-0" id="aiStudioModalLabel">
+                                <i class="fas fa-sparkles text-warning me-1"></i> Multi-Platform Viral Topic &amp; Article Generator
+                            </h5>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body p-4 bg-light">
+                        <!-- Step 1: Controls Bar -->
+                        <div class="card border-0 shadow-sm rounded-3 p-3 mb-4 bg-white">
+                            <div class="row g-3 align-items-end">
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold small text-muted mb-1">
+                                        <i class="fas fa-globe me-1"></i> Trend Source
+                                    </label>
+                                    <select id="aiSourceSelect" class="form-select form-select-sm">
+                                        <option value="all">🌟 All Platforms (Dev.to + LinkedIn + Instagram)</option>
+                                        <option value="devto">💻 Dev.to (Live Developer Debates &amp; Trends)</option>
+                                        <option value="linkedin">💼 LinkedIn (B2B, Agency Growth, Tech ROI)</option>
+                                        <option value="instagram">📸 Instagram (Design Reels, 10x Hacks)</option>
+                                        <option value="seo">🔍 Google SEO (High Volume Intent)</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold small text-muted mb-1">
+                                        <i class="fas fa-layer-group me-1"></i> Target Niche / Category
+                                    </label>
+                                    <select id="aiNicheSelect" class="form-select form-select-sm">
+                                        <option value="web_development">Web Development &amp; Architecture</option>
+                                        <option value="fullstack_saas">Full-Stack SaaS &amp; Micro-Apps</option>
+                                        <option value="ai_tools">AI Tools, Claude &amp; Gemini Agents</option>
+                                        <option value="ui_ux_design">UI/UX, Modern CSS &amp; Conversions</option>
+                                        <option value="seo_ranking">SEO, Organic Traffic &amp; Google AI</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-primary btn-sm w-100 fw-bold py-2" id="btnFetchTopics" onclick="fetchAiTrendingTopics()">
+                                        <i class="fas fa-search me-1"></i> Discover Viral Topics
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Topics Container -->
+                        <div id="topicsContainer">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="fw-bold text-dark mb-0">
+                                    <i class="fas fa-fire text-danger me-1"></i> Trending Topic Suggestions:
+                                </h6>
+                                <span class="text-muted small">Click any topic card to select it</span>
+                            </div>
+
+                            <!-- Topic Cards List -->
+                            <div id="topicsListRow" class="row g-3">
+                                <!-- Populated dynamically by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Custom Topic Option / Selected Topic Bar -->
+                        <div class="card border-0 shadow-sm rounded-3 p-3 mt-4 bg-white">
+                            <div class="row g-3">
+                                <div class="col-lg-8">
+                                    <label class="form-label fw-bold small text-dark mb-1">
+                                        <span>Selected or Custom Topic Title:</span>
+                                    </label>
+                                    <input type="text" id="selectedTopicInput" class="form-control form-control-sm fw-bold" 
+                                           placeholder="Pick a trending card above or type your own custom topic idea...">
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label class="form-label fw-bold small text-dark mb-1">
+                                        <span>Article Writing Tone:</span>
+                                    </label>
+                                    <select id="aiToneSelect" class="form-select form-select-sm">
+                                        <option value="authoritative">Authoritative, In-Depth &amp; Educational</option>
+                                        <option value="viral">Viral, Story-Driven &amp; Engaging</option>
+                                        <option value="technical">Deep Technical Tutorial with Code</option>
+                                        <option value="quick_guide">Quick Actionable Blueprint</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-wrap justify-content-between align-items-center mt-3 pt-3 border-top">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="autoCoverImageCheck" checked>
+                                    <label class="form-check-label small fw-semibold text-dark" for="autoCoverImageCheck">
+                                        <i class="fas fa-image text-primary me-1"></i> Auto-generate &amp; download 1200&times;630 Featured Cover Image
+                                    </label>
+                                </div>
+
+                                <button type="button" class="btn btn-success fw-bold px-4 py-2 mt-2 mt-md-0" id="btnGenerateFullArticle" onclick="generateFullArticleWithClaude()">
+                                    <i class="fas fa-bolt me-1"></i> ⚡ Generate Full Article &amp; Populate Form
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Live Progress Tracker -->
+                        <div id="aiProgressSection" class="card border-0 shadow-sm rounded-3 p-4 mt-4 bg-white text-center" style="display: none;">
+                            <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>
+                            <h5 class="fw-bold text-dark" id="aiProgressStatus">Claude AI is Architecting Your Article...</h5>
+                            <p class="text-muted small mb-0" id="aiProgressDetail">Crafting 1000+ words SEO content, meta tags, and high-res cover graphic...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             CLAUDE API KEY CONFIGURATION MODAL
+             ========================================== -->
+        <div class="modal fade" id="apiKeyModal" tabindex="-1" aria-labelledby="apiKeyModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-header bg-dark text-white border-0 py-3">
+                        <h5 class="modal-title fw-bold text-white" id="apiKeyModalLabel">
+                            <i class="fas fa-key text-warning me-2"></i> Claude AI API Configuration
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <p class="small text-muted mb-3">
+                            Enter your <strong>Anthropic Claude API Key</strong> (`sk-ant-...`) to unlock unlimited trending topic discovery, full 1000+ words SEO articles, and instant content generation.
+                        </p>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Anthropic API Key</label>
+                            <input type="password" id="claudeApiKeyInput" class="form-control" placeholder="sk-ant-api03-...">
+                            <small class="text-muted">Stored securely in your local <code>.env</code> file.</small>
+                        </div>
+                        <div id="apiKeySaveMsg" class="small"></div>
+                    </div>
+                    <div class="modal-footer border-0 bg-light py-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="saveClaudeApiKey()">Save API Key</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -729,7 +1003,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     const titleVal = blogTitle.value.trim();
                     titleCounter.textContent = `${titleVal.length} chars`;
 
-                    // Update slug if not manually altered
                     if (!isCustomSlugManuallyEdited) {
                         const generatedSlug = createSlug(titleVal) || 'your-article-slug';
                         slugPreviewText.textContent = generatedSlug;
@@ -737,7 +1010,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         slugInput.value = generatedSlug;
                     }
 
-                    // Update SERP Title
                     if (metaTitleInput.value.trim() === '') {
                         serpTitlePreview.textContent = (titleVal || 'Article Title Will Appear Here') + ' | NikhilWorks';
                     }
@@ -784,6 +1056,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 const imagePreviewContainer = document.getElementById('imagePreviewContainer');
                 const imagePreviewElem = document.getElementById('imagePreviewElem');
                 const removeImageBtn = document.getElementById('removeImageBtn');
+                const aiImageFilenameInput = document.getElementById('aiImageFilenameInput');
 
                 imageFileInput.addEventListener('change', function() {
                     handleImageSelect(this.files);
@@ -806,6 +1079,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             imagePreviewElem.src = e.target.result;
                             imagePreviewContainer.style.display = 'block';
                             dropzoneArea.style.display = 'none';
+                            aiImageFilenameInput.value = '';
                         }
                         reader.readAsDataURL(file);
                     }
@@ -814,6 +1088,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 removeImageBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     imageFileInput.value = '';
+                    aiImageFilenameInput.value = '';
                     imagePreviewElem.src = '#';
                     imagePreviewContainer.style.display = 'none';
                     dropzoneArea.style.display = 'block';
@@ -856,13 +1131,295 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     tagsInput.focus();
                 };
 
-                // Loading state on form submit
+                // Form submit handler
                 document.getElementById('blogForm').addEventListener('submit', function() {
                     const btn = document.getElementById('submitBtn');
                     btn.disabled = true;
-                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing &amp; Generating Social Drafts...';
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing &amp; Queueing Social Drafts...';
                 });
             });
+
+            // ==========================================
+            // CLAUDE AI STUDIO FRONTEND CONTROLLERS
+            // ==========================================
+            function openAiStudioModal() {
+                const modal = new bootstrap.Modal(document.getElementById('aiStudioModal'));
+                modal.show();
+                // Auto load initial trending topics if empty
+                if (document.getElementById('topicsListRow').children.length === 0) {
+                    fetchAiTrendingTopics();
+                }
+            }
+
+            function fetchAiTrendingTopics() {
+                const source = document.getElementById('aiSourceSelect').value;
+                const niche = document.getElementById('aiNicheSelect').value;
+                const btn = document.getElementById('btnFetchTopics');
+                const row = document.getElementById('topicsListRow');
+
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Discovering Trends...';
+                row.innerHTML = '<div class="col-12 text-center py-4 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div> Fetching viral topics from Dev.to, LinkedIn &amp; Claude AI...</div>';
+
+                $.ajax({
+                    url: 'ajax-ai-generator.php',
+                    type: 'POST',
+                    data: {
+                        action: 'suggest_topics',
+                        source: source,
+                        niche: niche
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        btn.disabled = false;
+                        btn.innerHTML = '<i class="fas fa-search me-1"></i> Discover Viral Topics';
+
+                        if (res.success && res.topics && res.topics.length > 0) {
+                            renderTopicCards(res.topics);
+                        } else {
+                            row.innerHTML = '<div class="col-12 text-center py-4 text-danger">No topics returned. Try selecting another source or niche.</div>';
+                        }
+                    },
+                    error: function() {
+                        btn.disabled = false;
+                        btn.innerHTML = '<i class="fas fa-search me-1"></i> Discover Viral Topics';
+                        row.innerHTML = '<div class="col-12 text-center py-4 text-danger">Failed to connect to AI server. Check console.</div>';
+                    }
+                });
+            }
+
+            function renderTopicCards(topics) {
+                const row = document.getElementById('topicsListRow');
+                row.innerHTML = '';
+
+                topics.forEach((t, i) => {
+                    let sourceBadge = '<span class="source-pill-seo">Google SEO</span>';
+                    const srcLow = (t.source || '').toLowerCase();
+                    if (srcLow.includes('dev')) sourceBadge = '<span class="source-pill-devto"><i class="fab fa-dev me-1"></i>Dev.to</span>';
+                    else if (srcLow.includes('linkedin')) sourceBadge = '<span class="source-pill-linkedin"><i class="fab fa-linkedin me-1"></i>LinkedIn</span>';
+                    else if (srcLow.includes('insta')) sourceBadge = '<span class="source-pill-insta"><i class="fab fa-instagram me-1"></i>Instagram</span>';
+
+                    const col = document.createElement('div');
+                    col.className = 'col-md-6';
+                    col.innerHTML = `
+                        <div class="ai-topic-card h-100" onclick="selectTopicCard(this, '${escapeHtml(t.title)}')">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                ${sourceBadge}
+                                <small class="text-muted fw-semibold">${escapeHtml(t.niche || 'Tech')}</small>
+                            </div>
+                            <h6 class="fw-bold text-dark mb-2">${escapeHtml(t.title)}</h6>
+                            <p class="text-muted small mb-2" style="font-size: 12.5px;">${escapeHtml(t.why_it_works || t.hook || '')}</p>
+                            <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                                <span class="badge bg-light text-dark border" style="font-size: 11px;">
+                                    <i class="fas fa-tags fa-xs me-1"></i>${escapeHtml(t.target_keywords || 'SEO')}
+                                </span>
+                                <button type="button" class="btn btn-sm btn-outline-primary py-0 px-2" style="font-size: 11.5px;">
+                                    Select &amp; Use &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    row.appendChild(col);
+                });
+            }
+
+            function selectTopicCard(cardElem, title) {
+                document.querySelectorAll('.ai-topic-card').forEach(c => c.classList.remove('selected'));
+                cardElem.classList.add('selected');
+                document.getElementById('selectedTopicInput').value = title;
+            }
+
+            function generateFullArticleWithClaude() {
+                const topic = document.getElementById('selectedTopicInput').value.trim();
+                const niche = document.getElementById('aiNicheSelect').value;
+                const source = document.getElementById('aiSourceSelect').value;
+                const tone = document.getElementById('aiToneSelect').value;
+                const autoCover = document.getElementById('autoCoverImageCheck').checked;
+
+                if (!topic) {
+                    alert('Please select a topic card above or enter a custom topic title.');
+                    document.getElementById('selectedTopicInput').focus();
+                    return;
+                }
+
+                const progressSection = document.getElementById('aiProgressSection');
+                const progressStatus = document.getElementById('aiProgressStatus');
+                const progressDetail = document.getElementById('aiProgressDetail');
+                const btnGen = document.getElementById('btnGenerateFullArticle');
+
+                btnGen.disabled = true;
+                progressSection.style.display = 'block';
+                progressStatus.textContent = 'Claude AI is Architecting Your Article...';
+                progressDetail.textContent = 'Writing in-depth 1000+ words SEO content, meta tags, and structured headings...';
+
+                // 1. Generate Article Content with Claude
+                $.ajax({
+                    url: 'ajax-ai-generator.php',
+                    type: 'POST',
+                    data: {
+                        action: 'generate_article',
+                        topic: topic,
+                        niche: niche,
+                        source: source,
+                        tone: tone
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        if (res.success && res.article) {
+                            const art = res.article;
+
+                            // Fill Form Fields
+                            document.getElementById('blogTitle').value = art.title;
+                            document.getElementById('slugInput').value = art.slug_url;
+                            document.getElementById('slugPreviewText').textContent = art.slug_url;
+                            document.getElementById('serpSlugPreview').textContent = art.slug_url;
+
+                            document.getElementById('metaTitleInput').value = art.meta_title || (art.title + ' | NikhilWorks');
+                            document.getElementById('metaDescInput').value = art.meta_description || '';
+                            document.getElementById('tagsInput').value = art.tags || '';
+
+                            // Update Summernote Editor
+                            $('#editor').summernote('code', art.content);
+
+                            // Trigger events for char counts & Google SERP preview
+                            document.getElementById('blogTitle').dispatchEvent(new Event('input'));
+                            document.getElementById('metaTitleInput').dispatchEvent(new Event('input'));
+                            document.getElementById('metaDescInput').dispatchEvent(new Event('input'));
+
+                            // 2. Generate Cover Image if checked
+                            if (autoCover) {
+                                progressStatus.textContent = 'Generating 1200x630 Featured Cover Image...';
+                                progressDetail.textContent = 'Downloading high-resolution tech graphic...';
+
+                                $.ajax({
+                                    url: 'ajax-ai-generator.php',
+                                    type: 'POST',
+                                    data: {
+                                        action: 'generate_image',
+                                        image_prompt: art.image_prompt || art.title,
+                                        title: art.title
+                                    },
+                                    dataType: 'json',
+                                    success: function(imgRes) {
+                                        btnGen.disabled = false;
+                                        progressSection.style.display = 'none';
+
+                                        if (imgRes.success && imgRes.path) {
+                                            document.getElementById('imagePreviewElem').src = imgRes.path;
+                                            document.getElementById('imagePreviewContainer').style.display = 'block';
+                                            document.getElementById('dropzoneArea').style.display = 'none';
+                                            document.getElementById('aiImageFilenameInput').value = imgRes.filename;
+                                        }
+
+                                        // Close modal and focus on form
+                                        bootstrap.Modal.getInstance(document.getElementById('aiStudioModal')).hide();
+                                        window.scrollTo({ top: 300, behavior: 'smooth' });
+                                    },
+                                    error: function() {
+                                        btnGen.disabled = false;
+                                        progressSection.style.display = 'none';
+                                        bootstrap.Modal.getInstance(document.getElementById('aiStudioModal')).hide();
+                                    }
+                                });
+                            } else {
+                                btnGen.disabled = false;
+                                progressSection.style.display = 'none';
+                                bootstrap.Modal.getInstance(document.getElementById('aiStudioModal')).hide();
+                                window.scrollTo({ top: 300, behavior: 'smooth' });
+                            }
+                        } else {
+                            btnGen.disabled = false;
+                            progressSection.style.display = 'none';
+                            alert('AI Generation Error: ' + (res.message || 'Unknown error.'));
+                        }
+                    },
+                    error: function(xhr) {
+                        btnGen.disabled = false;
+                        progressSection.style.display = 'none';
+                        alert('Server communication error during AI generation.');
+                    }
+                });
+            }
+
+            function quickGenAiImage() {
+                const title = document.getElementById('blogTitle').value.trim();
+                if (!title) {
+                    alert('Please enter an Article Title first to generate a matching cover image.');
+                    document.getElementById('blogTitle').focus();
+                    return;
+                }
+
+                const btn = document.getElementById('aiImageGenQuickBtn');
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+                $.ajax({
+                    url: 'ajax-ai-generator.php',
+                    type: 'POST',
+                    data: {
+                        action: 'generate_image',
+                        image_prompt: title,
+                        title: title
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        btn.innerHTML = '<i class="fas fa-magic me-1"></i>AI Image';
+                        if (res.success && res.path) {
+                            document.getElementById('imagePreviewElem').src = res.path;
+                            document.getElementById('imagePreviewContainer').style.display = 'block';
+                            document.getElementById('dropzoneArea').style.display = 'none';
+                            document.getElementById('aiImageFilenameInput').value = res.filename;
+                        } else {
+                            alert('Could not generate image: ' + (res.message || 'Error'));
+                        }
+                    },
+                    error: function() {
+                        btn.innerHTML = '<i class="fas fa-magic me-1"></i>AI Image';
+                        alert('Error generating image.');
+                    }
+                });
+            }
+
+            function saveClaudeApiKey() {
+                const key = document.getElementById('claudeApiKeyInput').value.trim();
+                const msg = document.getElementById('apiKeySaveMsg');
+                if (!key) {
+                    msg.innerHTML = '<span class="text-danger">Please enter a valid API key.</span>';
+                    return;
+                }
+
+                msg.innerHTML = '<span class="text-muted">Saving...</span>';
+
+                $.ajax({
+                    url: 'ajax-ai-generator.php',
+                    type: 'POST',
+                    data: {
+                        action: 'save_api_key',
+                        api_key: key
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        if (res.success) {
+                            msg.innerHTML = '<span class="text-success fw-bold"><i class="fas fa-check-circle me-1"></i> ' + res.message + '</span>';
+                            setTimeout(() => {
+                                bootstrap.Modal.getInstance(document.getElementById('apiKeyModal')).hide();
+                                msg.innerHTML = '';
+                            }, 1500);
+                        } else {
+                            msg.innerHTML = '<span class="text-danger">' + res.message + '</span>';
+                        }
+                    }
+                });
+            }
+
+            function escapeHtml(text) {
+                if (!text) return '';
+                return text
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
         </script>
 </body>
 </html>
