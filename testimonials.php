@@ -123,6 +123,96 @@ $googleMapLink    = !empty($contact['map']) ? $contact['map'] : 'https://maps.ap
   <?php endif; ?>
 
   <style>
+    :root {
+      --nw-primary: #104041;
+      --nw-accent: #ADFF1C;
+      --nw-dark: #082223;
+    }
+
+    /* ---- MODERN HERO LIKE PORTFOLIO ---- */
+    .page-modern-hero {
+      position: relative;
+      background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.14) 0%, transparent 45%),
+                  radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
+                  linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
+      padding: 135px 0 70px;
+      overflow: hidden;
+      color: #fff;
+    }
+    @media (max-width: 991px) {
+      .page-modern-hero {
+        padding: 110px 0 50px;
+      }
+    }
+
+    .site-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+      padding: 6px 18px;
+      margin-bottom: 20px;
+      font-size: 13.5px;
+      backdrop-filter: blur(8px);
+    }
+    .site-breadcrumb a {
+      color: #cbe3e1;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .site-breadcrumb a:hover {
+      color: #ADFF1C;
+    }
+    .site-breadcrumb .bc-sep {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 10px;
+    }
+    .site-breadcrumb .bc-current {
+      color: #ADFF1C;
+      font-weight: 700;
+    }
+
+    .hero-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(173, 255, 28, 0.12);
+      border: 1px solid rgba(173, 255, 28, 0.35);
+      color: #ADFF1C;
+      padding: 7px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      backdrop-filter: blur(8px);
+      letter-spacing: 0.3px;
+    }
+
+    .page-modern-hero h1 {
+      font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.18;
+      color: #ffffff;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .page-modern-hero-sub {
+      font-size: 1.12rem;
+      line-height: 1.7;
+      color: #c4dedb;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
     /* Google Business Profile Showcase Box */
     .google-profile-card {
       background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
@@ -458,23 +548,28 @@ $googleMapLink    = !empty($contact['map']) ? $contact['map'] : 'https://maps.ap
   <?php include_once "includes/header.php" ?>
 
   <!--===== HERO AREA STARTS =======-->
-  <div class="about-header-area" style="background-image: url(<?= $site ?>assets/img/bg/cta-bg7.png); background-repeat: no-repeat; background-size: cover; background-position: center;">
-    <img src="<?= $site ?>assets/img/elements/elements1.png" alt="" class="elements1 aniamtion-key-1" aria-hidden="true">
-    <img src="<?= $site ?>assets/img/elements/star2.png" alt="" class="star2 keyframe5" aria-hidden="true">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <div class="about-inner-header heading9 text-center">
-            <h1>Client Testimonials & Google Reviews</h1>
-            <p class="text-white-50 mt-2">Real feedback, Google ratings & video testimonials from business founders across India, Dubai, USA, UK & Australia.</p>
-            <nav aria-label="Breadcrumb" class="mt-3">
-              <a href="<?= $site ?>">Home <i class="fa-solid fa-angle-right" aria-hidden="true"></i> <span>Testimonials</span></a>
-            </nav>
+  <section class="page-modern-hero">
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="row align-items-center text-center">
+        <div class="col-lg-9 mx-auto">
+          <!-- Site Breadcrumb Standard (Like Portfolio) -->
+          <div class="site-breadcrumb" data-aos="fade-down" data-aos-duration="600">
+            <a href="<?= $site ?>"><i class="fa-solid fa-house"></i> Home</a>
+            <span class="bc-sep"><i class="fa-solid fa-angle-right"></i></span>
+            <span class="bc-current">Testimonials & Reviews</span>
           </div>
+
+          <div class="hero-pill-badge" data-aos="fade-up" data-aos-duration="700">
+            <i class="fa-solid fa-star text-warning"></i> 100% Verified Client Feedback & Video Stories
+          </div>
+          <h1 data-aos="fade-up" data-aos-duration="800">Client Testimonials & Google Reviews</h1>
+          <p class="page-modern-hero-sub" data-aos="fade-up" data-aos-duration="900">
+            Real feedback, Google ratings & video case studies from business founders across <strong>India, Dubai, USA, UK & Australia</strong>.
+          </p>
         </div>
       </div>
     </div>
-  </div>
+  </section>
   <!--===== HERO AREA ENDS =======-->
 
   <!--===== TESTIMONIALS SECTION =======-->
