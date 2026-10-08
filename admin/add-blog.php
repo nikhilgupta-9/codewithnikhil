@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $image_name = '';
 
         // If an AI generated image was already saved and chosen
-        if (!empty($ai_image_filename) && file_exists('uploads/blogs/' . $ai_image_filename)) {
+        if (!empty($ai_image_filename) && (file_exists('uploads/blogs/' . $ai_image_filename) || file_exists(__DIR__ . '/uploads/blogs/' . $ai_image_filename))) {
             $image_name = $ai_image_filename;
             $upload_success = true;
         }
@@ -1313,11 +1313,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         btnGen.disabled = false;
                                         progressSection.style.display = 'none';
 
-                                        if (imgRes.success && imgRes.path) {
-                                            document.getElementById('imagePreviewElem').src = imgRes.path;
+                                        if (imgRes.success && (imgRes.path || imgRes.url)) {
+                                            const previewImg = document.getElementById('imagePreviewElem');
+                                            const targetSrc = imgRes.path ? (imgRes.path + '?v=' + Date.now()) : imgRes.url;
+                                            previewImg.onerror = function() {
+                                                if (imgRes.url && this.src !== imgRes.url) {
+                                                    this.src = imgRes.url;
+                                                }
+                                            };
+                                            previewImg.src = targetSrc;
                                             document.getElementById('imagePreviewContainer').style.display = 'block';
                                             document.getElementById('dropzoneArea').style.display = 'none';
-                                            document.getElementById('aiImageFilenameInput').value = imgRes.filename;
+                                            document.getElementById('aiImageFilenameInput').value = imgRes.filename || '';
                                         }
 
                                         bootstrap.Modal.getInstance(document.getElementById('aiStudioModal')).hide();
@@ -1371,11 +1378,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     dataType: 'json',
                     success: function(res) {
                         btn.innerHTML = '<i class="fas fa-magic me-1"></i>AI Image';
-                        if (res.success && res.path) {
-                            document.getElementById('imagePreviewElem').src = res.path;
+                        if (res.success && (res.path || res.url)) {
+                            const previewImg = document.getElementById('imagePreviewElem');
+                            const targetSrc = res.path ? (res.path + '?v=' + Date.now()) : res.url;
+                            previewImg.onerror = function() {
+                                if (res.url && this.src !== res.url) {
+                                    this.src = res.url;
+                                }
+                            };
+                            previewImg.src = targetSrc;
                             document.getElementById('imagePreviewContainer').style.display = 'block';
                             document.getElementById('dropzoneArea').style.display = 'none';
-                            document.getElementById('aiImageFilenameInput').value = res.filename;
+                            document.getElementById('aiImageFilenameInput').value = res.filename || '';
                         } else {
                             alert('Could not generate image: ' + (res.message || 'Error'));
                         }

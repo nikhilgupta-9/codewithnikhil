@@ -110,18 +110,22 @@ class ClaudeService
             mkdir($uploadDir, 0755, true);
         }
 
-        $cleanPrompt = urlencode("Professional modern tech blog banner: " . substr($imagePrompt, 0, 200) . ", cinematic lighting, 4k ultra realistic, 16:9 aspect ratio, clean aesthetic");
+        // Clean up prompt to avoid repeating prefixes
+        $cleanPrompt = preg_replace('/^(professional|modern|tech|blog|banner|featured|image)\s*:\s*/i', '', trim($imagePrompt));
+        $cleanPrompt = preg_replace('/^(professional|modern|tech|blog|banner|featured|image)\s*:\s*/i', '', $cleanPrompt);
+        $promptEncoded = urlencode("High quality tech blog banner: " . substr($cleanPrompt ?: $title, 0, 180) . ", ultra HD, 16:9 aspect ratio, cinematic lighting, modern clean aesthetic");
         $randomSeed = mt_rand(1000, 99999);
-        $imageUrl = "https://image.pollinations.ai/prompt/{$cleanPrompt}?width=1200&height=630&seed={$randomSeed}&nologo=true";
+        $pollinationsUrl = "https://image.pollinations.ai/prompt/{$promptEncoded}?width=1200&height=630&seed={$randomSeed}&nologo=true";
 
         $filename = 'blog_ai_' . uniqid('', true) . '.jpg';
         $destination = rtrim($uploadDir, '/') . '/' . $filename;
 
-        $ch = curl_init($imageUrl);
+        // Try Pollinations AI first with 15s timeout
+        $ch = curl_init($pollinationsUrl);
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_TIMEOUT => 25,
+            CURLOPT_TIMEOUT => 15,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_USERAGENT => 'NikhilWorks/1.0'
         ]);
@@ -136,31 +140,39 @@ class ClaudeService
                 'success' => true,
                 'filename' => $filename,
                 'path' => 'uploads/blogs/' . $filename,
-                'url' => $imageUrl
+                'url' => $pollinationsUrl
             ];
         }
 
-        // Unsplash Tech Fallback if Pollinations is busy
-        $unsplashKeywords = urlencode($this->extractKeywords($title));
-        $unsplashUrl = "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=630&q=80";
-        
-        $ch2 = curl_init($unsplashUrl);
+        // High-Quality Tech Fallbacks from Unsplash Tech collection
+        $techImages = [
+            'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=630&q=80',
+            'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&h=630&q=80',
+            'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&h=630&q=80',
+            'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&h=630&q=80',
+            'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&h=630&q=80',
+            'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&h=630&q=80'
+        ];
+        $fallbackUrl = $techImages[array_rand($techImages)];
+
+        $ch2 = curl_init($fallbackUrl);
         curl_setopt_array($ch2, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_TIMEOUT => 15,
-            CURLOPT_SSL_VERIFYPEER => false
+            CURLOPT_TIMEOUT => 12,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_USERAGENT => 'NikhilWorks/1.0'
         ]);
         $imageData2 = curl_exec($ch2);
         curl_close($ch2);
 
-        if (!empty($imageData2)) {
+        if (!empty($imageData2) && strlen($imageData2) > 1000) {
             file_put_contents($destination, $imageData2);
             return [
                 'success' => true,
                 'filename' => $filename,
                 'path' => 'uploads/blogs/' . $filename,
-                'url' => $unsplashUrl
+                'url' => $fallbackUrl
             ];
         }
 
