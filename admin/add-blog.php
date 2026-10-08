@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $uploadDir = "uploads/blogs/";
             
             if (!file_exists($uploadDir)) {
-                mkdir($uploadDir, 0755, true);
+                mkdir($uploadDir, 0777, true);
             }
 
             $fileName = basename($_FILES['image']['name']);

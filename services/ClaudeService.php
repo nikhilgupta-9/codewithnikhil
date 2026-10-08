@@ -107,7 +107,7 @@ class ClaudeService
     public function generateCoverImage(string $imagePrompt, string $title, string $uploadDir): array
     {
         if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
+            mkdir($uploadDir, 0777, true);
         }
 
         // Clean up prompt to avoid repeating prefixes
