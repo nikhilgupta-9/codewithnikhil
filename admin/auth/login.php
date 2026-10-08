@@ -1,325 +1,523 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+declare(strict_types=1);
 
-session_start();
-require '../db-conn.php'; // Database connection
+// Security session settings
+ini_set('session.cookie_httponly', '1');
+ini_set('session.use_only_cookies', '1');
+ini_set('session.cookie_samesite', 'Lax');
 
-// Redirect if already logged in
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once dirname(__DIR__) . '/db-conn.php';
+
+// Redirect if already authenticated
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
     header("Location: ../index.php");
     exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // CSRF protection
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        $error = "Invalid request";
+$error = '';
+$warning = '';
+$userIp = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+$userAgent = substr($_SERVER['HTTP_USER_AGENT'] ?? 'Unknown', 0, 250);
+$now = time();
+
+// Rate limiting: Max 10 attempts per 5 minutes per IP
+if (!isset($_SESSION['admin_login_rate_count']) || ($_SESSION['admin_login_rate_window'] ?? 0) < ($now - 300)) {
+    $_SESSION['admin_login_rate_count'] = 0;
+    $_SESSION['admin_login_rate_window'] = $now;
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $_SESSION['admin_login_rate_count']++;
+
+    // 1. Honeypot check
+    $honeypot = trim((string)($_POST['admin_auth_hp'] ?? ''));
+    if (!empty($honeypot)) {
+        // Log bot attempt
+        $stmtLog = $conn->prepare("INSERT INTO admin_login_logs (username_attempted, ip_address, user_agent, status) VALUES (?, ?, ?, 'blocked')");
+        $stmtLog->bind_param('sss', $honeypot, $userIp, $userAgent);
+        $stmtLog->execute();
+        $stmtLog->close();
+        // Delay and fake error
+        usleep(300000);
+        $error = "Authentication failed. Request was flagged by security filters.";
+    }
+    // 2. Rate limit check
+    elseif ($_SESSION['admin_login_rate_count'] > 12) {
+        $error = "Too many login attempts. For security reasons, please wait 5 minutes before trying again.";
+    }
+    // 3. CSRF Validation
+    elseif (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['admin_auth_csrf'] ?? '', $_POST['csrf_token'])) {
+        $error = "Security token mismatch or expired. Please refresh the page and try again.";
     } else {
-        $username = trim($_POST['username']);
-        $password = $_POST['password'];
+        $username = trim((string)($_POST['username'] ?? ''));
+        $password = (string)($_POST['password'] ?? '');
 
-        // Prepare SQL statement
-        $stmt = $conn->prepare("SELECT id, username, password FROM admin_user WHERE username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-
-        // Use bind_result() instead of get_result()
-        $stmt->bind_result($id, $user, $hashed_password);
-        
-        if ($stmt->fetch()) { // Fetch result
-            if (password_verify($password, $hashed_password)) {
-                // Regenerate session ID to prevent session fixation
-                session_regenerate_id(true);
-                
-                $_SESSION['admin_logged_in'] = true;
-                $_SESSION['admin_id'] = $id;
-                $_SESSION['admin_user'] = $user;
-
-                header("Location: ../index.php");
-                exit();
-            } else {
-                // Delay response to prevent timing attacks
-                usleep(rand(200000, 500000));
-                $error = "Invalid username or password";
-            }
+        if (empty($username) || empty($password)) {
+            $error = "Please enter both username and password.";
         } else {
-            // Delay response to prevent timing attacks
-            usleep(rand(200000, 500000));
-            $error = "Invalid username or password";
-        }
+            // Check account in admin_user
+            $stmt = $conn->prepare("
+                SELECT id, username, password, email, role, status, failed_attempts, locked_until 
+                FROM admin_user 
+                WHERE username = ? OR email = ?
+                LIMIT 1
+            ");
+            $stmt->bind_param("ss", $username, $username);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            $admin = $res->fetch_assoc();
+            $stmt->close();
 
-        $stmt->close();
+            // Dummy hash to prevent timing attack / user enumeration
+            $dummyHash = '$2y$10$abcdefghijklmnopqrstuvABCDEFGHIJKLMNOPQRSTUVWXYZ012345';
+
+            if ($admin) {
+                $adminId = (int)$admin['id'];
+                $isLocked = !empty($admin['locked_until']) && strtotime($admin['locked_until']) > $now;
+
+                if ($isLocked) {
+                    $lockExpiresIn = ceil((strtotime($admin['locked_until']) - $now) / 60);
+                    $error = "Account temporarily locked due to consecutive failed attempts. Try again in {$lockExpiresIn} minute(s).";
+
+                    $stmtLog = $conn->prepare("INSERT INTO admin_login_logs (admin_id, username_attempted, ip_address, user_agent, status) VALUES (?, ?, ?, 'locked_out')");
+                    $stmtLog->bind_param('isss', $adminId, $username, $userIp, $userAgent);
+                    $stmtLog->execute();
+                    $stmtLog->close();
+                } elseif ($admin['status'] !== 'active') {
+                    $error = "This account is " . htmlspecialchars($admin['status']) . ". Please contact system administrator.";
+                } else {
+                    // Verify password
+                    if (password_verify($password, $admin['password'])) {
+                        // Success: Reset failed attempts & update last login
+                        $upStmt = $conn->prepare("
+                            UPDATE admin_user 
+                            SET failed_attempts = 0, 
+                                locked_until = NULL, 
+                                last_login = NOW(), 
+                                last_login_ip = ? 
+                            WHERE id = ?
+                        ");
+                        $upStmt->bind_param('si', $userIp, $adminId);
+                        $upStmt->execute();
+                        $upStmt->close();
+
+                        // Log success
+                        $stmtLog = $conn->prepare("INSERT INTO admin_login_logs (admin_id, username_attempted, ip_address, user_agent, status) VALUES (?, ?, ?, 'success')");
+                        $stmtLog->bind_param('isss', $adminId, $username, $userIp, $userAgent);
+                        $stmtLog->execute();
+                        $stmtLog->close();
+
+                        // Secure Session Fixation protection
+                        session_regenerate_id(true);
+
+                        $_SESSION['admin_logged_in'] = true;
+                        $_SESSION['admin_id']        = $adminId;
+                        $_SESSION['admin_user']      = $admin['username'];
+                        $_SESSION['admin_email']     = $admin['email'];
+                        $_SESSION['admin_role']      = $admin['role'];
+                        $_SESSION['admin_ip']        = $userIp;
+                        $_SESSION['admin_last_act']  = time();
+
+                        header("Location: ../index.php");
+                        exit();
+                    } else {
+                        // Failed password
+                        $newAttempts = (int)$admin['failed_attempts'] + 1;
+                        $lockSql = "";
+
+                        if ($newAttempts >= 5) {
+                            // Lock for 15 minutes
+                            $lockSql = ", locked_until = DATE_ADD(NOW(), INTERVAL 15 MINUTE)";
+                            $error = "Account locked for 15 minutes due to 5 consecutive failed attempts.";
+                        } else {
+                            $remaining = 5 - $newAttempts;
+                            $error = "Invalid credentials. {$remaining} attempt(s) remaining before security lockout.";
+                        }
+
+                        $upStmt = $conn->prepare("UPDATE admin_user SET failed_attempts = ? {$lockSql} WHERE id = ?");
+                        $upStmt->bind_param('ii', $newAttempts, $adminId);
+                        $upStmt->execute();
+                        $upStmt->close();
+
+                        // Log failed attempt
+                        $stmtLog = $conn->prepare("INSERT INTO admin_login_logs (admin_id, username_attempted, ip_address, user_agent, status) VALUES (?, ?, ?, 'failed')");
+                        $stmtLog->bind_param('isss', $adminId, $username, $userIp, $userAgent);
+                        $stmtLog->execute();
+                        $stmtLog->close();
+                    }
+                }
+            } else {
+                // User not found: run dummy hash check to mitigate timing enumeration
+                password_verify($password, $dummyHash);
+                usleep(rand(100000, 250000));
+                $error = "Invalid username or password.";
+
+                $stmtLog = $conn->prepare("INSERT INTO admin_login_logs (username_attempted, ip_address, user_agent, status) VALUES (?, ?, ?, 'failed')");
+                $stmtLog->bind_param('sss', $username, $userIp, $userAgent);
+                $stmtLog->execute();
+                $stmtLog->close();
+            }
+        }
     }
 }
 
-// Generate CSRF token
-$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-$conn->close();
+// Generate new CSRF token
+$_SESSION['admin_auth_csrf'] = bin2hex(random_bytes(32));
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Portal | eCommerce Dashboard</title>
+    <title>Admin Portal Authentication | NikhilWorks</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../assets/img/logo/preloader4.png" type="image/png">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3f37c9;
-            --accent-color: #4cc9f0;
-            --dark-color: #1a1a2e;
-            --light-color: #f8f9fa;
-            --danger-color: #f72585;
+            --brand-primary: #104041;
+            --brand-accent: #ADFF1C;
+            --brand-cyan: #38bdf8;
+            --brand-dark: #051617;
+            --card-bg: rgba(12, 38, 40, 0.75);
+            --border-glow: rgba(173, 255, 28, 0.25);
         }
-        
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
         body {
-            background: linear-gradient(135deg, var(--dark-color), #16213e);
-            height: 100vh;
+            background-color: var(--brand-dark);
+            background-image: 
+                radial-gradient(circle at 85% 15%, rgba(173, 255, 28, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.7) 0%, transparent 50%),
+                linear-gradient(135deg, #030d0e 0%, #082122 50%, #030d0e 100%);
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-        }
-        
-        .login-container {
+            justify-content: center;
             position: relative;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        /* Subtle Animated Tech Grid Overlay */
+        .grid-bg {
+            position: absolute;
+            inset: 0;
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .auth-wrapper {
+            position: relative;
+            z-index: 2;
             width: 100%;
-            max-width: 420px;
-            z-index: 1;
+            max-width: 440px;
         }
-        
-        .login-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 2.5rem;
-            width: 100%;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+
+        .auth-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 2.5rem 2.2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .login-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+
+        .auth-card:hover {
+            border-color: rgba(173, 255, 28, 0.45);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 25px rgba(173, 255, 28, 0.1);
         }
-        
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
+
+        .brand-logo-badge {
+            width: 68px;
+            height: 68px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #104041, #082122);
+            border: 2px solid var(--brand-accent);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: var(--brand-accent);
+            box-shadow: 0 0 20px rgba(173, 255, 28, 0.25);
+            margin-bottom: 1.2rem;
         }
-        
-        .login-header img {
-            width: 80px;
-            margin-bottom: 1rem;
+
+        .auth-title {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.3rem;
         }
-        
-        .login-header h3 {
-            color: var(--light-color);
+
+        .auth-subtitle {
+            color: #94a3b8;
+            font-size: 0.88rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .form-label {
+            color: #cbd5e1;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
         }
-        
-        .login-header p {
-            color: rgba(255, 255, 255, 0.7);
+
+        .input-group-custom {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(4, 18, 19, 0.6);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            transition: all 0.25s ease;
+        }
+
+        .input-group-custom:focus-within {
+            border-color: var(--brand-accent);
+            box-shadow: 0 0 0 4px rgba(173, 255, 28, 0.15);
+            background: rgba(4, 18, 19, 0.85);
+        }
+
+        .input-group-custom .input-icon {
+            color: #64748b;
+            padding: 0 14px;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .input-group-custom:focus-within .input-icon {
+            color: var(--brand-accent);
+        }
+
+        .input-custom {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            padding: 12px 14px 12px 0;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .input-custom::placeholder {
+            color: #64748b;
             font-size: 0.9rem;
         }
-        
-        .form-control {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--light-color);
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        
-        .form-control:focus {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 0.25rem rgba(76, 201, 240, 0.25);
-            color: white;
-        }
-        
-        .form-label {
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-        
-        .btn-login {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+
+        .password-toggle-btn {
+            background: transparent;
             border: none;
-            padding: 0.75rem;
-            border-radius: 8px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        
-        .btn-login:hover {
-            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
-            transform: translateY(-2px);
-        }
-        
-        .input-group-text {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .alert {
-            border-radius: 8px;
-        }
-        
-        .floating-bubbles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .bubble {
-            position: absolute;
-            bottom: -100px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 15s infinite ease-in;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-1000px) rotate(720deg);
-                opacity: 0;
-            }
-        }
-        
-        .forgot-password {
-            text-align: right;
-            margin-top: 0.5rem;
-        }
-        
-        .forgot-password a {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .forgot-password a:hover {
-            color: var(--accent-color);
-        }
-        
-        .password-toggle {
+            color: #64748b;
+            padding: 0 14px;
             cursor: pointer;
-            color: rgba(255, 255, 255, 0.6);
-            transition: color 0.3s;
+            transition: color 0.2s;
+            outline: none;
         }
-        
-        .password-toggle:hover {
-            color: var(--accent-color);
+
+        .password-toggle-btn:hover {
+            color: #cbd5e1;
+        }
+
+        /* Caps Lock Warning Alert */
+        #capsLockAlert {
+            display: none;
+            font-size: 0.78rem;
+            color: #f59e0b;
+            margin-top: 5px;
+        }
+
+        .btn-auth-submit {
+            background: linear-gradient(135deg, #ADFF1C 0%, #8ae600 100%);
+            color: #051617;
+            border: none;
+            border-radius: 12px;
+            padding: 13px;
+            font-size: 0.98rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(173, 255, 28, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1.4rem;
+        }
+
+        .btn-auth-submit:hover {
+            background: linear-gradient(135deg, #baff33 0%, #9bf000 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(173, 255, 28, 0.45);
+        }
+
+        .btn-auth-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auth-alert-box {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #fca5a5;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 1.4rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        .security-badge-footer {
+            margin-top: 2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            font-size: 0.76rem;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .security-badge-footer i {
+            color: var(--brand-accent);
         }
     </style>
 </head>
 <body>
-    <!-- Floating bubbles background -->
-    <div class="floating-bubbles">
-        <?php for($i=0; $i<15; $i++): ?>
-            <div class="bubble" style="
-                left: <?= rand(0, 100) ?>%;
-                width: <?= rand(20, 100) ?>px;
-                height: <?= rand(20, 100) ?>px;
-                animation-delay: <?= rand(0, 15) ?>s;
-                animation-duration: <?= rand(10, 30) ?>s;
-            "></div>
-        <?php endfor; ?>
-    </div>
+    <div class="grid-bg"></div>
 
-    <div class="login-container animate__animated animate__fadeIn">
-        <div class="login-card">
-            <div class="login-header">
-                <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Admin Logo">
-                <h3>ADMIN PORTAL</h3>
-                <p>Access your dashboard with secure credentials</p>
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="text-center">
+                <div class="brand-logo-badge">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h1 class="auth-title">NikhilWorks Admin</h1>
+                <p class="auth-subtitle">Secure Gateway &bull; Administrative Dashboard</p>
             </div>
-            
-            <form method="post" action="">
-                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+
+            <?php if (!empty($error)): ?>
+                <div class="auth-alert-box" role="alert">
+                    <i class="fa-solid fa-triangle-exclamation mt-1 flex-shrink-0"></i>
+                    <div><?= htmlspecialchars($error) ?></div>
+                </div>
+            <?php endif; ?>
+
+            <form method="POST" action="login.php" id="loginAuthForm">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['admin_auth_csrf']) ?>">
                 
+                <!-- Invisible Bot Honeypot Trap -->
+                <input type="text" name="admin_auth_hp" style="position:absolute;left:-9999px;opacity:0;" tabindex="-1" autocomplete="off">
+
+                <!-- Username / Email Field -->
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fas fa-user"></i></span>
-                        <input type="text" class="form-control" id="username" name="username" required placeholder="Enter admin username">
+                    <label for="username" class="form-label">Username or Email</label>
+                    <div class="input-group-custom">
+                        <span class="input-icon"><i class="fa-solid fa-user-shield"></i></span>
+                        <input type="text" class="input-custom" id="username" name="username" placeholder="Enter admin username" required autofocus autocomplete="username">
                     </div>
                 </div>
-                
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        <input type="password" class="form-control" id="password" name="password" required placeholder="Enter your password">
-                        <span class="input-group-text password-toggle" onclick="togglePassword()">
-                            <i class="fas fa-eye" id="toggleIcon"></i>
-                        </span>
+
+                <!-- Password Field -->
+                <div class="mb-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <label for="password" class="form-label">Password</label>
+                    </div>
+                    <div class="input-group-custom">
+                        <span class="input-icon"><i class="fa-solid fa-key"></i></span>
+                        <input type="password" class="input-custom" id="password" name="password" placeholder="••••••••••••" required autocomplete="current-password">
+                        <button type="button" class="password-toggle-btn" id="togglePasswordBtn" title="Toggle visibility" aria-label="Toggle password visibility">
+                            <i class="fa-regular fa-eye" id="pwdEyeIcon"></i>
+                        </button>
+                    </div>
+                    <div id="capsLockAlert">
+                        <i class="fa-solid fa-arrow-up-a-z me-1"></i> Warning: Caps Lock is ON
                     </div>
                 </div>
-                
-                <div class="forgot-password">
-                    <a href="#forgot-password">Forgot Password?</a>
-                </div>
-                
-                <?php if (isset($error)): ?>
-                    <div class="alert alert-danger p-2 text-center animate__animated animate__shakeX">
-                        <i class="fas fa-exclamation-circle me-2"></i><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
-                    </div>
-                <?php endif; ?>
-                
-                <button type="submit" class="btn btn-login mt-3">
-                    <i class="fas fa-sign-in-alt me-2"></i> LOGIN
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-auth-submit" id="authSubmitBtn">
+                    <span>Sign In to Dashboard</span>
+                    <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </form>
+
+            <div class="security-badge-footer">
+                <i class="fa-solid fa-lock"></i>
+                <span>256-Bit SSL Encrypted &bull; Brute-Force Protected</span>
+            </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function togglePassword() {
-            const password = document.getElementById('password');
-            const icon = document.getElementById('toggleIcon');
-            
-            if (password.type === 'password') {
-                password.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
+        // Password Visibility Toggle
+        const toggleBtn = document.getElementById('togglePasswordBtn');
+        const pwdInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('pwdEyeIcon');
+
+        toggleBtn.addEventListener('click', function() {
+            const isPassword = pwdInput.type === 'password';
+            pwdInput.type = isPassword ? 'text' : 'password';
+            eyeIcon.classList.toggle('fa-eye', !isPassword);
+            eyeIcon.classList.toggle('fa-eye-slash', isPassword);
+        });
+
+        // Caps Lock Detection
+        const capsAlert = document.getElementById('capsLockAlert');
+        pwdInput.addEventListener('keyup', function(e) {
+            if (e.getModifierState && e.getModifierState('CapsLock')) {
+                capsAlert.style.display = 'block';
             } else {
-                password.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
+                capsAlert.style.display = 'none';
             }
-        }
-        
-        // Add animation to form elements
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputs = document.querySelectorAll('.form-control');
-            inputs.forEach((input, index) => {
-                input.style.animationDelay = `${index * 0.1}s`;
-                input.classList.add('animate__animated', 'animate__fadeInUp');
-            });
+        });
+
+        // Form Submit Spinner Prevention
+        const loginForm = document.getElementById('loginAuthForm');
+        const submitBtn = document.getElementById('authSubmitBtn');
+
+        loginForm.addEventListener('submit', function() {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Authenticating...';
         });
     </script>
 </body>
