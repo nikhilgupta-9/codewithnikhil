@@ -1,708 +1,575 @@
 <?php
+declare(strict_types=1);
+
 if (session_status() === PHP_SESSION_NONE) {
-  session_start();
+    session_start();
 }
 if (!isset($_SESSION['admin_logged_in'])) {
     header("Location: auth/login.php");
     exit();
 }
-include "db-conn.php";
+
+require_once "db-conn.php";
+
+$adminUser = $_SESSION['admin_user'] ?? 'Admin';
+
+// Fetch Live Database Metrics
+$metrics = [
+    'blogs_count'          => 0,
+    'social_pending'       => 0,
+    'social_posted'        => 0,
+    'inquiries_new'        => 0,
+    'inquiries_total'      => 0,
+    'comments_pending'     => 0,
+    'comments_approved'    => 0,
+    'testimonials_count'   => 0,
+    'projects_count'       => 0,
+];
+
+if (isset($conn) && $conn instanceof mysqli && !$conn->connect_error) {
+    // Blogs
+    $q = $conn->query("SELECT COUNT(*) FROM `blogs`");
+    if ($q) $metrics['blogs_count'] = (int)$q->fetch_row()[0];
+
+    // Social Jobs
+    $q = $conn->query("SELECT status, COUNT(*) FROM `social_jobs` GROUP BY status");
+    if ($q) {
+        while ($r = $q->fetch_row()) {
+            if ($r[0] === 'draft') $metrics['social_pending'] = (int)$r[1];
+            if ($r[0] === 'posted') $metrics['social_posted'] = (int)$r[1];
+        }
+    }
+
+    // Inquiries / Leads
+    $q = $conn->query("SELECT status, COUNT(*) FROM `inquiries` GROUP BY status");
+    if ($q) {
+        while ($r = $q->fetch_row()) {
+            if ($r[0] === 'new') $metrics['inquiries_new'] = (int)$r[1];
+            $metrics['inquiries_total'] += (int)$r[1];
+        }
+    }
+
+    // Comments
+    $q = $conn->query("SELECT status, COUNT(*) FROM `blog_comments` GROUP BY status");
+    if ($q) {
+        while ($r = $q->fetch_row()) {
+            if ($r[0] === 'pending') $metrics['comments_pending'] = (int)$r[1];
+            if ($r[0] === 'approved') $metrics['comments_approved'] = (int)$r[1];
+        }
+    }
+
+    // Testimonials
+    $q = $conn->query("SELECT COUNT(*) FROM `testimonials`");
+    if ($q) $metrics['testimonials_count'] = (int)$q->fetch_row()[0];
+
+    // Projects / Products
+    $q = $conn->query("SELECT COUNT(*) FROM `products`");
+    if ($q) $metrics['projects_count'] = (int)$q->fetch_row()[0];
+
+    // Recent Inquiries
+    $recentInquiries = [];
+    $qInq = $conn->query("SELECT * FROM `inquiries` ORDER BY `id` DESC LIMIT 5");
+    if ($qInq) {
+        while ($row = $qInq->fetch_assoc()) {
+            $recentInquiries[] = $row;
+        }
+    }
+
+    // Recent Blogs
+    $recentBlogs = [];
+    $qBlog = $conn->query("SELECT id, title, slug_url, image, created_at FROM `blogs` ORDER BY `id` DESC LIMIT 4");
+    if ($qBlog) {
+        while ($row = $qBlog->fetch_assoc()) {
+            $recentBlogs[] = $row;
+        }
+    }
+
+    // Recent Social Jobs
+    $recentSocialJobs = [];
+    $qSoc = $conn->query("
+        SELECT j.*, b.title as blog_title 
+        FROM `social_jobs` j 
+        LEFT JOIN `blogs` b ON j.blog_id = b.id 
+        ORDER BY j.id DESC LIMIT 5
+    ");
+    if ($qSoc) {
+        while ($row = $qSoc->fetch_assoc()) {
+            $recentSocialJobs[] = $row;
+        }
+    }
+
+    // Recent Security Login Audit Logs
+    $recentLogs = [];
+    $qLogs = $conn->query("SELECT * FROM `admin_login_logs` ORDER BY id DESC LIMIT 5");
+    if ($qLogs) {
+        while ($row = $qLogs->fetch_assoc()) {
+            $recentLogs[] = $row;
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Admin Panel | Dashboard</title>
-  <link rel="icon" href="img/logo.png" type="image/png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>NikhilWorks Executive Dashboard - Admin Suite</title>
+    <link rel="icon" href="assets/img/logo/preloader4.png" type="image/png">
+    
+    <!-- Core Links -->
+    <?php include "links.php"; ?>
 
-  <!-- Bootstrap & Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- ApexCharts -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.35.0/dist/apexcharts.min.css">
-
-  <link rel="stylesheet" href="css/style.css" /> <!-- Custom Stylesheet -->
-  <?php include "links.php"; ?>
-
-  <style>
-    /* Ensure full page height */
-    html,
-    body {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Wrapper to push content down */
-    .wrapper {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .main_content {
-      flex: 1;
-    }
-
-    /* Ensure footer sticks at bottom */
-    footer {
-      position: relative;
-      bottom: 0;
-      background: #f8f9fa;
-      padding: 15px 0;
-      text-align: center;
-      width: 100%;
-    }
-
-    /* Custom Card Styles */
-    .stat-card {
-      transition: all 0.3s ease;
-      border-radius: 10px;
-      border-left: 4px solid;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .stat-card .card-icon {
-      font-size: 2rem;
-      opacity: 0.7;
-    }
-
-    .revenue-card {
-      border-left-color: #4e73df;
-    }
-
-    .orders-card {
-      border-left-color: #1cc88a;
-    }
-
-    .customers-card {
-      border-left-color: #36b9cc;
-    }
-
-    .products-card {
-      border-left-color: #f6c23e;
-    }
-
-    .chart-container {
-      position: relative;
-      height: 300px;
-    }
-
-    .activity-feed {
-      max-height: 400px;
-      overflow-y: auto;
-    }
-
-    .activity-item {
-      border-left: 3px solid #4e73df;
-      padding-left: 15px;
-      margin-bottom: 15px;
-    }
-
-    .activity-time {
-      font-size: 0.8rem;
-      color: #6c757d;
-    }
-
-    .top-product-img {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-  </style>
+    <style>
+        .dashboard-hero {
+            background: linear-gradient(135deg, #051617 0%, #0d383a 100%);
+            border-radius: 16px;
+            color: #fff;
+            padding: 28px 32px;
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(173, 255, 28, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        .dashboard-hero::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(173, 255, 28, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .metric-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08);
+        }
+        .metric-icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+        .quick-action-btn {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: #1e293b;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .quick-action-btn:hover {
+            background: #104041;
+            color: #ADFF1C;
+            border-color: #104041;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(16, 64, 65, 0.15);
+        }
+        .quick-action-btn i {
+            font-size: 1.2rem;
+            color: #104041;
+            transition: color 0.2s ease;
+        }
+        .quick-action-btn:hover i {
+            color: #ADFF1C;
+        }
+        .platform-tag {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .platform-linkedin { background-color: #0077b5; color: #fff; }
+        .platform-x { background-color: #000; color: #fff; }
+        .platform-devto { background-color: #0a0a0a; color: #fff; }
+        .platform-hashnode { background-color: #2942ff; color: #fff; }
+    </style>
 </head>
 
-<body class="bg-light">
+<body class="crm_body_bg">
+    <?php include "header.php"; ?>
 
-  <div class="wrapper">
-    <?php
-    include "header.php";
-    ?>
-
-    <section class="main_content dashboard_part">
-      <div class="container-fluid g-0">
-        <div class="row">
-          <div class="col-lg-12 p-0">
-            <?php include "top_nav.php"; ?>
-          </div>
-        </div>
-      </div>
-
-      <div class="container-fluid">
-        <!-- Dashboard Header -->
-        <div class="row mt-4">
-          <div class="col-lg-12">
-            <div class="d-flex justify-content-between align-items-center bg-white p-3 shadow rounded">
-              <h3 class="m-0 fw-bold text-primary"><i class="fas fa-chart-line me-2"></i> Dashboard Overview</h3>
-              <div class="d-flex">
-                <div class="input-group me-2" style="width: 250px;">
-                  <span class="input-group-text bg-white"><i class="fas fa-calendar-alt"></i></span>
-                  <input type="text" class="form-control" id="dateRangePicker" placeholder="Select date range">
+    <section class="main_content dashboard_part large_header_bg">
+        <div class="container-fluid g-0">
+            <div class="row">
+                <div class="col-lg-12 p-0">
+                    <?php include "top_nav.php"; ?>
                 </div>
-                <button class="btn btn-primary"><i class="fas fa-download me-2"></i>Export</button>
-              </div>
             </div>
-          </div>
         </div>
 
-        <!-- Key Metrics -->
-        <div class="row mt-4">
-          <?php
-          // Get counts from database
-          $total_revenue = 0;
-          $total_orders = 0;
-          $total_customers = 0;
-          $total_products = 0;
+        <div class="main_content_iner">
+            <div class="container-fluid p-0 sm_padding_15px">
 
-          // Revenue (assuming we have orders data)
-          $sql_orders = "SELECT SUM(order_total) as total FROM orders_new WHERE status = 'completed'";
-          $res_orders = mysqli_query($conn, $sql_orders);
-          if ($res_orders) {
-            $row = mysqli_fetch_assoc($res_orders);
-            $total_revenue = $row['total'] ? $row['total'] : 0;
-          }
-
-          // Total orders
-          $sql_order_count = "SELECT COUNT(*) as count FROM orders_new";
-          $res_order_count = mysqli_query($conn, $sql_order_count);
-          if ($res_order_count) {
-            $row = mysqli_fetch_assoc($res_order_count);
-            $total_orders = $row['count'];
-          }
-
-          // Total customers
-          $sql_cust = "SELECT COUNT(*) as count FROM users";
-          $res_cust = mysqli_query($conn, $sql_cust);
-          if ($res_cust) {
-            $row = mysqli_fetch_assoc($res_cust);
-            $total_customers = $row['count'];
-          }
-
-          // Total products
-          $sql_pro = "SELECT COUNT(*) as count FROM products";
-          $res_pro = mysqli_query($conn, $sql_pro);
-          if ($res_pro) {
-            $row = mysqli_fetch_assoc($res_pro);
-            $total_products = $row['count'];
-          }
-          ?>
-
-
-
-          <!-- Revenue Card -->
-          <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stat-card revenue-card shadow h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col me-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                      Total Revenue</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">₹<?= number_format($total_revenue, 2) ?></div>
-                    <div class="mt-2 mb-0 text-muted text-xs">
-                      <span class="text-success me-2"><i class="fas fa-arrow-up me-1"></i> 12%</span>
-                      <span>Since last month</span>
+                <!-- 1. Hero Welcome Banner -->
+                <div class="dashboard-hero">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <span class="badge bg-success bg-opacity-25 text-white mb-2 px-3 py-1" style="border: 1px solid rgba(173,255,28,0.4); font-size: 12px;">
+                                <i class="fas fa-bolt me-1 text-warning"></i> NIKHILWORKS AUTOMATION ACTIVE
+                            </span>
+                            <h2 class="text-white fw-bold mb-2">Welcome back, <?= htmlspecialchars($adminUser) ?>!</h2>
+                            <p class="text-white text-opacity-75 mb-0" style="font-size: 0.95rem;">
+                                Your multi-platform content engine, client lead center, and website ecosystem are running smoothly.
+                            </p>
+                        </div>
+                        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                            <a href="add-blog.php" class="btn btn-light fw-bold px-4 py-2 me-2 shadow-sm">
+                                <i class="fas fa-plus-circle text-primary me-1"></i> New Blog
+                            </a>
+                            <a href="social-queue.php" class="btn btn-outline-light px-3 py-2">
+                                <i class="fas fa-tasks me-1"></i> Queue
+                            </a>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-dollar-sign card-icon text-primary"></i>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- Orders Card -->
-          <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stat-card orders-card shadow h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col me-2">
-                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                      Total Orders</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_orders ?></div>
-                    <div class="mt-2 mb-0 text-muted text-xs">
-                      <span class="text-success me-2"><i class="fas fa-arrow-up me-1"></i> 8%</span>
-                      <span>Since last month</span>
+                <!-- 2. Hero Metric Cards -->
+                <div class="row g-3 mb-4">
+                    <!-- Blogs Count -->
+                    <div class="col-xl-3 col-md-6 col-12">
+                        <div class="metric-card">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <span class="text-muted small fw-semibold">Total Published Blogs</span>
+                                    <h2 class="fw-bold text-dark mb-0 mt-1"><?= $metrics['blogs_count'] ?></h2>
+                                </div>
+                                <div class="metric-icon-box bg-primary bg-opacity-10 text-primary">
+                                    <i class="fas fa-blog"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center border-top pt-2">
+                                <small class="text-muted"><i class="fas fa-eye me-1"></i>Live Technical Guides</small>
+                                <a href="view-all-blog.php" class="small fw-semibold text-primary text-decoration-none">Manage &rarr;</a>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-shopping-cart card-icon text-success"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- Customers Card -->
-          <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stat-card customers-card shadow h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col me-2">
-                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                      Total Customers</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_customers ?></div>
-                    <div class="mt-2 mb-0 text-muted text-xs">
-                      <span class="text-danger me-2"><i class="fas fa-arrow-down me-1"></i> 2%</span>
-                      <span>Since last month</span>
+                    <!-- Social Automation Pending Drafts -->
+                    <div class="col-xl-3 col-md-6 col-12">
+                        <div class="metric-card">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <span class="text-muted small fw-semibold">Social Media Queue</span>
+                                    <h2 class="fw-bold text-dark mb-0 mt-1"><?= $metrics['social_pending'] ?> <small class="text-muted" style="font-size:14px;">pending</small></h2>
+                                </div>
+                                <div class="metric-icon-box bg-info bg-opacity-10 text-info">
+                                    <i class="fas fa-share-alt"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center border-top pt-2">
+                                <small class="text-success"><i class="fas fa-check-double me-1"></i><?= $metrics['social_posted'] ?> posted live</small>
+                                <a href="social-queue.php" class="small fw-semibold text-info text-decoration-none">Review Queue &rarr;</a>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-users card-icon text-info"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- Products Card -->
-          <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stat-card products-card shadow h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col me-2">
-                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                      Total Products</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_products ?></div>
-                    <div class="mt-2 mb-0 text-muted text-xs">
-                      <span class="text-success me-2"><i class="fas fa-arrow-up me-1"></i> 15%</span>
-                      <span>Since last month</span>
+                    <!-- Client Leads / Inquiries -->
+                    <div class="col-xl-3 col-md-6 col-12">
+                        <div class="metric-card">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <span class="text-muted small fw-semibold">Client Inquiries / Leads</span>
+                                    <h2 class="fw-bold text-dark mb-0 mt-1"><?= $metrics['inquiries_new'] ?> <small class="text-muted" style="font-size:14px;">new</small></h2>
+                                </div>
+                                <div class="metric-icon-box bg-success bg-opacity-10 text-success">
+                                    <i class="fas fa-envelope-open-text"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center border-top pt-2">
+                                <small class="text-muted"><i class="fas fa-users me-1"></i><?= $metrics['inquiries_total'] ?> total received</small>
+                                <a href="new-leads.php" class="small fw-semibold text-success text-decoration-none">View Leads &rarr;</a>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-boxes card-icon text-warning"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Quick Actions -->
-        <div class="row mt-4">
-          <div class="col-12">
-            <h4 class="mb-3 text-secondary"><i class="fas fa-bolt"></i> Quick Actions</h4>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mb-4">
-            <a href="add-products.php" class="card action-card shadow-sm border-0 text-center text-decoration-none">
-              <div class="card-body">
-                <div class="icon-circle bg-primary text-white mb-3">
-                  <i class="fas fa-plus"></i>
-                </div>
-                <h5 class="card-title">Add Product</h5>
-                <p class="text-muted small">Add new product to inventory</p>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mb-4">
-            <a href="add-blog.php" class="card action-card shadow-sm border-0 text-center text-decoration-none">
-              <div class="card-body">
-                <div class="icon-circle bg-success text-white mb-3">
-                  <i class="fas fa-blog"></i>
-                </div>
-                <h5 class="card-title">Create Blog</h5>
-                <p class="text-muted small">Publish new blog post</p>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mb-4">
-            <a href="new-leads.php" class="card action-card shadow-sm border-0 text-center text-decoration-none">
-              <div class="card-body">
-                <div class="icon-circle bg-info text-white mb-3">
-                  <i class="fas fa-envelope"></i>
-                </div>
-                <h5 class="card-title">View Inquiries</h5>
-                <p class="text-muted small">Check customer inquiries</p>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mb-4">
-            <a href="show-products.php" class="card action-card shadow-sm border-0 text-center text-decoration-none">
-              <div class="card-body">
-                <div class="icon-circle bg-warning text-white mb-3">
-                  <i class="fas fa-boxes"></i>
-                </div>
-                <h5 class="card-title">Manage Products</h5>
-                <p class="text-muted small">View and edit products</p>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- Charts Row -->
-        <div class="row">
-          <!-- Revenue Chart -->
-          <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
-              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Revenue Overview</h6>
-                <div class="dropdown no-arrow">
-                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Week</a></li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Export Data</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart-container">
-                  <canvas id="revenueChart"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pie Chart -->
-          <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
-              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                <div class="dropdown no-arrow">
-                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">View Details</a></li>
-                    <li><a class="dropdown-item" href="#">Export Data</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart-container">
-                  <canvas id="revenuePieChart"></canvas>
-                </div>
-                <div class="mt-4 text-center small">
-                  <span class="me-2">
-                    <i class="fas fa-circle text-primary"></i> Direct
-                  </span>
-                  <span class="me-2">
-                    <i class="fas fa-circle text-success"></i> Social
-                  </span>
-                  <span class="me-2">
-                    <i class="fas fa-circle text-info"></i> Referral
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Content Row -->
-        <div class="row">
-          <!-- Recent Orders -->
-          <div class="col-lg-8 mb-4">
-            <div class="card shadow mb-4">
-              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Recent Orders</h6>
-                <a href="orders.php" class="btn btn-sm btn-primary">View All</a>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <thead class="table-light">
-                      <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      $sql_recent_orders = "SELECT * FROM orders_new ORDER BY created_at DESC LIMIT 5";
-                      $res_recent_orders = mysqli_query($conn, $sql_recent_orders);
-                      while ($order = mysqli_fetch_assoc($res_recent_orders)) {
-                        $status_class = '';
-                        if ($order['status'] == 'completed')
-                          $status_class = 'success';
-                        elseif ($order['status'] == 'pending')
-                          $status_class = 'warning';
-                        else
-                          $status_class = 'danger';
-
-                        echo "<tr>
-                          <td>#{$order['order_id']}</td>
-                          <td>{$order['first_name']} {$order['last_name']}</td>
-                          <td>" . date('M d, Y', strtotime($order['created_at'])) . "</td>
-                          <td>₹{$order['order_total']}</td>
-                          <td><span class='badge bg-{$status_class}'>{$order['status']}</span></td>
-                          <td><a href='order-details.php?id={$order['id']}' class='btn btn-sm btn-outline-primary'>View</a></td>
-                        </tr>";
-                      }
-                      ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Quick Stats & Activity -->
-          <div class="col-lg-4 mb-4">
-            <!-- Quick Stats -->
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Quick Stats</h6>
-              </div>
-              <div class="card-body">
-                <div class="mb-3">
-                  <div class="d-flex justify-content-between mb-1">
-                    <span>New Customers</span>
-                    <strong><?= $total_customers ?></strong>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 72%" aria-valuenow="72"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <div class="d-flex justify-content-between mb-1">
-                    <span>Order Conversion</span>
-                    <strong>42%</strong>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 42%" aria-valuenow="42"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <div class="d-flex justify-content-between mb-1">
-                    <span>Inventory</span>
-                    <strong><?= $total_products ?> items</strong>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 85%" aria-valuenow="85"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Recent Activity -->
-            <div class="card shadow">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Recent Activity</h6>
-              </div>
-              <div class="card-body activity-feed">
-                <?php
-                // Get recent activities from different tables
-                $activities = array();
-
-                // Get recent blog activities
-                $sql_blogs = "SELECT 'blog' as type, title as description, created_at FROM blogs ORDER BY created_at DESC LIMIT 2";
-                $res_blogs = mysqli_query($conn, $sql_blogs);
-                while ($blog = mysqli_fetch_assoc($res_blogs)) {
-                  $activities[] = $blog;
-                }
-
-                // Get recent product activities
-                $sql_products = "SELECT 'product' as type, pro_name as description, added_on as created_at FROM products ORDER BY added_on DESC LIMIT 2";
-                $res_products = mysqli_query($conn, $sql_products);
-                while ($product = mysqli_fetch_assoc($res_products)) {
-                  $activities[] = $product;
-                }
-
-                // Get recent inquiries
-                $sql_inquiries = "SELECT 'inquiry' as type, CONCAT('New inquiry from ', name) as description, created_at FROM inquiries ORDER BY created_at DESC LIMIT 2";
-                $res_inquiries = mysqli_query($conn, $sql_inquiries);
-                while ($inquiry = mysqli_fetch_assoc($res_inquiries)) {
-                  $activities[] = $inquiry;
-                }
-
-                // Sort activities by date
-                usort($activities, function ($a, $b) {
-                  return strtotime($b['created_at']) - strtotime($a['created_at']);
-                });
-
-                // Display activities
-                foreach (array_slice($activities, 0, 4) as $activity) {
-                  $icon = '';
-                  $color = '';
-                  if ($activity['type'] == 'blog') {
-                    $icon = 'fa-pen';
-                    $color = 'primary';
-                  } elseif ($activity['type'] == 'product') {
-                    $icon = 'fa-box';
-                    $color = 'success';
-                  } else {
-                    $icon = 'fa-envelope';
-                    $color = 'info';
-                  }
-
-                  echo "<div class='activity-item'>
-                    <div class='d-flex justify-content-between'>
-                      <strong>{$activity['description']}</strong>
-                      <span class='badge bg-{$color}'>" . ucfirst($activity['type']) . "</span>
+                    <!-- Blog Comments Moderation -->
+                    <div class="col-xl-3 col-md-6 col-12">
+                        <div class="metric-card">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <span class="text-muted small fw-semibold">Pending Comments</span>
+                                    <h2 class="fw-bold text-dark mb-0 mt-1"><?= $metrics['comments_pending'] ?></h2>
+                                </div>
+                                <div class="metric-icon-box bg-warning bg-opacity-10 text-warning">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center border-top pt-2">
+                                <small class="text-muted"><i class="fas fa-check me-1"></i><?= $metrics['comments_approved'] ?> approved live</small>
+                                <a href="blog-comments.php?status=pending" class="small fw-semibold text-warning text-decoration-none">Moderate &rarr;</a>
+                            </div>
+                        </div>
                     </div>
-                    <p class='activity-time mb-0'><i class='fas fa-clock me-1'></i>" . date('M j, Y g:i A', strtotime($activity['created_at'])) . "</p>
-                  </div>";
-                }
-                ?>
-              </div>
+                </div>
+
+                <!-- 3. Quick Action Bar -->
+                <div class="row g-3 mb-4">
+                    <div class="col-xl-2 col-md-4 col-sm-6">
+                        <a href="add-blog.php" class="quick-action-btn">
+                            <i class="fas fa-pen-nib text-primary"></i>
+                            <span>Add Blog</span>
+                        </a>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-6">
+                        <a href="social-queue.php" class="quick-action-btn">
+                            <i class="fas fa-share-nodes text-info"></i>
+                            <span>Social Queue</span>
+                        </a>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-6">
+                        <a href="blog-comments.php" class="quick-action-btn">
+                            <i class="fas fa-comment-dots text-warning"></i>
+                            <span>Comments</span>
+                        </a>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-6">
+                        <a href="new-leads.php" class="quick-action-btn">
+                            <i class="fas fa-user-tie text-success"></i>
+                            <span>Client Leads</span>
+                        </a>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-6">
+                        <a href="testimonials-social.php" class="quick-action-btn">
+                            <i class="fas fa-quote-right text-danger"></i>
+                            <span>Testimonials</span>
+                        </a>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-6">
+                        <a href="social-oauth.php" class="quick-action-btn">
+                            <i class="fas fa-key text-secondary"></i>
+                            <span>API &amp; OAuth</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 4. Row 1: Recent Inquiries & Social Media Queue Status -->
+                <div class="row g-4 mb-4">
+                    <!-- Left: Recent Inquiries -->
+                    <div class="col-lg-7">
+                        <div class="white_card h-100 shadow-sm border-0">
+                            <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0 fw-bold text-dark"><i class="fas fa-inbox text-success me-2"></i>Recent Client Inquiries</h5>
+                                <a href="new-leads.php" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Client</th>
+                                                <th>Subject / Message</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (empty($recentInquiries)): ?>
+                                                <tr>
+                                                    <td colspan="4" class="text-center py-4 text-muted">No client inquiries found.</td>
+                                                </tr>
+                                            <?php else: ?>
+                                                <?php foreach ($recentInquiries as $inq): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="fw-bold text-dark"><?= htmlspecialchars($inq['name']) ?></div>
+                                                            <small class="text-muted"><i class="fas fa-envelope fa-xs"></i> <?= htmlspecialchars($inq['email']) ?></small>
+                                                        </td>
+                                                        <td>
+                                                            <div class="fw-semibold text-dark small"><?= htmlspecialchars($inq['subject'] ?: 'Project Inquiry') ?></div>
+                                                            <small class="text-muted text-truncate d-inline-block" style="max-width:220px;">
+                                                                <?= htmlspecialchars(substr($inq['message'] ?? '', 0, 45)) ?>...
+                                                            </small>
+                                                        </td>
+                                                        <td class="text-muted small">
+                                                            <?= date('d M Y', strtotime($inq['created_at'])) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($inq['status'] === 'new'): ?>
+                                                                <span class="badge bg-success">New</span>
+                                                            <?php else: ?>
+                                                                <span class="badge bg-secondary">Read</span>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Social Media Automation Queue -->
+                    <div class="col-lg-5">
+                        <div class="white_card h-100 shadow-sm border-0">
+                            <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0 fw-bold text-dark"><i class="fas fa-share-alt text-primary me-2"></i>Social Media Queue</h5>
+                                <a href="social-queue.php" class="btn btn-sm btn-outline-primary">Approval Queue</a>
+                            </div>
+                            <div class="card-body p-3">
+                                <?php if (empty($recentSocialJobs)): ?>
+                                    <p class="text-center text-muted py-4">No social media jobs generated yet.</p>
+                                <?php else: ?>
+                                    <div class="d-flex flex-column gap-3">
+                                        <?php foreach ($recentSocialJobs as $job): 
+                                            $p = (string)$job['platform'];
+                                            $st = (string)$job['status'];
+                                        ?>
+                                            <div class="p-2 border rounded d-flex align-items-center justify-content-between bg-light">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <span class="platform-tag platform-<?= $p ?>"><?= $p ?></span>
+                                                    <div>
+                                                        <div class="fw-semibold text-dark small text-truncate" style="max-width: 200px;">
+                                                            <?= htmlspecialchars($job['blog_title'] ?: 'Blog #' . $job['blog_id']) ?>
+                                                        </div>
+                                                        <small class="text-muted" style="font-size:11px;">
+                                                            <?= date('d M, h:i A', strtotime($job['scheduled_at'])) ?>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <?php if ($st === 'draft'): ?>
+                                                        <span class="badge bg-warning text-dark">Draft</span>
+                                                    <?php elseif ($st === 'approved'): ?>
+                                                        <span class="badge bg-info">Approved</span>
+                                                    <?php elseif ($st === 'posted'): ?>
+                                                        <span class="badge bg-success">Posted</span>
+                                                    <?php elseif ($st === 'failed'): ?>
+                                                        <span class="badge bg-danger">Failed</span>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Row 2: Recent Blogs & Security Activity Logs -->
+                <div class="row g-4">
+                    <!-- Left: Latest Published Blogs -->
+                    <div class="col-lg-6">
+                        <div class="white_card h-100 shadow-sm border-0">
+                            <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0 fw-bold text-dark"><i class="fas fa-newspaper text-info me-2"></i>Latest Blogs</h5>
+                                <a href="view-all-blog.php" class="btn btn-sm btn-outline-primary">All Blogs</a>
+                            </div>
+                            <div class="card-body p-3">
+                                <?php if (empty($recentBlogs)): ?>
+                                    <p class="text-center text-muted py-4">No blogs found.</p>
+                                <?php else: ?>
+                                    <div class="d-flex flex-column gap-3">
+                                        <?php foreach ($recentBlogs as $rb): ?>
+                                            <div class="d-flex align-items-center justify-content-between p-2 border rounded">
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <img src="uploads/blogs/<?= htmlspecialchars($rb['image']) ?>" alt="Cover" class="rounded" width="54" height="42" style="object-fit:cover;" onerror="this.src='assets/img/logo_icon.jpg'">
+                                                    <div>
+                                                        <div class="fw-bold text-dark small text-truncate" style="max-width: 240px;">
+                                                            <?= htmlspecialchars($rb['title']) ?>
+                                                        </div>
+                                                        <small class="text-muted" style="font-size:11px;">
+                                                            <?= date('d M Y', strtotime($rb['created_at'])) ?>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <a href="edit-blog.php?id=<?= $rb['id'] ?>" class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Security Audit Logs -->
+                    <div class="col-lg-6">
+                        <div class="white_card h-100 shadow-sm border-0">
+                            <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0 fw-bold text-dark"><i class="fas fa-shield-alt text-danger me-2"></i>Security &amp; Auth Logs</h5>
+                                <span class="badge bg-light text-dark border">Live Monitor</span>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Attempted User</th>
+                                                <th>IP Address</th>
+                                                <th>Status</th>
+                                                <th>Timestamp</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (empty($recentLogs)): ?>
+                                                <tr>
+                                                    <td colspan="4" class="text-center py-4 text-muted">No auth logs recorded yet.</td>
+                                                </tr>
+                                            <?php else: ?>
+                                                <?php foreach ($recentLogs as $log): 
+                                                    $st = $log['status'];
+                                                ?>
+                                                    <tr>
+                                                        <td class="fw-semibold text-dark small"><?= htmlspecialchars($log['username_attempted']) ?></td>
+                                                        <td class="font-monospace text-muted small"><?= htmlspecialchars($log['ip_address']) ?></td>
+                                                        <td>
+                                                            <?php if ($st === 'success'): ?>
+                                                                <span class="badge bg-success">Success</span>
+                                                            <?php elseif ($st === 'failed'): ?>
+                                                                <span class="badge bg-warning text-dark">Failed</span>
+                                                            <?php elseif ($st === 'locked_out'): ?>
+                                                                <span class="badge bg-danger">Locked</span>
+                                                            <?php else: ?>
+                                                                <span class="badge bg-secondary"><?= htmlspecialchars($st) ?></span>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td class="text-muted small">
+                                                            <?= date('d M, h:i A', strtotime($log['attempt_time'])) ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          </div>
         </div>
-
-
-      </div>
     </section>
 
-    <footer>
-      <?php include "footer.php"; ?>
-    </footer>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.35.0/dist/apexcharts.min.js"></script>
-
-  <script>
-    // Revenue Chart
-    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-    const revenueChart = new Chart(revenueCtx, {
-      type: 'line',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [{
-          label: 'Revenue',
-          data: [12000, 19000, 15000, 18000, 22000, 25000, 28000, 26000, 30000, 32000, 35000, 40000],
-          backgroundColor: 'rgba(78, 115, 223, 0.05)',
-          borderColor: 'rgba(78, 115, 223, 1)',
-          pointBackgroundColor: 'rgba(78, 115, 223, 1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(78, 115, 223, 1)',
-          borderWidth: 2,
-          tension: 0.3,
-          fill: true
-        }]
-      },
-      options: {
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            backgroundColor: "rgb(255,255,255)",
-            bodyFontColor: "#858796",
-            titleMarginBottom: 10,
-            titleFontColor: '#6e707e',
-            titleFontSize: 14,
-            borderColor: '#dddfeb',
-            borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: false,
-            intersect: false,
-            mode: 'index',
-            caretPadding: 10,
-            callbacks: {
-              label: function (context) {
-                var label = context.dataset.label || '';
-                if (label) {
-                  label += ': ';
-                }
-                if (context.parsed.y !== null) {
-                  label += '₹' + context.parsed.y.toLocaleString();
-                }
-                return label;
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: function (value) {
-                return '₹' + value.toLocaleString();
-              }
-            },
-            grid: {
-              color: "rgb(234, 236, 244)",
-              zeroLineColor: "rgb(234, 236, 244)",
-              drawBorder: false,
-              borderDash: [2],
-              zeroLineBorderDash: [2]
-            }
-          },
-          x: {
-            grid: {
-              display: false,
-              drawBorder: false
-            },
-            ticks: {
-              padding: 20
-            }
-          }
-        }
-      }
-    });
-
-    // Revenue Pie Chart
-    const revenuePieCtx = document.getElementById('revenuePieChart').getContext('2d');
-    const revenuePieChart = new Chart(revenuePieCtx, {
-      type: 'doughnut',
-      data: {
-        labels: ["Direct", "Referral", "Social"],
-        datasets: [{
-          data: [55, 30, 15],
-          backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-          hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-          hoverBorderColor: "rgba(234, 236, 244, 1)",
-        }],
-      },
-      options: {
-        maintainAspectRatio: false,
-        plugins: {
-          tooltip: {
-            backgroundColor: "rgb(255,255,255)",
-            bodyFontColor: "#858796",
-            borderColor: '#dddfeb',
-            borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: false,
-            caretPadding: 10,
-          },
-          legend: {
-            display: false
-          },
-        },
-        cutout: '80%',
-      },
-    });
-
-    // Initialize date range picker
-    document.addEventListener('DOMContentLoaded', function () {
-      // This would be replaced with actual date range picker initialization
-      console.log('Date range picker would be initialized here');
-    });
-  </script>
+    <?php include "footer.php"; ?>
 </body>
-
 </html>
