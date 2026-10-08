@@ -680,35 +680,6 @@ include_once "config/connect.php";
               </div>
             </div>
 
-            <div class="testimonial-boxarea">
-              <div class="row">
-                <div class="col-lg-5">
-                  <div class="pera">
-                    <p>"Amazing work! Harsh Bhai Patel here. Nikhil developed an e-commerce website for my shop and integrated online payments. Great experience working with him!"</p>
-                    <div class="space100"></div>
-                    <div class="space30"></div>
-                    <div class="list-area">
-                      <div class="list">
-                        <ul>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                          <li><i class="fa-solid fa-star"></i></li>
-                        </ul>
-                        <a href="#">Harsh Bhai Patel (Nasik)</a>
-                      </div>
-                      <img src="<?=$site?>assets/img/icons/google.svg" alt="">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-7">
-                  <div class="images">
-                    <img src="<?=$site?>assets/img/all-images/testimonials-img5.jpg" alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class="testimonial-boxarea">
               <div class="row">
@@ -804,13 +775,14 @@ include_once "config/connect.php";
   <script>
     $(document).ready(function() {
       $('.counter').each(function() {
+        const targetCount = parseInt($(this).attr('data-count') || $(this).text(), 10) || 0;
         $(this).prop('Counter', 0).animate({
-          Counter: $(this).text()
+          Counter: targetCount
         }, {
           duration: 2000,
           easing: 'swing',
           step: function(now) {
-            $(this).text(Math.ceil(now));
+            $(this).text(Math.ceil(now) + '+');
           }
         });
       });
