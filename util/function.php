@@ -533,4 +533,39 @@ function average_client_rating()
         'count' => intval($row['total'] ?? 0),
     ];
 }
+
+// ── Testimonial Video & Google Helpers ──
+function get_youtube_id($url) {
+    if (empty($url)) return null;
+    if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/i', $url, $matches)) {
+        return $matches[1];
+    }
+    return null;
+}
+
+function get_video_embed_url($url) {
+    if (empty($url)) return '';
+    $yt_id = get_youtube_id($url);
+    if ($yt_id) {
+        return "https://www.youtube.com/embed/{$yt_id}?autoplay=1&rel=0";
+    }
+    if (preg_match('/loom\.com\/(?:share|embed)\/([a-zA-Z0-9]+)/i', $url, $matches)) {
+        return "https://www.loom.com/embed/" . $matches[1] . "?autoplay=1";
+    }
+    if (preg_match('/vimeo\.com\/(?:video\/)?([0-9]+)/i', $url, $matches)) {
+        return "https://player.vimeo.com/video/" . $matches[1] . "?autoplay=1";
+    }
+    return $url;
+}
+
+function get_video_thumbnail_url($video_url, $custom_thumbnail = '', $site = '') {
+    if (!empty($custom_thumbnail)) {
+        return (strpos($custom_thumbnail, 'http') === 0) ? $custom_thumbnail : $site . 'uploads/testimonials/' . $custom_thumbnail;
+    }
+    $yt_id = get_youtube_id($video_url);
+    if ($yt_id) {
+        return "https://img.youtube.com/vi/{$yt_id}/hqdefault.jpg";
+    }
+    return $site . 'assets/img/preview.png';
+}
 ?>
