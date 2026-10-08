@@ -668,7 +668,7 @@ $result = $stmt->get_result();
                                                                         <?= ucfirst(htmlspecialchars($row['payment_method'])) ?>
                                                                     </td>
                                                                     <td data-label="Amount" class="amount-cell">
-                                                                        Rs. <?= number_format($row['order_total'], 2) ?>
+                                                                        Rs. <?= number_format((float)($row['order_total'] ?? 0), 2) ?>
                                                                     </td>
                                                                     <td data-label="Date" class="date-cell">
                                                                         <?= $orderDate ?>

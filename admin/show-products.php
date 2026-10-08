@@ -167,15 +167,15 @@ include_once "functions.php";
                                                                 <td><?= htmlspecialchars($row['pro_name']) ?></td>
                                                                 <!-- <td><?= htmlspecialchars($row['pro_cate']) ?></td> -->
                                                                 <?php $cat = get_category_by_id($row['pro_cate']); ?>
-                                                                <td><?= $cat['categories'] ?></td>
+                                                                <td><?= !empty($cat['categories']) ? htmlspecialchars($cat['categories']) : '<span class="text-muted">Uncategorized</span>' ?></td>
                                                                 <td>
-                                                                    <img src="assets/img/uploads/<?= htmlspecialchars($row['pro_img']) ?>"
-                                                                        alt="<?= htmlspecialchars($row['pro_name']) ?>"
+                                                                    <img src="assets/img/uploads/<?= htmlspecialchars($row['pro_img'] ?? '') ?>"
+                                                                        alt="<?= htmlspecialchars($row['pro_name'] ?? '') ?>"
                                                                         style="width: 80px;" class="img-thumbnail">
                                                                 </td>
-                                                                <td><del>₹<?= number_format($row['mrp'], 2) ?></del></td>
+                                                                <td><del>₹<?= number_format((float)($row['mrp'] ?? 0), 2) ?></del></td>
                                                                 <td class="text-primary">
-                                                                    ₹<?= number_format($row['selling_price'], 2) ?></td>
+                                                                    ₹<?= number_format((float)($row['selling_price'] ?? 0), 2) ?></td>
                                                                 <td class="<?= $status_color ?>"><?= $status_text ?></td>
                                                                 <td>
                                                                     <div class="d-flex justify-content-center">
