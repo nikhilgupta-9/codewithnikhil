@@ -836,14 +836,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                 <div class="col-md-4">
                                     <label class="form-label fw-bold small text-muted mb-1">
-                                        <i class="fas fa-layer-group me-1"></i> Target Niche / Category
+                                        <i class="fas fa-layer-group me-1"></i> Target Sector &amp; Domain
                                     </label>
                                     <select id="aiNicheSelect" class="form-select form-select-sm">
-                                        <option value="web_development">Web Development &amp; Architecture</option>
-                                        <option value="fullstack_saas">Full-Stack SaaS &amp; Micro-Apps</option>
-                                        <option value="ai_tools">AI Tools, Claude &amp; Gemini Agents</option>
-                                        <option value="ui_ux_design">UI/UX, Modern CSS &amp; Conversions</option>
-                                        <option value="seo_ranking">SEO, Organic Traffic &amp; Google AI</option>
+                                        <option value="ai_development">🤖 AI Breakthroughs, Agents &amp; LLMs (DeepSeek, RAG, Ollama)</option>
+                                        <option value="software_engineering">💻 Software Engineering &amp; System Design (Backend, Scale)</option>
+                                        <option value="robotics_iot">🦾 Robotics, Embedded Systems &amp; IoT (ROS 2, Edge AI)</option>
+                                        <option value="daily_learners_cs">🎓 Daily Learners &amp; CSE Roadmaps (DSA, OS Internals)</option>
+                                        <option value="fullstack_saas">🚀 Full-Stack Web &amp; Next-Gen Tech (Next.js, PHP, Cloud)</option>
                                     </select>
                                 </div>
 

@@ -35,7 +35,7 @@ class ClaudeService
     /**
      * Fetch trending topic ideas across Dev.to, LinkedIn, Instagram, or Tech Trends
      */
-    public function suggestTopics(string $source = 'all', string $niche = 'web_development'): array
+    public function suggestTopics(string $source = 'all', string $niche = 'ai_development'): array
     {
         // Try live Dev.to API if devto or all is chosen
         $devtoTopics = [];
@@ -51,11 +51,11 @@ class ClaudeService
                     return $claudeTopics;
                 }
             } catch (\Throwable $t) {
-                $this->logger->warning("Claude API topic query failed: " . $t->getMessage() . ". Falling back to curated/devto trends.");
+                $this->logger->warning("Claude API topic query failed: " . $t->getMessage());
             }
         }
 
-        // If Gemini API is available as fallback
+        // If Gemini API is available as primary or fallback
         if (!empty($this->geminiApiKey)) {
             try {
                 $geminiTopics = $this->queryGeminiForTopics($source, $niche);
@@ -72,32 +72,33 @@ class ClaudeService
     }
 
     /**
-     * Generate complete SEO-optimized blog article using Claude API
+     * Generate complete SEO-optimized blog article using Claude or Gemini API
      */
-    public function generateArticle(string $topic, string $niche = 'web_development', string $source = 'tech_trends', string $tone = 'authoritative'): array
+    public function generateArticle(string $topic, string $niche = 'ai_development', string $source = 'tech_trends', string $tone = 'authoritative'): array
     {
+        // If Gemini API is configured
+        if (!empty($this->geminiApiKey)) {
+            try {
+                return $this->queryGeminiForArticle($topic, $niche, $tone);
+            } catch (\Throwable $gt) {
+                $this->logger->error("Gemini article generation error: " . $gt->getMessage());
+                if (empty($this->apiKey)) {
+                    throw $gt;
+                }
+            }
+        }
+
+        // If Claude API is configured
         if (!empty($this->apiKey)) {
             try {
                 return $this->queryClaudeForArticle($topic, $niche, $source, $tone);
             } catch (\Throwable $t) {
                 $this->logger->error("Claude API article generation failed: " . $t->getMessage());
-                // If Gemini is available, try Gemini
-                if (!empty($this->geminiApiKey)) {
-                    try {
-                        return $this->queryGeminiForArticle($topic, $niche, $tone);
-                    } catch (\Throwable $gt) {
-                        $this->logger->error("Gemini fallback also failed: " . $gt->getMessage());
-                    }
-                }
                 throw new RuntimeException("Claude AI Error: " . $t->getMessage());
             }
         }
 
-        if (!empty($this->geminiApiKey)) {
-            return $this->queryGeminiForArticle($topic, $niche, $tone);
-        }
-
-        throw new RuntimeException("No AI API Key configured. Please add ANTHROPIC_API_KEY or CLAUDE_API_KEY in your .env file or settings.");
+        throw new RuntimeException("No AI API Key configured. Please add GEMINI_API_KEY or ANTHROPIC_API_KEY in your .env file or settings.");
     }
 
     /**
@@ -116,7 +117,6 @@ class ClaudeService
         $filename = 'blog_ai_' . uniqid('', true) . '.jpg';
         $destination = rtrim($uploadDir, '/') . '/' . $filename;
 
-        // Download image
         $ch = curl_init($imageUrl);
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
@@ -177,28 +177,37 @@ class ClaudeService
     {
         $devtoContext = '';
         if (!empty($liveDevto)) {
-            $devtoContext = "Live trending Dev.to topics currently active: " . json_encode(array_column($liveDevto, 'title'));
+            $devtoContext = "Live developer discussions: " . json_encode(array_column($liveDevto, 'title'));
         }
 
         $prompt = <<<PROMPT
-You are a viral tech content curator and SEO strategist for NikhilWorks (a full-stack web developer and agency owner).
-Generate 6 highly engaging, trending, high-CTR blog topic ideas inspired by current trends on {$source} and {$niche}.
+You are a senior Computer Science Professor, AI Systems Architect, and Robotics Engineer writing for NikhilWorks.
+Generate 6 ultra-specific, high-value, highly engaging topic ideas tailored for DAILY LEARNERS, COMPUTER SCIENCE STUDENTS, and SOFTWARE ENGINEERS in the sector: "{$niche}" (Source inspiration: {$source}).
+
+The topics MUST focus strictly on:
+1. Practical daily learner value (hands-on implementations, roadmaps, step-by-step code, core CS breakdown).
+2. Cutting-edge developments in Artificial Intelligence (Autonomous Agents, RAG, Local LLMs like DeepSeek/Ollama, fine-tuning, Multi-Agent systems).
+3. Modern Software Engineering & System Design (Distributed architectures, High-concurrency backend, clean architecture, real-world scaling, DevOps).
+4. Robotics, Embedded Systems & IoT (ROS 2, Edge AI on Jetson/Raspberry Pi, Computer Vision, autonomous navigation, IoT mesh networks).
+
 {$devtoContext}
+
+Do NOT output vague, generic titles like "Intro to Coding" or "Why Tech is Good". Provide concrete, technical, curiosity-driven titles with specific frameworks and real-world architectures.
 
 Return strictly a JSON array of 6 objects without markdown backticks:
 [
   {
-    "title": "Compelling, viral, SEO-rich title",
-    "source": "Dev.to Trending / LinkedIn Viral / Instagram Tech Reel / Google SEO",
-    "niche": "Web Development / AI Tools / Full Stack / Career Growth",
-    "why_it_works": "Why this topic gets high engagement, clicks, and search traffic",
-    "target_keywords": "keyword1, keyword2, keyword3",
-    "hook": "A 1-sentence magnetic hook"
+    "title": "Specific, actionable, technical title with stack/keywords",
+    "source": "Dev.to Trending / LinkedIn Engineering / GitHub Trends / Research Paper",
+    "niche": "AI & LLMs / Software Engineering / Robotics & IoT / CS Fundamentals",
+    "why_it_works": "Why daily learners, engineering students, and devs love and bookmark this",
+    "target_keywords": "keyword1, keyword2, keyword3, keyword4",
+    "hook": "A clear, compelling 1-sentence engineering breakdown hook"
   }
 ]
 PROMPT;
 
-        $response = $this->callClaudeApi($prompt, 1500);
+        $response = $this->callClaudeApi($prompt, 1800);
         $json = $this->extractJson($response);
 
         return is_array($json) ? $json : [];
@@ -244,7 +253,6 @@ PROMPT;
             throw new RuntimeException("Invalid response format received from Claude API.");
         }
 
-        // Clean slug
         if (empty($result['slug_url'])) {
             $result['slug_url'] = strtolower(trim(preg_replace('/[^a-zA-Z0-9]+/', '-', $result['title']), '-'));
         }
@@ -311,37 +319,68 @@ PROMPT;
     }
 
     /**
-     * Query Gemini API if Claude key is missing
+     * Query Gemini API for topics
      */
     private function queryGeminiForTopics(string $source, string $niche): array
     {
-        $endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={$this->geminiApiKey}";
-        $prompt = "Generate 6 trending, high-CTR blog topic ideas for {$source} in {$niche}. Return strictly a valid JSON array of objects with keys: title, source, niche, why_it_works, target_keywords, hook.";
+        $models = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+        $prompt = <<<PROMPT
+You are a senior Computer Science Engineer, AI Researcher, and Robotics Architect writing for NikhilWorks.
+Generate 6 ultra-specific, high-value, highly engaging topic ideas tailored for DAILY LEARNERS, COMPUTER SCIENCE STUDENTS, and SOFTWARE ENGINEERS in the sector: "{$niche}" (Source inspiration: {$source}).
 
-        $payload = [
-            'contents' => [
-                ['parts' => [['text' => $prompt]]]
-            ]
-        ];
+The topics MUST focus strictly on:
+1. Practical daily learner value (step-by-step builds, roadmap architectures, core CS concepts made visual and practical).
+2. Cutting-edge developments in AI (Autonomous Agents, Local LLMs with Ollama/DeepSeek, RAG pipelines, Multi-Agent systems, Multimodal AI).
+3. Modern Software Engineering (System Design, Microservices, Distributed Caching, High-Concurrency APIs in Go/Rust/PHP 8.4/Node, Clean Code).
+4. Robotics, Embedded Systems & IoT (ROS 2, Edge AI on NVIDIA Jetson / ESP32 / Raspberry Pi, OpenCV vision, Autonomous Navigation).
 
-        $ch = curl_init($endpoint);
-        curl_setopt_array($ch, [
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => json_encode($payload),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_SSL_VERIFYPEER => false
-        ]);
+Do NOT output vague generic titles. Give concrete, technical, curiosity-driven titles with specific tools and stacks.
 
-        $res = curl_exec($ch);
-        curl_close($ch);
+Return strictly a valid JSON array of 6 objects with keys: title, source, niche, why_it_works, target_keywords, hook.
+PROMPT;
 
-        $decoded = json_decode((string)$res, true);
-        $text = $decoded['candidates'][0]['content']['parts'][0]['text'] ?? '';
-        return $this->extractJson($text) ?: [];
+        foreach ($models as $m) {
+            $endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{$m}:generateContent?key={$this->geminiApiKey}";
+            $payload = [
+                'contents' => [
+                    ['parts' => [['text' => $prompt]]]
+                ],
+                'generationConfig' => [
+                    'temperature' => 0.7,
+                    'responseMimeType' => 'application/json'
+                ]
+            ];
+
+            $ch = curl_init($endpoint);
+            curl_setopt_array($ch, [
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => json_encode($payload),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_SSL_VERIFYPEER => false
+            ]);
+
+            $res = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+
+            if ($httpCode === 200) {
+                $decoded = json_decode((string)$res, true);
+                $text = $decoded['candidates'][0]['content']['parts'][0]['text'] ?? '';
+                $data = $this->extractJson($text);
+                if (is_array($data) && count($data) > 0) {
+                    return $data;
+                }
+            }
+        }
+
+        return [];
     }
 
+    /**
+     * Query Gemini API for article
+     */
     private function queryGeminiForArticle(string $topic, string $niche, string $tone): array
     {
         $models = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
@@ -425,10 +464,10 @@ PROMPT;
     private function fetchLiveDevtoTrends(string $niche): array
     {
         $tag = 'webdev';
-        if (str_contains($niche, 'ai')) $tag = 'ai';
-        if (str_contains($niche, 'javascript') || str_contains($niche, 'frontend')) $tag = 'javascript';
-        if (str_contains($niche, 'react') || str_contains($niche, 'next')) $tag = 'react';
-        if (str_contains($niche, 'python')) $tag = 'python';
+        if (str_contains($niche, 'ai') || str_contains($niche, 'agent')) $tag = 'ai';
+        if (str_contains($niche, 'robot') || str_contains($niche, 'iot')) $tag = 'hardware';
+        if (str_contains($niche, 'software') || str_contains($niche, 'system')) $tag = 'architecture';
+        if (str_contains($niche, 'learner') || str_contains($niche, 'cs')) $tag = 'computerscience';
 
         $url = "https://dev.to/api/articles?tag={$tag}&top=7";
 
@@ -465,66 +504,136 @@ PROMPT;
     }
 
     /**
-     * Curated trending topics library across platforms
+     * Curated trending topics library across CSE, AI, Software Engineering & Robotics
      */
     private function getCuratedTrendingTopics(string $source, string $niche, array $devto = []): array
     {
-        $defaults = [
-            [
-                'title' => 'Top 10 Modern Web Development Tools Every Developer Needs in 2026',
-                'source' => 'Dev.to & LinkedIn Viral',
-                'niche' => 'Web Development',
-                'why_it_works' => 'High bookmark rate, listicle format, evergreen organic search volume.',
-                'target_keywords' => 'web development tools, dev productivity, fullstack developer 2026',
-                'hook' => 'Discover the cutting-edge workflow stack turning 10-hour builds into 30-minute deployments.'
+        $library = [
+            'ai_development' => [
+                [
+                    'title' => 'Building Autonomous Multi-Agent Workflows from Scratch with Python & Local LLMs',
+                    'source' => 'GitHub & AI Research Trends',
+                    'niche' => 'Artificial Intelligence & Agents',
+                    'why_it_works' => 'High developer demand for agentic orchestration without relying on paid proprietary APIs.',
+                    'target_keywords' => 'autonomous agents python, local llm ollama, multi-agent system, ai workflows 2026',
+                    'hook' => 'Learn how to orchestrate specialized AI agents that collaborate, debug code, and execute complex workflows autonomously.'
+                ],
+                [
+                    'title' => 'Complete Guide to Retrieval-Augmented Generation (RAG) with Vector Databases & Hybrid Search',
+                    'source' => 'Dev.to & LinkedIn Engineering',
+                    'niche' => 'AI Architecture & RAG',
+                    'why_it_works' => 'Essential architecture pattern for every software engineer building enterprise AI applications.',
+                    'target_keywords' => 'rag architecture tutorial, vector database pgvector, hybrid search bm25, chunking strategies',
+                    'hook' => 'Step-by-step implementation of advanced RAG with contextual chunking, re-ranking, and zero hallucination.'
+                ],
+                [
+                    'title' => 'Running DeepSeek-R1 & Llama 3 Locally: Complete Hardware, Quantization & Setup Guide',
+                    'source' => 'Dev.to & Reddit LocalLLaMA',
+                    'niche' => 'Open Source AI & Edge Computing',
+                    'why_it_works' => 'Massive interest from daily learners and privacy-conscious software engineers.',
+                    'target_keywords' => 'run deepseek r1 locally, ollama quantization guide, local reasoning model, llama 3 local setup',
+                    'hook' => 'How to run state-of-the-art reasoning LLMs on consumer hardware with 4-bit GGUF quantization.'
+                ]
             ],
-            [
-                'title' => 'How to Build and Deploy Full-Stack AI Micro-SaaS in 48 Hours',
-                'source' => 'LinkedIn & X/Twitter Viral',
-                'niche' => 'AI & SaaS Development',
-                'why_it_works' => 'Appeals to indie hackers, startup founders, and high-income tech freelancers.',
-                'target_keywords' => 'build ai saas, micro saas ideas, fullstack ai development',
-                'hook' => 'A complete blueprint for turning AI API models into recurring revenue products.'
+            'software_engineering' => [
+                [
+                    'title' => 'System Design Blueprint: Architecting a Real-Time Distributed Notification Engine for 10M Users',
+                    'source' => 'LinkedIn Engineering & Tech Blogs',
+                    'niche' => 'Software Engineering & System Design',
+                    'why_it_works' => 'Crucial for coding interviews, senior engineering roles, and backend performance.',
+                    'target_keywords' => 'system design notification service, redis pubsub, websocket scaling, distributed systems',
+                    'hook' => 'Deep architectural breakdown of queue management, rate limiting, and WebSocket pooling at scale.'
+                ],
+                [
+                    'title' => 'Why High-Performance Modular Monoliths are Replacing Microservices in 2026',
+                    'source' => 'Dev.to & Hacker News Debate',
+                    'niche' => 'Software Architecture',
+                    'why_it_works' => 'Addresses real-world microservice complexity fatigue with measurable benchmarks.',
+                    'target_keywords' => 'modular monolith architecture, microservices vs monolith benchmarks, domain driven design, clean architecture',
+                    'hook' => 'How engineering teams are reducing cloud costs by 60% while speeding up deployment cycles.'
+                ],
+                [
+                    'title' => 'Database Indexing & Query Optimization Mastery: From B-Trees to EXPLAIN ANALYZE',
+                    'source' => 'Dev.to Masterclass',
+                    'niche' => 'Database Engineering',
+                    'why_it_works' => 'Every fullstack learner needs database tuning skills to prevent production bottlenecks.',
+                    'target_keywords' => 'postgresql index optimization, explain analyze tutorial, btree vs gin index, sql performance tuning',
+                    'hook' => 'Visual guide to how database engines execute queries under the hood and how to cut latency by 90%.'
+                ]
             ],
-            [
-                'title' => 'Next.js vs Remix vs PHP in 2026: The Honest Architecture Breakdown',
-                'source' => 'Dev.to Debate Trend',
-                'niche' => 'Frontend & Backend',
-                'why_it_works' => 'High engagement debate topic with strong technical SEO value.',
-                'target_keywords' => 'nextjs vs php, web frameworks 2026, server side rendering performance',
-                'hook' => 'Why traditional monolithic architectures are making an unexpected comeback.'
+            'robotics_iot' => [
+                [
+                    'title' => 'Getting Started with ROS 2 and Computer Vision for Autonomous Mobile Robots (AMR)',
+                    'source' => 'Robotics Research & GitHub',
+                    'niche' => 'Robotics & Computer Science Engineering',
+                    'why_it_works' => 'Students and robotics enthusiasts look for clear, beginner-to-intermediate ROS 2 tutorials.',
+                    'target_keywords' => 'ros2 tutorial beginners, autonomous robot navigation, opencv slam robotics, python ros2 nodes',
+                    'hook' => 'Hands-on guide to creating publisher-subscriber nodes, LiDAR mapping, and obstacle avoidance in ROS 2 Humble.'
+                ],
+                [
+                    'title' => 'Edge AI on NVIDIA Jetson & Raspberry Pi 5: Real-Time Object Detection at 60 FPS',
+                    'source' => 'Embedded Systems Trends',
+                    'niche' => 'Edge AI & Embedded Hardware',
+                    'why_it_works' => 'Bridges the gap between software algorithms and physical hardware deployments.',
+                    'target_keywords' => 'nvidia jetson nano edge ai, raspberry pi 5 yolo real time, tensorrt optimization, embedded computer vision',
+                    'hook' => 'How to optimize and deploy lightweight YOLOv8 models onto edge microcomputers with TensorRT acceleration.'
+                ],
+                [
+                    'title' => 'The Humanoid Robotics Revolution: How Embodied AI and Reinforcement Learning are Changing Engineering',
+                    'source' => 'CSE Sector & Robotics Deep Dive',
+                    'niche' => 'Humanoid Robotics & Embodied AI',
+                    'why_it_works' => 'Cutting-edge topic exploring the convergence of LLMs, motor control, and robotic simulation.',
+                    'target_keywords' => 'humanoid robotics embodied ai, reinforcement learning locomotion, mujoco simulation tutorial, future of robotics 2026',
+                    'hook' => 'An engineer’s look inside how modern humanoids learn motor skills via physics simulators and neural networks.'
+                ]
             ],
-            [
-                'title' => '7 Secret CSS & UI/UX Tricks That 10x Website Conversion Rates',
-                'source' => 'Instagram Tech Reel',
-                'niche' => 'UI/UX Design',
-                'why_it_works' => 'Visual design hacks drive viral saves on Instagram & LinkedIn.',
-                'target_keywords' => 'modern css tricks, ui ux conversion optimization, web design tips',
-                'hook' => 'Micro-interactions and visual hierarchy secrets top agencies use.'
-            ],
-            [
-                'title' => 'SEO Roadmap 2026: How to Rank #1 on Google with AI Search Overviews',
-                'source' => 'Google Search / SEO High Volume',
-                'niche' => 'SEO & Traffic',
-                'why_it_works' => 'Massive business intent; founders looking for organic lead generation.',
-                'target_keywords' => 'seo ranking 2026, rank on google, ai search optimization',
-                'hook' => 'How to optimize your website for AI Overviews and capture qualified B2B leads.'
-            ],
-            [
-                'title' => 'Complete Guide to Automating Social Media Content with Claude & Gemini AI',
-                'source' => 'LinkedIn Tech Leadership',
-                'niche' => 'Automation & AI',
-                'why_it_works' => 'Agencies and creators want automated distribution workflows.',
-                'target_keywords' => 'ai content automation, claude api blog, social media automation python php',
-                'hook' => 'Step-by-step architecture to auto-distribute blog articles across LinkedIn, X, and Instagram.'
+            'daily_learners_cs' => [
+                [
+                    'title' => 'Computer Science Fundamentals Every Self-Taught Developer and Student Must Master in 2026',
+                    'source' => 'Dev.to & LinkedIn Roadmap',
+                    'niche' => 'Computer Science Engineering Roadmap',
+                    'why_it_works' => 'Evergreen guide helping learners bridge the gap between simple tutorial code and deep engineering.',
+                    'target_keywords' => 'computer science roadmap 2026, memory management os concepts, dsa for real world engineering, computer networking basics',
+                    'hook' => 'The definitive roadmap to OS memory models, concurrency primitives, network protocols, and core data structures.'
+                ],
+                [
+                    'title' => 'How Operating Systems Actually Work: Memory Management, Threads, and Syscalls Visualized',
+                    'source' => 'Educational CS Visual Guide',
+                    'niche' => 'Operating Systems & Internals',
+                    'why_it_works' => 'Visual, easy-to-understand explanations of complex low-level CS topics get massive shares.',
+                    'target_keywords' => 'operating systems internals, virtual memory paging explained, process vs thread syscalls, low level programming',
+                    'hook' => 'Demystifying virtual memory, page tables, CPU context switching, and kernel syscalls with practical diagrams.'
+                ],
+                [
+                    'title' => 'Visualizing Data Structures & Algorithms: From Graph Traversals to Dynamic Programming',
+                    'source' => 'Daily Learner Mastery',
+                    'niche' => 'DSA & Problem Solving',
+                    'why_it_works' => 'High demand by computer science students preparing for technical rounds and interviews.',
+                    'target_keywords' => 'data structures algorithms visualized, graph traversal bfs dfs, dynamic programming patterns, leetcode roadmap',
+                    'hook' => 'Master the top 15 problem-solving patterns that cover 90% of technical interview questions.'
+                ]
             ]
         ];
 
+        $nicheKey = 'ai_development';
+        if (str_contains($niche, 'software') || str_contains($niche, 'backend') || str_contains($niche, 'system')) $nicheKey = 'software_engineering';
+        if (str_contains($niche, 'robot') || str_contains($niche, 'iot') || str_contains($niche, 'embedded')) $nicheKey = 'robotics_iot';
+        if (str_contains($niche, 'learner') || str_contains($niche, 'cs') || str_contains($niche, 'dsa')) $nicheKey = 'daily_learners_cs';
+
+        $curated = $library[$nicheKey] ?? $library['ai_development'];
+
+        $allCurated = array_merge(
+            $library['ai_development'],
+            $library['software_engineering'],
+            $library['robotics_iot'],
+            $library['daily_learners_cs']
+        );
+
         if (!empty($devto)) {
-            return array_merge(array_slice($devto, 0, 3), array_slice($defaults, 0, 3));
+            return array_merge(array_slice($devto, 0, 2), array_slice($curated, 0, 4));
         }
 
-        return $defaults;
+        return array_slice(array_merge($curated, $allCurated), 0, 6);
     }
 
     private function extractKeywords(string $title): string
@@ -549,7 +658,6 @@ PROMPT;
             return $decoded;
         }
 
-        // Try extracting between first [ or { and last ] or }
         $firstBracket = strpos($text, '[');
         $lastBracket = strrpos($text, ']');
         if ($firstBracket !== false && $lastBracket !== false) {
