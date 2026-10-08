@@ -605,27 +605,27 @@ include_once "config/connect.php";
       <div class="row">
         <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up">
           <div class="stat-box">
-            <h2 class="counter" data-count="20">20+</h2>
+            <h2 class="counter" data-count="25">25+</h2>
             <p>Projects Completed</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="100">
           <?php $aboutExpYears = function_exists('years_in_business') ? years_in_business(2022, 8) : '4'; ?>
           <div class="stat-box">
-            <h2 class="counter" data-count="<?= $aboutExpYears ?>"><?= $aboutExpYears ?>+</h2>
+            <h2 class="counter" data-count="4">4+</h2>
             <p>Years Experience (Since Aug 2022)</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="200">
           <div class="stat-box">
-            <h2 class="counter" data-count="15">15+</h2>
+            <h2 class="counter" data-count="20">20+</h2>
             <p>Happy Clients</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="300">
           <div class="stat-box">
-            <h2 class="counter" data-count="15">15+</h2>
-            <p>SEO Projects</p>
+            <h2 class="counter" data-count="32">32+</h2>
+            <p>Google Reviews ⭐</p>
           </div>
         </div>
       </div>
@@ -643,7 +643,7 @@ include_once "config/connect.php";
             <img src="<?=$site?>assets/img/elements/elements13.png" alt="" class="star3 keyframe5">
             <h5>Testimonials</h5>
             <h2>What Our Clients Say <br class="d-md-block d-none"> On Google Reviews</h2>
-            <p>Don't just take our word for it. Hear what our satisfied clients <br class="d-md-block d-none"> have to say about their experience partnering with NikhilWorks</p>
+            <p>Don't just take our word for it. Hear what our satisfied clients <br class="d-md-block d-none"> have to say about their experience working with NikhilWorks</p>
           </div>
         </div>
       </div>
