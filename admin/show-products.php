@@ -172,10 +172,13 @@ include_once "functions.php";
                                                                     <img src="assets/img/uploads/<?= htmlspecialchars($row['pro_img'] ?? '') ?>"
                                                                         alt="<?= htmlspecialchars($row['pro_name'] ?? '') ?>"
                                                                         style="width: 80px;" class="img-thumbnail">
-                                                                </td>
-                                                                <td><del>₹<?= number_format((float)($row['mrp'] ?? 0), 2) ?></del></td>
+                                                                <?php 
+                                                                    $mrpVal = (!empty($row['mrp']) && is_numeric($row['mrp'])) ? (float)$row['mrp'] : 0.0;
+                                                                    $sellingVal = (!empty($row['selling_price']) && is_numeric($row['selling_price'])) ? (float)$row['selling_price'] : 0.0;
+                                                                ?>
+                                                                <td><del>₹<?= number_format($mrpVal, 2) ?></del></td>
                                                                 <td class="text-primary">
-                                                                    ₹<?= number_format((float)($row['selling_price'] ?? 0), 2) ?></td>
+                                                                    ₹<?= number_format($sellingVal, 2) ?></td>
                                                                 <td class="<?= $status_color ?>"><?= $status_text ?></td>
                                                                 <td>
                                                                     <div class="d-flex justify-content-center">

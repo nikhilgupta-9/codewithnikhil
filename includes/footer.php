@@ -240,14 +240,16 @@ $footerYearsInBusiness = (string)$years;
             <i class="fa-solid fa-chevron-down"></i>
           </h3>
           <ul class="footer-nav-links">
-            <li><a href="<?= $site ?>free-tools/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-wrench me-1"></i> Free Web & SEO Tools</a></li>
-            <li><a href="<?= $site ?>tools/whatsapp-link/"><i class="fa-brands fa-whatsapp text-accent-dot me-1"></i> WhatsApp Link Generator</a></li>
-            <li><a href="<?= $site ?>tools/qr-code/"><i class="fa-solid fa-qrcode text-accent-dot me-1"></i> QR Code Generator</a></li>
+            <li><a href="<?= $site ?>free-tools/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-wrench me-1"></i> Free Tools Hub</a></li>
+            <li><a href="<?= $site ?>tools/invoice/"><i class="fa-solid fa-file-invoice text-accent-dot me-1"></i> A4 Invoice Generator</a></li>
+            <li><a href="<?= $site ?>tools/qr-code/"><i class="fa-solid fa-qrcode text-accent-dot me-1"></i> QR Code Studio</a></li>
+            <li><a href="<?= $site ?>tools/whatsapp-link/"><i class="fa-brands fa-whatsapp text-accent-dot me-1"></i> WhatsApp Link Maker</a></li>
             <li><a href="<?= $site ?>tools/gst-calculator/"><i class="fa-solid fa-calculator text-accent-dot me-1"></i> GST Calculator</a></li>
+            <li><a href="<?= $site ?>tools/pagespeed/"><i class="fa-solid fa-gauge-high text-accent-dot me-1"></i> PageSpeed Insights</a></li>
+            <li><a href="<?= $site ?>tools/ssl-checker/"><i class="fa-solid fa-shield-halved text-accent-dot me-1"></i> SSL Checker</a></li>
             <li><a href="<?= $site ?>tools/schema-generator/"><i class="fa-solid fa-code text-accent-dot me-1"></i> Schema Generator</a></li>
             <li><a href="<?= $site ?>website-cost-calculator/"><i class="fa-solid fa-file-invoice-dollar text-accent-dot me-1"></i> Cost Calculator</a></li>
             <li><a href="<?= $site ?>seo-auditor/"><i class="fa-solid fa-stethoscope text-accent-dot me-1"></i> Free SEO Auditor</a></li>
-            <li><a href="<?= $site ?>pay/" class="link-highlight-pay"><i class="fa-solid fa-qrcode text-accent-dot me-1"></i> Pay Online (UPI / QR)</a></li>
           </ul>
         </div>
       </div>
@@ -264,6 +266,7 @@ $footerYearsInBusiness = (string)$years;
             <li><a href="<?= $site ?>contact/">Contact Us</a></li>
             <li><a href="<?= $site ?>blogs/">Blog &amp; Insights</a></li>
             <li><a href="<?= $site ?>testimonials/">Testimonials</a></li>
+            <li><a href="<?= $site ?>sitemap/" style="color:#ADFF1C; font-weight:600;"><i class="fa-solid fa-sitemap me-1"></i> HTML Sitemap</a></li>
             <li><a href="<?= $site ?>privacy-policy/">Privacy Policy</a></li>
             <li><a href="<?= $site ?>terms-and-conditions/">Terms &amp; Conditions</a></li>
           </ul>
@@ -280,12 +283,13 @@ $footerYearsInBusiness = (string)$years;
           <ul class="footer-nav-links">
             <li><a href="<?= $site ?>portfolio/">Portfolio &amp; Showcase</a></li>
             <li><a href="<?= $site ?>pricing/">Pricing Plans</a></li>
-            <li><a href="<?= $site ?>hire-freelance-web-developer/">Hire a Freelance Developer</a></li>
+            <li><a href="<?= $site ?>hire-freelance-web-developer/">Hire Freelance Developer</a></li>
             <li><a href="<?= $site ?>website-development-cost-india/">Website Development Cost</a></li>
+            <li><a href="<?= $site ?>pay/" class="link-highlight-pay"><i class="fa-solid fa-qrcode text-accent-dot me-1"></i> Pay Online (UPI / QR)</a></li>
             <li><a href="<?= $site ?>contact/">Book Free Consultation</a></li>
           </ul>
 
-          <div class="mt-4 pt-2">
+          <div class="mt-3 pt-1">
             <a href="https://wa.me/918368552640?text=Hi%20Nikhil%2C%20I%20would%20like%20to%20discuss%20a%20project." class="footer-quick-wa-btn" target="_blank" rel="noopener">
               <i class="fa-brands fa-whatsapp"></i> Chat with Nikhil
             </a>
@@ -304,6 +308,7 @@ $footerYearsInBusiness = (string)$years;
       <div class="footer-tag-grid">
         <a href="<?= $site ?>pay/" class="tag-featured"><i class="fa-solid fa-qrcode me-1"></i> Pay Online</a>
         <a href="<?= $site ?>ai-integration-services/" class="tag-featured"><i class="fa-solid fa-robot me-1"></i> AI Integration &amp; Automation</a>
+        <a href="<?= $site ?>free-tools/" class="tag-featured"><i class="fa-solid fa-wrench me-1"></i> Free Developer Tools</a>
         <a href="<?= $site ?>website-cost-calculator/" class="tag-featured"><i class="fa-solid fa-calculator me-1"></i> Website Cost Calculator</a>
         <a href="<?= $site ?>seo-auditor/" class="tag-featured"><i class="fa-solid fa-stethoscope me-1"></i> Free SEO Audit Tool</a>
         <a href="<?= $site ?>service/website-design-development/">Web Design &amp; Development</a>
@@ -331,24 +336,45 @@ $footerYearsInBusiness = (string)$years;
 
     <!-- Global Regional Hubs Grid -->
     <div class="footer-region-panel">
-      <h4 class="footer-panel-title"><i class="fa-solid fa-globe text-accent-dot me-2"></i>Global Delivery Locations</h4>
+      <h4 class="footer-panel-title"><i class="fa-solid fa-globe text-accent-dot me-2"></i>Global &amp; Indian Delivery Locations</h4>
       <div class="row g-3 footer-region-grid">
-        <div class="col-lg-2 col-md-4 col-6">
-          <h5>India</h5>
-          <ul>
-            <li><a href="<?= $site ?>web-developer-india/">India (All Cities)</a></li>
-            <li><a href="<?= $site ?>web-designer-delhi/">Delhi</a></li>
-            <li><a href="<?= $site ?>freelance-web-developer-india/">Freelance Developer India</a></li>
-          </ul>
+        <div class="col-lg-3 col-md-6 col-12">
+          <h5>Top Indian IT &amp; Metro Hubs</h5>
+          <div class="row g-1">
+            <div class="col-6">
+              <ul class="mb-0">
+                <li><a href="<?= $site ?>web-developer-india/">India (National)</a></li>
+                <li><a href="<?= $site ?>web-designer-delhi/">Delhi NCR</a></li>
+                <li><a href="<?= $site ?>web-developer-noida/">Noida</a></li>
+                <li><a href="<?= $site ?>web-developer-gurgaon/">Gurgaon</a></li>
+                <li><a href="<?= $site ?>web-developer-bangalore/">Bengaluru</a></li>
+                <li><a href="<?= $site ?>web-developer-mumbai/">Mumbai</a></li>
+                <li><a href="<?= $site ?>web-developer-hyderabad/">Hyderabad</a></li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <ul class="mb-0">
+                <li><a href="<?= $site ?>web-developer-pune/">Pune</a></li>
+                <li><a href="<?= $site ?>web-developer-chennai/">Chennai</a></li>
+                <li><a href="<?= $site ?>web-developer-kolkata/">Kolkata</a></li>
+                <li><a href="<?= $site ?>web-developer-ahmedabad/">Ahmedabad</a></li>
+                <li><a href="<?= $site ?>web-developer-jaipur/">Jaipur</a></li>
+                <li><a href="<?= $site ?>web-developer-lucknow/">Lucknow</a></li>
+                <li><a href="<?= $site ?>web-developer-chandigarh/">Chandigarh</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-2 col-md-4 col-6">
+        <div class="col-lg-2 col-md-3 col-6">
           <h5>North America</h5>
           <ul>
-            <li><a href="<?= $site ?>web-developer-usa/">USA</a></li>
+            <li><a href="<?= $site ?>web-developer-usa/">United States</a></li>
             <li><a href="<?= $site ?>web-developer-canada/">Canada</a></li>
+            <li><a href="<?= $site ?>healthcare-website-design-usa/">US Healthcare</a></li>
+            <li><a href="<?= $site ?>real-estate-website-design-usa/">US Real Estate</a></li>
           </ul>
         </div>
-        <div class="col-lg-2 col-md-4 col-6">
+        <div class="col-lg-2 col-md-3 col-6">
           <h5>Europe</h5>
           <ul>
             <li><a href="<?= $site ?>web-developer-uk/">United Kingdom</a></li>
@@ -356,27 +382,20 @@ $footerYearsInBusiness = (string)$years;
             <li><a href="<?= $site ?>web-developer-switzerland/">Switzerland</a></li>
           </ul>
         </div>
-        <div class="col-lg-2 col-md-4 col-6">
+        <div class="col-lg-2 col-md-3 col-6">
           <h5>Middle East</h5>
           <ul>
             <li><a href="<?= $site ?>web-developer-dubai/">UAE (Dubai)</a></li>
             <li><a href="<?= $site ?>web-developer-saudi-arabia/">Saudi Arabia</a></li>
           </ul>
         </div>
-        <div class="col-lg-2 col-md-4 col-6">
-          <h5>Asia Pacific</h5>
+        <div class="col-lg-3 col-md-3 col-6">
+          <h5>Asia Pacific &amp; Global</h5>
           <ul>
             <li><a href="<?= $site ?>web-developer-australia/">Australia</a></li>
             <li><a href="<?= $site ?>web-developer-new-zealand/">New Zealand</a></li>
             <li><a href="<?= $site ?>web-developer-singapore/">Singapore</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-4 col-6">
-          <h5>Worldwide</h5>
-          <ul>
-            <li><a href="<?= $site ?>hire-freelance-web-developer/">View All Countries</a></li>
-            <li><a href="<?= $site ?>web-developer-south-africa/">South Africa</a></li>
-            <li><a href="<?= $site ?>web-developer-russia/">Russia</a></li>
+            <li><a href="<?= $site ?>sitemap/" style="color:#ADFF1C; font-weight:700;">Explore All Locations (HTML Sitemap) &rarr;</a></li>
           </ul>
         </div>
       </div>
@@ -400,6 +419,7 @@ $footerYearsInBusiness = (string)$years;
         </div>
         <div class="col-md-4 text-center text-md-end">
           <ul class="footer-legal-links mb-0">
+            <li><a href="<?= $site ?>sitemap/">Sitemap</a></li>
             <li><a href="<?= $site ?>pay/">Pay Online</a></li>
             <li><a href="<?= $site ?>terms-and-conditions/">Terms</a></li>
             <li><a href="<?= $site ?>privacy-policy/">Privacy</a></li>
