@@ -106,17 +106,59 @@ ErrorDocument 404 /404.php
   RewriteCond %{THE_REQUEST} \s/+terms-and-conditions\.php[\s?] [NC]
   RewriteRule ^terms-and-conditions\.php$ https://nikhilworks.com/terms-and-conditions/ [R=301,L]
 
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+free-tools\.php[\s?] [NC]
+  RewriteRule ^free-tools\.php$ https://nikhilworks.com/free-tools/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+sitemap\.php[\s?] [NC]
+  RewriteRule ^sitemap\.php$ https://nikhilworks.com/sitemap/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+website-cost-calculator\.php[\s?] [NC]
+  RewriteRule ^website-cost-calculator\.php$ https://nikhilworks.com/website-cost-calculator/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+seo-auditor\.php[\s?] [NC]
+  RewriteRule ^seo-auditor\.php$ https://nikhilworks.com/seo-auditor/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+pay\.php[\s?] [NC]
+  RewriteRule ^pay\.php$ https://nikhilworks.com/pay/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^nikhilworks\.com$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+ai-integration-services\.php[\s?] [NC]
+  RewriteRule ^ai-integration-services\.php$ https://nikhilworks.com/ai-integration-services/ [R=301,L]
+
   # 4. Old & Duplicate URL Fixes
-  RewriteRule ^services/([a-z0-9_-]+)/?$ service/$1/ [R=301,L]
-  RewriteRule ^service-details/website-design-services/?$ service/website-design-development/ [R=301,L]
-  RewriteRule ^service/website-maintenance/?$ service/website-maintenance-support/ [R=301,L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^services/([a-z0-9_-]+)/?$ https://nikhilworks.com/service/$1/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^service-details/website-design-services/?$ https://nikhilworks.com/service/website-design-development/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^service/website-maintenance/?$ https://nikhilworks.com/service/website-maintenance-support/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^free-seo-audit-tool/?$ https://nikhilworks.com/seo-auditor/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^make-payment/?$ https://nikhilworks.com/pay/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^ai-workflow-automation/?$ https://nikhilworks.com/ai-integration-services/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^ai-services/?$ https://nikhilworks.com/ai-integration-services/ [R=301,L]
 
   # 5. Trailing Slash Canonicalization (Ensures single canonical URL for search engines)
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} !/$
   RewriteCond %{REQUEST_URI} !\.(php|xml|txt|css|js|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot|pdf|zip)$ [NC]
-  RewriteRule ^(.*)$ $1/ [R=301,L]
+  RewriteRule ^(.*)$ https://nikhilworks.com/$1/ [R=301,L]
 
   # 6. Sitemaps
   RewriteRule ^sitemap\.xml$ sitemap.xml [L]
@@ -131,15 +173,11 @@ ErrorDocument 404 /404.php
   RewriteRule ^pricing/?$ pricing.php [L]
   RewriteRule ^website-cost-calculator/?$ website-cost-calculator.php [L]
   RewriteRule ^seo-auditor/?$ seo-auditor.php [L]
-  RewriteRule ^free-seo-audit-tool/?$ seo-auditor.php [L]
   RewriteRule ^pay/?$ pay.php [L]
-  RewriteRule ^make-payment/?$ pay.php [L]
   RewriteRule ^contact/?$ contact.php [L]
   RewriteRule ^blogs/?$ blog.php [L]
   RewriteRule ^testimonials/?$ testimonials.php [L]
   RewriteRule ^ai-integration-services/?$ ai-integration-services.php [L]
-  RewriteRule ^ai-workflow-automation/?$ ai-integration-services.php [L]
-  RewriteRule ^ai-services/?$ ai-integration-services.php [L]
   RewriteRule ^privacy-policy/?$ privacy-policy.php [L]
   RewriteRule ^terms-and-conditions/?$ terms-and-conditions.php [L]
   RewriteRule ^sitemap/?$ sitemap.php [L]

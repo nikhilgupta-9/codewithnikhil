@@ -9,11 +9,10 @@ $yearsExperience = years_in_business(2022, 8);
 $rating = average_client_rating();
 $avgRating = ($rating['avg'] > 0) ? $rating['avg'] : '4.9';
 
-$isIndiaCostPage = (strpos($_SERVER['REQUEST_URI'] ?? '', 'website-development-cost-india') !== false);
-$pageTitle = $isIndiaCostPage ? "Website Development Cost in India (2026 Price Calculator) - Nikhil Gupta" : "Website Cost Calculator India 2026 | Instant Real-Time Project Estimator";
+$pageTitle = "Website Cost Calculator India 2026 | Instant Real-Time Project Estimator";
 $pageDesc = "Calculate accurate website development costs in India (2026). Transparent pricing for WordPress, Custom PHP, MERN Stack, and eCommerce stores with multi-currency estimator.";
 $pageKeywords = "website cost calculator india, website development cost in india, web design price estimator, calculate website cost, ecommerce website price india, freelance web developer cost";
-$canonicalUrl = $isIndiaCostPage ? "https://nikhilworks.com/website-development-cost-india/" : "https://nikhilworks.com/website-cost-calculator/";
+$canonicalUrl = "https://nikhilworks.com/website-cost-calculator/";
 ?>
 <!DOCTYPE html>
 <html lang="en">
