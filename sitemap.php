@@ -135,13 +135,13 @@ if (file_exists($cityFile)) {
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    /* Hero Section */
+    /* Hero Section - Ultra Compact & Modern */
     .sitemap-hero {
       position: relative;
       background: radial-gradient(circle at 80% 20%, rgba(173, 255, 28, 0.16) 0%, transparent 45%),
                   radial-gradient(circle at 15% 85%, rgba(16, 64, 65, 0.85) 0%, transparent 50%),
                   linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
-      padding: 160px 0 70px;
+      padding: 92px 0 16px;
       color: #fff;
       overflow: hidden;
     }
@@ -151,79 +151,79 @@ if (file_exists($cityFile)) {
       position: absolute;
       inset: 0;
       background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-      background-size: 24px 24px;
-      opacity: 0.4;
+      background-size: 20px 20px;
+      opacity: 0.35;
       pointer-events: none;
     }
 
     .sitemap-badge-pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       background: rgba(173, 255, 28, 0.12);
       border: 1px solid rgba(173, 255, 28, 0.35);
       color: var(--nw-accent);
-      padding: 6px 18px;
+      padding: 3px 12px;
       border-radius: 50px;
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      margin-bottom: 18px;
+      letter-spacing: 0.4px;
+      margin-bottom: 6px;
     }
 
     .sitemap-title {
-      font-size: 42px;
+      font-size: 26px;
       font-weight: 800;
       color: #ffffff;
       line-height: 1.2;
-      margin-bottom: 16px;
+      margin-bottom: 6px;
     }
     @media (max-width: 768px) {
-      .sitemap-title { font-size: 30px; }
-      .sitemap-hero { padding: 110px 0 50px; }
+      .sitemap-title { font-size: 22px; }
+      .sitemap-hero { padding: 82px 0 14px; }
     }
 
     .sitemap-desc {
-      font-size: 16px;
-      color: rgba(255, 255, 255, 0.82);
-      max-width: 680px;
-      margin: 0 auto 28px;
-      line-height: 1.6;
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 650px;
+      margin: 0 auto 10px;
+      line-height: 1.45;
     }
 
     /* Search & XML Quick Bar */
     .sitemap-search-wrap {
-      max-width: 620px;
-      margin: 0 auto 24px;
+      max-width: 520px;
+      margin: 0 auto 8px;
       position: relative;
     }
 
     .sitemap-search-input {
       width: 100%;
       background: rgba(255, 255, 255, 0.95);
-      border: 2px solid rgba(173, 255, 28, 0.4);
-      border-radius: 50px;
-      padding: 15px 24px 15px 50px;
-      font-size: 15px;
+      border: 1.5px solid rgba(173, 255, 28, 0.45);
+      border-radius: 40px;
+      padding: 8px 18px 8px 38px;
+      font-size: 13.5px;
       color: #0f172a;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-      transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
       outline: none;
     }
 
     .sitemap-search-input:focus {
       background: #ffffff;
       border-color: var(--nw-accent);
-      box-shadow: 0 10px 35px rgba(173, 255, 28, 0.35);
+      box-shadow: 0 6px 24px rgba(173, 255, 28, 0.35);
     }
 
     .sitemap-search-icon {
       position: absolute;
-      left: 20px;
+      left: 14px;
       top: 50%;
       transform: translateY(-50%);
       color: #104041;
-      font-size: 18px;
+      font-size: 14px;
       pointer-events: none;
     }
 
@@ -231,22 +231,22 @@ if (file_exists($cityFile)) {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
-      margin-top: 15px;
+      gap: 6px;
+      margin-top: 6px;
     }
 
     .sitemap-xml-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       color: #ffffff;
-      font-size: 12.5px;
+      font-size: 11px;
       font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 30px;
+      padding: 3px 10px;
+      border-radius: 20px;
       text-decoration: none;
       transition: all 0.2s ease;
     }
@@ -255,39 +255,39 @@ if (file_exists($cityFile)) {
       background: var(--nw-accent);
       color: #051617;
       border-color: var(--nw-accent);
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
-    /* Stats Ribbon */
+    /* Stats Ribbon - Compact */
     .sitemap-stats-ribbon {
       background: #ffffff;
       border-bottom: 1px solid var(--nw-border);
-      padding: 18px 0;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      padding: 6px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
     }
 
     .sitemap-stat-item {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 6px 15px;
+      gap: 8px;
+      padding: 2px 8px;
     }
 
     .sitemap-stat-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
       background: rgba(16, 64, 65, 0.08);
       color: var(--nw-primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 13px;
       flex-shrink: 0;
     }
 
     .sitemap-stat-num {
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 800;
       color: #0f172a;
       line-height: 1.1;
@@ -295,7 +295,7 @@ if (file_exists($cityFile)) {
     }
 
     .sitemap-stat-label {
-      font-size: 12px;
+      font-size: 10.5px;
       color: var(--nw-text-muted);
       font-weight: 600;
     }
@@ -303,12 +303,12 @@ if (file_exists($cityFile)) {
     /* Navigation Filter Tabs */
     .sitemap-filter-nav {
       position: sticky;
-      top: 75px;
+      top: 68px;
       z-index: 100;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--nw-border);
-      padding: 12px 0;
+      padding: 6px 0;
       transition: top 0.3s ease;
     }
     @media (max-width: 991px) {
@@ -319,23 +319,23 @@ if (file_exists($cityFile)) {
 
     .filter-pills-wrap {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
-      padding-bottom: 4px;
+      padding-bottom: 2px;
       scrollbar-width: thin;
     }
 
     .filter-pills-wrap::-webkit-scrollbar {
-      height: 4px;
+      height: 3px;
     }
 
     .filter-pill {
       background: #f1f5f9;
       color: #475569;
       border: 1px solid transparent;
-      padding: 7px 16px;
-      border-radius: 30px;
-      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
       font-weight: 600;
       text-decoration: none;
       white-space: nowrap;
@@ -349,18 +349,19 @@ if (file_exists($cityFile)) {
       color: #ffffff;
     }
 
-    /* Sitemap Directory Cards */
+    /* Sitemap Directory Cards - Generous Height */
     .sitemap-section {
-      padding: 40px 0;
+      padding: 20px 0 60px;
     }
 
     .sitemap-card {
       background: var(--nw-surface);
       border: 1px solid var(--nw-border);
       border-radius: var(--nw-radius);
-      padding: 28px 24px;
+      padding: 22px 20px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
       height: 100%;
+      min-height: 580px;
       display: flex;
       flex-direction: column;
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
@@ -485,9 +486,10 @@ if (file_exists($cityFile)) {
       border: 1px solid #fde68a;
     }
 
-    /* Custom Scrollbox for long lists */
+    /* Custom Scrollbox for long lists - Increased Height */
     .sitemap-scroll-box {
-      max-height: 420px;
+      max-height: 560px;
+      min-height: 480px;
       overflow-y: auto;
       padding-right: 8px;
       scrollbar-width: thin;
@@ -501,6 +503,91 @@ if (file_exists($cityFile)) {
     .sitemap-scroll-box::-webkit-scrollbar-thumb {
       background: #cbd5e1;
       border-radius: 4px;
+    }
+
+    /* Visual Tree Chart Styling - High-Tech Flowchart */
+    .tree-chart-wrapper {
+      background: linear-gradient(135deg, #051617 0%, #0c3334 55%, #041213 100%);
+      border-radius: 18px;
+      padding: 30px 24px;
+      border: 1px solid rgba(173, 255, 28, 0.25);
+      color: #ffffff;
+      min-height: 580px;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    .tree-root-node {
+      background: rgba(173, 255, 28, 0.15);
+      border: 2px solid var(--nw-accent);
+      color: var(--nw-accent);
+      border-radius: 30px;
+      padding: 10px 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 15px;
+      box-shadow: 0 0 25px rgba(173, 255, 28, 0.25);
+      text-decoration: none;
+    }
+    .tree-root-node:hover {
+      background: var(--nw-accent);
+      color: #051617;
+    }
+    .tree-connector-line {
+      width: 2px;
+      height: 25px;
+      background: linear-gradient(180deg, var(--nw-accent), rgba(173, 255, 28, 0.2));
+      margin: 0 auto;
+    }
+    .tree-branch-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 18px;
+      height: 100%;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
+    }
+    .tree-branch-card:hover {
+      border-color: var(--nw-accent);
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+    .tree-branch-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding-bottom: 8px;
+    }
+    .tree-node-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tree-node-pill {
+      font-size: 11.5px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.9);
+      padding: 4px 9px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .tree-node-pill:hover {
+      background: var(--nw-accent);
+      color: #051617;
+      font-weight: 600;
+      transform: translateY(-1px);
     }
 
     /* City Hubs Collapsible / Explorer */
@@ -684,6 +771,7 @@ if (file_exists($cityFile)) {
     <div class="container">
       <div class="filter-pills-wrap">
         <a href="#all" class="filter-pill active" data-target="all"><i class="fa-solid fa-border-all me-1"></i> All Categories</a>
+        <a href="#sec-tree" class="filter-pill" data-target="sec-tree"><i class="fa-solid fa-diagram-project me-1"></i> Visual Tree Chart</a>
         <a href="#sec-core" class="filter-pill" data-target="sec-core"><i class="fa-solid fa-house me-1"></i> Core Pages</a>
         <a href="#sec-tools" class="filter-pill" data-target="sec-tools"><i class="fa-solid fa-screwdriver-wrench me-1"></i> Free Tools (14)</a>
         <a href="#sec-services" class="filter-pill" data-target="sec-services"><i class="fa-solid fa-laptop-code me-1"></i> Web Services</a>
@@ -707,6 +795,117 @@ if (file_exists($cityFile)) {
       </div>
 
       <div class="row g-4" id="sitemapCardsGrid">
+
+        <!-- 0. Visual Architecture Tree Chart -->
+        <div class="col-12 sitemap-category-box" id="sec-tree">
+          <div class="tree-chart-wrapper">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+              <div>
+                <span class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25 px-2 py-1 mb-1 rounded-pill" style="font-size: 11px;">
+                  <i class="fa-solid fa-diagram-project me-1"></i> Visual Hierarchy Flowchart
+                </span>
+                <h3 class="h5 fw-bold text-white mb-0">Full Website Architecture Tree Chart</h3>
+              </div>
+              <div class="text-white-50 small mt-2 mt-md-0">
+                <i class="fa-solid fa-sitemap me-1 text-warning"></i> Multi-Tier Categorical Architecture
+              </div>
+            </div>
+
+            <!-- Root Node -->
+            <div class="text-center mb-3">
+              <a href="<?= $site ?>" class="tree-root-node" title="Homepage Root Node">
+                <i class="fa-solid fa-globe"></i>
+                <span>NikhilWorks (https://nikhilworks.com/)</span>
+              </a>
+              <div class="tree-connector-line"></div>
+            </div>
+
+            <!-- Level 1 Hierarchy Branches -->
+            <div class="row g-3">
+              <!-- Branch 1: Core Pages -->
+              <div class="col-lg-3 col-md-6">
+                <div class="tree-branch-card">
+                  <div class="tree-branch-title">
+                    <i class="fa-solid fa-house text-warning"></i>
+                    <span>Core Pages (12)</span>
+                  </div>
+                  <div class="tree-node-pills">
+                    <a href="<?= $site ?>about/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> About</a>
+                    <a href="<?= $site ?>services/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Services</a>
+                    <a href="<?= $site ?>portfolio/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Portfolio</a>
+                    <a href="<?= $site ?>pricing/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Pricing</a>
+                    <a href="<?= $site ?>contact/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Contact</a>
+                    <a href="<?= $site ?>blogs/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Blogs</a>
+                    <a href="<?= $site ?>testimonials/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Reviews</a>
+                    <a href="<?= $site ?>pay/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Pay Online</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Branch 2: Web & AI Services -->
+              <div class="col-lg-3 col-md-6">
+                <div class="tree-branch-card">
+                  <div class="tree-branch-title">
+                    <i class="fa-solid fa-laptop-code text-info"></i>
+                    <span>Web &amp; AI Services</span>
+                  </div>
+                  <div class="tree-node-pills">
+                    <a href="<?= $site ?>web-development-india/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Custom Web</a>
+                    <a href="<?= $site ?>ecommerce-development-india/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> E-Commerce</a>
+                    <a href="<?= $site ?>ai-integration-services/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> AI Integration</a>
+                    <a href="<?= $site ?>shopify-development-india/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Shopify</a>
+                    <a href="<?= $site ?>php-development-india/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> PHP/Laravel</a>
+                    <a href="<?= $site ?>wordpress-development-india/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> WordPress</a>
+                    <a href="<?= $site ?>website-maintenance-india/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Maintenance</a>
+                    <a href="<?= $site ?>website-redesign-india/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Redesign</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Branch 3: Free Tools Suite -->
+              <div class="col-lg-3 col-md-6">
+                <div class="tree-branch-card">
+                  <div class="tree-branch-title">
+                    <i class="fa-solid fa-screwdriver-wrench" style="color: #ADFF1C;"></i>
+                    <span>Free Tools Suite (14)</span>
+                  </div>
+                  <div class="tree-node-pills">
+                    <a href="<?= $site ?>invoice-generator/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> GST Invoice</a>
+                    <a href="<?= $site ?>gst-calculator/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> GST Calc</a>
+                    <a href="<?= $site ?>seo-auditor/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> SEO Auditor</a>
+                    <a href="<?= $site ?>meta-tag-generator/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Meta Tags</a>
+                    <a href="<?= $site ?>robots-txt-generator/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Robots.txt</a>
+                    <a href="<?= $site ?>compress-image/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Compress Img</a>
+                    <a href="<?= $site ?>css-glassmorphism-generator/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Glassmorphism</a>
+                    <a href="<?= $site ?>website-cost-calculator/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Cost Calc</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Branch 4: Metro & Global Hubs -->
+              <div class="col-lg-3 col-md-6">
+                <div class="tree-branch-card">
+                  <div class="tree-branch-title">
+                    <i class="fa-solid fa-map-location-dot text-danger"></i>
+                    <span>Regional &amp; Global Hubs</span>
+                  </div>
+                  <div class="tree-node-pills">
+                    <a href="<?= $site ?>web-developer-india/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> India Hub</a>
+                    <a href="<?= $site ?>web-designer-delhi/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Delhi NCR</a>
+                    <a href="<?= $site ?>web-developer-noida/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Noida</a>
+                    <a href="<?= $site ?>web-developer-bangalore/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Bengaluru</a>
+                    <a href="<?= $site ?>web-developer-mumbai/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Mumbai</a>
+                    <a href="<?= $site ?>web-developer-usa/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> USA</a>
+                    <a href="<?= $site ?>web-developer-uk/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> UK</a>
+                    <a href="<?= $site ?>hire-freelance-web-developer/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Global Hubs</a>
+                    <a href="#sec-cities" class="tree-node-pill" style="background: rgba(173,255,28,0.18); color: #ADFF1C;"><i class="fa-solid fa-layer-group"></i> 500+ Cities Directory</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
 
         <!-- 1. Core Pages Card -->
         <div class="col-lg-4 col-md-6 sitemap-category-box" id="sec-core">
@@ -992,7 +1191,7 @@ if (file_exists($cityFile)) {
             
             <p class="text-muted small mb-2">Dedicated local web design and development landing hubs across Indian districts and cities:</p>
             
-            <div class="sitemap-scroll-box" style="max-height: 280px;">
+            <div class="sitemap-scroll-box" style="max-height: 560px; min-height: 480px;">
               <div class="city-chip-grid">
                 <?php if (!empty($cityLocations)): ?>
                   <?php 
@@ -1021,7 +1220,7 @@ if (file_exists($cityFile)) {
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var searchInput = document.getElementById('sitemapSearchInput');
-      var linkItems = document.querySelectorAll('.sitemap-link-item, .city-chip');
+      var linkItems = document.querySelectorAll('.sitemap-link-item, .city-chip, .tree-node-pill');
       var categoryBoxes = document.querySelectorAll('.sitemap-category-box');
       var noResults = document.getElementById('sitemapNoResults');
       var filterPills = document.querySelectorAll('.filter-pill');
@@ -1050,7 +1249,7 @@ if (file_exists($cityFile)) {
 
         // Hide empty category boxes
         categoryBoxes.forEach(function(box) {
-          var visibleItems = box.querySelectorAll('.sitemap-link-item:not([style*="display: none"]), .city-chip:not([style*="display: none"])');
+          var visibleItems = box.querySelectorAll('.sitemap-link-item:not([style*="display: none"]), .city-chip:not([style*="display: none"]), .tree-node-pill:not([style*="display: none"])');
           if (visibleItems.length === 0) {
             box.style.display = 'none';
           } else {
