@@ -104,7 +104,11 @@ $services = get_sub_category($limit);
                     <li><a href="<?= $site ?>book-website-design-usa/">Books & Publishers</a></li>
                   </ul>
                 </li>
-                <li><a href="<?= $site ?>free-tools/">Free Tools</a></li>
+                <li><a href="<?= $site ?>solutions/">Solutions</a></li>
+                <li><a href="<?= $site ?>case-studies/">Case Studies</a></li>
+                <li><a href="<?= $site ?>solutions/">Solutions</a></li>
+      <li><a href="<?= $site ?>case-studies/">Case Studies</a></li>
+      <li><a href="<?= $site ?>free-tools/">Free Tools</a></li>
                 <li><a href="<?= $site ?>portfolio/">Portfolio</a></li>
                 <!-- <li><a href="<?= $site ?>blogs/">Blogs</a></li>
                 <li><a href="<?= $site ?>testimonials/">Testimonials</a></li> -->
@@ -195,6 +199,8 @@ $services = get_sub_category($limit);
           <li><a href="<?= $site ?>book-website-design-usa/">Books & Publishers</a></li>
         </ul>
       </li>
+      <li><a href="<?= $site ?>solutions/">Solutions</a></li>
+      <li><a href="<?= $site ?>case-studies/">Case Studies</a></li>
       <li><a href="<?= $site ?>free-tools/">Free Tools</a></li>
       <li><a href="<?= $site ?>blogs/">Blogs</a></li>
       <li><a href="<?= $site ?>portfolio/">Portfolio</a></li>

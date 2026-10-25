@@ -24,7 +24,11 @@ $is_tag_page = !empty($_GET['tag']);
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <?php if ($is_tag_page): ?>
+  <meta name="robots" content="noindex, follow">
+  <?php else: ?>
   <meta name="robots" content="index, follow">
+  <?php endif; ?>
   <title>Engineering & SEO Insights | NikhilWorks Tech Blog</title>
   <meta name="description" content="Read in-depth guides and actionable articles on Web Development, PHP, Laravel, WordPress, SEO strategies, Core Web Vitals, and conversion optimization by Nikhil Gupta.">
   <meta name="keywords" content="web development blog, SEO tips, Laravel tutorials, PHP development guide, WordPress optimization, Core Web Vitals guide, NikhilWorks">

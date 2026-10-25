@@ -7,12 +7,20 @@ Disallow: /config/
 Disallow: /tools/api/
 Disallow: /util/
 Disallow: /data/
+Disallow: /*?tag=*
+Disallow: /*?s=*
 
 User-agent: Googlebot
 Allow: /
 Allow: /free-tools/
 Allow: /tools/
+Disallow: /admin/
+Disallow: /config/
 Disallow: /tools/api/
+Disallow: /util/
+Disallow: /data/
+Disallow: /*?tag=*
+Disallow: /*?s=*
 
 User-agent: GPTBot
 Allow: /

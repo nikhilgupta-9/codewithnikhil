@@ -34,6 +34,22 @@ $heroImage = hub_image_url($site, 'locations', hub_country_slug($c['schema_count
 <meta name="description" content="<?= htmlspecialchars($c['description']) ?>">
 <meta name="keywords" content="<?= htmlspecialchars($c['keywords']) ?>">
 <link rel="canonical" href="<?= htmlspecialchars($c['canonical']) ?>">
+
+<!-- International SEO: Bidirectional hreflang tags -->
+<link rel="alternate" hreflang="en-US" href="<?= $site ?>web-developer-usa/">
+<link rel="alternate" hreflang="en-GB" href="<?= $site ?>web-developer-uk/">
+<link rel="alternate" hreflang="en-AE" href="<?= $site ?>web-developer-dubai/">
+<link rel="alternate" hreflang="en-AU" href="<?= $site ?>web-developer-australia/">
+<link rel="alternate" hreflang="en-CA" href="<?= $site ?>web-developer-canada/">
+<link rel="alternate" hreflang="en-SG" href="<?= $site ?>web-developer-singapore/">
+<link rel="alternate" hreflang="en-NZ" href="<?= $site ?>web-developer-new-zealand/">
+<link rel="alternate" hreflang="en-ZA" href="<?= $site ?>web-developer-south-africa/">
+<link rel="alternate" hreflang="en-SA" href="<?= $site ?>web-developer-saudi-arabia/">
+<link rel="alternate" hreflang="en-CH" href="<?= $site ?>web-developer-switzerland/">
+<link rel="alternate" hreflang="en-DE" href="<?= $site ?>web-developer-germany/">
+<link rel="alternate" hreflang="en-IN" href="<?= $site ?>web-developer-india/">
+<link rel="alternate" hreflang="x-default" href="<?= $site ?>hire-freelance-web-developer/">
+
 <meta property="og:title" content="<?= htmlspecialchars($c['title']) ?>">
 <meta property="og:description" content="<?= htmlspecialchars($c['description']) ?>">
 <meta property="og:url" content="<?= htmlspecialchars($c['canonical']) ?>">
@@ -43,20 +59,48 @@ $heroImage = hub_image_url($site, 'locations', hub_country_slug($c['schema_count
 <script type="application/ld+json">
 <?= json_encode([
   '@context' => 'https://schema.org',
-  '@type' => 'Service',
-  'serviceType' => 'Web Development',
-  'provider' => [
-    '@type' => 'ProfessionalService',
-    'name' => 'NikhilWorks',
-    'url' => 'https://nikhilworks.com',
-    'logo' => 'https://nikhilworks.com/assets/img/logo/preloader4.png',
-    'image' => 'https://nikhilworks.com/assets/img/preview.png',
-    'address' => ['@type' => 'PostalAddress', 'addressCountry' => 'IN'],
+  '@type' => 'ProfessionalService',
+  'name' => 'NikhilWorks Product Engineering Studio',
+  'url' => 'https://nikhilworks.com',
+  'logo' => 'https://nikhilworks.com/assets/img/logo/preloader4.png',
+  'image' => 'https://nikhilworks.com/assets/img/preview.png',
+  'founder' => [
+    '@type' => 'Person',
+    'name' => 'Nikhil Gupta',
+    'jobTitle' => 'Lead Software Architect',
   ],
-  'areaServed' => ['@type' => 'Country', 'name' => $c['city_name']],
+  'areaServed' => [
+    ['@type' => 'Country', 'name' => 'United States'],
+    ['@type' => 'Country', 'name' => 'United Kingdom'],
+    ['@type' => 'Country', 'name' => 'United Arab Emirates'],
+    ['@type' => 'Country', 'name' => 'Australia'],
+    ['@type' => 'Country', 'name' => 'Canada'],
+    ['@type' => 'Country', 'name' => 'Singapore'],
+    ['@type' => 'Country', 'name' => 'Germany'],
+    ['@type' => 'Country', 'name' => 'Switzerland'],
+    ['@type' => 'Country', 'name' => 'India'],
+  ],
+  'knowsAbout' => [
+    'Flutter Mobile Development',
+    'Node.js Real-time Architecture',
+    'WebSocket Trading Systems',
+    'Custom SaaS CRM Development',
+    'Enterprise E-Commerce Platforms',
+    'PHP Laravel Full-Stack Engineering',
+  ],
+  'sameAs' => [
+    'https://github.com/nikhilgupta-9',
+    'https://x.com/Nikhil_Works',
+    'https://share.google/g59W77vezpezMIl1a',
+  ],
   'description' => $c['description'],
-  'offers' => ['@type' => 'Offer', 'priceCurrency' => $c['currency'], 'priceRange' => $c['price_range']],
-], JSON_UNESCAPED_SLASHES) ?>
+  'offers' => [
+    '@type' => 'Offer',
+    'priceCurrency' => $c['currency'],
+    'price' => '100',
+    'priceRange' => $c['price_range'],
+  ],
+], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
 </script>
 <script type="application/ld+json">
 <?= json_encode([

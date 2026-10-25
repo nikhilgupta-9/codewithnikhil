@@ -40,6 +40,9 @@ $heroImage = ($isPriorityHub ? hub_image_url($site, 'locations', 'india') : null
 <meta name="description" content="<?= htmlspecialchars($c['description']) ?>">
 <meta name="keywords" content="<?= htmlspecialchars($c['keywords']) ?>">
 <link rel="canonical" href="<?= htmlspecialchars($c['canonical']) ?>">
+<link rel="alternate" hreflang="en-IN" href="<?= htmlspecialchars($c['canonical']) ?>">
+<link rel="alternate" hreflang="en" href="<?= $site ?>web-developer-india/">
+<link rel="alternate" hreflang="x-default" href="<?= $site ?>hire-freelance-web-developer/">
 <meta property="og:title" content="<?= htmlspecialchars($c['title']) ?>">
 <meta property="og:description" content="<?= htmlspecialchars($c['description']) ?>">
 <meta property="og:url" content="<?= htmlspecialchars($c['canonical']) ?>">

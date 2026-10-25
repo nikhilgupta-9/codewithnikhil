@@ -831,6 +831,8 @@ if (file_exists($cityFile)) {
                   </div>
                   <div class="tree-node-pills">
                     <a href="<?= $site ?>about/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> About</a>
+                    <a href="<?= $site ?>solutions/" class="tree-node-pill" style="color: var(--nw-accent);"><i class="fa-solid fa-angle-right"></i> Solutions</a>
+                    <a href="<?= $site ?>case-studies/" class="tree-node-pill" style="color: var(--nw-accent);"><i class="fa-solid fa-angle-right"></i> Case Studies</a>
                     <a href="<?= $site ?>services/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Services</a>
                     <a href="<?= $site ?>portfolio/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Portfolio</a>
                     <a href="<?= $site ?>pricing/" class="tree-node-pill"><i class="fa-solid fa-angle-right"></i> Pricing</a>
@@ -924,6 +926,14 @@ if (file_exists($cityFile)) {
               </li>
               <li class="sitemap-link-item">
                 <a href="<?= $site ?>about/"><i class="fa-solid fa-chevron-right link-arrow"></i> About Nikhil Gupta</a>
+              </li>
+              <li class="sitemap-link-item">
+                <a href="<?= $site ?>solutions/"><i class="fa-solid fa-chevron-right link-arrow"></i> Global Engineering Solutions</a>
+                <span class="sitemap-tag-pill tag-new">Pillars</span>
+              </li>
+              <li class="sitemap-link-item">
+                <a href="<?= $site ?>case-studies/"><i class="fa-solid fa-chevron-right link-arrow"></i> Production Case Studies (Bazaar Sync / DRE Homes)</a>
+                <span class="sitemap-tag-pill tag-featured">Proof</span>
               </li>
               <li class="sitemap-link-item">
                 <a href="<?= $site ?>services/"><i class="fa-solid fa-chevron-right link-arrow"></i> All Services Directory</a>

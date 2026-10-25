@@ -130,12 +130,51 @@ ErrorDocument 404 /404.php
   RewriteCond %{THE_REQUEST} \s/+ai-integration-services\.php[\s?] [NC]
   RewriteRule ^ai-integration-services\.php$ https://nikhilworks.com/ai-integration-services/ [R=301,L]
 
-  # 4. Old & Duplicate URL Fixes
+  # 4. Old & Duplicate URL Fixes (GSC 404s & Redirect Cleanups)
   RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
-  RewriteRule ^services/([a-z0-9_-]+)/?$ https://nikhilworks.com/service/$1/ [R=301,L]
+  RewriteRule ^blog/how-to-grow-your-business-globally-during-war-crisis-code-with-nikhil/?$ https://nikhilworks.com/blog/how-to-grow-your-business-globally-during-war-crisis-nikhil-works/ [R=301,L]
 
   RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
-  RewriteRule ^service-details/website-design-services/?$ https://nikhilworks.com/service/website-design-development/ [R=301,L]
+  RewriteRule ^digital-marketing/?$ https://nikhilworks.com/seo-services-india/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^website-development/?$ https://nikhilworks.com/web-development-india/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^wordpress-development/?$ https://nikhilworks.com/wordpress-development-india/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^php-development/?$ https://nikhilworks.com/php-development-india/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^mobile-app-development/?$ https://nikhilworks.com/services/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^seo-services/?$ https://nikhilworks.com/seo-services-india/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^service-details/seo-company-delhi/?$ https://nikhilworks.com/seo-services-india/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^service-details/wordpress-developer-delhi/?$ https://nikhilworks.com/web-designer-delhi/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^service-details/website-design-services/?$ https://nikhilworks.com/web-development-india/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^service-details/responsive-web-design/?$ https://nikhilworks.com/web-development-india/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^service-details/website-redesign-delhi/?$ https://nikhilworks.com/website-redesign-india/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^service-details/ecommerce-website-delhi/?$ https://nikhilworks.com/ecommerce-development-india/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^service-details/web-development-delhi/?$ https://nikhilworks.com/web-designer-delhi/ [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
+  RewriteRule ^services/([a-z0-9_-]+)/?$ https://nikhilworks.com/service/$1/ [R=301,L]
 
   RewriteCond %{HTTP_HOST} ^(www\.)?nikhilworks\.com$ [NC]
   RewriteRule ^service/website-maintenance/?$ https://nikhilworks.com/service/website-maintenance-support/ [R=301,L]
@@ -183,6 +222,12 @@ ErrorDocument 404 /404.php
   RewriteRule ^sitemap/?$ sitemap.php [L]
   RewriteRule ^free-tools/?$ free-tools.php [L]
   RewriteRule ^tools/([a-z0-9_-]+)/?$ tools/$1.php [QSA,L]
+
+  # 7b. Global Solutions & Engineering Case Studies Architecture
+  RewriteRule ^solutions/?$ solutions.php [L]
+  RewriteRule ^solutions/([a-z0-9_-]+)/?$ solutions.php?slug=$1 [QSA,L]
+  RewriteRule ^case-studies/?$ case-study.php [L]
+  RewriteRule ^case-studies/([a-z0-9_-]+)/?$ case-study.php?slug=$1 [QSA,L]
 
   # 8. Dynamic Service & Blog Detail Pages
   RewriteRule ^service/([a-z0-9_-]+)/?$ service.php?alias=$1 [QSA,L]
