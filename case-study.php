@@ -613,6 +613,23 @@ $ogImage = ($isDetail && !empty($cs['image']))
           </div>
           <?php endif; ?>
 
+          <!-- Verified Google Review Callout -->
+          <?php if (!empty($cs['google_review'])): ?>
+          <div class="cs-content-card" style="border-left: 4px solid #10B981; background: #F0FDF4;">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-brands fa-google fa-lg" style="color: #4285F4;"></i>
+                <span class="fw-bold text-dark" style="font-size: 14.5px;">Verified Google Review</span>
+                <span class="badge bg-warning text-dark px-2 py-1"><i class="fa-solid fa-star"></i> 5.0 ★</span>
+              </div>
+              <span class="small text-muted fw-bold"><?= htmlspecialchars($cs['google_review']['reviewer']) ?></span>
+            </div>
+            <p class="mb-0 fst-italic" style="color: #166534; font-size: 1.05rem; line-height: 1.7;">
+              &ldquo;<?= htmlspecialchars($cs['google_review']['text']) ?>&rdquo;
+            </p>
+          </div>
+          <?php endif; ?>
+
           <!-- 1. The Challenge -->
           <div class="cs-content-card">
             <div class="cs-card-header">

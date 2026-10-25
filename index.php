@@ -1282,20 +1282,20 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
           </div>
         </div>
 
-        <!-- Project 2: Earnova.co.in -->
+        <!-- Project 2: PrintMont.com -->
         <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="850">
           <div class="simple-portfolio-card">
             <div class="project-image">
-              <a href="https://earnova.co.in/" target="_blank" rel="noopener">
-                <img src="<?= $site ?>assets/img/portfolio/earnova.png" alt="Earnova Education Website">
-                <div class="live-badge"><i class="fa-solid fa-globe me-1"></i> Live Website</div>
+              <a href="https://printmont.com/" target="_blank" rel="noopener">
+                <img src="<?= $site ?>assets/img/portfolio/dubey-printers.png" alt="PrintMont Custom E-Commerce Platform">
+                <div class="live-badge"><i class="fa-solid fa-globe me-1"></i> Live Flagship E-Commerce</div>
               </a>
             </div>
             <div class="project-info p-3">
-              <h4 class="fw-bold mb-1" style="color:#104041;">Earnova.co.in</h4>
-              <p class="text-muted small mb-2">Education &amp; E-Learning Portal</p>
-              <p class="text-secondary small mb-3">Courses, student enrollment dashboards, and interactive learning resources.</p>
-              <a href="https://earnova.co.in/" target="_blank" rel="noopener" class="btn btn-sm text-white" style="background:#104041;">
+              <h4 class="fw-bold mb-1" style="color:#104041;">PrintMont.com</h4>
+              <p class="text-muted small mb-2">Enterprise Custom E-Commerce Ecosystem</p>
+              <p class="text-secondary small mb-3">Custom merchandise, bulk corporate ordering, automated GST billing &amp; sub-1.2s LCP.</p>
+              <a href="https://printmont.com/" target="_blank" rel="noopener" class="btn btn-sm text-white" style="background:#104041;">
                 <i class="fa-solid fa-external-link-alt me-1"></i> Visit Website
               </a>
             </div>
@@ -1322,21 +1322,21 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
           </div>
         </div>
 
-        <!-- Project 4: Bestok.in -->
+        <!-- Project 4: Beastline.in -->
         <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="700">
           <div class="simple-portfolio-card">
             <div class="project-image">
-              <a href="https://bestok.in/" target="_blank" rel="noopener">
-                <img src="<?= $site ?>assets/img/portfolio/bestok-thumb.png" alt="Bestok Shopping Website">
-                <div class="live-badge"><i class="fa-solid fa-globe me-1"></i> Live Website</div>
+              <a href="https://beastline.in/" target="_blank" rel="noopener">
+                <img src="<?= $site ?>assets/img/portfolio/beastline-banner.png" alt="Beastline Activewear E-Commerce Store">
+                <div class="live-badge"><i class="fa-solid fa-star text-warning me-1"></i> Google Review 5.0 ★</div>
               </a>
             </div>
             <div class="project-info p-3">
-              <h4 class="fw-bold mb-1" style="color:#104041;">Bestok.in</h4>
-              <p class="text-muted small mb-2">Online E-Commerce Store</p>
-              <p class="text-secondary small mb-3">Complete online store with Razorpay checkout, product catalogs, and cart.</p>
-              <a href="https://bestok.in/" target="_blank" rel="noopener" class="btn btn-sm text-white" style="background:#104041;">
-                <i class="fa-solid fa-external-link-alt me-1"></i> Visit Website
+              <h4 class="fw-bold mb-1" style="color:#104041;">Beastline.in</h4>
+              <p class="text-muted small mb-2">D2C Activewear &amp; Gym Apparel Store</p>
+              <p class="text-secondary small mb-3">Fast loading catalog, mobile-optimized checkout, and verified client Google review.</p>
+              <a href="https://beastline.in/" target="_blank" rel="noopener" class="btn btn-sm text-white" style="background:#104041;">
+                <i class="fa-solid fa-external-link-alt me-1"></i> Visit Store
               </a>
             </div>
           </div>
@@ -1360,20 +1360,22 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
           </div>
         </div>
 
-        <!-- Project 6: Dubey Printers -->
+        <!-- Project 6: SRB Makeovers & Academy -->
         <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1000">
           <div class="simple-portfolio-card">
             <div class="project-image">
-              <img src="<?= $site ?>assets/img/portfolio/dubey-printers.png" alt="Dubey Printers Portal">
-              <div class="live-badge"><i class="fa-solid fa-mobile-screen me-1"></i> Web &amp; Mobile App</div>
+              <a href="https://srbmakeoversandacademy.in/" target="_blank" rel="noopener">
+                <img src="<?= $site ?>assets/img/portfolio/srb-makeover-banner.jpg" alt="SRB Makeovers & Academy Web Platform">
+                <div class="live-badge"><i class="fa-solid fa-star text-warning me-1"></i> Google Review 5.0 ★</div>
+              </a>
             </div>
             <div class="project-info p-3">
-              <h4 class="fw-bold mb-1" style="color:#104041;">Dubey Printers</h4>
-              <p class="text-muted small mb-2">Commercial Printing &amp; Custom Orders</p>
-              <p class="text-secondary small mb-3">Custom printing order calculation, PDF uploads, and WhatsApp checkout.</p>
-              <button class="details-btn btn btn-sm btn-light border" data-project="mobile-app">
-                <i class="fa-solid fa-circle-info text-primary me-1"></i> See Details
-              </button>
+              <h4 class="fw-bold mb-1" style="color:#104041;">SRB Makeovers &amp; Academy</h4>
+              <p class="text-muted small mb-2">Bridal Studio &amp; Training Academy Portal</p>
+              <p class="text-secondary small mb-3">High-converting bridal booking funnels, academy courses, and verified 5-star Google review.</p>
+              <a href="https://srbmakeoversandacademy.in/" target="_blank" rel="noopener" class="btn btn-sm text-white" style="background:#104041;">
+                <i class="fa-solid fa-external-link-alt me-1"></i> Visit Studio
+              </a>
             </div>
           </div>
         </div>

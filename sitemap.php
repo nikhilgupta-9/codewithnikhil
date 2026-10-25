@@ -932,7 +932,7 @@ if (file_exists($cityFile)) {
                 <span class="sitemap-tag-pill tag-new">Pillars</span>
               </li>
               <li class="sitemap-link-item">
-                <a href="<?= $site ?>case-studies/"><i class="fa-solid fa-chevron-right link-arrow"></i> Production Case Studies (Rejuvenate Health / Bazaar Sync)</a>
+                <a href="<?= $site ?>case-studies/"><i class="fa-solid fa-chevron-right link-arrow"></i> Flagship Case Studies (Rejuvenate Health / PrintMont / Bazaar Sync)</a>
                 <span class="sitemap-tag-pill tag-featured">Proof</span>
               </li>
               <li class="sitemap-link-item">
