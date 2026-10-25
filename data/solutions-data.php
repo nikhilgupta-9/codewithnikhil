@@ -33,8 +33,8 @@ return [
     'hero_heading' => 'Native 60 FPS Mobile Applications Built with Enterprise Flutter',
     'hero_sub' => 'Compile once, deploy flawlessly to Apple App Store and Google Play Store. Built for SaaS products, PropTech marketplaces, and high-growth consumer apps.',
     'lead_text' => 'Maintaining separate Swift and Kotlin engineering teams doubles your burn rate and delays feature parity. We build clean, BLoC-architected Flutter applications that look, feel, and perform indistinguishably from 100% native builds.',
-    'related_case_study' => 'dre-homes-mobile-app',
-    'case_study_title' => 'DRE Homes Mobile App',
+    'related_case_study' => 'rejuvenate-digital-health',
+    'case_study_title' => 'Rejuvenate Digital Health Platform',
     'features' => [
       ['title' => 'Zero-Rejection Store Launch', 'desc' => 'Strict compliance with Apple Human Interface Guidelines and Google Play privacy manifest requirements.'],
       ['title' => 'Native Hardware & Sensors', 'desc' => 'Direct hardware interop for Biometrics (FaceID), Camera, Bluetooth, Apple Pay, and Google Wallet.'],
@@ -57,8 +57,8 @@ return [
     'hero_heading' => 'Scalable Multi-Tenant SaaS Products Engineered for High Recurring Revenue',
     'hero_sub' => 'From MVP to enterprise-ready platform. Complete with subscription billing, granular RBAC permissions, audit logging, and automated customer onboarding.',
     'lead_text' => 'Building a commercial SaaS requires far more than basic CRUD functionality. We architect multi-tenant SaaS products designed to scale to thousands of paying organizations without database contention or security vulnerabilities.',
-    'related_case_study' => 'printmont-ecommerce-ecosystem',
-    'case_study_title' => 'Printmont E-Commerce Ecosystem',
+    'related_case_study' => 'get-accountant-nz',
+    'case_study_title' => 'Get Accountant Cloud Advisory Platform',
     'features' => [
       ['title' => 'Multi-Tenant Data Isolation', 'desc' => 'Architected with tenant isolation models ensuring zero cross-customer data leakage.'],
       ['title' => 'Stripe & Paddle Subscriptions', 'desc' => 'Usage-based metering, recurring tiers, proration, automated dunning, and tax compliance.'],

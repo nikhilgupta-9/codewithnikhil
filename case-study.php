@@ -25,9 +25,11 @@ $pageTitle = $isDetail
 
 $pageDesc = $isDetail 
     ? $cs['meta_description']
-    : 'Deep technical case studies on real-time Fintech WebSocket engines, Flutter mobile applications, and scalable multi-vendor e-commerce architectures by Nikhil Gupta.';
+    : 'Deep technical case studies on national ABHA healthcare systems, NZ cloud accounting platforms, real-time Fintech WebSocket engines, and scalable multi-vendor e-commerce by Nikhil Gupta.';
 
-$ogImage = rtrim($site, '/') . '/assets/img/preview.png';
+$ogImage = ($isDetail && !empty($cs['image']))
+    ? rtrim($site, '/') . '/' . ltrim($cs['image'], '/')
+    : rtrim($site, '/') . '/assets/img/preview.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +58,7 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
   <link rel="alternate" hreflang="en-GB" href="<?= $canonical_url ?>">
   <link rel="alternate" hreflang="en-AE" href="<?= $canonical_url ?>">
   <link rel="alternate" hreflang="en-AU" href="<?= $canonical_url ?>">
+  <link rel="alternate" hreflang="en-NZ" href="<?= $canonical_url ?>">
   <link rel="alternate" hreflang="x-default" href="<?= $canonical_url ?>">
 
   <!-- Open Graph -->
@@ -94,6 +97,7 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
     "name": "<?= htmlspecialchars($cs['title']) ?>",
     "headline": "<?= htmlspecialchars($cs['hero_heading']) ?>",
     "description": "<?= htmlspecialchars($cs['meta_description']) ?>",
+    "image": "<?= $ogImage ?>",
     "author": {
       "@type": "Person",
       "name": "Nikhil Gupta",
@@ -113,7 +117,7 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
   <!-- Favicon -->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 
-  <!-- CSS Plugins - Verified Paths -->
+  <!-- CSS Plugins -->
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
@@ -126,27 +130,29 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
   <style>
     :root {
       --nw-primary: #104041;
+      --nw-teal: #0F766E;
+      --nw-teal-light: #E6F4F2;
       --nw-accent: #ADFF1C;
-      --nw-dark: #041213;
-      --nw-dark-card: #082223;
-      --nw-border: rgba(173, 255, 28, 0.2);
+      --nw-bg: #F8FAFC;
+      --nw-card: #FFFFFF;
+      --nw-border: #E2E8F0;
+      --nw-text-dark: #0F172A;
+      --nw-text-muted: #475569;
+      --nw-text-subtle: #64748B;
     }
 
     body.cs-body {
-      background-color: var(--nw-dark);
-      color: #e2e8f0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--nw-bg);
+      color: var(--nw-text-muted);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
-    /* ---- HERO SECTION ---- */
+    /* ---- LIGHT HERO SECTION ---- */
     .cs-hero {
       position: relative;
-      background: radial-gradient(circle at 85% 15%, rgba(173, 255, 28, 0.16) 0%, transparent 45%),
-                  radial-gradient(circle at 10% 85%, rgba(16, 64, 65, 0.9) 0%, transparent 55%),
-                  linear-gradient(135deg, #041213 0%, #0a292a 50%, #030d0e 100%);
-      padding: 155px 0 75px;
+      background: linear-gradient(180deg, #EDF7F6 0%, #F8FAFC 100%);
+      padding: 145px 0 65px;
       overflow: hidden;
-      color: #fff;
       border-bottom: 1px solid var(--nw-border);
     }
 
@@ -154,9 +160,9 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
       position: absolute;
       inset: 0;
       background-image: 
-        linear-gradient(to right, rgba(173, 255, 28, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(173, 255, 28, 0.04) 1px, transparent 1px);
-      background-size: 38px 38px;
+        linear-gradient(to right, rgba(16, 64, 65, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(16, 64, 65, 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
       pointer-events: none;
       z-index: 1;
     }
@@ -165,156 +171,237 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.65);
-      margin-bottom: 20px;
+      font-size: 13.5px;
+      color: var(--nw-text-subtle);
+      margin-bottom: 18px;
     }
     .cs-breadcrumb a {
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--nw-teal);
       text-decoration: none;
+      font-weight: 600;
     }
     .cs-breadcrumb a:hover {
-      color: var(--nw-accent);
+      color: var(--nw-primary);
+      text-decoration: underline;
     }
 
     .cs-hero-pill {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      background: rgba(173, 255, 28, 0.12);
-      border: 1px solid rgba(173, 255, 28, 0.4);
-      color: var(--nw-accent);
-      padding: 7px 20px;
+      gap: 9px;
+      background: var(--nw-teal-light);
+      border: 1px solid #A5D8D3;
+      color: var(--nw-teal);
+      padding: 6px 18px;
       border-radius: 50px;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
     }
     .cs-hero-pill .pulse-dot {
       width: 8px;
       height: 8px;
-      background: var(--nw-accent);
+      background: var(--nw-teal);
       border-radius: 50%;
-      box-shadow: 0 0 10px var(--nw-accent);
-      animation: pulseCS 2s infinite;
-    }
-    @keyframes pulseCS {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.35; transform: scale(0.8); }
+      box-shadow: 0 0 8px rgba(15, 118, 110, 0.5);
     }
 
     .cs-hero h1 {
-      font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+      font-size: clamp(2rem, 3.8vw, 3.1rem);
       font-weight: 800;
-      line-height: 1.2;
-      color: #ffffff;
-      margin-bottom: 18px;
+      line-height: 1.22;
+      color: var(--nw-text-dark);
+      margin-bottom: 16px;
       letter-spacing: -0.5px;
     }
     .cs-hero p.lead-text {
-      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-      color: #d6ecea;
-      max-width: 850px;
+      font-size: clamp(1.02rem, 1.6vw, 1.15rem);
+      color: var(--nw-text-muted);
+      max-width: 860px;
       line-height: 1.7;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
     /* ---- METRIC CARDS ---- */
     .metric-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #ffffff;
+      border: 1px solid var(--nw-border);
       border-radius: 16px;
-      padding: 24px 18px;
+      padding: 22px 18px;
       text-align: center;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 18px rgba(16, 64, 65, 0.05);
       height: 100%;
     }
     .metric-card:hover {
-      border-color: var(--nw-accent);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      border-color: var(--nw-teal);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(15, 118, 110, 0.12);
     }
     .metric-val {
-      font-size: 2.3rem;
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
       font-weight: 800;
-      color: var(--nw-accent);
+      color: var(--nw-teal);
       line-height: 1.1;
       margin-bottom: 6px;
     }
     .metric-label {
       font-size: 0.95rem;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--nw-text-dark);
       margin-bottom: 4px;
     }
     .metric-desc {
-      font-size: 0.8rem;
-      color: #94a3b8;
+      font-size: 0.82rem;
+      color: var(--nw-text-subtle);
       line-height: 1.4;
+    }
+
+    /* ---- BROWSER MOCKUP SHOWCASE ---- */
+    .cs-browser-frame {
+      background: #FFFFFF;
+      border: 1px solid var(--nw-border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      margin-bottom: 32px;
+    }
+    .cs-browser-bar {
+      background: #F1F5F9;
+      border-bottom: 1px solid var(--nw-border);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .cs-browser-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .cs-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .cs-dot-red { background: #EF4444; }
+    .cs-dot-yellow { background: #F59E0B; }
+    .cs-dot-green { background: #10B981; }
+    .cs-browser-url {
+      flex: 1;
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12.5px;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cs-browser-img-wrap {
+      background: #0f172a;
+      text-align: center;
+    }
+    .cs-browser-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 520px;
+      object-fit: cover;
     }
 
     /* ---- CONTENT CARDS ---- */
     .cs-content-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #FFFFFF;
+      border: 1px solid var(--nw-border);
       border-radius: 18px;
-      padding: 36px 30px;
-      margin-bottom: 30px;
-      backdrop-filter: blur(8px);
+      padding: 34px 30px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
     }
     .cs-card-header {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 22px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 16px;
+      gap: 14px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #F1F5F9;
+      padding-bottom: 14px;
+    }
+    .cs-card-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--nw-teal-light);
+      color: var(--nw-teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
     }
     .cs-card-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #ffffff;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--nw-text-dark);
       margin: 0;
     }
 
     /* ---- ARCHITECTURE BLUEPRINT ---- */
     .arch-step-box {
-      background: rgba(16, 64, 65, 0.28);
-      border: 1px solid rgba(173, 255, 28, 0.22);
+      background: #F8FAFC;
+      border: 1px solid var(--nw-border);
       border-radius: 14px;
       padding: 22px 20px;
       height: 100%;
       transition: all 0.25s ease;
     }
     .arch-step-box:hover {
-      border-color: var(--nw-accent);
+      border-color: var(--nw-teal);
+      background: #FFFFFF;
       transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15, 118, 110, 0.1);
     }
     .arch-step-num {
       display: inline-block;
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      background: var(--nw-accent);
-      color: #041213;
+      background: var(--nw-primary);
+      color: var(--nw-accent);
       font-weight: 800;
       font-size: 13px;
-      line-height: 28px;
+      line-height: 30px;
       text-align: center;
       margin-bottom: 12px;
     }
     .arch-step-title {
       font-size: 1.05rem;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--nw-text-dark);
       margin-bottom: 8px;
     }
     .arch-step-desc {
-      font-size: 0.9rem;
-      color: #94a3b8;
+      font-size: 0.92rem;
+      color: var(--nw-text-muted);
+      line-height: 1.55;
+    }
+
+    /* ---- RISK ELIMINATED ITEMS ---- */
+    .risk-card-item {
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .risk-card-item span {
+      font-size: 0.96rem;
+      color: #166534;
+      font-weight: 600;
       line-height: 1.5;
     }
 
@@ -322,33 +409,41 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
     .tech-pill {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: #f1f5f9;
+      gap: 8px;
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      color: var(--nw-text-dark);
       font-size: 0.88rem;
       font-weight: 600;
-      padding: 7px 15px;
+      padding: 8px 16px;
       border-radius: 30px;
       margin: 4px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+    }
+    .tech-pill:hover {
+      background: var(--nw-primary);
+      color: var(--nw-accent);
+      border-color: var(--nw-primary);
+      transform: translateY(-2px);
     }
 
     /* ---- STICKY DISCOVERY SIDEBAR ---- */
     .cs-sidebar-sticky {
       position: sticky;
       top: 100px;
-      background: linear-gradient(135deg, rgba(16, 64, 65, 0.6) 0%, rgba(4, 18, 19, 0.95) 100%);
-      border: 1px solid rgba(173, 255, 28, 0.35);
+      background: #FFFFFF;
+      border: 1px solid var(--nw-border);
       border-radius: 20px;
       padding: 32px 28px;
-      box-shadow: 0 14px 45px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
     }
-    .btn-lime {
-      background: var(--nw-accent);
-      color: #041213 !important;
-      font-weight: 800;
-      font-size: 15.5px;
-      padding: 14px 28px;
+    .btn-whatsapp-consult {
+      background: #25D366;
+      color: #FFFFFF !important;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 24px;
       border-radius: 12px;
       border: none;
       display: inline-flex;
@@ -358,32 +453,91 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
       text-decoration: none;
       transition: all 0.25s ease;
       width: 100%;
-      box-shadow: 0 10px 30px rgba(173, 255, 28, 0.25);
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.25);
     }
-    .btn-lime:hover {
-      background: #ffffff;
-      color: #041213 !important;
+    .btn-whatsapp-consult:hover {
+      background: #1EBE5D;
       transform: translateY(-2px);
-      box-shadow: 0 12px 35px rgba(255, 255, 255, 0.35);
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.35);
+    }
+    .btn-primary-consult {
+      background: var(--nw-primary);
+      color: #FFFFFF !important;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 22px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      width: 100%;
+      transition: all 0.25s ease;
+    }
+    .btn-primary-consult:hover {
+      background: var(--nw-teal);
+      transform: translateY(-2px);
     }
 
     /* ---- LISTING CARDS ---- */
     .cs-list-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #FFFFFF;
+      border: 1px solid var(--nw-border);
       border-radius: 20px;
-      padding: 35px 30px;
+      overflow: hidden;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.3s ease;
-      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
     }
     .cs-list-card:hover {
-      border-color: var(--nw-accent);
+      border-color: var(--nw-teal);
       transform: translateY(-5px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 14px 35px rgba(15, 118, 110, 0.12);
+    }
+    .cs-list-thumb {
+      height: 210px;
+      overflow: hidden;
+      background: #F1F5F9;
+      position: relative;
+    }
+    .cs-list-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .cs-list-card:hover .cs-list-thumb img {
+      transform: scale(1.05);
+    }
+    .cs-list-content {
+      padding: 26px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .cs-list-btn {
+      background: var(--nw-primary);
+      color: #FFFFFF !important;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 11px 22px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      width: 100%;
+    }
+    .cs-list-btn:hover {
+      background: var(--nw-teal);
+      transform: translateY(-2px);
     }
   </style>
 </head>
@@ -403,7 +557,7 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
         <span>/</span>
         <a href="<?= $site ?>case-studies/">Case Studies</a>
         <span>/</span>
-        <span class="text-white"><?= htmlspecialchars($cs['client']) ?></span>
+        <span class="text-dark fw-bold"><?= htmlspecialchars($cs['client']) ?></span>
       </div>
 
       <div class="cs-hero-pill">
@@ -429,28 +583,56 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
     </div>
   </section>
 
-  <main class="py-5">
+  <main class="py-5" style="background: var(--nw-bg);">
     <div class="container">
       <div class="row g-5">
         <!-- Main Case Study Content -->
         <div class="col-lg-8">
 
+          <!-- Live Mockup / Project Screenshot Frame -->
+          <?php if (!empty($cs['image'])): ?>
+          <div class="cs-browser-frame">
+            <div class="cs-browser-bar">
+              <div class="cs-browser-dots">
+                <span class="cs-dot cs-dot-red"></span>
+                <span class="cs-dot cs-dot-yellow"></span>
+                <span class="cs-dot cs-dot-green"></span>
+              </div>
+              <div class="cs-browser-url">
+                <span><i class="fa-solid fa-lock text-success me-1"></i> <?= htmlspecialchars($cs['live_url'] ?: 'https://nikhilworks.com/case-studies/' . $slug . '/') ?></span>
+                <?php if (!empty($cs['live_url'])): ?>
+                <a href="<?= htmlspecialchars($cs['live_url']) ?>" target="_blank" rel="noopener noreferrer" class="badge bg-primary text-white text-decoration-none px-2 py-1">
+                  Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+                </a>
+                <?php endif; ?>
+              </div>
+            </div>
+            <div class="cs-browser-img-wrap">
+              <img src="<?= $site . ltrim($cs['image'], '/') ?>" alt="<?= htmlspecialchars($cs['title']) ?>" class="img-fluid" loading="lazy">
+            </div>
+          </div>
+          <?php endif; ?>
+
           <!-- 1. The Challenge -->
           <div class="cs-content-card">
             <div class="cs-card-header">
-              <i class="fa-solid fa-triangle-exclamation text-warning fa-lg"></i>
+              <div class="cs-card-icon-wrap">
+                <i class="fa-solid fa-triangle-exclamation text-warning"></i>
+              </div>
               <h2 class="cs-card-title">The Engineering Challenge</h2>
             </div>
-            <p style="font-size: 1.05rem; line-height: 1.75; color: #cbd5e1;"><?= nl2br(htmlspecialchars($cs['challenge'])) ?></p>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--nw-text-muted);"><?= nl2br(htmlspecialchars($cs['challenge'])) ?></p>
           </div>
 
           <!-- 2. The Architectural Solution -->
           <div class="cs-content-card">
             <div class="cs-card-header">
-              <i class="fa-solid fa-diagram-project text-info fa-lg"></i>
+              <div class="cs-card-icon-wrap">
+                <i class="fa-solid fa-diagram-project"></i>
+              </div>
               <h2 class="cs-card-title">System Architecture Blueprint</h2>
             </div>
-            <p style="font-size: 1.05rem; line-height: 1.75; color: #cbd5e1; margin-bottom: 25px;"><?= nl2br(htmlspecialchars($cs['solution'])) ?></p>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--nw-text-muted); margin-bottom: 25px;"><?= nl2br(htmlspecialchars($cs['solution'])) ?></p>
             
             <div class="row g-3">
               <?php $stepIdx = 1; foreach ($cs['architecture'] as $arch): ?>
@@ -468,28 +650,32 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
           <!-- 3. Production Risks Eliminated -->
           <div class="cs-content-card">
             <div class="cs-card-header">
-              <i class="fa-solid fa-shield-halved text-success fa-lg"></i>
+              <div class="cs-card-icon-wrap">
+                <i class="fa-solid fa-shield-halved text-success"></i>
+              </div>
               <h2 class="cs-card-title">Critical Production Risks Eliminated</h2>
             </div>
-            <ul class="list-unstyled mb-0">
+            <div>
               <?php foreach ($cs['risks_eliminated'] as $risk): ?>
-              <li class="d-flex align-items-start gap-3 mb-3" style="font-size: 1rem; color: #cbd5e1;">
-                <i class="fa-solid fa-circle-check mt-1" style="color: var(--nw-accent);"></i>
+              <div class="risk-card-item">
+                <i class="fa-solid fa-circle-check text-success mt-1"></i>
                 <span><?= htmlspecialchars($risk) ?></span>
-              </li>
+              </div>
               <?php endforeach; ?>
-            </ul>
+            </div>
           </div>
 
           <!-- 4. Production Tech Stack -->
           <div class="cs-content-card">
             <div class="cs-card-header">
-              <i class="fa-solid fa-layer-group text-primary fa-lg"></i>
+              <div class="cs-card-icon-wrap">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
               <h2 class="cs-card-title">Verified Production Stack</h2>
             </div>
             <div>
               <?php foreach ($cs['tech_stack'] as $tech): ?>
-              <span class="tech-pill"><i class="fa-solid fa-microchip" style="color: var(--nw-accent);"></i> <?= htmlspecialchars($tech) ?></span>
+              <span class="tech-pill"><i class="fa-solid fa-microchip text-teal" style="color: var(--nw-teal);"></i> <?= htmlspecialchars($tech) ?></span>
               <?php endforeach; ?>
             </div>
           </div>
@@ -499,24 +685,24 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
         <!-- Sticky Booking Sidebar -->
         <div class="col-lg-4">
           <div class="cs-sidebar-sticky">
-            <span class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25 px-3 py-1 mb-3 rounded-pill" style="font-size: 12px;">
+            <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-1 mb-3 rounded-pill" style="font-size: 12px;">
               🟢 Accepting Selected H2 Projects
             </span>
-            <h3 class="h4 fw-bold text-white mb-2">Build Your Next Engine with Nikhil Gupta</h3>
-            <p class="small text-white-50 mb-4">Direct architect-to-founder consultation. Available across US (EST/PST), UK (GMT), UAE (GST) and Indian time zones.</p>
+            <h3 class="h4 fw-bold mb-2" style="color: var(--nw-text-dark);">Build Your Next Engine with Nikhil Gupta</h3>
+            <p class="small text-muted mb-4">Direct architect-to-founder consultation. Available across US (EST/PST), UK (GMT), UAE (GST), New Zealand (NZST) and Indian time zones.</p>
 
-            <div class="mb-4 p-3 rounded-3" style="background: rgba(0, 0, 0, 0.35); border: 1px dashed rgba(255,255,255,0.15);">
-              <div class="small text-white-50 mb-1"><i class="fa-solid fa-user-tie text-info me-1"></i> Lead Architect:</div>
-              <div class="fw-bold text-white">Nikhil Gupta</div>
-              <div class="small text-white-50 mt-2"><i class="fa-solid fa-clock text-warning me-1"></i> Typical Overlap Window:</div>
-              <div class="fw-semibold text-white small">8:00 AM – 1:00 PM EST / 1:00 PM – 6:00 PM GMT</div>
+            <div class="mb-4 p-3 rounded-3" style="background: #F8FAFC; border: 1px dashed var(--nw-border);">
+              <div class="small text-muted mb-1"><i class="fa-solid fa-user-tie text-teal me-1" style="color: var(--nw-teal);"></i> Lead Architect:</div>
+              <div class="fw-bold text-dark">Nikhil Gupta</div>
+              <div class="small text-muted mt-2"><i class="fa-solid fa-clock text-warning me-1"></i> Typical Overlap Window:</div>
+              <div class="fw-semibold text-dark small">8:00 AM – 1:00 PM EST / 1:00 PM – 6:00 PM GMT</div>
             </div>
 
-            <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20reviewed%20your%20<?= urlencode($cs['client']) ?>%20case%20study%20and%20would%20like%20to%20discuss%20an%20engineering%20project." target="_blank" class="btn-lime mb-3">
+            <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20reviewed%20your%20<?= urlencode($cs['client']) ?>%20case%20study%20and%20would%20like%20to%20discuss%20an%20engineering%20project." target="_blank" class="btn-whatsapp-consult mb-3">
               <i class="fa-brands fa-whatsapp fa-lg"></i> Schedule Discovery Call
             </a>
 
-            <a href="<?= $site ?>contact/" class="btn btn-outline-light w-100 rounded-pill py-2 text-white-50">
+            <a href="<?= $site ?>contact/" class="btn-primary-consult">
               <i class="fa-solid fa-envelope me-1"></i> Submit Technical Scope
             </a>
           </div>
@@ -535,51 +721,59 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
       <div class="cs-breadcrumb justify-content-center">
         <a href="<?= $site ?>"><i class="fa-solid fa-house me-1"></i> Home</a>
         <span>/</span>
-        <span class="text-white">Case Studies</span>
+        <span class="text-dark fw-bold">Case Studies</span>
       </div>
 
       <div class="cs-hero-pill">
         <span class="pulse-dot"></span>
         <span>Production Engineering Showcase</span>
       </div>
-      <h1>Deep Technical Case Studies</h1>
+      <h1>Production Case Studies & Systems</h1>
       <p class="lead-text mx-auto">
-        Explore detailed architectural teardowns, latency metrics, and production frameworks built for fintech trading engines, enterprise mobile platforms, and high-volume e-commerce.
+        Explore detailed architectural teardowns, compliance frameworks, and real-time platforms engineered for national health systems, Kiwi cloud accounting, high-frequency fintech engines, and enterprise e-commerce.
       </p>
     </div>
   </section>
 
-  <main class="py-5">
+  <main class="py-5" style="background: var(--nw-bg);">
     <div class="container">
       <div class="row g-4">
         <?php foreach ($caseStudies as $slugKey => $item): ?>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-6 col-md-6">
           <div class="cs-list-card">
-            <div>
-              <div class="cs-hero-pill mb-3" style="font-size: 11px; padding: 4px 12px;">
-                <span class="pulse-dot"></span>
-                <span><?= htmlspecialchars($item['badge']) ?></span>
-              </div>
-              <h2 class="h5 fw-bold text-white mb-2"><?= htmlspecialchars($item['client']) ?></h2>
-              <p class="small text-white-50 mb-3"><?= htmlspecialchars($item['category']) ?></p>
-              
-              <div class="mb-4">
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-secondary border-opacity-25">
-                  <span class="small text-white-50">Key Metric</span>
-                  <span class="fw-bold" style="color: var(--nw-accent);"><?= htmlspecialchars($item['metrics'][0]['val']) ?></span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-secondary border-opacity-25">
-                  <span class="small text-white-50">Throughput</span>
-                  <span class="fw-bold text-white"><?= htmlspecialchars($item['metrics'][1]['val']) ?></span>
-                </div>
-              </div>
-
-              <p class="small text-white-50 mb-4"><?= htmlspecialchars(mb_substr($item['challenge'], 0, 140)) ?>...</p>
+            <?php if (!empty($item['image'])): ?>
+            <div class="cs-list-thumb">
+              <img src="<?= $site . ltrim($item['image'], '/') ?>" alt="<?= htmlspecialchars($item['client']) ?>" loading="lazy">
             </div>
+            <?php endif; ?>
 
-            <a href="<?= $site ?>case-studies/<?= $slugKey ?>/" class="btn btn-outline-light w-100 rounded-pill py-2" style="border-color: rgba(173,255,28,0.4); color: var(--nw-accent);">
-              View Architecture &rarr;
-            </a>
+            <div class="cs-list-content">
+              <div>
+                <div class="cs-hero-pill mb-2" style="font-size: 11px; padding: 4px 12px;">
+                  <span class="pulse-dot"></span>
+                  <span><?= htmlspecialchars($item['badge']) ?></span>
+                </div>
+                <h2 class="h5 fw-bold text-dark mb-1"><?= htmlspecialchars($item['client']) ?></h2>
+                <p class="small text-muted mb-3"><?= htmlspecialchars($item['category']) ?></p>
+                
+                <div class="mb-3 p-3 rounded-3" style="background: #F8FAFC; border: 1px solid var(--nw-border);">
+                  <div class="d-flex justify-content-between align-items-center py-1 border-bottom border-light">
+                    <span class="small text-muted"><?= htmlspecialchars($item['metrics'][0]['label']) ?></span>
+                    <span class="fw-bold" style="color: var(--nw-teal);"><?= htmlspecialchars($item['metrics'][0]['val']) ?></span>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center py-1 pt-2">
+                    <span class="small text-muted"><?= htmlspecialchars($item['metrics'][1]['label']) ?></span>
+                    <span class="fw-bold text-dark"><?= htmlspecialchars($item['metrics'][1]['val']) ?></span>
+                  </div>
+                </div>
+
+                <p class="small text-muted mb-4" style="line-height: 1.6;"><?= htmlspecialchars(mb_substr($item['challenge'], 0, 150)) ?>...</p>
+              </div>
+
+              <a href="<?= $site ?>case-studies/<?= $slugKey ?>/" class="cs-list-btn">
+                View Architecture Teardown <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
         </div>
         <?php endforeach; ?>
