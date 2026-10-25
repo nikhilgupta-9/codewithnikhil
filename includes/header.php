@@ -77,10 +77,13 @@ $services = get_sub_category($limit);
                     <?php
                     }
                     ?>
+                    <li><a href="<?= $site ?>solutions/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-cube me-1"></i> Global Solutions</a></li>
                     <li><a href="<?= $site ?>ai-integration-services/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-robot me-1"></i> AI & Workflow Automation</a></li>
                     <li><a href="<?= $site ?>api-integration-services-india/">API & Integration Services</a></li>
                   </ul>
                 </li>
+
+                <li><a href="<?=$site?>case-studies/">Case Studies</a></li>
 
                 <li><a href="<?=$site?>hire-freelance-web-developer/">Locations <i class="fa-solid fa-angle-down"></i></a>
                   <ul class="dropdown-padding">
@@ -104,11 +107,7 @@ $services = get_sub_category($limit);
                     <li><a href="<?= $site ?>book-website-design-usa/">Books & Publishers</a></li>
                   </ul>
                 </li>
-                <li><a href="<?= $site ?>solutions/">Solutions</a></li>
-                <li><a href="<?= $site ?>case-studies/">Case Studies</a></li>
-                <li><a href="<?= $site ?>solutions/">Solutions</a></li>
-      <li><a href="<?= $site ?>case-studies/">Case Studies</a></li>
-      <li><a href="<?= $site ?>free-tools/">Free Tools</a></li>
+                <li><a href="<?= $site ?>free-tools/">Free Tools</a></li>
                 <li><a href="<?= $site ?>portfolio/">Portfolio</a></li>
                 <!-- <li><a href="<?= $site ?>blogs/">Blogs</a></li>
                 <li><a href="<?= $site ?>testimonials/">Testimonials</a></li> -->

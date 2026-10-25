@@ -113,85 +113,142 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
   <!-- Favicon -->
   <link rel="shortcut icon" href="<?= $site ?>assets/img/logo/fav-logo5.png" type="image/x-icon">
 
-  <!-- Core CSS -->
-  <link rel="stylesheet" href="<?= $site ?>assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?= $site ?>assets/css/fontawesome.css">
+  <!-- CSS Plugins - Verified Paths -->
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/bootstrap.min.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/aos.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/fontawesome.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/mobile.css">
+  <link rel="stylesheet" href="<?= $site ?>assets/css/plugins/owlcarousel.min.css">
   <link rel="stylesheet" href="<?= $site ?>assets/css/main.css">
+
+  <script src="<?= $site ?>assets/js/plugins/jquery-3-6-0.min.js"></script>
 
   <style>
     :root {
-      --sol-bg: #041213;
-      --sol-teal: #104041;
-      --sol-lime: #ADFF1C;
+      --nw-primary: #104041;
+      --nw-accent: #ADFF1C;
+      --nw-dark: #041213;
+      --nw-dark-card: #082223;
+      --nw-border: rgba(173, 255, 28, 0.2);
     }
+
     body.sol-body {
-      background-color: var(--sol-bg);
+      background-color: var(--nw-dark);
       color: #e2e8f0;
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
+
     .sol-hero {
       position: relative;
-      padding: 130px 0 60px;
-      background: radial-gradient(circle at 75% 25%, rgba(173, 255, 28, 0.12) 0%, transparent 45%),
-                  radial-gradient(circle at 25% 75%, rgba(16, 64, 65, 0.8) 0%, transparent 50%),
-                  linear-gradient(135deg, #041213 0%, #0a2f31 60%, #041213 100%);
-      border-bottom: 1px solid rgba(173, 255, 28, 0.2);
+      background: radial-gradient(circle at 85% 15%, rgba(173, 255, 28, 0.16) 0%, transparent 45%),
+                  radial-gradient(circle at 10% 85%, rgba(16, 64, 65, 0.9) 0%, transparent 55%),
+                  linear-gradient(135deg, #041213 0%, #0a292a 50%, #030d0e 100%);
+      padding: 155px 0 75px;
+      overflow: hidden;
+      color: #fff;
+      border-bottom: 1px solid var(--nw-border);
     }
-    .sol-badge {
-      display: inline-flex;
+
+    .loc-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(173, 255, 28, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(173, 255, 28, 0.04) 1px, transparent 1px);
+      background-size: 38px 38px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .sol-breadcrumb {
+      display: flex;
       align-items: center;
       gap: 8px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 20px;
+    }
+    .sol-breadcrumb a {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+    }
+    .sol-breadcrumb a:hover {
+      color: var(--nw-accent);
+    }
+
+    .sol-hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       background: rgba(173, 255, 28, 0.12);
-      border: 1px solid rgba(173, 255, 28, 0.35);
-      color: var(--sol-lime);
-      padding: 6px 16px;
+      border: 1px solid rgba(173, 255, 28, 0.4);
+      color: var(--nw-accent);
+      padding: 7px 20px;
       border-radius: 50px;
       font-size: 13px;
       font-weight: 700;
+      margin-bottom: 20px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
-      margin-bottom: 18px;
     }
-    .sol-hero-title {
-      font-size: 2.8rem;
+    .sol-hero-pill .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--nw-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--nw-accent);
+      animation: pulseSol 2s infinite;
+    }
+    @keyframes pulseSol {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
+    .sol-hero h1 {
+      font-size: clamp(2.1rem, 4.2vw, 3.2rem);
       font-weight: 800;
+      line-height: 1.2;
       color: #ffffff;
-      line-height: 1.25;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      letter-spacing: -0.5px;
     }
-    .sol-hero-sub {
-      font-size: 1.15rem;
-      color: #94a3b8;
-      max-width: 800px;
-      line-height: 1.6;
-      margin-bottom: 25px;
+    .sol-hero p.lead-text {
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      color: #d6ecea;
+      max-width: 850px;
+      line-height: 1.7;
+      margin-bottom: 30px;
     }
+
     .sol-card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 18px;
-      padding: 32px 28px;
+      padding: 34px 30px;
       margin-bottom: 30px;
       backdrop-filter: blur(8px);
     }
+
     .feature-box {
-      background: rgba(16, 64, 65, 0.2);
-      border: 1px solid rgba(173, 255, 28, 0.18);
+      background: rgba(16, 64, 65, 0.28);
+      border: 1px solid rgba(173, 255, 28, 0.2);
       border-radius: 14px;
       padding: 22px;
       height: 100%;
       transition: all 0.25s ease;
     }
     .feature-box:hover {
-      border-color: var(--sol-lime);
-      transform: translateY(-3px);
+      border-color: var(--nw-accent);
+      transform: translateY(-2px);
     }
+
     .btn-lime {
-      background: var(--sol-lime);
-      color: #041213;
+      background: var(--nw-accent);
+      color: #041213 !important;
       font-weight: 800;
+      font-size: 15.5px;
       padding: 14px 28px;
-      border-radius: 40px;
+      border-radius: 12px;
       border: none;
       display: inline-flex;
       align-items: center;
@@ -199,23 +256,25 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
       gap: 10px;
       text-decoration: none;
       transition: all 0.25s ease;
+      box-shadow: 0 10px 30px rgba(173, 255, 28, 0.25);
     }
     .btn-lime:hover {
-      background: #c3ff47;
-      color: #041213;
+      background: #ffffff;
+      color: #041213 !important;
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(173, 255, 28, 0.4);
+      box-shadow: 0 12px 35px rgba(255, 255, 255, 0.35);
     }
+
     .tech-pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       color: #f1f5f9;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 600;
-      padding: 6px 14px;
+      padding: 7px 15px;
       border-radius: 30px;
       margin: 4px;
     }
@@ -228,18 +287,31 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
   <?php if ($isDetail): ?>
   <!-- ══════════════ SOLUTION DETAIL VIEW ══════════════ -->
   <section class="sol-hero">
-    <div class="container">
-      <div class="sol-badge">
-        <i class="fa-solid fa-cube"></i> <?= htmlspecialchars($sol['badge']) ?>
+    <div class="loc-grid-overlay"></div>
+    <div class="container position-relative" style="z-index: 2;">
+      
+      <!-- Breadcrumb -->
+      <div class="sol-breadcrumb">
+        <a href="<?= $site ?>"><i class="fa-solid fa-house me-1"></i> Home</a>
+        <span>/</span>
+        <a href="<?= $site ?>solutions/">Solutions</a>
+        <span>/</span>
+        <span class="text-white"><?= htmlspecialchars($sol['badge']) ?></span>
       </div>
-      <h1 class="sol-hero-title"><?= htmlspecialchars($sol['hero_heading']) ?></h1>
-      <p class="sol-hero-sub"><?= htmlspecialchars($sol['hero_sub']) ?></p>
+
+      <div class="sol-hero-pill">
+        <span class="pulse-dot"></span>
+        <span><?= htmlspecialchars($sol['badge']) ?></span>
+      </div>
+
+      <h1><?= htmlspecialchars($sol['hero_heading']) ?></h1>
+      <p class="lead-text"><?= htmlspecialchars($sol['hero_sub']) ?></p>
 
       <div class="d-flex flex-wrap gap-3 mt-4">
         <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20am%20interested%20in%20your%20<?= urlencode($sol['badge']) ?>%20solutions." target="_blank" class="btn-lime">
           <i class="fa-brands fa-whatsapp fa-lg"></i> Discuss Your Architecture
         </a>
-        <a href="<?= $site ?>case-studies/<?= $sol['related_case_study'] ?>/" class="btn btn-outline-light rounded-pill px-4 py-3 d-inline-flex align-items-center gap-2">
+        <a href="<?= $site ?>case-studies/<?= $sol['related_case_study'] ?>/" class="btn btn-outline-light rounded-pill px-4 py-3 d-inline-flex align-items-center gap-2" style="border-color: rgba(255,255,255,0.25);">
           <i class="fa-solid fa-diagram-project text-info"></i> View Related Case Study &rarr;
         </a>
       </div>
@@ -254,7 +326,7 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
           <!-- 1. The Strategy / Core Approach -->
           <div class="sol-card">
             <h2 class="h4 fw-bold text-white mb-3">Enterprise Architectural Philosophy</h2>
-            <p style="font-size: 1.05rem; line-height: 1.7; color: #cbd5e1;"><?= nl2br(htmlspecialchars($sol['lead_text'])) ?></p>
+            <p style="font-size: 1.05rem; line-height: 1.75; color: #cbd5e1;"><?= nl2br(htmlspecialchars($sol['lead_text'])) ?></p>
           </div>
 
           <!-- 2. Core Capabilities Matrix -->
@@ -278,7 +350,7 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
             <ul class="list-unstyled mb-0">
               <?php foreach ($sol['risks_eliminated'] as $risk): ?>
               <li class="d-flex align-items-start gap-3 mb-3" style="font-size: 1rem; color: #cbd5e1;">
-                <i class="fa-solid fa-shield-halved mt-1" style="color: var(--sol-lime);"></i>
+                <i class="fa-solid fa-shield-halved mt-1" style="color: var(--nw-accent);"></i>
                 <span><?= htmlspecialchars($risk) ?></span>
               </li>
               <?php endforeach; ?>
@@ -290,7 +362,7 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
             <h2 class="h4 fw-bold text-white mb-3">Supported Technical Stack</h2>
             <div>
               <?php foreach ($sol['tech_stack'] as $t): ?>
-              <span class="tech-pill"><i class="fa-solid fa-code" style="color: var(--sol-lime);"></i> <?= htmlspecialchars($t) ?></span>
+              <span class="tech-pill"><i class="fa-solid fa-code" style="color: var(--nw-accent);"></i> <?= htmlspecialchars($t) ?></span>
               <?php endforeach; ?>
             </div>
           </div>
@@ -299,16 +371,16 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
 
         <!-- Sticky Sidebar -->
         <div class="col-lg-4">
-          <div class="sol-card" style="position: sticky; top: 100px; border-color: rgba(173,255,28,0.35);">
+          <div class="sol-card" style="position: sticky; top: 100px; border-color: rgba(173,255,28,0.35); background: linear-gradient(135deg, rgba(16, 64, 65, 0.6) 0%, rgba(4, 18, 19, 0.95) 100%);">
             <span class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25 px-3 py-1 mb-3 rounded-pill" style="font-size: 12px;">
               Direct Founder Engineering
             </span>
             <h3 class="h5 fw-bold text-white mb-2">Book a Technical Discovery Session</h3>
             <p class="small text-white-50 mb-4">Discuss your product specs directly with lead software architect Nikhil Gupta. Zero sales reps.</p>
 
-            <div class="p-3 rounded-3 mb-4" style="background: rgba(0,0,0,0.3); border: 1px dashed rgba(255,255,255,0.15);">
+            <div class="p-3 rounded-3 mb-4" style="background: rgba(0,0,0,0.35); border: 1px dashed rgba(255,255,255,0.15);">
               <div class="small text-white-50 mb-1">Related Production Proof:</div>
-              <a href="<?= $site ?>case-studies/<?= $sol['related_case_study'] ?>/" class="fw-bold text-decoration-none" style="color: var(--sol-lime);">
+              <a href="<?= $site ?>case-studies/<?= $sol['related_case_study'] ?>/" class="fw-bold text-decoration-none" style="color: var(--nw-accent);">
                 <?= htmlspecialchars($sol['case_study_title']) ?> &rarr;
               </a>
             </div>
@@ -329,12 +401,22 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
   <?php else: ?>
   <!-- ══════════════ SOLUTIONS DIRECTORY VIEW ══════════════ -->
   <section class="sol-hero text-center">
-    <div class="container">
-      <div class="sol-badge">
-        <i class="fa-solid fa-microchip"></i> Global Engineering Pillars
+    <div class="loc-grid-overlay"></div>
+    <div class="container position-relative" style="z-index: 2;">
+      
+      <!-- Breadcrumb -->
+      <div class="sol-breadcrumb justify-content-center">
+        <a href="<?= $site ?>"><i class="fa-solid fa-house me-1"></i> Home</a>
+        <span>/</span>
+        <span class="text-white">Solutions</span>
       </div>
-      <h1 class="sol-hero-title">Location-Agnostic Software Architecture</h1>
-      <p class="sol-hero-sub mx-auto">
+
+      <div class="sol-hero-pill">
+        <span class="pulse-dot"></span>
+        <span>Global Engineering Pillars</span>
+      </div>
+      <h1>Location-Agnostic Software Architecture</h1>
+      <p class="lead-text mx-auto">
         Specialized engineering capabilities designed for high-scale fintech systems, cross-platform mobile apps, enterprise SaaS, and sub-second e-commerce platforms.
       </p>
     </div>
@@ -347,7 +429,10 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
         <div class="col-lg-6">
           <div class="sol-card h-100 d-flex flex-column justify-content-between">
             <div>
-              <div class="sol-badge mb-2" style="font-size: 11px;"><?= htmlspecialchars($item['badge']) ?></div>
+              <div class="sol-hero-pill mb-3" style="font-size: 11px; padding: 4px 12px;">
+                <span class="pulse-dot"></span>
+                <span><?= htmlspecialchars($item['badge']) ?></span>
+              </div>
               <h2 class="h5 fw-bold text-white mb-2"><?= htmlspecialchars($item['hero_heading']) ?></h2>
               <p class="small text-white-50 mb-4"><?= htmlspecialchars($item['hero_sub']) ?></p>
 
@@ -363,8 +448,8 @@ $ogImage = rtrim($site, '/') . '/assets/img/preview.png';
               </div>
             </div>
 
-            <div class="d-flex gap-2">
-              <a href="<?= $site ?>solutions/<?= $slugKey ?>/" class="btn btn-outline-light w-100 rounded-pill py-2" style="border-color: rgba(173,255,28,0.4); color: var(--sol-lime);">
+            <div>
+              <a href="<?= $site ?>solutions/<?= $slugKey ?>/" class="btn btn-outline-light w-100 rounded-pill py-2" style="border-color: rgba(173,255,28,0.4); color: var(--nw-accent);">
                 Explore Architecture &rarr;
               </a>
             </div>
