@@ -66,8 +66,7 @@ $services = get_sub_category($limit);
             </div>
             <div class="main-menu">
               <ul>
-                <li><a href="<?= $site ?>">Home </a> </li>
-                <li><a href="<?=$site?>about/">About</a></li>
+                <li><a href="<?= $site ?>">Home</a></li>
                 <li><a href="<?=$site?>services/">Services <i class="fa-solid fa-angle-down"></i></a>
                   <ul class="dropdown-padding">
                     <?php
@@ -85,20 +84,6 @@ $services = get_sub_category($limit);
 
                 <li><a href="<?=$site?>case-studies/">Case Studies</a></li>
 
-                <li><a href="<?=$site?>hire-freelance-web-developer/">Locations <i class="fa-solid fa-angle-down"></i></a>
-                  <ul class="dropdown-padding">
-                    <li><a href="<?= $site ?>web-developer-usa/">USA</a></li>
-                    <li><a href="<?= $site ?>web-developer-uk/">United Kingdom</a></li>
-                    <li><a href="<?= $site ?>web-developer-india/">India</a></li>
-                    <li><a href="<?= $site ?>web-developer-canada/">Canada</a></li>
-                    <li><a href="<?= $site ?>web-developer-australia/">Australia</a></li>
-                    <li><a href="<?= $site ?>web-developer-dubai/">UAE</a></li>
-                    <li><a href="<?= $site ?>web-developer-new-zealand/">New Zealand</a></li>
-                    <li><a href="<?= $site ?>web-developer-germany/">Germany</a></li>
-                    <li><a href="<?= $site ?>web-developer-singapore/">Singapore</a></li>
-                    <li><a href="<?= $site ?>hire-freelance-web-developer/">View All Locations</a></li>
-                  </ul>
-                </li>
                 <li><a href="<?=$site?>healthcare-website-design-usa/">Industries <i class="fa-solid fa-angle-down"></i></a>
                   <ul class="dropdown-padding">
                     <li><a href="<?= $site ?>healthcare-website-design-usa/">Healthcare</a></li>

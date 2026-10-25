@@ -262,7 +262,9 @@ $footerYearsInBusiness = (string)$years;
             <i class="fa-solid fa-chevron-down"></i>
           </h3>
           <ul class="footer-nav-links">
-            <li><a href="<?= $site ?>about/">About Us</a></li>
+            <li><a href="<?= $site ?>about/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-user-tie me-1"></i> About Nikhil Gupta</a></li>
+            <li><a href="<?= $site ?>hire-freelance-web-developer/"><i class="fa-solid fa-earth-americas me-1 text-accent-dot"></i> Global Locations Directory</a></li>
+            <li><a href="<?= $site ?>case-studies/"><i class="fa-solid fa-diagram-project me-1 text-accent-dot"></i> Engineering Case Studies</a></li>
             <li><a href="<?= $site ?>contact/">Contact Us</a></li>
             <li><a href="<?= $site ?>blogs/">Blog &amp; Insights</a></li>
             <li><a href="<?= $site ?>testimonials/">Testimonials</a></li>
@@ -395,7 +397,8 @@ $footerYearsInBusiness = (string)$years;
             <li><a href="<?= $site ?>web-developer-australia/">Australia</a></li>
             <li><a href="<?= $site ?>web-developer-new-zealand/">New Zealand</a></li>
             <li><a href="<?= $site ?>web-developer-singapore/">Singapore</a></li>
-            <li><a href="<?= $site ?>sitemap/" style="color:#ADFF1C; font-weight:700;">Explore All Locations (HTML Sitemap) &rarr;</a></li>
+            <li><a href="<?= $site ?>hire-freelance-web-developer/" style="color:#ADFF1C; font-weight:700;"><i class="fa-solid fa-earth-americas me-1"></i> All Global Countries &rarr;</a></li>
+            <li><a href="<?= $site ?>sitemap/" style="color:rgba(255,255,255,0.7); font-size:12px;">Full HTML Sitemap (650+ URLs) &rarr;</a></li>
           </ul>
         </div>
       </div>
