@@ -15,7 +15,7 @@ class Logger
 
         $dir = dirname($this->logFile);
         if (!is_dir($dir)) {
-            mkdir($dir, 0755, true);
+            @mkdir($dir, 0755, true);
         }
     }
 
@@ -24,12 +24,18 @@ class Logger
         $this->rotateIfNeeded();
 
         $tz = Env::get('TIMEZONE', 'Asia/Kolkata');
-        $date = (new \DateTime('now', new \DateTimeZone($tz)))->format('Y-m-d H:i:s');
+        try {
+            $date = (new \DateTime('now', new \DateTimeZone($tz)))->format('Y-m-d H:i:s');
+        } catch (\Throwable $t) {
+            $date = date('Y-m-d H:i:s');
+        }
         
         $contextStr = !empty($context) ? ' ' . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : '';
         $line = sprintf("[%s] [%s] %s%s%s", $date, strtoupper($level), $message, $contextStr, PHP_EOL);
 
-        file_put_contents($this->logFile, $line, FILE_APPEND | LOCK_EX);
+        if (@file_put_contents($this->logFile, $line, FILE_APPEND | LOCK_EX) === false) {
+            error_log($line);
+        }
     }
 
     public function info(string $message, array $context = []): void
