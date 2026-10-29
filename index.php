@@ -398,43 +398,27 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
     }
     .hero5-section-area h1 {
       color: #ffffff;
-      font-size: clamp(2.3rem, 4.3vw, 3.6rem);
+      font-size: clamp(2.3rem, 4.5vw, 3.5rem);
       font-weight: 800;
-      line-height: 1.18;
-      margin-bottom: 22px;
+      line-height: 1.15;
+      margin-bottom: 20px;
       letter-spacing: -0.5px;
     }
-    .hero5-section-area h1 span.highlight,
-    .hero5-section-area h1 .highlight,
+    .hero5-section-area h1 span.highlight {
+      color: #ADFF1C;
+      background: linear-gradient(120deg, #ADFF1C 0%, #7dffb3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     .hero5-section-area h1 .highlight * {
       color: #ADFF1C !important;
       -webkit-text-fill-color: #ADFF1C !important;
-      background: none !important;
-      -webkit-background-clip: initial !important;
-      text-shadow: 0 0 25px rgba(173, 255, 28, 0.4);
-      display: inline-block;
     }
     .hero5-section-area p.lead-text {
       font-size: clamp(1rem, 1.7vw, 1.15rem);
       color: #d6ecea;
       line-height: 1.7;
       margin-bottom: 30px;
-    }
-
-    @media (max-width: 768px) {
-      .hero5-section-area {
-        padding: 115px 0 60px;
-      }
-      .hero5-section-area h1 {
-        font-size: clamp(1.9rem, 7.5vw, 2.5rem);
-        line-height: 1.22;
-        margin-bottom: 18px;
-      }
-      .hero-status-pill {
-        font-size: 12.5px;
-        padding: 6px 14px;
-        margin-bottom: 18px;
-      }
     }
 
     /* Floating Author Animation Frame */
@@ -714,15 +698,15 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
             
             <div class="hero-status-pill" data-aos="fade-down">
               <span class="pulse-dot"></span>
-              Top Freelance Web Designer &amp; Developer · Delhi NCR &amp; Global
+              Top Freelance Web Developer &amp; AI Engineer · Delhi NCR &amp; Global
             </div>
 
-            <h1 data-aos="fade-right" data-aos-duration="1000">
-              Freelance <span class="highlight">Web Designer</span> &amp; <span class="highlight">Software Developer</span>
+            <h1 class="text-anime-style-2">
+              Custom Web Applications, <span class="highlight">AI Workflows</span> &amp; High-Rank SEO Systems
             </h1>
 
             <p class="lead-text" data-aos="fade-left" data-aos-duration="1000">
-              Looking to hire a top freelance developer or web designer? NikhilWorks delivers bespoke UI/UX web design, enterprise-grade custom software development, and Google #1 SEO systems for businesses in Delhi NCR, Mumbai, Bangalore, and globally across USA, UK, UAE &amp; Australia. From high-converting websites and scalable e-commerce stores to custom CRM/ERP platforms, REST APIs, and 24/7 AI workflow automations—get 100% direct developer communication &amp; complete source code ownership.
+              NikhilWorks provides expert full-stack web development, custom AI integrations, and Google #1 SEO engineering in Delhi NCR, Mumbai, Bangalore, and globally across USA, UK, UAE &amp; Australia. Build fast, secure, conversion-ready web platforms with 100% direct communication &amp; complete code ownership.
             </p>
 
             <div class="btn-area1 d-flex flex-wrap gap-3" data-aos="fade-left" data-aos-duration="1200">
@@ -733,14 +717,12 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
               </a>
             </div>
 
-            <!-- Core SEO Keyword Badges -->
+            <!-- Local SEO Badges -->
             <div class="local-seo-badges" data-aos="fade-up" data-aos-duration="1500">
-              <a href="<?= $site ?>web-developer-gurgaon/" class="badge-item"><i class="fa-solid fa-code me-1"></i> Freelance Developer India</a>
-              <a href="<?= $site ?>web-designer-delhi/" class="badge-item"><i class="fa-solid fa-palette me-1"></i> Freelance Web Designer</a>
-              <a href="<?= $site ?>crm-development-india/" class="badge-item"><i class="fa-solid fa-database me-1"></i> Custom Software Developer</a>
-              <a href="<?= $site ?>service/e-commerce-website-development/" class="badge-item"><i class="fa-solid fa-cart-shopping me-1"></i> E-Commerce Engineering</a>
-              <a href="<?= $site ?>ai-integration-services/" class="badge-item" style="border-color:#ADFF1C; color:#ADFF1C;"><i class="fa-solid fa-robot me-1"></i> AI &amp; Automations</a>
-              <a href="<?= $site ?>web-developer-usa/" class="badge-item"><i class="fa-solid fa-globe me-1"></i> Hire Freelance Developer</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="badge-item">Web Developer Delhi</a>
+              <a href="<?= $site ?>web-developer-gurgaon/" class="badge-item">SEO Expert Gurgaon</a>
+              <a href="<?= $site ?>web-developer-noida/" class="badge-item">Noida Tech Hub</a>
+              <a href="<?= $site ?>ai-integration-services/" class="badge-item" style="border-color:#ADFF1C; color:#ADFF1C;"><i class="fa-solid fa-robot me-1"></i> AI &amp; Workflow Automations</a>
             </div>
 
           </div>
