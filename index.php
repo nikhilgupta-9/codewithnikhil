@@ -398,23 +398,43 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
     }
     .hero5-section-area h1 {
       color: #ffffff;
-      font-size: clamp(2.3rem, 4.5vw, 3.5rem);
+      font-size: clamp(2.3rem, 4.3vw, 3.6rem);
       font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 20px;
+      line-height: 1.18;
+      margin-bottom: 22px;
       letter-spacing: -0.5px;
     }
-    .hero5-section-area h1 span.highlight {
-      color: #ADFF1C;
-      background: linear-gradient(120deg, #ADFF1C 0%, #7dffb3 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .hero5-section-area h1 span.highlight,
+    .hero5-section-area h1 .highlight,
+    .hero5-section-area h1 .highlight * {
+      color: #ADFF1C !important;
+      -webkit-text-fill-color: #ADFF1C !important;
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      text-shadow: 0 0 25px rgba(173, 255, 28, 0.4);
+      display: inline-block;
     }
     .hero5-section-area p.lead-text {
       font-size: clamp(1rem, 1.7vw, 1.15rem);
       color: #d6ecea;
       line-height: 1.7;
       margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .hero5-section-area {
+        padding: 115px 0 60px;
+      }
+      .hero5-section-area h1 {
+        font-size: clamp(1.9rem, 7.5vw, 2.5rem);
+        line-height: 1.22;
+        margin-bottom: 18px;
+      }
+      .hero-status-pill {
+        font-size: 12.5px;
+        padding: 6px 14px;
+        margin-bottom: 18px;
+      }
     }
 
     /* Floating Author Animation Frame */
@@ -694,11 +714,11 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
             
             <div class="hero-status-pill" data-aos="fade-down">
               <span class="pulse-dot"></span>
-              Top Freelance Web Designer &amp; Freelance Developer · Delhi NCR, India &amp; Global
+              Top Freelance Web Designer &amp; Developer · Delhi NCR &amp; Global
             </div>
 
-            <h1 class="text-anime-style-2">
-              Hire Top <span class="highlight">Freelance Web Designer</span> &amp; <span class="highlight">Freelance Developer</span>
+            <h1 data-aos="fade-right" data-aos-duration="1000">
+              Freelance <span class="highlight">Web Designer</span> &amp; <span class="highlight">Software Developer</span>
             </h1>
 
             <p class="lead-text" data-aos="fade-left" data-aos-duration="1000">
