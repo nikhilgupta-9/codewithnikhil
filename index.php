@@ -32,9 +32,9 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary SEO Meta Tags (High-End Keyword Optimised) -->
-  <title>NikhilWorks | Top Freelance Web Developer, AI Solutions & SEO Expert India</title>
-  <meta name="description" content="Hire Nikhil Gupta — Senior Freelance Full-Stack Web Developer & AI Solutions Engineer in India. Custom PHP 8.2, MERN Stack, WordPress, 24/7 AI Chatbots, n8n automations & Google #1 SEO rankings across Delhi NCR, Mumbai, Bangalore, USA, UK, UAE & Australia.">
-  <meta name="keywords" content="freelance web developer india, web developer delhi ncr, full stack developer india, ai integration services, ai chatbot developer, mern stack developer, custom php developer, wordpress developer delhi, ecommerce website developer india, local seo expert delhi, hire freelance web developer, website cost calculator india, n8n automation developer">
+  <title>NikhilWorks | Top Freelance Web Designer &amp; Full-Stack Software Developer India</title>
+  <meta name="description" content="Hire Nikhil Gupta — Top Freelance Web Designer &amp; Senior Full-Stack Software Developer in India. Custom software development, responsive web design, CRM &amp; ERP systems, PHP 8.2, MERN Stack, WordPress, AI chatbots &amp; Google #1 SEO rankings across Delhi NCR, Mumbai, Bangalore, USA, UK, UAE &amp; Australia.">
+  <meta name="keywords" content="freelance web designer, software developer india, freelance software developer, custom software development, web designer delhi ncr, full stack software developer, freelance software engineer, custom crm developer, enterprise software development, mern stack developer, php laravel software developer, python ai developer, hire freelance software developer, web designer and developer">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="author" content="Nikhil Gupta - NikhilWorks">
 
@@ -59,21 +59,21 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
   <meta property="og:site_name" content="NikhilWorks">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="en_IN">
-  <meta property="og:title" content="NikhilWorks — Freelance Web Developer, AI Solutions & SEO Expert">
-  <meta property="og:description" content="Custom full-stack web applications, e-commerce platforms, 24/7 AI chatbots & Google #1 SEO rankings for businesses in India, USA, UK, UAE & Australia.">
+  <meta property="og:title" content="NikhilWorks — Top Freelance Web Designer &amp; Software Developer">
+  <meta property="og:description" content="Custom software development, bespoke UI/UX web design, e-commerce systems, 24/7 AI chatbots &amp; Google #1 SEO rankings for businesses in India, USA, UK, UAE &amp; Australia.">
   <meta property="og:url" content="<?= $canonical_url ?>">
   <meta property="og:image" content="<?= $og_image ?>">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="NikhilWorks - Web Development & AI Solutions">
+  <meta property="og:image:alt" content="NikhilWorks - Web Design, Software Development &amp; AI Engineering">
   <meta name="google-site-verification" content="CDIIrOxAgIwGM82moWkxmu4MN4lrxpLE6HdPVFlvXPE" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@Nikhil_Works">
   <meta name="twitter:creator" content="@Nikhil_Works">
-  <meta name="twitter:title" content="NikhilWorks — Freelance Web Developer & AI Solutions Engineer">
-  <meta name="twitter:description" content="Custom full-stack web applications, e-commerce platforms, AI chatbots, and technical SEO with 100% code ownership.">
+  <meta name="twitter:title" content="NikhilWorks — Freelance Web Designer &amp; Software Developer">
+  <meta name="twitter:description" content="Custom software development, responsive web design, CRM systems, AI chatbots, and technical SEO with 100% direct code ownership.">
   <meta name="twitter:image" content="<?= $og_image ?>">
 
   <!-- ============================================
@@ -88,7 +88,7 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
     "@id": "https://nikhilworks.com/#organization",
     "name": "NikhilWorks",
     "alternateName": "CodeWithNikhil",
-    "description": "Professional full-stack web development, custom AI integrations, e-commerce engineering, and technical SEO services for startups and enterprises across India, USA, UK, UAE, and Australia.",
+    "description": "Professional web design, custom software development, full-stack engineering, AI integrations, and technical SEO services for startups and enterprises across India, USA, UK, UAE, and Australia.",
     "url": "https://nikhilworks.com/",
     "logo": "https://nikhilworks.com/assets/img/logo/preloader4.png",
     "image": "https://nikhilworks.com/assets/img/preview.png",
@@ -213,8 +213,8 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
     "name": "Nikhil Gupta",
     "givenName": "Nikhil",
     "familyName": "Gupta",
-    "jobTitle": "Senior Freelance Full-Stack Developer & AI Solutions Engineer",
-    "description": "Nikhil Gupta is a leading freelance web developer and AI solutions architect based in Delhi NCR, India. He builds high-speed custom PHP applications, MERN stack platforms, AI chatbots, and Google #1 ranking SEO architectures.",
+    "jobTitle": "Senior Freelance Web Designer, Full-Stack Software Developer & AI Solutions Engineer",
+    "description": "Nikhil Gupta is a leading freelance web designer, full-stack software developer, and AI solutions architect based in Delhi NCR, India. He builds high-speed custom software, responsive web applications, MERN stack platforms, AI chatbots, and Google #1 ranking SEO architectures.",
     "url": "https://nikhilworks.com/",
     "image": "https://nikhilworks.com/assets/img/all-images/auhtor-img1.png",
     "email": "contact@nikhilworks.com",
@@ -229,11 +229,14 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
       "@id": "https://nikhilworks.com/#organization"
     },
     "knowsAbout": [
+      "Custom Software Development",
+      "Web Design & UI/UX",
       "Full-Stack Web Development",
       "PHP 8.2 & MySQL",
       "React.js & Next.js",
       "Node.js & Express",
       "MERN Stack",
+      "Laravel Framework",
       "Google Gemini API Integration",
       "OpenAI GPT-4o Integration",
       "RAG Vector Search Pipelines",
@@ -691,15 +694,15 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
             
             <div class="hero-status-pill" data-aos="fade-down">
               <span class="pulse-dot"></span>
-              Top Freelance Web Developer &amp; AI Engineer · Delhi NCR &amp; Global
+              Senior Freelance Web Designer &amp; Software Developer · Delhi NCR, India &amp; Global
             </div>
 
             <h1 class="text-anime-style-2">
-              Custom Web Applications, <span class="highlight">AI Workflows</span> &amp; High-Rank SEO Systems
+              Freelance <span class="highlight">Web Designer</span> &amp; Senior <span class="highlight">Software Developer</span>
             </h1>
 
             <p class="lead-text" data-aos="fade-left" data-aos-duration="1000">
-              NikhilWorks provides expert full-stack web development, custom AI integrations, and Google #1 SEO engineering in Delhi NCR, Mumbai, Bangalore, and globally across USA, UK, UAE &amp; Australia. Build fast, secure, conversion-ready web platforms with 100% direct communication &amp; complete code ownership.
+              NikhilWorks delivers bespoke UI/UX web design, enterprise-grade custom software development, and Google #1 SEO systems for businesses in Delhi NCR, Mumbai, Bangalore, and globally across USA, UK, UAE &amp; Australia. From high-converting websites and scalable e-commerce stores to custom CRM/ERP platforms, REST APIs, and 24/7 AI workflow automations—get 100% direct developer communication &amp; complete source code ownership.
             </p>
 
             <div class="btn-area1 d-flex flex-wrap gap-3" data-aos="fade-left" data-aos-duration="1200">
@@ -710,12 +713,14 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
               </a>
             </div>
 
-            <!-- Local SEO Badges -->
+            <!-- Core SEO Keyword Badges -->
             <div class="local-seo-badges" data-aos="fade-up" data-aos-duration="1500">
-              <a href="<?= $site ?>web-designer-delhi/" class="badge-item">Web Developer Delhi</a>
-              <a href="<?= $site ?>web-developer-gurgaon/" class="badge-item">SEO Expert Gurgaon</a>
-              <a href="<?= $site ?>web-developer-noida/" class="badge-item">Noida Tech Hub</a>
-              <a href="<?= $site ?>ai-integration-services/" class="badge-item" style="border-color:#ADFF1C; color:#ADFF1C;"><i class="fa-solid fa-robot me-1"></i> AI &amp; Workflow Automations</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="badge-item"><i class="fa-solid fa-palette me-1"></i> Web Designer Delhi</a>
+              <a href="<?= $site ?>web-developer-gurgaon/" class="badge-item"><i class="fa-solid fa-code me-1"></i> Software Developer Delhi NCR</a>
+              <a href="<?= $site ?>crm-development-india/" class="badge-item"><i class="fa-solid fa-database me-1"></i> Custom CRM &amp; Software</a>
+              <a href="<?= $site ?>service/e-commerce-website-development/" class="badge-item"><i class="fa-solid fa-cart-shopping me-1"></i> E-Commerce Engineering</a>
+              <a href="<?= $site ?>ai-integration-services/" class="badge-item" style="border-color:#ADFF1C; color:#ADFF1C;"><i class="fa-solid fa-robot me-1"></i> AI &amp; Automations</a>
+              <a href="<?= $site ?>web-developer-usa/" class="badge-item"><i class="fa-solid fa-globe me-1"></i> Global Delivery (USA, UK, UAE)</a>
             </div>
 
           </div>
@@ -794,8 +799,8 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
       <!-- SEO Heading -->
       <div class="row">
         <div class="col-lg-12 text-center mb-4">
-          <h2>Our Web Design &amp; Digital Engineering Services in Delhi NCR</h2>
-          <p>We provide professional website development, AI workflows, SEO, and digital marketing services across Delhi, Gurgaon, and India.</p>
+          <h2>Custom Software Development, Web Design &amp; Digital Engineering Services</h2>
+          <p>We engineer scalable custom software, bespoke UI/UX web designs, enterprise CRM portals, AI automations, and search engine dominance across Delhi NCR, India, and globally.</p>
         </div>
       </div>
 
@@ -805,12 +810,23 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
           <div class="slider-all-boxarea">
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service/website-design-development/" title="Professional Website Design Services in Delhi NCR">
+                <a href="<?= $site ?>service/website-design-development/" title="Professional Website Design Services">
                   Website Design Services
                 </a>
               </div>
               <div class="img1 reveal">
-                <img src="<?= $site ?>assets/img/all-images/brand-img2.png" alt="Custom website design services in Delhi NCR by NikhilWorks">
+                <img src="<?= $site ?>assets/img/all-images/brand-img2.png" alt="Custom website design services by NikhilWorks">
+              </div>
+            </div>
+
+            <div class="slider-boxarea">
+              <div class="content">
+                <a href="<?= $site ?>crm-development-india/" title="Custom Software & CRM Development">
+                  Custom Software Development
+                </a>
+              </div>
+              <div class="img1 reveal">
+                <img src="<?= $site ?>assets/img/all-images/brand-img5.png" alt="Custom software and CRM development">
               </div>
             </div>
 
@@ -827,18 +843,18 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
 
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service/search-engine-optimization/" title="Affordable SEO Services in Delhi NCR">
-                  SEO Services
+                <a href="<?= $site ?>service/search-engine-optimization/" title="Affordable SEO Services">
+                  SEO &amp; Growth Services
                 </a>
               </div>
               <div class="img1 reveal">
-                <img src="<?= $site ?>assets/img/all-images/brand-img3.png" alt="SEO optimization services in Delhi NCR for business growth">
+                <img src="<?= $site ?>assets/img/all-images/brand-img3.png" alt="SEO optimization services for business growth">
               </div>
             </div>
 
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service/e-commerce-website-development/" title="Ecommerce Website Development Company in Delhi">
+                <a href="<?= $site ?>service/e-commerce-website-development/" title="Ecommerce Website Development">
                   Ecommerce Development
                 </a>
               </div>
@@ -849,12 +865,12 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
 
             <div class="slider-boxarea">
               <div class="content">
-                <a href="<?= $site ?>service/wordpress-website-development/" title="Hire WordPress Developer in Delhi NCR">
+                <a href="<?= $site ?>service/wordpress-website-development/" title="Hire WordPress Developer">
                   WordPress Development
                 </a>
               </div>
               <div class="img1">
-                <img src="<?= $site ?>assets/img/all-images/brand-img2.png" alt="WordPress website development services in Delhi NCR">
+                <img src="<?= $site ?>assets/img/all-images/brand-img2.png" alt="WordPress website development services">
               </div>
             </div>
           </div>
@@ -933,19 +949,29 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
             <h2 class="text-anime-style-1">About <span>NikhilWorks <img src="<?= $site ?>assets/img/elements/line-img1.png" alt=""></span></h2>
             <div class="space10 d-lg-block d-none"></div>
             <p data-aos="fade-up" data-aos-duration="1000">
-              NikhilWorks is a premier freelance web development, AI integration, and SEO brand led by <strong>Nikhil Gupta</strong>, focused on helping businesses build high-converting, scalable online platforms.
+              NikhilWorks is a premier freelance web design and custom software development studio founded by <strong>Nikhil Gupta</strong>, a Senior Full-Stack Software Developer &amp; UI/UX Designer dedicated to engineering high-converting, scalable digital platforms.
             </p>
             <p data-aos="fade-up" data-aos-duration="1100">
-              With <strong>proven experience since August 2022</strong>, we specialize in modern web architectures, Core Web Vitals speed optimization, 24/7 AI chatbots, and search engine visibility—ensuring every website is fast, secure, and built to convert.
+              With <strong>proven hands-on experience since August 2022</strong>, we bridge the gap between creative visual web design and complex backend software engineering—building custom web applications, enterprise CRM systems, 24/7 AI chatbots, and Google #1 SEO architectures.
             </p>
 
             <div class="space20"></div>
 
             <div class="works-content-box" data-aos="fade-up" data-aos-duration="1200">
-              <div class="icons"><i class="fa-solid fa-laptop-code" style="font-size:22px; color:#104041;"></i></div>
+              <div class="icons"><i class="fa-solid fa-code" style="font-size:22px; color:#104041;"></i></div>
               <div class="content">
-                <a href="<?= $site ?>services/">Full-Stack Web &amp; App Development</a>
-                <p>Expertise in <strong>MERN Stack, PHP 8.2, WordPress, and Custom Laravel</strong> solutions to build responsive, scalable websites for real business needs.</p>
+                <a href="<?= $site ?>services/">Custom Software &amp; Full-Stack Web Development</a>
+                <p>Full-stack software engineering using <strong>PHP 8.2, Laravel, MERN Stack (React, Node.js, Express, MongoDB)</strong>, and custom SQL database architectures designed for speed, security, and scale.</p>
+              </div>
+            </div>
+
+            <div class="space16"></div>
+
+            <div class="works-content-box" data-aos="fade-up" data-aos-duration="1250">
+              <div class="icons"><i class="fa-solid fa-palette" style="font-size:22px; color:#104041;"></i></div>
+              <div class="content">
+                <a href="<?= $site ?>service/website-design-development/">Bespoke Web Design &amp; UI/UX Conversion</a>
+                <p>Creative web design crafted with clean semantic code, sub-second 95+ PageSpeed scores, mobile-first responsiveness, and intuitive customer funnels that convert visitors into revenue.</p>
               </div>
             </div>
 
@@ -1008,8 +1034,8 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
         <div class="col-lg-12 m-auto">
           <div class="case-header-area heading2 text-center">
             <h2 class="text-anime-style-3">What I Offer</h2>
-            <h3>Complete Digital Engineering Solutions for Your Business</h3>
-            <h5>With professional experience since August 2022, we provide end-to-end web development, AI automation, and digital growth services.</h5>
+            <h3>Custom Software Development &amp; Web Design Solutions</h3>
+            <h5>From bespoke UI/UX design to enterprise software architecture, we deliver full-cycle digital engineering with 100% code ownership.</h5>
           </div>
         </div>
       </div>
@@ -1018,38 +1044,106 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
       <div class="row mb-5">
         <div class="col-lg-12 text-center">
           <div class="d-inline-flex flex-wrap gap-2 justify-content-center">
-            <button class="service-tab-btn active" onclick="switchServiceCategory('web-dev', this)">
-              <i class="fa-solid fa-code me-1"></i> Web &amp; App Development
+            <button class="service-tab-btn active" onclick="switchServiceCategory('software-dev', this)">
+              <i class="fa-solid fa-code me-1"></i> Custom Software Development
+            </button>
+            <button class="service-tab-btn" onclick="switchServiceCategory('web-design', this)">
+              <i class="fa-solid fa-paintbrush me-1"></i> Web Design &amp; UI/UX
             </button>
             <button class="service-tab-btn" onclick="switchServiceCategory('ai-auto', this)">
               <i class="fa-solid fa-robot me-1"></i> AI &amp; Automations
             </button>
             <button class="service-tab-btn" onclick="switchServiceCategory('digital-mktg', this)">
-              <i class="fa-solid fa-chart-line me-1"></i> SEO &amp; Digital Marketing
-            </button>
-            <button class="service-tab-btn" onclick="switchServiceCategory('design-brand', this)">
-              <i class="fa-solid fa-pen-nib me-1"></i> Design &amp; Branding
+              <i class="fa-solid fa-chart-line me-1"></i> SEO &amp; Growth
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Tab 1: Web Development Services -->
-      <div class="service-tab-panel" id="web-dev">
+      <!-- Tab 1: Custom Software Development Services -->
+      <div class="service-tab-panel" id="software-dev">
         <div class="row g-4">
           <div class="col-lg-4 col-md-6">
             <div class="service-card" data-aos="fade-up">
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <div class="service-icon"><i class="fa-solid fa-code fa-2x"></i></div>
+                <div class="service-icon"><i class="fa-solid fa-database fa-2x"></i></div>
+                <div class="service-experience"><span>Enterprise Grade</span></div>
+              </div>
+              <h3 class="fw-bold">Custom Software &amp; CRM Systems</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Tailored Business Automation</p>
+              <p class="text-muted small">Bespoke software applications, automated lead pipelines, customer dashboards, and inventory/accounting workflows with zero licensing lock-in.</p>
+              <ul class="service-features list-unstyled mb-4">
+                <li><i class="fa-solid fa-check text-success me-2"></i> Multi-Role RBAC Permissions</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Clean PHP 8.2 &amp; MySQL Core</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Automated Invoicing &amp; Quotations</li>
+              </ul>
+              <div class="mt-auto d-flex gap-2">
+                <a href="<?= $site ?>contact/" class="btn-card-action">Get Quote</a>
+                <a href="<?= $site ?>crm-development-india/" class="btn btn-outline-dark btn-sm rounded-3">Details</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-laptop-code fa-2x"></i></div>
+                <div class="service-experience"><span>Full-Stack SaaS</span></div>
+              </div>
+              <h3 class="fw-bold">Full-Stack SaaS &amp; Web Apps</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Modern React &amp; Laravel</p>
+              <p class="text-muted small">Scalable web applications built using React.js, Next.js, Node.js, and Laravel. Secure authentication, RESTful APIs, and fast database queries.</p>
+              <ul class="service-features list-unstyled mb-4">
+                <li><i class="fa-solid fa-check text-success me-2"></i> MERN &amp; Laravel Engineering</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Secure JWT &amp; OAuth 2.0 Auth</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Sub-Second Response Times</li>
+              </ul>
+              <div class="mt-auto d-flex gap-2">
+                <a href="<?= $site ?>contact/" class="btn-card-action">Get Quote</a>
+                <a href="<?= $site ?>service/laravel/" class="btn btn-outline-dark btn-sm rounded-3">Details</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-network-wired fa-2x"></i></div>
+                <div class="service-experience"><span>Seamless Sync</span></div>
+              </div>
+              <h3 class="fw-bold">API &amp; Backend Integrations</h3>
+              <p class="text-uppercase small fw-bold" style="color:#104041;">Enterprise Ecosystems</p>
+              <p class="text-muted small">Connect web platforms with Razorpay, Stripe, WhatsApp Cloud API, Shiprocket logistics, CRM webhooks, and third-party cloud services.</p>
+              <ul class="service-features list-unstyled mb-4">
+                <li><i class="fa-solid fa-check text-success me-2"></i> Payment Gateway Integrations</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> WhatsApp Cloud API Webhooks</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Custom Middleware &amp; ETL</li>
+              </ul>
+              <div class="mt-auto d-flex gap-2">
+                <a href="<?= $site ?>contact/" class="btn-card-action">Get Quote</a>
+                <a href="<?= $site ?>api-integration-services-india/" class="btn btn-outline-dark btn-sm rounded-3">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Web Design & Development Services -->
+      <div class="service-tab-panel d-none" id="web-design">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="service-card" data-aos="fade-up">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="service-icon"><i class="fa-solid fa-palette fa-2x"></i></div>
                 <div class="service-experience"><span>Since Aug 2022</span></div>
               </div>
               <h3 class="fw-bold">Website Design &amp; Development</h3>
               <p class="text-uppercase small fw-bold" style="color:#104041;">Simple, Clean &amp; Effective</p>
-              <p class="text-muted small">Custom website development using modern technologies. Responsive, user-friendly websites that convert visitors into paying clients.</p>
+              <p class="text-muted small">Custom website design using modern technologies. Responsive, user-friendly websites that convert visitors into paying clients.</p>
               <ul class="service-features list-unstyled mb-4">
                 <li><i class="fa-solid fa-check text-success me-2"></i> Responsive on All Devices</li>
                 <li><i class="fa-solid fa-check text-success me-2"></i> Sub-Second 95+ PageSpeed</li>
-                <li><i class="fa-solid fa-check text-success me-2"></i> Clean PHP 8.2 &amp; MySQL Code</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Clean HTML5, PHP &amp; CSS</li>
               </ul>
               <div class="mt-auto d-flex gap-2">
                 <a href="<?= $site ?>contact/" class="btn-card-action">Get Quote</a>
@@ -1087,6 +1181,20 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
               </div>
               <h3 class="fw-bold">WordPress &amp; Headless CMS</h3>
               <p class="text-uppercase small fw-bold" style="color:#104041;">Powerful CMS Solutions</p>
+              <p class="text-muted small">Custom WordPress websites engineered without slow page-builder bloat. Easily manage content, blogs, and landing pages.</p>
+              <ul class="service-features list-unstyled mb-4">
+                <li><i class="fa-solid fa-check text-success me-2"></i> Custom Theme Architecture</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> WooCommerce Setup</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Security &amp; Speed Hardening</li>
+              </ul>
+              <div class="mt-auto d-flex gap-2">
+                <a href="<?= $site ?>contact/" class="btn-card-action">Get Quote</a>
+                <a href="<?= $site ?>service/wordpress-website-development/" class="btn btn-outline-dark btn-sm rounded-3">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
               <p class="text-muted small">Custom WordPress websites engineered without slow page-builder bloat. Easily manage content, blogs, and landing pages.</p>
               <ul class="service-features list-unstyled mb-4">
                 <li><i class="fa-solid fa-check text-success me-2"></i> Custom Theme Architecture</li>
@@ -1424,22 +1532,22 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
           </div>
         </div>
 
-        <!-- 2. Dynamic Website (Featured) -->
+        <!-- 2. Dynamic Website & Custom Software (Featured) -->
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="700">
           <div class="pricing-boxarea active">
             <span class="badge position-absolute top-0 end-0 m-3 px-3 py-1" style="background:#ADFF1C; color:#082223; font-weight:800;">Most Popular</span>
-            <h4 class="text-white">Dynamic Website</h4>
-            <p class="text-white-50 small">PHP &amp; MySQL custom database web application.</p>
+            <h4 class="text-white">Dynamic Software App</h4>
+            <p class="text-white-50 small">PHP &amp; MySQL custom database software &amp; CRM.</p>
             <h3 class="price-heading text-white" style="color:#ADFF1C !important;">₹9,999 <span style="font-size:14px; font-weight:500; color:#d8ecea;">/ $129</span></h3>
             <div class="space20"></div>
             <ul class="list-unstyled text-light">
               <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> 5-10 Custom Dynamic Pages</li>
-              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> Admin Panel for CMS Control</li>
+              <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> Custom Admin &amp; CRM Control</li>
               <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> Lead Ingestion &amp; Email Alerts</li>
               <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> 60-Day Dedicated Support</li>
             </ul>
             <div class="mt-auto pt-3">
-              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20Dynamic%20Website%20Package" target="_blank" rel="noopener" class="header-btn8 w-100 text-center" style="background:#ADFF1C; color:#082223 !important; font-weight:700;">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20Dynamic%20Software%20Package" target="_blank" rel="noopener" class="header-btn8 w-100 text-center" style="background:#ADFF1C; color:#082223 !important; font-weight:700;">Get Started <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -1447,8 +1555,8 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
         <!-- 3. MERN Stack Web App -->
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="900">
           <div class="pricing-boxarea">
-            <h4>MERN Full-Stack</h4>
-            <p class="text-muted small">React.js, Node.js &amp; MongoDB scalable web apps.</p>
+            <h4>Full-Stack SaaS App</h4>
+            <p class="text-muted small">React.js, Node.js &amp; MongoDB custom software.</p>
             <h3 class="price-heading" style="color:#104041;">₹18,999 <span style="font-size:14px; font-weight:500; color:#6c757d;">/ $249</span></h3>
             <div class="space20"></div>
             <ul class="list-unstyled">
@@ -1458,7 +1566,7 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
               <li class="py-1"><i class="fa-solid fa-check text-success me-2"></i> 90-Day Priority Support</li>
             </ul>
             <div class="mt-auto pt-3">
-              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20MERN%20Full-Stack%20Package" target="_blank" rel="noopener" class="header-btn11 w-100 text-center">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="https://wa.me/918368552640?text=Hi%20Nikhil,%20I%20want%20the%20FullStack%20Software%20Package" target="_blank" rel="noopener" class="header-btn11 w-100 text-center">Get Started <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -1711,12 +1819,12 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
               <div class="accordion-item faq-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button faq-btn" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne" aria-expanded="true">
-                    1. Why should I hire NikhilWorks as a freelance developer?
+                    1. Why should I hire NikhilWorks as a freelance web designer &amp; software developer?
                   </button>
                 </h2>
                 <div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#homeFaqAccordion">
                   <div class="accordion-body text-muted">
-                    You work directly 1-on-1 with a senior full-stack developer. You get <strong>3x faster delivery</strong>, <strong>60% lower costs</strong> with zero agency markups, and <strong>100% source code ownership</strong> with zero vendor lock-in.
+                    You work directly 1-on-1 with a senior full-stack software developer and UI/UX web designer. You get <strong>3x faster delivery</strong>, <strong>60% lower costs</strong> with zero agency markups, and <strong>100% source code ownership</strong> with zero vendor lock-in.
                   </div>
                 </div>
               </div>
@@ -1724,12 +1832,12 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
               <div class="accordion-item faq-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo" aria-expanded="false">
-                    2. Can you build websites from scratch &amp; integrate AI?
+                    2. Can you build custom software, web applications &amp; integrate AI?
                   </button>
                 </h2>
                 <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#homeFaqAccordion">
                   <div class="accordion-body text-muted">
-                    Yes. We design and develop custom websites completely from scratch using PHP 8.2, MERN Stack, or WordPress, and integrate 24/7 AI Chatbots, Google Gemini / OpenAI APIs, and n8n automated workflows.
+                    Yes. We design and engineer custom software applications, CRM/ERP platforms, dynamic web platforms, and mobile-first websites using PHP 8.2, Laravel, MERN Stack (React, Node.js), and integrate 24/7 AI Chatbots, Google Gemini / OpenAI APIs, and n8n automated workflows.
                   </div>
                 </div>
               </div>
