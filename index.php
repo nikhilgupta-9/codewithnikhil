@@ -32,9 +32,9 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary SEO Meta Tags (High-End Keyword Optimised) -->
-  <title>NikhilWorks | Top Freelance Web Designer &amp; Full-Stack Software Developer India</title>
-  <meta name="description" content="Hire Nikhil Gupta — Top Freelance Web Designer &amp; Senior Full-Stack Software Developer in India. Custom software development, responsive web design, CRM &amp; ERP systems, PHP 8.2, MERN Stack, WordPress, AI chatbots &amp; Google #1 SEO rankings across Delhi NCR, Mumbai, Bangalore, USA, UK, UAE &amp; Australia.">
-  <meta name="keywords" content="freelance web designer, software developer india, freelance software developer, custom software development, web designer delhi ncr, full stack software developer, freelance software engineer, custom crm developer, enterprise software development, mern stack developer, php laravel software developer, python ai developer, hire freelance software developer, web designer and developer">
+  <title>NikhilWorks | Hire Freelance Developer &amp; Top Web Designer India</title>
+  <meta name="description" content="Hire Nikhil Gupta — Top Freelance Web Designer &amp; Full-Stack Freelance Developer in India. Custom software development, responsive web design, CRM &amp; ERP systems, PHP 8.2, MERN Stack, WordPress, AI chatbots &amp; Google #1 SEO rankings across Delhi NCR, Mumbai, Bangalore, USA, UK, UAE &amp; Australia.">
+  <meta name="keywords" content="hire freelance developer, freelance developer india, freelance web developer, freelance software developer, freelance web designer, full stack freelance developer, hire freelance software developer, top freelance developer, best freelance developer india, freelance web designer and developer, web designer delhi ncr, custom software development, hire web developer">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="author" content="Nikhil Gupta - NikhilWorks">
 
@@ -59,20 +59,20 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
   <meta property="og:site_name" content="NikhilWorks">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="en_IN">
-  <meta property="og:title" content="NikhilWorks — Top Freelance Web Designer &amp; Software Developer">
+  <meta property="og:title" content="NikhilWorks — Hire Top Freelance Developer &amp; Web Designer">
   <meta property="og:description" content="Custom software development, bespoke UI/UX web design, e-commerce systems, 24/7 AI chatbots &amp; Google #1 SEO rankings for businesses in India, USA, UK, UAE &amp; Australia.">
   <meta property="og:url" content="<?= $canonical_url ?>">
   <meta property="og:image" content="<?= $og_image ?>">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="NikhilWorks - Web Design, Software Development &amp; AI Engineering">
+  <meta property="og:image:alt" content="NikhilWorks - Freelance Developer, Web Design &amp; AI Engineering">
   <meta name="google-site-verification" content="CDIIrOxAgIwGM82moWkxmu4MN4lrxpLE6HdPVFlvXPE" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@Nikhil_Works">
   <meta name="twitter:creator" content="@Nikhil_Works">
-  <meta name="twitter:title" content="NikhilWorks — Freelance Web Designer &amp; Software Developer">
+  <meta name="twitter:title" content="NikhilWorks — Top Freelance Developer &amp; Web Designer">
   <meta name="twitter:description" content="Custom software development, responsive web design, CRM systems, AI chatbots, and technical SEO with 100% direct code ownership.">
   <meta name="twitter:image" content="<?= $og_image ?>">
 
@@ -213,8 +213,8 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
     "name": "Nikhil Gupta",
     "givenName": "Nikhil",
     "familyName": "Gupta",
-    "jobTitle": "Senior Freelance Web Designer, Full-Stack Software Developer & AI Solutions Engineer",
-    "description": "Nikhil Gupta is a leading freelance web designer, full-stack software developer, and AI solutions architect based in Delhi NCR, India. He builds high-speed custom software, responsive web applications, MERN stack platforms, AI chatbots, and Google #1 ranking SEO architectures.",
+    "jobTitle": "Top Freelance Developer, Web Designer & AI Solutions Engineer",
+    "description": "Nikhil Gupta is a leading freelance developer, full-stack software engineer, and UI/UX designer based in Delhi NCR, India. He builds high-speed custom software, responsive web applications, MERN stack platforms, AI chatbots, and Google #1 ranking SEO architectures.",
     "url": "https://nikhilworks.com/",
     "image": "https://nikhilworks.com/assets/img/all-images/auhtor-img1.png",
     "email": "contact@nikhilworks.com",
@@ -271,10 +271,10 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Why should I hire NikhilWorks as a freelance web developer instead of an agency?",
+        "name": "Why should I hire NikhilWorks as a freelance developer instead of an agency?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "When you hire NikhilWorks, you work directly 1-on-1 with a senior full-stack engineer. You get 3x faster delivery, zero agency management overhead, 60% lower costs, and 100% direct source code ownership with zero vendor lock-in."
+          "text": "When you hire NikhilWorks, you work directly 1-on-1 with a top full-stack freelance developer. You get 3x faster delivery, zero agency management overhead, 60% lower costs, and 100% direct source code ownership with zero vendor lock-in."
         }
       },
       {
@@ -694,15 +694,15 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
             
             <div class="hero-status-pill" data-aos="fade-down">
               <span class="pulse-dot"></span>
-              Senior Freelance Web Designer &amp; Software Developer · Delhi NCR, India &amp; Global
+              Top Freelance Web Designer &amp; Freelance Developer · Delhi NCR, India &amp; Global
             </div>
 
             <h1 class="text-anime-style-2">
-              Freelance <span class="highlight">Web Designer</span> &amp; Senior <span class="highlight">Software Developer</span>
+              Hire Top <span class="highlight">Freelance Web Designer</span> &amp; <span class="highlight">Freelance Developer</span>
             </h1>
 
             <p class="lead-text" data-aos="fade-left" data-aos-duration="1000">
-              NikhilWorks delivers bespoke UI/UX web design, enterprise-grade custom software development, and Google #1 SEO systems for businesses in Delhi NCR, Mumbai, Bangalore, and globally across USA, UK, UAE &amp; Australia. From high-converting websites and scalable e-commerce stores to custom CRM/ERP platforms, REST APIs, and 24/7 AI workflow automations—get 100% direct developer communication &amp; complete source code ownership.
+              Looking to hire a top freelance developer or web designer? NikhilWorks delivers bespoke UI/UX web design, enterprise-grade custom software development, and Google #1 SEO systems for businesses in Delhi NCR, Mumbai, Bangalore, and globally across USA, UK, UAE &amp; Australia. From high-converting websites and scalable e-commerce stores to custom CRM/ERP platforms, REST APIs, and 24/7 AI workflow automations—get 100% direct developer communication &amp; complete source code ownership.
             </p>
 
             <div class="btn-area1 d-flex flex-wrap gap-3" data-aos="fade-left" data-aos-duration="1200">
@@ -715,12 +715,12 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
 
             <!-- Core SEO Keyword Badges -->
             <div class="local-seo-badges" data-aos="fade-up" data-aos-duration="1500">
-              <a href="<?= $site ?>web-designer-delhi/" class="badge-item"><i class="fa-solid fa-palette me-1"></i> Web Designer Delhi</a>
-              <a href="<?= $site ?>web-developer-gurgaon/" class="badge-item"><i class="fa-solid fa-code me-1"></i> Software Developer Delhi NCR</a>
-              <a href="<?= $site ?>crm-development-india/" class="badge-item"><i class="fa-solid fa-database me-1"></i> Custom CRM &amp; Software</a>
+              <a href="<?= $site ?>web-developer-gurgaon/" class="badge-item"><i class="fa-solid fa-code me-1"></i> Freelance Developer India</a>
+              <a href="<?= $site ?>web-designer-delhi/" class="badge-item"><i class="fa-solid fa-palette me-1"></i> Freelance Web Designer</a>
+              <a href="<?= $site ?>crm-development-india/" class="badge-item"><i class="fa-solid fa-database me-1"></i> Custom Software Developer</a>
               <a href="<?= $site ?>service/e-commerce-website-development/" class="badge-item"><i class="fa-solid fa-cart-shopping me-1"></i> E-Commerce Engineering</a>
               <a href="<?= $site ?>ai-integration-services/" class="badge-item" style="border-color:#ADFF1C; color:#ADFF1C;"><i class="fa-solid fa-robot me-1"></i> AI &amp; Automations</a>
-              <a href="<?= $site ?>web-developer-usa/" class="badge-item"><i class="fa-solid fa-globe me-1"></i> Global Delivery (USA, UK, UAE)</a>
+              <a href="<?= $site ?>web-developer-usa/" class="badge-item"><i class="fa-solid fa-globe me-1"></i> Hire Freelance Developer</a>
             </div>
 
           </div>
@@ -949,7 +949,7 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
             <h2 class="text-anime-style-1">About <span>NikhilWorks <img src="<?= $site ?>assets/img/elements/line-img1.png" alt=""></span></h2>
             <div class="space10 d-lg-block d-none"></div>
             <p data-aos="fade-up" data-aos-duration="1000">
-              NikhilWorks is a premier freelance web design and custom software development studio founded by <strong>Nikhil Gupta</strong>, a Senior Full-Stack Software Developer &amp; UI/UX Designer dedicated to engineering high-converting, scalable digital platforms.
+              NikhilWorks is a premier freelance web design and custom software development studio founded by <strong>Nikhil Gupta</strong>, a Top Full-Stack Freelance Developer &amp; UI/UX Designer dedicated to engineering high-converting, scalable digital platforms.
             </p>
             <p data-aos="fade-up" data-aos-duration="1100">
               With <strong>proven hands-on experience since August 2022</strong>, we bridge the gap between creative visual web design and complex backend software engineering—building custom web applications, enterprise CRM systems, 24/7 AI chatbots, and Google #1 SEO architectures.
@@ -1819,12 +1819,12 @@ $og_image = rtrim($site, '/') . '/assets/img/preview.png';
               <div class="accordion-item faq-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button faq-btn" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne" aria-expanded="true">
-                    1. Why should I hire NikhilWorks as a freelance web designer &amp; software developer?
+                    1. Why should I hire NikhilWorks as a freelance web designer &amp; freelance developer?
                   </button>
                 </h2>
                 <div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#homeFaqAccordion">
                   <div class="accordion-body text-muted">
-                    You work directly 1-on-1 with a senior full-stack software developer and UI/UX web designer. You get <strong>3x faster delivery</strong>, <strong>60% lower costs</strong> with zero agency markups, and <strong>100% source code ownership</strong> with zero vendor lock-in.
+                    You work directly 1-on-1 with a top full-stack freelance developer and UI/UX web designer. You get <strong>3x faster delivery</strong>, <strong>60% lower costs</strong> with zero agency markups, and <strong>100% source code ownership</strong> with zero vendor lock-in.
                   </div>
                 </div>
               </div>

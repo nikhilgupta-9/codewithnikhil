@@ -139,7 +139,7 @@ $footerYearsInBusiness = (string)$years;
             </a>
           </div>
           <p class="footer-brand-bio">
-            Nikhil Gupta — senior freelance web architect, CRM engineer &amp; SEO consultant delivering high-ROI digital platforms across India, USA, UK, UAE, Canada, and Australia (since Aug 2022).
+            Nikhil Gupta — top freelance developer, web designer &amp; SEO consultant delivering high-ROI digital platforms across India, USA, UK, UAE, Canada, and Australia (since Aug 2022).
           </p>
 
           <!-- Live Trust Counters -->
