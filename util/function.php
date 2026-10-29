@@ -1,6 +1,11 @@
 <?php
 include_once __DIR__. "/../config/connect.php";
 
+if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+    // Prevent default session from sending anti-SEO no-cache headers on public pages
+    session_cache_limiter('');
+}
+
 // Safely escape a string for use inside a hand-built JSON-LD string value.
 // addslashes() produces \' which is not a valid JSON escape and breaks
 // structured data (Google Search Console: "Bad escape sequence in string").

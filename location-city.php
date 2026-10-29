@@ -2,10 +2,9 @@
 include_once "config/connect.php";
 include_once "util/function.php";
 
-$slug = $_GET['slug'] ?? 'web-developer-noida';
-
 $pages = include __DIR__ . '/data/locations-cities.php';
 $content = include __DIR__ . '/data/locations-cities-content.php';
+$slug = $_GET['slug'] ?? '';
 
 if (!isset($pages[$slug]) || !isset($content[$slug])) {
   include_once "404.php";
@@ -667,6 +666,11 @@ $heroImage = $site . 'assets/img/all-images/about-img6.png';
     </div>
   </div>
 </section>
+
+<?php
+include_once "includes/hub-crosslinks.php";
+echo render_service_page_links($site, $slug, $c, false);
+?>
 
 <?php include_once "includes/footer.php" ?>
 </body>

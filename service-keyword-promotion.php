@@ -931,7 +931,7 @@ if ($u['layout'] === 'A') {
   </div>
 </section>
 
-<?= $isHub ? render_hub_crosslinks($site, $c['schema_country'], $page . '/') : '' ?>
+<?= render_service_page_links($site, $page, $c, $isHub) ?>
 
 <?php include_once "includes/footer.php" ?>
 </body>

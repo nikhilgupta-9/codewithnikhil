@@ -248,6 +248,11 @@ $footerYearsInBusiness = (string)$years;
             <li><a href="<?= $site ?>tools/pagespeed/"><i class="fa-solid fa-gauge-high text-accent-dot me-1"></i> PageSpeed Insights</a></li>
             <li><a href="<?= $site ?>tools/ssl-checker/"><i class="fa-solid fa-shield-halved text-accent-dot me-1"></i> SSL Checker</a></li>
             <li><a href="<?= $site ?>tools/schema-generator/"><i class="fa-solid fa-code text-accent-dot me-1"></i> Schema Generator</a></li>
+            <li><a href="<?= $site ?>tools/index-checker/"><i class="fa-solid fa-magnifying-glass text-accent-dot me-1"></i> Google Index Checker</a></li>
+            <li><a href="<?= $site ?>tools/meta-preview/"><i class="fa-solid fa-eye text-accent-dot me-1"></i> Meta &amp; SERP Preview</a></li>
+            <li><a href="<?= $site ?>tools/robots-validator/"><i class="fa-solid fa-robot text-accent-dot me-1"></i> Robots.txt Validator</a></li>
+            <li><a href="<?= $site ?>tools/profit-calculator/"><i class="fa-solid fa-chart-line text-accent-dot me-1"></i> Profit Margin Calculator</a></li>
+            <li><a href="<?= $site ?>tools/privacy-policy/"><i class="fa-solid fa-user-shield text-accent-dot me-1"></i> Privacy Policy Generator</a></li>
             <li><a href="<?= $site ?>website-cost-calculator/"><i class="fa-solid fa-file-invoice-dollar text-accent-dot me-1"></i> Cost Calculator</a></li>
             <li><a href="<?= $site ?>seo-auditor/"><i class="fa-solid fa-stethoscope text-accent-dot me-1"></i> Free SEO Auditor</a></li>
           </ul>

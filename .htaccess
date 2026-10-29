@@ -32,6 +32,11 @@ ErrorDocument 404 /404.php
 # ============================================
 # Caching & Compression
 # ============================================
+<IfModule mod_headers.c>
+  # Ensure public SEO pages are aggressively cached by crawlers, CDN, and browsers
+  Header set Cache-Control "public, max-age=3600, stale-while-revalidate=86400" "expr=%{REQUEST_URI} !~ m#^/admin/#"
+</IfModule>
+
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/css "access plus 1 month"

@@ -16,6 +16,13 @@ if ($bRes) {
         $blogsList[] = $bRow;
     }
 }
+if (empty($blogsList)) {
+    $blogsList = [
+        ['title' => 'Deploy YOLOv11 on Jetson Orin Nano: ROS 2 C++ Guide', 'slug_url' => 'deploy-yolov11-on-jetson-orin-nano-ros-2-c-guide', 'created_at' => '2026-05-16'],
+        ['title' => 'How AI Is Changing the Game of Online Marketing (And What It Means for Your Business)', 'slug_url' => 'how-ai-is-changing-the-game-of-online-marketing-and-what-it-means-for-your-business', 'created_at' => '2026-05-17'],
+        ['title' => 'Social Media Marketing Strategies to Drive Engagement and Conversions', 'slug_url' => 'social-media-marketing-strategies-to-drive-engagement-and-conversions', 'created_at' => '2025-12-21'],
+    ];
+}
 
 // Fetch all active services
 $servicesList = [];
@@ -26,12 +33,48 @@ if ($sRes) {
         $servicesList[] = $sRow;
     }
 }
+if (empty($servicesList)) {
+    $servicesList = [
+        ['categories' => 'Website Design & Development', 'slug_url' => 'website-design-development'],
+        ['categories' => 'E-Commerce Website Development', 'slug_url' => 'e-commerce-website-development'],
+        ['categories' => 'WordPress Website Development', 'slug_url' => 'wordpress-website-development'],
+        ['categories' => 'Search Engine Optimization (SEO)', 'slug_url' => 'search-engine-optimization'],
+        ['categories' => 'Website Maintenance & Support', 'slug_url' => 'website-maintenance-support'],
+        ['categories' => 'Website Redesign', 'slug_url' => 'website-redesign'],
+        ['categories' => 'Landing Page Design', 'slug_url' => 'landing-page-design'],
+        ['categories' => 'Mobile App Development Services', 'slug_url' => 'mobile-app-development-services'],
+        ['categories' => 'Custom Dynamic Websites', 'slug_url' => 'dynamic-website'],
+        ['categories' => 'Static Jamstack Websites', 'slug_url' => 'static-website'],
+        ['categories' => 'Laravel Framework Applications', 'slug_url' => 'laravel'],
+        ['categories' => 'MERN Stack Applications', 'slug_url' => 'mern-stack'],
+        ['categories' => 'Android Play Store Applications', 'slug_url' => 'application'],
+        ['categories' => 'Corporate Business Websites', 'slug_url' => 'business-website'],
+        ['categories' => 'B2B Wholesale Platforms', 'slug_url' => 'b2b-platform'],
+        ['categories' => 'Custom CRM & ERP Solutions', 'slug_url' => 'crm'],
+        ['categories' => 'Executive Portfolios', 'slug_url' => 'portfolio'],
+        ['categories' => 'Lightweight WordPress', 'slug_url' => 'wordpress'],
+    ];
+}
 
 // Load International Locations Data
 $intlLocations = [];
 $intlFile = __DIR__ . '/data/locations-international.php';
 if (file_exists($intlFile)) {
     $intlLocations = include $intlFile;
+}
+
+// Load All-India Locations Data
+$indiaLocations = [];
+$indiaFile = __DIR__ . '/data/locations-india.php';
+if (file_exists($indiaFile)) {
+    $indiaLocations = include $indiaFile;
+}
+
+// Load Global City List
+$cityList = [];
+$cityListFile = __DIR__ . '/data/city-list.php';
+if (file_exists($cityListFile)) {
+    $cityList = include $cityListFile;
 }
 
 // Load City Locations Data
@@ -778,7 +821,8 @@ if (file_exists($cityFile)) {
         <a href="#sec-blogs" class="filter-pill" data-target="sec-blogs"><i class="fa-solid fa-newspaper me-1"></i> Tech Articles (<?= count($blogsList) ?>)</a>
         <a href="#sec-metro" class="filter-pill" data-target="sec-metro"><i class="fa-solid fa-city me-1"></i> Indian Metro Hubs</a>
         <a href="#sec-intl" class="filter-pill" data-target="sec-intl"><i class="fa-solid fa-earth-americas me-1"></i> International</a>
-        <a href="#sec-cities" class="filter-pill" data-target="sec-cities"><i class="fa-solid fa-map-location-dot me-1"></i> All Cities Directory</a>
+        <a href="#sec-cities" class="filter-pill" data-target="sec-cities"><i class="fa-solid fa-map-location-dot me-1"></i> Indian Cities</a>
+        <a href="#sec-global-cities" class="filter-pill" data-target="sec-global-cities"><i class="fa-solid fa-globe me-1"></i> Global Cities Directory</a>
       </div>
     </div>
   </div>
@@ -1161,28 +1205,89 @@ if (file_exists($cityFile)) {
                 <span class="sitemap-card-title-icon"><i class="fa-solid fa-earth-americas"></i></span>
                 <span>International Delivery Hubs</span>
               </h2>
-              <span class="sitemap-count-badge">Global Clients</span>
+              <span class="sitemap-count-badge">Global Services</span>
             </div>
-            <div class="row g-2">
-              <div class="col-sm-6">
-                <ul class="sitemap-links-grid">
-                  <li class="sitemap-link-item"><a href="<?= $site ?>web-developer-usa/"><i class="fa-solid fa-chevron-right link-arrow"></i> United States (USA)</a></li>
-                  <li class="sitemap-link-item"><a href="<?= $site ?>web-developer-uk/"><i class="fa-solid fa-chevron-right link-arrow"></i> United Kingdom (UK)</a></li>
-                  <li class="sitemap-link-item"><a href="<?= $site ?>web-developer-canada/"><i class="fa-solid fa-chevron-right link-arrow"></i> Canada</a></li>
-                  <li class="sitemap-link-item"><a href="<?= $site ?>web-developer-australia/"><i class="fa-solid fa-chevron-right link-arrow"></i> Australia</a></li>
-                  <li class="sitemap-link-item"><a href="<?= $site ?>web-developer-dubai/"><i class="fa-solid fa-chevron-right link-arrow"></i> UAE (Dubai &amp; Abu Dhabi)</a></li>
-                  <li class="sitemap-link-item"><a href="<?= $site ?>web-developer-saudi-arabia/"><i class="fa-solid fa-chevron-right link-arrow"></i> Saudi Arabia</a></li>
-                </ul>
+            <div class="sitemap-scroll-box" style="max-height: 560px;">
+              <div class="mb-3 pb-2 border-bottom">
+                <strong class="d-block mb-1 text-dark"><i class="fa-solid fa-flag-usa text-danger me-1"></i> United States (USA) Services</strong>
+                <div class="d-flex flex-wrap gap-1" style="font-size: 11px;">
+                  <a href="<?= $site ?>web-developer-usa/" class="badge bg-light text-dark border text-decoration-none">Web Dev</a>
+                  <a href="<?= $site ?>seo-services-usa/" class="badge bg-light text-dark border text-decoration-none">SEO Services</a>
+                  <a href="<?= $site ?>crm-development-usa/" class="badge bg-light text-dark border text-decoration-none">CRM Dev</a>
+                  <a href="<?= $site ?>ads-management-usa/" class="badge bg-light text-dark border text-decoration-none">Ads Mgmt</a>
+                  <a href="<?= $site ?>keyword-promotion-usa/" class="badge bg-light text-dark border text-decoration-none">Keywords</a>
+                  <a href="<?= $site ?>website-auditing-usa/" class="badge bg-light text-dark border text-decoration-none">Auditing</a>
+                  <a href="<?= $site ?>website-redesign-usa/" class="badge bg-light text-dark border text-decoration-none">Redesign</a>
+                  <a href="<?= $site ?>website-maintenance-usa/" class="badge bg-light text-dark border text-decoration-none">Maintenance</a>
+                  <a href="<?= $site ?>healthcare-website-design-usa/" class="badge bg-light text-dark border text-decoration-none">Healthcare</a>
+                </div>
               </div>
-              <div class="col-sm-6">
-                <ul class="sitemap-links-grid">
-                  <li class="sitemap-link-item"><a href="<?= $site ?>web-developer-germany/"><i class="fa-solid fa-chevron-right link-arrow"></i> Germany</a></li>
-                  <li class="sitemap-link-item"><a href="<?= $site ?>web-developer-singapore/"><i class="fa-solid fa-chevron-right link-arrow"></i> Singapore</a></li>
-                  <li class="sitemap-link-item"><a href="<?= $site ?>web-developer-new-zealand/"><i class="fa-solid fa-chevron-right link-arrow"></i> New Zealand</a></li>
-                  <li class="sitemap-link-item"><a href="<?= $site ?>web-developer-switzerland/"><i class="fa-solid fa-chevron-right link-arrow"></i> Switzerland</a></li>
-                  <li class="sitemap-link-item"><a href="<?= $site ?>web-developer-south-africa/"><i class="fa-solid fa-chevron-right link-arrow"></i> South Africa</a></li>
-                  <li class="sitemap-link-item"><a href="<?= $site ?>hire-freelance-web-developer/"><i class="fa-solid fa-chevron-right link-arrow"></i> <strong>All Global Countries &rarr;</strong></a></li>
-                </ul>
+
+              <div class="mb-3 pb-2 border-bottom">
+                <strong class="d-block mb-1 text-dark"><i class="fa-solid fa-crown text-primary me-1"></i> United Kingdom (UK) Services</strong>
+                <div class="d-flex flex-wrap gap-1" style="font-size: 11px;">
+                  <a href="<?= $site ?>web-developer-uk/" class="badge bg-light text-dark border text-decoration-none">Web Dev</a>
+                  <a href="<?= $site ?>seo-services-uk/" class="badge bg-light text-dark border text-decoration-none">SEO Services</a>
+                  <a href="<?= $site ?>crm-development-uk/" class="badge bg-light text-dark border text-decoration-none">CRM Dev</a>
+                  <a href="<?= $site ?>ads-management-uk/" class="badge bg-light text-dark border text-decoration-none">Ads Mgmt</a>
+                  <a href="<?= $site ?>keyword-promotion-uk/" class="badge bg-light text-dark border text-decoration-none">Keywords</a>
+                  <a href="<?= $site ?>website-auditing-uk/" class="badge bg-light text-dark border text-decoration-none">Auditing</a>
+                  <a href="<?= $site ?>website-redesign-uk/" class="badge bg-light text-dark border text-decoration-none">Redesign</a>
+                  <a href="<?= $site ?>website-maintenance-uk/" class="badge bg-light text-dark border text-decoration-none">Maintenance</a>
+                  <a href="<?= $site ?>healthcare-website-design-uk/" class="badge bg-light text-dark border text-decoration-none">Healthcare</a>
+                </div>
+              </div>
+
+              <div class="mb-3 pb-2 border-bottom">
+                <strong class="d-block mb-1 text-dark"><i class="fa-solid fa-leaf text-danger me-1"></i> Canada Services</strong>
+                <div class="d-flex flex-wrap gap-1" style="font-size: 11px;">
+                  <a href="<?= $site ?>web-developer-canada/" class="badge bg-light text-dark border text-decoration-none">Web Dev</a>
+                  <a href="<?= $site ?>seo-services-canada/" class="badge bg-light text-dark border text-decoration-none">SEO Services</a>
+                  <a href="<?= $site ?>crm-development-canada/" class="badge bg-light text-dark border text-decoration-none">CRM Dev</a>
+                  <a href="<?= $site ?>ads-management-canada/" class="badge bg-light text-dark border text-decoration-none">Ads Mgmt</a>
+                  <a href="<?= $site ?>keyword-promotion-canada/" class="badge bg-light text-dark border text-decoration-none">Keywords</a>
+                  <a href="<?= $site ?>website-auditing-canada/" class="badge bg-light text-dark border text-decoration-none">Auditing</a>
+                  <a href="<?= $site ?>website-redesign-canada/" class="badge bg-light text-dark border text-decoration-none">Redesign</a>
+                  <a href="<?= $site ?>website-maintenance-canada/" class="badge bg-light text-dark border text-decoration-none">Maintenance</a>
+                  <a href="<?= $site ?>real-estate-website-design-canada/" class="badge bg-light text-dark border text-decoration-none">Real Estate</a>
+                </div>
+              </div>
+
+              <div class="mb-3 pb-2 border-bottom">
+                <strong class="d-block mb-1 text-dark"><i class="fa-solid fa-sun text-warning me-1"></i> Australia Services</strong>
+                <div class="d-flex flex-wrap gap-1" style="font-size: 11px;">
+                  <a href="<?= $site ?>web-developer-australia/" class="badge bg-light text-dark border text-decoration-none">Web Dev</a>
+                  <a href="<?= $site ?>seo-services-australia/" class="badge bg-light text-dark border text-decoration-none">SEO Services</a>
+                  <a href="<?= $site ?>crm-development-australia/" class="badge bg-light text-dark border text-decoration-none">CRM Dev</a>
+                  <a href="<?= $site ?>ads-management-australia/" class="badge bg-light text-dark border text-decoration-none">Ads Mgmt</a>
+                  <a href="<?= $site ?>keyword-promotion-australia/" class="badge bg-light text-dark border text-decoration-none">Keywords</a>
+                  <a href="<?= $site ?>website-auditing-australia/" class="badge bg-light text-dark border text-decoration-none">Auditing</a>
+                  <a href="<?= $site ?>website-maintenance-australia/" class="badge bg-light text-dark border text-decoration-none">Maintenance</a>
+                </div>
+              </div>
+
+              <div class="mb-3 pb-2 border-bottom">
+                <strong class="d-block mb-1 text-dark"><i class="fa-solid fa-building-columns text-success me-1"></i> UAE Services</strong>
+                <div class="d-flex flex-wrap gap-1" style="font-size: 11px;">
+                  <a href="<?= $site ?>web-developer-dubai/" class="badge bg-light text-dark border text-decoration-none">Dubai Web Dev</a>
+                  <a href="<?= $site ?>seo-services-uae/" class="badge bg-light text-dark border text-decoration-none">UAE SEO</a>
+                  <a href="<?= $site ?>crm-development-uae/" class="badge bg-light text-dark border text-decoration-none">UAE CRM</a>
+                  <a href="<?= $site ?>ads-management-uae/" class="badge bg-light text-dark border text-decoration-none">UAE Ads</a>
+                  <a href="<?= $site ?>keyword-promotion-uae/" class="badge bg-light text-dark border text-decoration-none">UAE Keywords</a>
+                </div>
+              </div>
+
+              <div>
+                <strong class="d-block mb-1 text-dark"><i class="fa-solid fa-globe text-info me-1"></i> Europe &amp; Global Hubs</strong>
+                <div class="d-flex flex-wrap gap-1" style="font-size: 11px;">
+                  <a href="<?= $site ?>web-developer-germany/" class="badge bg-light text-dark border text-decoration-none">Germany</a>
+                  <a href="<?= $site ?>web-developer-switzerland/" class="badge bg-light text-dark border text-decoration-none">Switzerland</a>
+                  <a href="<?= $site ?>web-developer-saudi-arabia/" class="badge bg-light text-dark border text-decoration-none">Saudi Arabia</a>
+                  <a href="<?= $site ?>web-developer-new-zealand/" class="badge bg-light text-dark border text-decoration-none">New Zealand</a>
+                  <a href="<?= $site ?>web-developer-singapore/" class="badge bg-light text-dark border text-decoration-none">Singapore</a>
+                  <a href="<?= $site ?>web-developer-south-africa/" class="badge bg-light text-dark border text-decoration-none">South Africa</a>
+                  <a href="<?= $site ?>hire-freelance-web-developer/" class="badge bg-dark text-white text-decoration-none">All Global Countries &rarr;</a>
+                </div>
               </div>
             </div>
           </div>
@@ -1196,26 +1301,75 @@ if (file_exists($cityFile)) {
                 <span class="sitemap-card-title-icon"><i class="fa-solid fa-map-location-dot"></i></span>
                 <span>All-India City Directory</span>
               </h2>
-              <span class="sitemap-count-badge"><?= !empty($cityLocations) ? count($cityLocations) : '500+' ?> Cities</span>
+              <span class="sitemap-count-badge"><?= !empty($indiaLocations) ? count($indiaLocations) : '30+' ?> Cities</span>
             </div>
             
             <p class="text-muted small mb-2">Dedicated local web design and development landing hubs across Indian districts and cities:</p>
             
             <div class="sitemap-scroll-box" style="max-height: 560px; min-height: 480px;">
               <div class="city-chip-grid">
-                <?php if (!empty($cityLocations)): ?>
+                <?php if (!empty($indiaLocations)): ?>
                   <?php 
-                  $cityIndex = 0;
-                  foreach ($cityLocations as $cSlug => $cData): 
-                    $cityName = !empty($cData['city_name']) ? $cData['city_name'] : ucwords(str_replace('-', ' ', str_replace('web-developer-', '', $cSlug)));
+                  foreach ($indiaLocations as $iSlug => $iData): 
+                    $cityName = !empty($iData['city_name']) ? $iData['city_name'] : ucwords(str_replace('-', ' ', $iSlug));
                   ?>
-                    <a href="<?= $site ?><?= $cSlug ?>/" class="city-chip">
+                    <a href="<?= $site ?><?= $iSlug ?>/" class="city-chip">
                       <i class="fa-solid fa-location-dot text-danger" style="font-size: 10px;"></i> <?= htmlspecialchars($cityName) ?>
                     </a>
                   <?php endforeach; ?>
                 <?php else: ?>
                   <a href="<?= $site ?>web-developer-india/" class="city-chip">All Indian Cities</a>
                 <?php endif; ?>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Global International Cities & Regional Services Directory -->
+        <div class="col-lg-12 col-md-12 sitemap-category-box" id="sec-global-cities">
+          <div class="sitemap-card" style="min-height: auto;">
+            <div class="sitemap-card-header">
+              <h2 class="sitemap-card-title">
+                <span class="sitemap-card-title-icon"><i class="fa-solid fa-globe"></i></span>
+                <span>Global International Cities &amp; Regional Services Directory</span>
+              </h2>
+              <span class="sitemap-count-badge">480+ Regional Hubs</span>
+            </div>
+
+            <p class="text-muted small mb-3">Complete cross-linked directory of our international service hubs across USA, UK, Canada, Australia, New Zealand, UAE, Saudi Arabia, Germany, Switzerland, South Africa &amp; Russia:</p>
+
+            <div class="sitemap-scroll-box" style="max-height: 650px;">
+              <div class="row g-4">
+                <?php foreach ($cityList as $cKey => $cCountry): ?>
+                  <div class="col-lg-4 col-md-6">
+                    <div class="p-3 rounded bg-light border h-100">
+                      <div class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom">
+                        <strong class="text-dark"><i class="fa-solid fa-flag me-1 text-primary"></i> <?= htmlspecialchars($cCountry['flag']) ?></strong>
+                        <span class="badge bg-secondary" style="font-size: 10px;"><?= count($cCountry['places']) ?> Hubs</span>
+                      </div>
+                      <div class="d-flex flex-column gap-2">
+                        <?php foreach ($cCountry['places'] as $pl): ?>
+                          <div class="bg-white p-2 rounded border small">
+                            <div class="fw-bold text-dark mb-1"><i class="fa-solid fa-location-pin text-danger me-1"></i> <?= htmlspecialchars($pl['name']) ?></div>
+                            <div class="d-flex flex-wrap gap-1" style="font-size: 11px;">
+                              <a href="<?= $site ?>web-developer-<?= $pl['slug'] ?>/" class="badge bg-light text-dark border text-decoration-none">Web Dev</a>
+                              <a href="<?= $site ?>seo-services-<?= $pl['slug'] ?>/" class="badge bg-light text-dark border text-decoration-none">SEO</a>
+                              <a href="<?= $site ?>crm-development-<?= $pl['slug'] ?>/" class="badge bg-light text-dark border text-decoration-none">CRM</a>
+                              <a href="<?= $site ?>ads-management-<?= $pl['slug'] ?>/" class="badge bg-light text-dark border text-decoration-none">Ads</a>
+                              <a href="<?= $site ?>website-redesign-<?= $pl['slug'] ?>/" class="badge bg-light text-dark border text-decoration-none">Redesign</a>
+                              <a href="<?= $site ?>website-maintenance-<?= $pl['slug'] ?>/" class="badge bg-light text-dark border text-decoration-none">Care</a>
+                              <a href="<?= $site ?>website-auditing-<?= $pl['slug'] ?>/" class="badge bg-light text-dark border text-decoration-none">Audit</a>
+                              <a href="<?= $site ?>keyword-promotion-<?= $pl['slug'] ?>/" class="badge bg-light text-dark border text-decoration-none">Keywords</a>
+                              <?php if (in_array($cKey, ['usa', 'uk'])): ?>
+                                <a href="<?= $site ?>healthcare-website-design-<?= $pl['slug'] ?>/" class="badge bg-light text-dark border text-decoration-none">Health</a>
+                              <?php endif; ?>
+                            </div>
+                          </div>
+                        <?php endforeach; ?>
+                      </div>
+                    </div>
+                  </div>
+                <?php endforeach; ?>
               </div>
             </div>
           </div>

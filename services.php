@@ -747,6 +747,167 @@ $canonicalUrl = "https://nikhilworks.com/services/";
   </section>
   <!--===== CORE SERVICES GRID ENDS =======-->
 
+  <!--===== SPECIALIZED ARCHITECTURES & TECH STACKS DIRECTORY =======-->
+  <section class="py-5" style="background: #F8FAFC; border-top: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0;">
+    <div class="container py-3">
+      <div class="row text-center mb-4">
+        <div class="col-lg-8 mx-auto">
+          <span class="badge bg-white text-dark border px-3 py-2 rounded-pill fw-bold mb-2 shadow-sm">
+            <i class="fa-solid fa-layer-group text-primary me-1"></i> Engineering Directory
+          </span>
+          <h2 class="fw-bold" style="color: #0F172A; font-size: clamp(1.6rem, 2.8vw, 2.2rem);">Specialized Web Architectures &amp; Development Stacks</h2>
+          <p class="text-muted small">Comprehensive technical stacks and custom web frameworks tailored to business scale and performance demands.</p>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/dynamic-website/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-primary" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-solid fa-database"></i>
+              </div>
+              <strong class="text-dark small">Dynamic Web Platforms</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">Custom PHP &amp; MySQL dynamic web apps with user dashboards.</p>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/static-website/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-primary" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <strong class="text-dark small">Static Jamstack Websites</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">Zero server vulnerabilities, sub-second speeds &amp; 99+ Core Web Vitals.</p>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/laravel/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-danger" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-brands fa-laravel"></i>
+              </div>
+              <strong class="text-dark small">Laravel Framework Apps</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">Enterprise MVC web applications, multi-tenant databases &amp; REST APIs.</p>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/mern-stack/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-success" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-brands fa-node-js"></i>
+              </div>
+              <strong class="text-dark small">MERN Stack Engineering</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">MongoDB, Express, React, and Node.js for real-time web products.</p>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/application/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-primary" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-brands fa-google-play"></i>
+              </div>
+              <strong class="text-dark small">Play Store Applications</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">Native and hybrid Android mobile apps published directly to Play Store.</p>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/business-website/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-primary" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+              <strong class="text-dark small">Corporate Business Sites</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">High-credibility corporate identities with clear buyer conversion funnels.</p>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/b2b-platform/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-primary" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-solid fa-handshake"></i>
+              </div>
+              <strong class="text-dark small">B2B Wholesale Platforms</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">Bulk order quotation engines, dealer logins &amp; price-tier management.</p>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/crm/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-primary" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-solid fa-users-gear"></i>
+              </div>
+              <strong class="text-dark small">CRM &amp; ERP Solutions</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">Bespoke workflow automation, sales pipelines and employee portals.</p>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/portfolio/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-primary" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-solid fa-palette"></i>
+              </div>
+              <strong class="text-dark small">Executive Portfolios</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">Distinguished personal brand &amp; creative agency showcase websites.</p>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/wordpress/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-primary" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-brands fa-wordpress-simple"></i>
+              </div>
+              <strong class="text-dark small">Lightweight WordPress</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">Clean Gutenberg blocks, zero plugin bloat &amp; instant client publishing.</p>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/mobile-app-development-services/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-primary" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-solid fa-mobile-screen"></i>
+              </div>
+              <strong class="text-dark small">Mobile App Engineering</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">iOS and Android mobile apps with push alerts, auth &amp; offline mode.</p>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="<?= $site ?>service/search-engine-optimization/" class="d-block p-3 rounded bg-white border text-decoration-none shadow-sm h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="d-flex align-items-center mb-2">
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2 text-primary" style="width: 32px; height: 32px; font-size: 13px;">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <strong class="text-dark small">Organic SEO Services</strong>
+            </div>
+            <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">Data-backed keyword ranking, technical crawl audits &amp; backlink building.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!--===== DEEP LOCAL SEO HUBS SECTION (DELHI NCR & ALL MAJOR METROS) =======-->
   <section class="loc-seo-hub-section">
     <div class="container">

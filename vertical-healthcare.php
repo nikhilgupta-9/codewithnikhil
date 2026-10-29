@@ -524,12 +524,8 @@ $heroImage = ($isHub ? hub_image_url($site, 'verticals', 'healthcare-' . hub_cou
 </section>
 
 <!--===== REGIONAL CROSSLINKS =====-->
-<?php if ($isHub && function_exists('render_hub_crosslinks') && !empty($c['schema_country'])): ?>
-<section class="py-4" style="background: #F4F8F8;">
-  <div class="container">
-    <?= render_hub_crosslinks($site, $c['schema_country'], $c['canonical'], 'verticals') ?>
-  </div>
-</section>
+<?php if (function_exists('render_service_page_links')): ?>
+  <?= render_service_page_links($site, $slug, $c, $isHub, 'healthcare') ?>
 <?php endif; ?>
 
 <?php include_once "includes/footer.php" ?>

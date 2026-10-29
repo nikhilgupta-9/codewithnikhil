@@ -16,16 +16,16 @@ $pages = [];
 
 foreach ($countries as $key => $country) {
   foreach ($country['places'] as $place) {
-    $slug = 'web-developer-' . $place['slug'];
+    $locSlug = 'web-developer-' . $place['slug'];
     $name = $place['name'];
     $nameLower = strtolower($name);
 
-    $pages[$slug] = [
+    $pages[$locSlug] = [
       'title' => "Web Developer in {$name} | Affordable Website Design - NikhilWorks",
       'h1' => "Professional Web Developer in {$name}",
       'description' => "Hire an experienced web developer serving {$name} businesses remotely. Custom websites, WordPress, e-commerce and SEO services with transparent {$country['currency']} pricing and fast turnaround.",
       'keywords' => "web developer {$nameLower}, website design {$nameLower}, web development {$nameLower}, affordable web developer {$nameLower}, hire web developer {$nameLower}",
-      'canonical' => "https://nikhilworks.com/{$slug}/",
+      'canonical' => "https://nikhilworks.com/{$locSlug}/",
       'hero_sub' => "Custom websites and SEO for {$name} businesses — remote-first, timezone-friendly, and priced in {$country['currency']}.",
       'city_name' => $name,
       'currency' => $country['currency'],
