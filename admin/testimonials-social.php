@@ -220,9 +220,6 @@ $testimonials = $stmt->fetchAll();
 
             </div>
         </div>
-    </section>
-
-    <?php include "footer.php"; ?>
 
     <script>
     (function($) {
@@ -295,5 +292,5 @@ $testimonials = $stmt->fetchAll();
 
     })(jQuery);
     </script>
-</body>
-</html>
+
+    <?php include "footer.php"; ?>

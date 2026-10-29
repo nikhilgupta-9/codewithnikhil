@@ -154,6 +154,31 @@ class Database
             if ($colCheck && $colCheck->rowCount() === 0) {
                 $pdo->exec("ALTER TABLE `social_tokens` ADD COLUMN `author_urn` VARCHAR(255) DEFAULT NULL AFTER `expires_at`");
             }
+
+            // Ensure testimonials automation & consent columns exist
+            $existingCols = [];
+            $cRes = $pdo->query("SHOW COLUMNS FROM `testimonials`");
+            if ($cRes) {
+                while ($col = $cRes->fetch()) {
+                    $existingCols[] = $col['Field'];
+                }
+            }
+            $neededCols = [
+                'video_url'         => "VARCHAR(500) DEFAULT NULL",
+                'video_file_path'   => "VARCHAR(500) DEFAULT NULL",
+                'consent_given'     => "TINYINT(1) UNSIGNED NOT NULL DEFAULT 0",
+                'consent_proof_url' => "VARCHAR(500) DEFAULT NULL",
+                'youtube_video_id'  => "VARCHAR(100) DEFAULT NULL",
+                'youtube_status'    => "ENUM('none', 'pending_upload', 'uploaded_private', 'published') DEFAULT 'none'",
+                'social_status'     => "ENUM('draft', 'approved', 'processed', 'archived') NOT NULL DEFAULT 'draft'"
+            ];
+            foreach ($neededCols as $colName => $colDef) {
+                if (!in_array($colName, $existingCols, true)) {
+                    try {
+                        $pdo->exec("ALTER TABLE `testimonials` ADD COLUMN `{$colName}` {$colDef}");
+                    } catch (\Throwable $colErr) {}
+                }
+            }
         } catch (\Throwable $t) {
             // Non-fatal setup notice
             error_log("ensureTablesExist notice: " . $t->getMessage());
