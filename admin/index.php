@@ -385,12 +385,13 @@ if (isset($conn) && $conn instanceof mysqli && !$conn->connect_error) {
                                                 <th>Subject / Message</th>
                                                 <th>Date</th>
                                                 <th>Status</th>
+                                                <th class="text-end">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php if (empty($recentInquiries)): ?>
                                                 <tr>
-                                                    <td colspan="4" class="text-center py-4 text-muted">No client inquiries found.</td>
+                                                    <td colspan="5" class="text-center py-4 text-muted">No client inquiries found.</td>
                                                 </tr>
                                             <?php else: ?>
                                                 <?php foreach ($recentInquiries as $inq): ?>
@@ -414,6 +415,11 @@ if (isset($conn) && $conn instanceof mysqli && !$conn->connect_error) {
                                                             <?php else: ?>
                                                                 <span class="badge bg-secondary">Read</span>
                                                             <?php endif; ?>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <a href="view_inquiry.php?id=<?= $inq['id'] ?>" class="btn btn-sm btn-outline-primary py-1 px-2" title="View Inquiry #<?= $inq['id'] ?>">
+                                                                <i class="fas fa-eye fa-xs me-1"></i> View
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
