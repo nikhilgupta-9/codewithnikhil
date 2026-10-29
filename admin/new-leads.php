@@ -182,8 +182,8 @@ if (isset($_GET['delete'])) {
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
                                                             <!-- Reply via Email -->
-                                                            <a href="mailto:developer.web2techsolution@gmail.com"
-                                                                class="btn btn-sm btn-info" title="Reply">
+                                                            <a href="mailto:<?= htmlspecialchars($row['email']) ?>?subject=<?= rawurlencode('Re: ' . $row['subject'] . ' - NikhilWorks') ?>"
+                                                                class="btn btn-sm btn-info" title="Reply to <?= htmlspecialchars($row['email']) ?>">
                                                                 <i class="fa fa-reply"></i>
                                                             </a>
                                                             <a href="?delete=<?= $row['id'] ?>" class="btn btn-sm btn-danger"
