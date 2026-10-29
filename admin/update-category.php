@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // Include database connection
 include 'db-conn.php';
 
@@ -7,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_category'])) {
     $cat_id = intval($_POST['cat_id']);
     $cate_name = trim($_POST['cate_name']);
     $slug_url = trim($_POST['slug_url']);
-    $status = ($_POST['status'] == 'Active') ? 1 : 0;
+    $status = ($_POST['status'] == 'Active' || $_POST['status'] == '1') ? 1 : 0;
 
     // Fetch the existing category to get the old image
     $stmt = $conn->prepare("SELECT image FROM categories WHERE id = ?");
@@ -17,7 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_category'])) {
     $category = $result->fetch_assoc();
 
     if (!$category) {
-        die("Category not found.");
+        $_SESSION['flash_msg'] = ['type' => 'danger', 'text' => "Category not found."];
+        header("Location: view-categories.php");
+        exit();
     }
 
     $image_name = $category['image']; // Keep old image by default
@@ -25,23 +30,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_category'])) {
     // Image upload handling
     if (!empty($_FILES['imageUpload']['name'])) {
         $upload_dir = "uploads/category/";
-        $image_name = time() . "_" . basename($_FILES["imageUpload"]["name"]);
-        $target_file = $upload_dir . $image_name;
-
-        // Validate image type
-        $allowed_types = ['image/jpeg', 'image/png', 'image/webp'];
-        if (!in_array($_FILES['imageUpload']['type'], $allowed_types)) {
-            die("Invalid image format. Allowed: JPG, PNG, WEBP.");
+        if (!is_dir($upload_dir)) {
+            mkdir($upload_dir, 0755, true);
         }
+        $ext = strtolower(pathinfo($_FILES["imageUpload"]["name"], PATHINFO_EXTENSION));
+        $allowed = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'];
+        if (!in_array($ext, $allowed)) {
+            $_SESSION['flash_msg'] = ['type' => 'danger', 'text' => "Invalid image format. Allowed: JPG, PNG, WEBP, SVG."];
+            header("Location: view-categories.php");
+            exit();
+        }
+
+        $image_name = time() . "_" . preg_replace('/[^a-zA-Z0-9_\.-]/', '', basename($_FILES["imageUpload"]["name"]));
+        $target_file = $upload_dir . $image_name;
 
         // Move uploaded file
         if (move_uploaded_file($_FILES["imageUpload"]["tmp_name"], $target_file)) {
             // Delete old image if it exists
             if (!empty($category['image']) && file_exists($upload_dir . $category['image'])) {
-                unlink($upload_dir . $category['image']);
+                @unlink($upload_dir . $category['image']);
             }
         } else {
-            die("Image upload failed.");
+            $_SESSION['flash_msg'] = ['type' => 'danger', 'text' => "Image upload failed."];
+            header("Location: view-categories.php");
+            exit();
         }
     }
 
@@ -51,14 +63,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_category'])) {
     $stmt->bind_param("ssisi", $cate_name, $slug_url, $status, $image_name, $cat_id);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Category updated successfully!'); window.location.href='view-categories.php';</script>";
+        try {
+            require_once dirname(__DIR__) . '/util/sitemap_generator.php';
+            generate_all_sitemaps($conn, true);
+        } catch (\Throwable $t) {}
+        $_SESSION['flash_msg'] = ['type' => 'success', 'text' => "Category \"$cate_name\" updated successfully!"];
     } else {
-        echo "Error updating category: " . $stmt->error;
+        $_SESSION['flash_msg'] = ['type' => 'danger', 'text' => "Error updating category: " . $stmt->error];
     }
 
     $stmt->close();
     $conn->close();
+    header("Location: view-categories.php");
+    exit();
 } else {
-    echo "Invalid request.";
+    header("Location: view-categories.php");
+    exit();
 }
 ?>

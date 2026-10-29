@@ -42,7 +42,7 @@ include "functions.php";
                                     <p class="text-muted mb-0 small">Manage your product subcategories</p>
                                 </div>
                                 <div>
-                                    <a href="add-sub-category.php" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addcategory">
+                                    <a href="add-sub-category.php" class="btn btn-primary">
                                         <i class="fas fa-plus me-2"></i>Add New Sub Category
                                     </a>
                                 </div>

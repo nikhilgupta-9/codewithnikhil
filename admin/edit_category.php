@@ -1,39 +1,29 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include "functions.php";
+
+// Admin Authentication Check
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header("Location: auth/login.php");
+    exit();
+}
 
 // Get category id from URL
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $cat_id = $_GET['id'];
-    // Fetch category details from the database (assume get_category_by_id() exists)
     $category = get_category_by_id($cat_id);
     if (!$category) {
-        echo "Category not found.";
-        exit;
+        $_SESSION['flash_msg'] = ['type' => 'danger', 'text' => "Category not found."];
+        header("Location: view-categories.php");
+        exit();
     }
 } else {
-    echo "Invalid category id.";
-    exit;
+    $_SESSION['flash_msg'] = ['type' => 'danger', 'text' => "Invalid category ID specified."];
+    header("Location: view-categories.php");
+    exit();
 }
-
-// Process form submission for updating the category
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve updated values from POST
-    $new_name = $_POST['categories'] ?? '';
-    $new_name = $_POST['image'] ?? '';
-    $new_slug = $_POST['slug_url'] ?? '';
-    $new_status = $_POST['status'] ?? '';
-
-    // Update category (assume update_category() handles this)
-    if (update_category($cat_id, $new_name, $new_slug, $new_status)) {
-        header("Location: categories.php"); // redirect back after update
-        exit;
-    } else {
-        echo "Error updating category.";
-    }
-}
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -106,10 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                 class="form-label fw-bold">Status</label>
                                                             <select id="status" name="status" class="form-select"
                                                                 required>
-                                                                <option value="Active"
-                                                                    <?= ($category['status'] == 'Active') ? 'selected' : '' ?>>Active</option>
-                                                                <option value="Inactive"
-                                                                    <?= ($category['status'] == 'Inactive') ? 'selected' : '' ?>>Inactive</option>
+                                                                <option value="1"
+                                                                    <?= ($category['status'] == 1 || $category['status'] === 'Active') ? 'selected' : '' ?>>Active</option>
+                                                                <option value="0"
+                                                                    <?= ($category['status'] == 0 || $category['status'] === 'Inactive') ? 'selected' : '' ?>>Inactive</option>
                                                             </select>
                                                         </div>
 
@@ -117,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <div class="mb-3">
                                                             <label class="form-label fw-bold">Current Image</label><br>
                                                             <?php if (!empty($category['image'])): ?>
-                                                                <img src="<?= $site ?>/uploads/category/<?= htmlspecialchars($category['image']) ?>"
+                                                                <img src="uploads/category/<?= htmlspecialchars($category['image']) ?>"
                                                                     alt="Category Image" class="img-thumbnail mb-2"
                                                                     style="max-height:120px;">
                                                             <?php else: ?>
